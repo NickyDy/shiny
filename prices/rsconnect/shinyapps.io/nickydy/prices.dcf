@@ -1,0 +1,13 @@
+name: prices
+title: prices
+username:
+account: nickydy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8145659
+bundleId: 7461482
+url: https://nickydy.shinyapps.io/prices/
+when: 1689480568.81491
+lastSyncTime: 1689480568.81497
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,11 @@
+name: elections
+title: elections
+username:
+account: nickydy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8072983
+bundleId: 7832287
+url: https://nickydy.shinyapps.io/elections/
+asMultiple: FALSE
+asStatic: FALSE
