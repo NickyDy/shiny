@@ -15,7 +15,7 @@ int_migration <- read_parquet("int_migration.parquet") %>% filter(pop != 0) %>% 
 ext_migration <- read_parquet("ext_migration.parquet")
 school <- read_parquet("school.parquet")
 university <- read_parquet("university.parquet") %>% arrange(oblast)
-health <- read_parquet("health.parquet") %>% arrange(oblast)
+health <- read_parquet("health.parquet") %>% filter(pop != 0) %>% arrange(oblast)
 kinder_gardens <- read_parquet("kinder_gardens.parquet") %>% arrange(obshtina)
 poverty <- read_parquet("poverty.parquet")
 #-----------------------------------------
@@ -436,7 +436,8 @@ server <- function(input, output, session) {
       geom_col(position = position_dodge2(preserve = "single")) +
       scale_fill_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
-      geom_text(aes(label = round(pop, 0)), position = position_dodge(width = 1), vjust = -0.1, size = 4) +
+      geom_text(aes(label = round(pop, 1)), 
+                position = position_dodge(width = 1), vjust = -0.1, size = 4) +
       theme(text = element_text(size = 16), legend.position = "right") +
       labs(y = "Брой починали", x = NULL, fill = "Пол:",
            caption = "Източник на данните: Infostat") +
