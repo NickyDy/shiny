@@ -1,69 +1,131 @@
 library(shiny)
 library(shinythemes)
 library(tidyverse)
-library(DT)
 library(sf)
+library(arrow)
+library(bslib)
 
-df <- read_rds("daily.rds") %>% 
+df <- read_parquet("daily.parquet") %>% 
   mutate(month = fct_recode(month, "януари" = "1", "февруари" = "2", "март" = "3",
                             "април" = "4", "май" = "5", "юни" = "6", "юли" = "7",
                             "август" = "8", "септември" = "9", "октомври" = "10",
                             "ноември" = "11", "декември" = "12")) %>% 
   rename(Минимална_температура = temp_min, Максимална_температура = temp_max, 
          Средна_температура = temp_mean, Валеж = prec_sum, Снеговалеж = snow_sum, 
-         Скорост_на_вятъра = wind_max)
+         Скорост_на_вятъра = wind_max, Посока_на_вятъра = wind_dir)
 obl_map <- st_read("obl_map.gpkg") %>% 
   mutate(oblast_bg = fct_recode(oblast_bg, "София" = "София – област"))
 
 min_colors <- c("<-20 \u00B0C" = "purple", "-20:-10 \u00B0C" = "blue", ">-10 \u00B0C" = "lightblue")
 max_colors <- c(">35 \u00B0C" = "red", "25-35 \u00B0C" = "orange", "<25 \u00B0C" = "green")
-
-ml <- tags$a(href = "mailto:nickydyakov@gmail.com", icon("envelope"))
-gh <- tags$a(href = "https://github.com/NickyDy", icon("github"))
-
-ui <- fluidPage(#theme = shinytheme("cyborg"),
-                fluidRow(column(4, titlePanel("Климатът в България")), h5(ml, gh)),
-                tabsetPanel(
-                  tabPanel("Средна температура", 
-                           fluidRow(column(2, selectInput("location_mean", "Станция", choices = unique(df$location))),
-                                    column(2, selectInput("month", "Месец", choices = unique(df$month))), 
-                           fluidRow(column(8, plotOutput("mean"))))),
-                  tabPanel("Минимална температура", 
-                           fluidRow(column(2, selectInput("location_min", "Станция", choices = unique(df$location))),
-                                    column(2, selectInput("year_min", "Година", choices = unique(df$year))),
-                                    column(2, selectInput("month_min", "Месец", choices = unique(df$month))),
-                           fluidRow(column(8, plotOutput("min"))))), 
-                  tabPanel("Максимална температура", 
-                           fluidRow(column(2, selectInput("location_max", "Станция", choices = unique(df$location))),
-                                    column(2, selectInput("year_max", "Година", choices = unique(df$year))),
-                                    column(2, selectInput("month_max", "Месец", choices = unique(df$month))),
-                           fluidRow(column(8, plotOutput("max"))))), 
-                  tabPanel("Валежи", 
-                           fluidRow(column(2, selectInput("location_rain", "Станция", choices = unique(df$location))),
-                                    column(2, selectInput("month_rain", "Месец", choices = unique(df$month))),
-                           fluidRow(column(8, plotOutput("rain"))))),
-                  tabPanel("Снежна покривка", 
-                           fluidRow(column(2, selectInput("location_snow", "Станция", choices = unique(df$location))),
-                                    column(2, selectInput("month_snow", "Месец", choices = unique(df$month))),
-                           fluidRow(column(8, plotOutput("snow_depth"))))), 
-                  tabPanel("Средногодишни данни", 
-                           fluidRow(column(2, selectInput("location_yearly", "Станция", choices = unique(df$location)))),
-                           fluidRow(column(8, plotOutput("yearly_temp", height = 280), 
-                                              plotOutput("yearly_prec", height = 280),
-                                              plotOutput("yearly_snow", height = 280)))),
-                  tabPanel("Топ 10 (min/max)", 
-                           fluidRow(column(2, selectInput("location_top_10", "Станция", choices = unique(df$location)))),
-                           fluidRow(column(8, plotOutput("top_10_min", height = 400), 
-                                              plotOutput("top_10_max", height = 400)))),
-                  tabPanel("Таблица", 
-                           fluidRow(column(12, DTOutput("table")))),
-                  tabPanel("Карта", 
-                           fluidRow(column(2, selectInput("map_year", "Година", choices = unique(df$year), selected = last(df$year))),
-                                    column(2, selectInput("map_month", "Месец", choices = unique(df$month))),
-                                    column(2, selectInput("map_day", "Ден", choices = unique(df$day))),
-                                    column(2, varSelectInput("map_var", "Променлива", df %>% select(6:11))),
-                                    fluidRow(column(8, plotOutput("map")))))))
-
+#------------------------------------------------------------------------------------------
+mail <- tags$a(icon("envelope"), "Email", 
+               href = "mailto:nickydyakov@gmail.com", 
+               tagret = "_blank")
+github <- tags$a(icon("github"), "Github", 
+                 href = "https://github.com/NickyDy", 
+                 tagret = "_blank")
+#-----------------------------------------------
+ui <- page_fillable(h3("Климатът на България!"),
+                    navset_pill(
+                      nav_panel("Средна температура",
+                                layout_columns(
+                                selectInput("location_mean", "Станция:", 
+                                            choices = unique(df$location)),
+                                selectInput("month", "Месец:", 
+                                            choices = unique(df$month)), 
+                                col_widths = c(2, 1)), 
+                                plotOutput("mean")),
+                      nav_panel("Минимална температура",
+                                layout_columns(
+                                selectInput("location_min", "Станция:", 
+                                            choices = unique(df$location)),
+                                selectInput("year_min", "Година:", 
+                                            choices = unique(df$year),
+                                            selected = "2023"),
+                                selectInput("month_min", "Месец:", 
+                                            choices = unique(df$month)), 
+                                col_widths = c(2, 1, 1)),
+                                plotOutput("min")),
+                      nav_panel("Максимална температура",
+                                layout_columns(
+                                selectInput("location_max", "Станция:", 
+                                            choices = unique(df$location)),
+                                selectInput("year_max", "Година:", 
+                                            choices = unique(df$year),
+                                            selected = "2023"),
+                                selectInput("month_max", "Месец:", 
+                                            choices = unique(df$month)), 
+                                col_widths = c(2, 1, 1)),
+                                plotOutput("max")),
+                      nav_panel("Валежи",
+                                layout_columns(
+                                selectInput("location_rain", "Станция:", 
+                                            choices = unique(df$location)),
+                                selectInput("month_rain", "Месец:", 
+                                            choices = unique(df$month)), 
+                                col_widths = c(2, 1)),
+                                plotOutput("rain")),
+                      nav_panel("Снежна покривка",
+                                layout_columns(
+                                selectInput("location_snow", "Станция:", 
+                                            choices = unique(df$location)),
+                                selectInput("month_snow", "Месец:", 
+                                            choices = unique(df$month)), 
+                                col_widths = c(2, 1)),
+                                plotOutput("snow_depth")),
+                      nav_panel("Средногодишни данни",
+                                layout_columns(
+                                selectInput("location_yearly", "Станция:", 
+                                            choices = unique(df$location)), 
+                                col_widths = c(2)),
+                                plotOutput("yearly_temp", height = 280), 
+                                plotOutput("yearly_prec", height = 280),
+                                plotOutput("yearly_snow", height = 280)),
+                      nav_panel("Топ 10 (min/max)",
+                                layout_columns(
+                                selectInput("location_top_10", "Станция:", 
+                                            choices = unique(df$location)), 
+                                col_widths = c(2)),
+                                plotOutput("top_10_min", height = 400), 
+                                plotOutput("top_10_max", height = 400)),
+                      nav_panel("Карта",
+                                layout_columns(
+                                selectInput("map_year", "Година:", choices = unique(df$year), 
+                                            selected = last(df$year)),
+                                selectInput("map_month", "Месец:", choices = unique(df$month)),
+                                selectInput("map_day", "Ден", choices = unique(df$day)),
+                                varSelectInput("map_var", "Променлива:", df %>% select(6:11)), 
+                                col_widths = c(1, 1, 1, 2)),
+                                plotOutput("map")),
+                      nav_panel(tags$img(src = "kofi.png", width = 40),
+                                "Ако Ви харесва приложението,
+                                 можете да направите дарение в евро към
+                                 следната сметка:",
+                                br(),
+                                br(),
+                                "Име: Nikolay Dyakov",
+                                br(),
+                                "IBAN: BE89 9670 3038 2685",
+                                br(),
+                                "BIC: TRWIBEB1XXX",
+                                br(),
+                                "Адрес: Rue de Trone 100, 3rd floor,",
+                                br(),
+                                "Brussels,",
+                                br(),
+                                "1050,",
+                                br(),
+                                "Belgium"),
+                      nav_spacer(),
+                      nav_menu(
+                        title = "Links",
+                        nav_item(mail),
+                        nav_item(github)
+    )
+  )
+)
+#-------------------------------------------
 server <- function(input, output, session) {
   
   output$min <- renderPlot({
@@ -81,10 +143,10 @@ server <- function(input, output, session) {
       scale_x_discrete(breaks = c(1:31)) +
       labs(x = "Дни от месеца", y = "Минимална дневна температура (\u00B0C)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
-           title = paste0("Минимални температури за станция ", input$location_min, " през месец ",
-                          input$month_min, ", ", input$year_min, " година")) +
+           title = paste0("Минимални температури през месец ", input$month_min, " за станция ", 
+                          input$location_min, ", ", input$year_min, " година")) +
       guides(fill = guide_legend(reverse = TRUE)) +
-      theme(text = element_text(size = 16))
+      theme(text = element_text(size = 18))
   }, height = 750, width = 1850)
   
   output$mean <- renderPlot({
@@ -96,15 +158,14 @@ server <- function(input, output, session) {
       ggplot(aes(year, m, fill = col)) +
       geom_col() +
       geom_hline(aes(yintercept = mean(m)), linewidth = 0.5, lty = 2, color = "black") +
-      geom_text(aes(label = m), size = 3.5, vjust = -0.5) +
+      geom_text(aes(label = m), size = 4, vjust = -0.5) +
       scale_y_continuous(expand = expansion(mult = c(.01, .05))) +
       scale_fill_discrete(labels = c("Топла", "Студена")) +
-      theme(text = element_text(size = 16), 
+      theme(text = element_text(size = 18), 
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = "Години", y = "Средна месечна температура (ºС)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
-           title = paste0("Средни температури за станция ", input$location_mean, " през месец ",
-                          input$month))
+           title = paste0("Средни температури през месец ", input$month, " за станция ", input$location_mean))
   }, height = 750, width = 1850)
   
   output$max <- renderPlot({
@@ -122,10 +183,10 @@ server <- function(input, output, session) {
       scale_x_discrete(breaks = c(1:31)) +
       labs(x = "Дни от месеца", y = "Максимална дневна температура (\u00B0C)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
-           title = paste0("Максимални температури за станция ", input$location_max, " през месец ",
-                          input$month_max, ", ", input$year_max, " година")) +
+           title = paste0("Максимални температури през месец ", input$month_max, " за станция ", 
+                          input$location_max, ", ", input$year_max, " година")) +
       guides(fill = guide_legend(reverse = TRUE)) +
-      theme(text = element_text(size = 16))
+      theme(text = element_text(size = 18))
   }, height = 750, width = 1850)
   
   output$rain <- renderPlot({
@@ -142,12 +203,12 @@ server <- function(input, output, session) {
       geom_text(aes(label = p), size = 4, vjust = -0.5) +
       scale_y_continuous(expand = expansion(mult = c(.01, .05))) +
       scale_fill_discrete(labels = c("Суха", "Дъждовна")) +
-      theme(text = element_text(size = 16), 
+      theme(text = element_text(size = 18), 
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = "Години", y = "Месечно количество на валежите (mm)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
-           title = paste0("Количество на валежите за станция ", input$location_rain, " през месец ",
-                          input$month_rain)) +
+           title = paste0("Количество на валежите през месец ", 
+                          input$month_rain, " за станция ", input$location_rain)) +
       guides(fill = guide_legend(reverse = TRUE))
   }, height = 750, width = 1850)
   
@@ -163,12 +224,12 @@ server <- function(input, output, session) {
       geom_text(aes(label = s), size = 4, vjust = -0.5) +
       scale_y_continuous(expand = expansion(mult = c(.01, .05))) +
       scale_fill_discrete(labels = c("Безснежна", "Снежна")) +
-      theme(text = element_text(size = 16), 
+      theme(text = element_text(size = 18), 
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = "Години", y = "Дебелина на снежната покривка (cm)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
-           title = paste0("Дебелина на снежната покривка за станция ", input$location_snow, " през месец ",
-                          input$month_snow)) +
+           title = paste0("Дебелина на снежната покривка през месец ", 
+                          input$month_snow, " за станция ", input$location_snow)) +
       guides(fill = guide_legend(reverse = TRUE))
   }, height = 750, width = 1850)
   
@@ -238,7 +299,7 @@ server <- function(input, output, session) {
       geom_col() +
       scale_y_continuous(expand = expansion(mult = c(.07, .01))) +
       geom_text(aes(label = paste0(round(Минимална_температура, 1), " \u00B0C")), size = 5, vjust = -0.5) +
-      theme(text = element_text(size = 16)) +
+      theme(text = element_text(size = 18)) +
       labs(x = NULL, y = "Минимална температура (\u00B0C)", fill = "Месец:",
            title = paste0("Топ 10 минимални и максимални температури за станция ", input$location_top_10))
   }, height = 380, width = 1850)
@@ -252,22 +313,10 @@ server <- function(input, output, session) {
       geom_col() +
       scale_y_continuous(expand = expansion(mult = c(.01, .07))) +
       geom_text(aes(label = paste0(round(Максимална_температура, 1), " \u00B0C")), size = 5, vjust = -0.5) +
-      theme(text = element_text(size = 16)) +
+      theme(text = element_text(size = 18)) +
       labs(x = "Дата", y = "Максимална температура (\u00B0C)", fill = "Месец:",
            caption = "Източник на данните: openmeteo")
   }, height = 380, width = 1850)
-
-output$table <- renderDT(
-  df %>% 
-    datatable(filter = 'top', 
-              extensions = 'Buttons', 
-              options = list(dom = 'Bfrtip', 
-                             buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
-                             pageLength = 20)) %>% 
-    formatStyle("Минимална_температура", color = styleInterval(c(0), c("#69cfd5", "#fd6d98"))) %>% 
-    formatStyle("Средна_температура", color = styleInterval(c(0), c("#69cfd5", "#fd6d98"))) %>% 
-    formatStyle("Максимална_температура", color = styleInterval(c(0), c("#69cfd5", "#fd6d98")))
-)
 
 climate <- reactive(df %>% filter(year == input$map_year, month == input$map_month, day == input$map_day))
 
@@ -281,9 +330,13 @@ output$map <- renderPlot({
     scale_fill_gradient2(low = "blue", mid = "white", high = "red") +
     labs(x = NULL, y = NULL, caption = "Източник на данните: openmeteo",
          title = "Данните са от станция в областния град - температурите са измерени в \u00B0C,\nвалежите в mm, снеговалежа в cm, а скоростта на вятъра в km/h.") +
-    theme(text = element_text(size = 16), legend.position = "none",
+    theme(text = element_text(size = 18), legend.position = "none",
           axis.text = element_blank(), axis.ticks = element_blank())
 }, height = 750, width = 1850)
+
+session$onSessionEnded(function() {
+  stopApp()
+})
 
 }
 shinyApp(ui, server)

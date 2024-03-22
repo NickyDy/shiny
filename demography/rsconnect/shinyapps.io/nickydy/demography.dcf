@@ -1,0 +1,12 @@
+name: demography
+title: demography
+username: nickydy
+account: nickydy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11457011
+bundleId: 8400273
+url: https://nickydy.shinyapps.io/demography/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
