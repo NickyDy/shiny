@@ -18,6 +18,8 @@ university <- read_parquet("university.parquet") %>% arrange(oblast)
 health <- read_parquet("health.parquet") %>% filter(pop != 0) %>% arrange(oblast)
 kinder_gardens <- read_parquet("kinder_gardens.parquet") %>% arrange(obshtina)
 poverty <- read_parquet("poverty.parquet")
+potreblenie <- read_parquet("potreblenie.parquet") %>% filter(value != 0) %>% arrange(oblast)
+prestupnost <- read_parquet("prestupnost.parquet") %>% arrange(oblast)
 #-----------------------------------------
 colors_sex <- c("Мъже" = "#F8766D", "Жени" = "#00BFC4")
 space_s <- function (x, accuracy = NULL, scale = 1, prefix = "", suffix = "", 
@@ -124,6 +126,16 @@ ui <- page_fillable(h3("Демография на България!"),
              plotOutput("kinder_gardens_plot")),
     nav_panel("Работещи бедни",
              plotOutput("poverty_plot")),
+    nav_panel("Потребление", layout_columns(
+               selectInput("potr_product", "Продукт:",
+                  choices = unique(potreblenie$product)),
+               col_widths = c(3)),
+             plotOutput("potr_plot")),
+    nav_panel("Престъпност", layout_columns(
+      selectInput("prest_age", "Възраст:",
+                  choices = unique(prestupnost$age)),
+      col_widths = c(1)),
+      plotOutput("prest_plot")),
     nav_panel(tags$img(src = "kofi.png", width = 40),
               "Ако Ви харесва приложението,
                можете да направите дарение в евро към
@@ -482,6 +494,35 @@ server <- function(input, output, session) {
 
   }, height = 800, width = 1800, res = 96)
 #---------------------------------------
+output$potr_plot <- renderPlot({
+  
+ potreblenie %>% 
+    filter(product %in% c(input$potr_product)) %>% 
+    ggplot(aes(year, value)) +
+    geom_col(position = position_dodge2(preserve = "single"), fill = "#00BFC4") +
+    scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
+    theme(text = element_text(size = 14), legend.position = "right",
+          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+    labs(y = "Потребление (средно на човек)", x = NULL) +
+    facet_wrap(vars(oblast), ncol = 5)
+  
+}, height = 800, width = 1800, res = 96)
+#---------------------------------------
+  output$prest_plot <- renderPlot({
+    
+    prestupnost %>% 
+      filter(age %in% c(input$prest_age)) %>% 
+      ggplot(aes(year, pop, fill = sex)) +
+      geom_col(position = position_dodge2(preserve = "single")) +
+      scale_fill_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
+      scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
+      theme(text = element_text(size = 14), legend.position = "right",
+            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      labs(y = "Брой осъдени", x = NULL, fill = "Пол:") +
+      facet_wrap(vars(oblast), ncol = 4) +
+      guides(fill = guide_legend(reverse = TRUE))
+    
+  }, height = 800, width = 1800, res = 96)
   
 session$onSessionEnded(function() {
     stopApp()
