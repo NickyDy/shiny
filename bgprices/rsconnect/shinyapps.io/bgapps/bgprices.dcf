@@ -1,0 +1,13 @@
+name: bgprices
+title: bgprices
+username: bgapps
+account: bgapps
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11608264
+bundleId: 8470477
+url: https://ndapps.shinyapps.io/bgprices/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: foods_mar4.parquet|foods_week14.parquet|pharm_mar4.parquet|pharm_week14.parquet

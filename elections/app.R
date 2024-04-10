@@ -1,9 +1,10 @@
 library(tidyverse)
 library(shiny)
-library(gt)
+library(DT)
 library(arrow)
 library(bslib)
 library(tidytext)
+library(sf)
 
 votes <- read_parquet("votes.parquet")
 mand <- read_parquet("mand.parquet") %>% 
@@ -11,6 +12,7 @@ mand <- read_parquet("mand.parquet") %>%
   unite("ns_year", 1:2, sep = " ")
 act <- read_parquet("election_activity.parquet")
 address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
+obsh_map <- read_sf("obsh_map.gpkg")
 
 risk_sec <- votes %>% 
   group_by(oblast, obshtina, section, code) %>% 
@@ -80,7 +82,7 @@ colors_mand <- c(
   "КП ББЦ" = "pink",
   "КП АБВ" = "red",
   "ИБГНИ" = "green")
-
+#----------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
                href = "mailto:nickydyakov@gmail.com", 
                tagret = "_blank")
@@ -89,7 +91,8 @@ github <- tags$a(icon("github"), "Github",
                  tagret = "_blank")
 #----------------------------------
 ui <- page_sidebar(
-  title = h3("Избори в България!"),
+  title = h3("Избори в България!"), 
+  theme = bslib::bs_theme(bootswatch = "darkly"),
   sidebar = sidebar(list(
     selectInput("obl", "Избирателен район:", 
                 choices = unique(votes$oblast)),
@@ -107,12 +110,20 @@ ui <- page_sidebar(
               plotOutput("sec_perc", height = 290)),
     nav_panel(title = "Общо за страната", 
               plotOutput("country")),
+    nav_panel(title = "Карта на общините", layout_columns(
+              selectInput("vote_date_map", "Изборна дата:",
+                          choices = unique(votes$vote_date),
+                          selected = last(unique(votes$vote_date))),
+              selectInput("party_map", "Партия:",
+                          choices = NULL),
+              col_widths = c(2, 4)),
+              plotOutput("plot_map")),
     nav_panel(title = "Рискови секции", 
-              gt_output("gt_table")),
+              DTOutput("dt_table", width = 1600)),
     nav_panel(title = "Адресна регистрация", layout_columns(
-                selectInput("oblast_add", "Област:",
-                            choices = unique(address$oblast)),
-                selectInput("obshtina_add", "Община:",
+              selectInput("oblast_add", "Област:",
+                          choices = unique(address$oblast)),
+              selectInput("obshtina_add", "Община:",
                           choices = NULL),
               selectInput("month_first", "Месец за сравнение:",
                           choices = c("януари", "февруари", "март"),
@@ -126,9 +137,23 @@ ui <- page_sidebar(
               plotOutput("elec_act")),
     nav_panel(title = "Депутатски мандати", 
               plotOutput("mand_plot")),
+    nav_panel(tags$img(src = "shiny.png", width = 40),
+              "Други полезни приложения:",
+              tags$a(href = "https://nickydy.shinyapps.io/demography/", br(),
+                     "Демография на България!"), br(),
+              tags$a(href = "https://nickydy.shinyapps.io/climate/",
+                     "Климатът на България!"), br(),
+              tags$a(href = "https://nickydy.shinyapps.io/inlation/",
+                     "Inflation in EU!"), br(),
+              tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+                     "Сравнение на цените в България!"), br(),
+              tags$a(href = "https://ndapps.shinyapps.io/agri/",
+                     "Цени на селскостопанска продукция в ЕС!"), br(),
+              tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
+                     "Евростат за България!"), br()),
     nav_panel(tags$img(src = "kofi.png", width = 40),
               "Ако Ви харесва приложението,
-               можете да направите дарение в евро към
+               можете да ме подкрепите като направите дарение в евро към
                следната сметка:",
                br(),
                br(),
@@ -181,28 +206,14 @@ server <- function(input, output, session) {
 		choices <- unique(sett()$code)
 		updateSelectInput(inputId = "sec", choices = choices)
   })
-
-	gt_rend <- reactive({
-	  risk_sec %>%
-	    filter(oblast %in% c(input$obl), 
-	           obshtina %in% c(input$obsh), 
-	           section %in% c(input$sett)) %>%
-	    arrange(-v) %>%
-	    select(-v) %>%
-	    gt() %>%
-	    cols_label("oblast" ="Избирателен район",
-	               "obshtina" ="Община",
-	               "section" = "Населено място",
-	               "code" ="Секция",
-	               "var" = "Риск") %>%
-	    data_color(columns = var, method = "factor",
-	               palette = c("red", "orange", "darkgreen")) %>%
-	    opt_interactive(page_size_default = 100, use_filters = T)
+	sec <- reactive({
+	  req(input$sec)
+	  filter(sett(), code == input$sec)
 	})
 #-------------------------------
 output$obsh_perc <- renderPlot({
 		obsh() %>%
-			filter(obshtina == input$obsh) %>%
+			filter(obshtina %in% c(input$obsh)) %>%
 			mutate(vote_date = fct_relevel(vote_date,
 			                               "Април_2023",
 																		 "Октомври_2022",
@@ -232,7 +243,7 @@ output$obsh_perc <- renderPlot({
 
 output$sett_perc <- renderPlot({
 		sett() %>%
-			filter(section == input$sett) %>%
+			filter(section %in% c(input$sett)) %>%
 			mutate(vote_date = fct_relevel(vote_date,
 			                               "Април_2023",
 																		 "Октомври_2022",
@@ -261,8 +272,8 @@ output$sett_perc <- renderPlot({
 	}, height = 290, width = 1600, res = 96)
 
 output$sec_perc <- renderPlot({
-		sett() %>%
-			filter(code == input$sec) %>%
+		sec() %>%
+			filter(code %in% c(input$sec)) %>%
 			mutate(vote_date = fct_relevel(vote_date,
 			                               "Април_2023",
 																		 "Октомври_2022",
@@ -322,7 +333,55 @@ output$country <- renderPlot({
     facet_wrap(~ vote_date, ncol = 6)
   
 }, height = 800, width = 1600, res = 96)
+#---------------------------------------
+vote_date_map <- reactive({
+  filter(votes, vote_date == input$vote_date_map)
+})
+observeEvent(vote_date_map(), {
+  freezeReactiveValue(input, "party_map")
+  choices <- unique(vote_date_map()$party)
+  updateSelectInput(inputId = "party_map", choices = choices)
+})
+party_map <- reactive({
+  req(input$party_map)
+  filter(vote_date_map(), party == input$party_map)
+})
 
+df <- reactive({
+  votes %>%
+  group_by(vote_date, obshtina, party) %>%
+  summarise(sum_party = sum(votes)) %>%
+  group_by(vote_date, obshtina) %>%
+  mutate(sum_obshtina = sum(sum_party), 
+         perc = sum_party / sum_obshtina * 100) %>%
+  filter(party %in% c(input$party_map))
+})
+
+map <- reactive({
+  obsh_map %>%
+  left_join(df(), by = c("obshtina_bg" = "obshtina")) %>%
+  mutate_if(is.numeric, round, 1) %>%
+  filter(vote_date %in% c(input$vote_date_map)) %>%
+  mutate(party = fct_reorder(party, perc))
+})
+
+output$plot_map <- renderPlot({
+map() %>%
+  ggplot() +
+  geom_sf(aes(fill = perc), alpha = .4) +
+  geom_sf_text(aes(label = perc),
+               check_overlap = TRUE, size = 3) +
+  geom_sf_text(aes(label = obshtina_bg),
+               check_overlap = TRUE, size = 2, vjust = -1.5) +
+  theme(text = element_text(size = 16), legend.position = "right",
+        axis.text = element_blank(),
+        axis.ticks = element_blank(), plot.title.position = "plot") +
+  labs(x = NULL, y = NULL, fill = "(%)",
+       title = paste0("Вот за ", input$party_map,
+       " през ", input$vote_date_map, "!")) +
+  scale_fill_gradient(low = "white", high = "red")
+}, height = 800, width = 1600, res = 96)
+#-------------------------------------------------
 output$elec_act <- renderPlot({
 
   act %>%
@@ -339,7 +398,7 @@ output$elec_act <- renderPlot({
     facet_wrap(vars(type_election))
 
 }, height = 800, width = 1600, res = 96)
-
+#---------------------------------------
 output$mand_plot <- renderPlot({
   
   mand %>% 
@@ -399,7 +458,26 @@ output$add_plot <- renderPlot({
   
 }, height = function() input$height_slider, width = 1600, res = 96)
 
-output$gt_table <- render_gt({expr = gt_rend()}, width = 1600)
+dt_rend <- reactive({
+  risk_sec %>%
+    filter(oblast %in% c(input$obl), 
+           obshtina %in% c(input$obsh)) %>%
+    arrange(-v) %>%
+    select(-v)
+})
+
+output$dt_table <- renderDT(
+ dt_rend() %>% 
+    datatable(rownames = F,
+      colnames = c("Избирателен район" = "oblast",
+                   "Община" = "obshtina",
+                   "Населено място" = "section",
+                   "Секция" = "code",
+                   "Риск" = "var"), 
+      options = list(dom = 'Brtip', pageLength = 100)) %>% 
+      formatStyle("Риск", backgroundColor = styleEqual(
+        c("Висок", "Среден", "Нисък"), 
+        c("red", "orange", "darkgreen"))))
 
 session$onSessionEnded(function() {
   stopApp()

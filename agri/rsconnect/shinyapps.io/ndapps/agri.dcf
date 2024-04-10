@@ -1,0 +1,13 @@
+name: agri
+title: agri
+username: ndapps
+account: ndapps
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11622909
+bundleId: 8444328
+url: https://ndapps.shinyapps.io/agri/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: agri.R

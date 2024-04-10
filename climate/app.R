@@ -1,5 +1,4 @@
 library(shiny)
-library(shinythemes)
 library(tidyverse)
 library(sf)
 library(arrow)
@@ -27,6 +26,7 @@ github <- tags$a(icon("github"), "Github",
                  tagret = "_blank")
 #-----------------------------------------------
 ui <- page_fillable(h3("Климатът на България!"),
+                    theme = bslib::bs_theme(bootswatch = "darkly"),
                     navset_pill(
                       nav_panel("Средна температура",
                                 layout_columns(
@@ -98,9 +98,23 @@ ui <- page_fillable(h3("Климатът на България!"),
                                 varSelectInput("map_var", "Променлива:", df %>% select(6:11)), 
                                 col_widths = c(1, 1, 1, 2)),
                                 plotOutput("map")),
+                      nav_panel(tags$img(src = "shiny.png", width = 40),
+                                "Други полезни приложения:",
+                                tags$a(href = "https://nickydy.shinyapps.io/elections/", br(),
+                                       "Избори в България!"), br(),
+                                tags$a(href = "https://nickydy.shinyapps.io/demography/",
+                                       "Демография на България!"), br(),
+                                tags$a(href = "https://nickydy.shinyapps.io/inlation/",
+                                       "Inflation in EU!"), br(),
+                                tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+                                       "Сравнение на цените в България!"), br(),
+                                tags$a(href = "https://ndapps.shinyapps.io/agri/",
+                                       "Цени на селскостопанска продукция в ЕС!"), br(),
+                                tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
+                                       "Евростат за България!"), br()),
                       nav_panel(tags$img(src = "kofi.png", width = 40),
                                 "Ако Ви харесва приложението,
-                                 можете да направите дарение в евро към
+                                 можете да ме подкрепите като направите дарение в евро към
                                  следната сметка:",
                                 br(),
                                 br(),
