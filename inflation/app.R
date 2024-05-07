@@ -52,7 +52,9 @@ ui <- page_sidebar(
               tags$a(href = "https://ndapps.shinyapps.io/agri/",
                      "Prices of agricultural products in EU!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
-                     "Eurostat for Bulgaria!"), br()),
+                     "Eurostat for Bulgaria!"), br(),
+              tags$a(href = "https://ndapps.shinyapps.io/und_water/",
+                     "Чистота на водите в България"), br()),
     nav_panel(tags$img(src = "kofi.png", width = 40),
               "If you like the app,
                you can support me by donating \u20AC to

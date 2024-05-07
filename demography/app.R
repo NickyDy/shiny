@@ -20,7 +20,7 @@ kinder_gardens <- read_parquet("kinder_gardens.parquet") %>% arrange(obshtina)
 poverty <- read_parquet("poverty.parquet")
 potreblenie <- read_parquet("potreblenie.parquet") %>% filter(value != 0) %>% arrange(oblast)
 prestupnost <- read_parquet("prestupnost.parquet") %>% arrange(oblast)
-#-----------------------------------------
+#---------------------------------------------------------------------
 colors_sex <- c("Мъже" = "#F8766D", "Жени" = "#00BFC4")
 space_s <- function (x, accuracy = NULL, scale = 1, prefix = "", suffix = "", 
                      big.mark = " ", decimal.mark = ".", trim = TRUE, digits, 
@@ -150,7 +150,9 @@ ui <- page_fillable(h3("Демография на България!"),
               tags$a(href = "https://ndapps.shinyapps.io/agri/",
                      "Цени на селскостопанска продукция в ЕС!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
-                     "Евростат за България!"), br()),
+                     "Евростат за България!"), br(),
+              tags$a(href = "https://ndapps.shinyapps.io/und_water/",
+                     "Чистота на водите в България!"), br()),
     nav_panel(tags$img(src = "kofi.png", width = 40),
               "Ако Ви харесва приложението,
                можете да ме подкрепите като направите дарение в евро към

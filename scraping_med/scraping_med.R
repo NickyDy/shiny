@@ -16,6 +16,9 @@ marvi <- read_parquet("shiny/scraping_med/marvi.parquet")
 promahon <- read_parquet("shiny/scraping_med/promahon.parquet")
 vitosha <- read_parquet("shiny/scraping_med/vitosha.parquet")
 
+files <- list.files(pattern = ".parquet")
+pharm <- map_dfr(files, read_parquet)
+
 pharm <- bind_rows(sopharmacy, bg366, framar, remedium, gpharm,
                    salvia, ozone, lilly, epharm, mypharmacy, afya,
                    marvi, promahon, vitosha)  %>% 

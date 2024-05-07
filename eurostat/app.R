@@ -10,30 +10,30 @@ gdp <- read_parquet("nama_10_gdp.parquet") %>%
 gdp_pc <- read_parquet("nama_10_pc.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-gini <- read_parquet("gini.parquet") %>% 
+gini <- read_parquet("ilc_di12.parquet") %>% 
   mutate(geo = fct_recode(geo, "Turkey" = "Türkiye")) %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-inf <- read_parquet("inflation.parquet") %>% 
+inf <- read_parquet("prc_hicp_mmor.parquet") %>% 
   mutate(geo = fct_recode(geo, "Turkey" = "Türkiye")) %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
-  select(-c(1:2)) %>% arrange(TIME_PERIOD)
-sal <- read_parquet("avg_salary.parquet") %>% 
+  arrange(TIME_PERIOD)
+sal <- read_parquet("nama_10_fte.parquet") %>% 
   filter(!str_detect(geo, "^Euro"), unit == "Euro") %>% 
   arrange(TIME_PERIOD)
-house <- read_parquet("house_prices.parquet") %>% 
+house <- read_parquet("prc_hpi_a.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-unemp <- read_parquet("unemployment.parquet") %>% 
+unemp <- read_parquet("tps00203.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-imp_exp <- read_parquet("imp_exp.parquet") %>% 
+imp_exp <- read_parquet("nama_10_exi.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-labor <- read_parquet("labor_cost.parquet") %>% 
+labor <- read_parquet("nama_10_lp_ulc.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-debt <- read_parquet("debt.parquet") %>% 
+debt <- read_parquet("gov_10dd_edpt1.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
 ppp <- read_parquet("prc_ppp_ind.parquet") %>% 
@@ -118,8 +118,17 @@ ui <- page_fillable(h3("Евростат за България!"),
                                   selectInput("coicop_inf", "Показател:",
                                             choices = unique(inf$coicop),
                                             selected = "All-items HICP"),
-                                  col_widths = c(2, 4)),
-                                plotOutput("inf_plot")),
+                                  selectInput("country_inf", "Държава",
+                                              choices = unique(inf$geo),
+                                              selected = "Bulgaria"),
+                                  selectInput("coicop_inf_line", "Показател:",
+                                              choices = unique(inf$coicop),
+                                              selected = "All-items HICP"),
+                                  col_widths = c(2, 4, 2, 4)),
+                                layout_columns(
+                                  plotOutput("inf_plot"),
+                                  plotOutput("inf_line"),
+                                  col_widths = c(6, 6))),
                       nav_panel(title = "Gini",
                                 layout_columns(gap = "400px",
                                   selectInput("date_gini", "Дата:",
@@ -133,12 +142,19 @@ ui <- page_fillable(h3("Евростат за България!"),
                                   plotOutput("gini_plot"),
                                   plotOutput("gini_time"), 
                                   col_widths = c(6, 6))),
-                      nav_panel("Средна заплата", layout_columns(
-                        selectInput("sal_date", "Дата:",
-                                    choices = unique(sal$TIME_PERIOD),
-                                    selected = last(sal$TIME_PERIOD)),
-                        col_widths = c(2)),
-                        plotOutput("sal_plot")),
+                      nav_panel("Средна заплата", 
+                                layout_columns(gap = "400px",
+                                  selectInput("sal_date", "Дата:",
+                                              choices = unique(sal$TIME_PERIOD),
+                                              selected = last(sal$TIME_PERIOD)),
+                                  selectInput("sal_country", "Държава:",
+                                              choices = unique(sal$geo),
+                                              selected = "Bulgaria"),
+                                  col_widths = c(2, 2)), 
+                                layout_columns(
+                                  plotOutput("sal_plot"),
+                                  plotOutput("sal_time"), 
+                                  col_widths = c(6, 6))),
                       nav_panel("Цени на имоти", layout_columns(
                         selectInput("house_date", "Дата:",
                                     choices = unique(house$TIME_PERIOD),
@@ -149,14 +165,23 @@ ui <- page_fillable(h3("Евростат за България!"),
                                     choices = NULL),
                         col_widths = c(2, 3, 3)),
                         plotOutput("house_plot")),
-                      nav_panel("Безработица", layout_columns(
-                        selectInput("unemp_date", "Дата:",
-                                    choices = unique(unemp$TIME_PERIOD),
-                                    selected = last(unemp$TIME_PERIOD)),
-                        selectInput("unemp_unit", "Индекс:",
-                                    choices = NULL),
-                        col_widths = c(2, 3)),
-                        plotOutput("unemp_plot")),
+                      nav_panel("Безработица", 
+                                layout_columns(
+                                  selectInput("unemp_date", "Дата:",
+                                              choices = unique(unemp$TIME_PERIOD),
+                                              selected = last(unemp$TIME_PERIOD)),
+                                  selectInput("unemp_unit", "Индекс:",
+                                              choices = unique(unemp$unit)),
+                                  selectInput("unemp_country", "Държава",
+                                              choices = unique(unemp$geo),
+                                              selected = "Bulgaria"),
+                                  selectInput("unemp_unit_line", "Индекс:",
+                                              choices = unique(unemp$unit)),
+                                  col_widths = c(2, 4, 2, 4)),
+                                layout_columns(
+                                  plotOutput("unemp_plot"),
+                                  plotOutput("plot_unemp_line"),
+                                  col_widths = c(6, 6))),
                       nav_panel("Внос/Износ", layout_columns(
                         selectInput("date_imp_exp", "Дата:",
                                     choices = unique(imp_exp$TIME_PERIOD),
@@ -223,30 +248,57 @@ ui <- page_fillable(h3("Евростат за България!"),
                                     choices = NULL),
                         col_widths = c(2, 3, 3, 3)),
                         plotOutput("plot_emp")),
-                      nav_panel("Разходи на домакинствата", layout_columns(
+                      nav_panel("Разходи на домакинствата", 
+                        layout_columns(
                         selectInput("tec00009_date", "Дата:",
                                     choices = unique(tec00009$TIME_PERIOD),
                                     selected = last(tec00009$TIME_PERIOD)),
                         selectInput("tec00009_unit", "Индекс:",
                                     choices = unique(tec00009$unit)),
-                        col_widths = c(2, 3)),
-                        plotOutput("plot_tec00009")),
-                      nav_panel("Разходи на правителството", layout_columns(
+                        selectInput("tec00009_country", "Държава",
+                                    choices = unique(tec00009$geo),
+                                    selected = "Bulgaria"),
+                        selectInput("tec00009_unit_line", "Индекс:",
+                                    choices = unique(tec00009$unit)),
+                        col_widths = c(2, 4, 2, 4)),
+                        layout_columns(
+                        plotOutput("plot_tec00009"),
+                        plotOutput("plot_tec00009_line"),
+                        col_widths = c(6, 6))),
+                      nav_panel("Разходи на правителството", 
+                        layout_columns(
                         selectInput("tec00010_date", "Дата:",
                                     choices = unique(tec00010$TIME_PERIOD),
                                     selected = last(tec00010$TIME_PERIOD)),
                         selectInput("tec00010_unit", "Индекс:",
                                     choices = unique(tec00010$unit)),
-                        col_widths = c(2, 3)),
-                        plotOutput("plot_tec00010")),
-                      nav_panel("Инвестиции", layout_columns(
+                        selectInput("tec00010_country", "Държава",
+                                    choices = unique(tec00010$geo),
+                                    selected = "Bulgaria"),
+                        selectInput("tec00010_unit_line", "Индекс:",
+                                    choices = unique(tec00010$unit)),
+                        col_widths = c(2, 4, 2, 4)),
+                        layout_columns(
+                        plotOutput("plot_tec00010"),
+                        plotOutput("plot_tec00010_line"),
+                        col_widths = c(6, 6))),
+                      nav_panel("Инвестиции", 
+                        layout_columns(
                         selectInput("tec00011_date", "Дата:",
                                     choices = unique(tec00011$TIME_PERIOD),
                                     selected = last(tec00011$TIME_PERIOD)),
                         selectInput("tec00011_unit", "Индекс:",
                                     choices = unique(tec00011$unit)),
-                        col_widths = c(2, 3)),
-                        plotOutput("plot_tec00011")),
+                        selectInput("tec00011_country", "Държава",
+                                    choices = unique(tec00011$geo),
+                                    selected = "Bulgaria"),
+                        selectInput("tec00011_unit_line", "Индекс:",
+                                    choices = unique(tec00011$unit)),
+                        col_widths = c(2, 4, 2, 4)),
+                        layout_columns(
+                        plotOutput("plot_tec00011"),
+                        plotOutput("plot_tec00011_line"),
+                        col_widths = c(6, 6))),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
                                 tags$a(href = "https://nickydy.shinyapps.io/elections/", br(),
@@ -260,7 +312,9 @@ ui <- page_fillable(h3("Евростат за България!"),
                                 tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
                                        "Сравнение на цените в България!"), br(),
                                 tags$a(href = "https://ndapps.shinyapps.io/agri/",
-                                       "Цени на селскостопанска продукция в ЕС!"), br()),
+                                       "Цени на селскостопанска продукция в ЕС!"), br(),
+                                tags$a(href = "https://ndapps.shinyapps.io/und_water/",
+                                       "Чистота на водите в България!"), br()),
                       nav_panel(tags$img(src = "kofi.png", width = 40),
                                 "Ако Ви харесва приложението,
                                 можете да ме подкрепите като направите дарение в евро към
@@ -385,27 +439,52 @@ inf_last <- reactive({
   group_by(coicop, geo) %>% 
   summarise(sm = sum(values, na.rm = T)) %>%
   ungroup() %>% 
-  mutate_if(is.numeric, round, 1)
+  mutate_if(is.numeric, round, 1) %>% 
+    mutate(geo = fct_reorder(geo, sm),
+           col = if_else(geo == "Bulgaria", "1", "0"))
 })
 
   output$inf_plot <- renderPlot({
 
 inf_last() %>% 
-  mutate(geo = fct_reorder(geo, sm),
-         col = if_else(geo == "Bulgaria", "1", "0")) %>% 
   ggplot(aes(sm, geo, fill = col)) +
   geom_col() +
   scale_fill_manual(values = c("gray50", "red")) +
   scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
   geom_text(aes(label = sm),
       position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
-  theme(text = element_text(size = 14), legend.position = "none") +
-  labs(title = paste0("Натрупана инфлация между датите: ", 
+  theme(text = element_text(size = 12), legend.position = "none", 
+        plot.title.position = "plot") +
+  labs(title = paste0("Натрупана инфлация между датите: ",
       input$date_inf[1], " и ", input$date_inf[2], "!"), 
   x = "Инфлация (%)", y = NULL, 
   caption = "Източник на данните: Eurostat")
 
-  }, height = 800, width = 1550, res = 96)
+  }, height = 700, width = 750, res = 96)
+  
+  inf_line_r <- reactive({
+    inf %>% 
+    filter(TIME_PERIOD >= input$date_inf[1] & TIME_PERIOD <= input$date_inf[2],
+           geo %in% c(input$country_inf),
+           coicop %in% c(input$coicop_inf_line)) %>% 
+    group_by(coicop, geo) %>% 
+    mutate(cs = cumsum(values)) %>% 
+    ungroup()
+  })
+  
+  output$inf_line <- renderPlot({
+    
+    inf_line_r() %>% 
+      ggplot(aes(TIME_PERIOD, cs)) +
+      geom_line() +
+      geom_point() +
+      theme(text = element_text(size = 12), plot.title.position = "plot") +
+      labs(y = "Инфлация (%)", x = NULL, 
+           title = paste0("Натрупана инфлация в ", input$country_inf, " между датите: ",
+           input$date_inf[1], " и ", input$date_inf[2], "!"),
+           caption = "Източник на данните: Eurostat")
+    
+  }, height = 700, width = 750, res = 96)
   #---------------------------------------
   
   output$gini_plot <- renderPlot({
@@ -442,7 +521,7 @@ inf_last() %>%
   #---------------------------------------
   
   output$sal_plot <- renderPlot({
-
+    
     sal %>% 
       filter(TIME_PERIOD %in% c(input$sal_date)) %>% 
       mutate(geo = fct_reorder(geo, values),
@@ -450,14 +529,28 @@ inf_last() %>%
       ggplot(aes(values, geo, fill = col)) +
       geom_col() +
       scale_fill_manual(values = c("gray50", "red")) +
-      scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
+      scale_x_continuous(expand = expansion(mult = c(0.01, 0.2))) +
       geom_text(aes(label = space_s(values)),
                 position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
       theme(text = element_text(size = 14), legend.position = "none") +
       labs(x = "Средна годишна заплата (\u20AC)", y = NULL, 
            caption = "Източник на данните: Eurostat")
-
-  }, height = 800, width = 1550, res = 96)
+  }, height = 700, width = 750, res = 96)
+  
+  output$sal_time <- renderPlot({
+    
+    sal %>% 
+      filter(geo %in% c(input$sal_country)) %>% 
+      ggplot(aes(TIME_PERIOD, values)) +
+      geom_line() +
+      geom_point() +
+      scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
+      geom_text(aes(label = space_s(values)), check_overlap = T,
+                position = position_dodge(width = 1), vjust = -0.5, size = 4) +
+      theme(text = element_text(size = 14), legend.position = "none") +
+      labs(y = "Средна годишна заплата (\u20AC)", x = NULL, 
+           caption = "Източник на данните: Eurostat")
+  }, height = 700, width = 750, res = 96)
   #---------------------------------------
   house_date <- reactive({
     filter(house, TIME_PERIOD %in% c(input$house_date))
@@ -505,24 +598,10 @@ inf_last() %>%
 
   }, height = 800, width = 1550, res = 96)
   #---------------------------------------
-  unemp_date <- reactive({
-    filter(unemp, TIME_PERIOD %in% c(input$unemp_date))
-  })
-  
-  observeEvent(unemp_date(), {
-    freezeReactiveValue(input, "unemp_unit")
-    choices <- unique(unemp_date()$unit)
-    updateSelectInput(inputId = "unemp_unit", choices = choices)
-  })
-  
-  unemp_unit <- reactive({
-    req(input$unemp_date)
-    filter(unemp_date(), unit == input$unemp_unit)
-  })
   
   output$unemp_plot <- renderPlot({
 
-    unemp_unit() %>% 
+    unemp %>% 
       filter(TIME_PERIOD %in% c(input$unemp_date),
              unit %in% c(input$unemp_unit)) %>% 
       mutate(geo = fct_reorder(geo, values),
@@ -537,7 +616,23 @@ inf_last() %>%
       labs(x = input$unemp_unit, y = NULL, 
            caption = "Източник на данните: Eurostat")
 
-  }, height = 800, width = 1550, res = 96)
+  }, height = 700, width = 750, res = 96)
+  
+  output$plot_unemp_line <- renderPlot({
+    
+    unemp %>% 
+      filter(geo %in% c(input$unemp_country),
+             unit %in% c(input$unemp_unit_line)) %>% 
+      ggplot(aes(TIME_PERIOD, values)) +
+      geom_line() +
+      geom_point() +
+      scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
+      geom_text(aes(label = values), check_overlap = T,
+                position = position_dodge(width = 1), vjust = -0.5, size = 4) +
+      theme(text = element_text(size = 14), legend.position = "none") +
+      labs(y = input$unemp_unit_line, x = NULL, 
+           caption = "Източник на данните: Eurostat")
+  }, height = 700, width = 750, res = 96)
   #---------------------------------------
   date_imp_exp <- reactive({
     filter(imp_exp, TIME_PERIOD %in% c(input$date_imp_exp))
@@ -855,13 +950,29 @@ output$plot_tec00009 <- renderPlot({
     geom_col() +
     scale_fill_manual(values = c("gray50", "red")) +
     scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
-    geom_text(aes(label = values),
+    geom_text(aes(label = space_s(values)),
               position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
     theme(text = element_text(size = 14), legend.position = "none") +
     labs(x = input$tec00009_unit, y = NULL, 
          caption = "Източник на данните: Eurostat")
   
-}, height = 800, width = 1550, res = 96)
+}, height = 700, width = 750, res = 96)
+
+output$plot_tec00009_line <- renderPlot({
+  
+  tec00009 %>% 
+    filter(geo %in% c(input$tec00009_country),
+           unit %in% c(input$tec00009_unit_line)) %>% 
+    ggplot(aes(TIME_PERIOD, values)) +
+    geom_line() +
+    geom_point() +
+    scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
+    geom_text(aes(label = space_s(values)), check_overlap = T,
+              position = position_dodge(width = 1), vjust = -0.5, size = 4) +
+    theme(text = element_text(size = 14), legend.position = "none") +
+    labs(y = input$tec00009_unit_line, x = NULL, 
+         caption = "Източник на данните: Eurostat")
+}, height = 700, width = 750, res = 96)
 
 #---------------------------------------
  
@@ -876,14 +987,30 @@ output$plot_tec00010 <- renderPlot({
     geom_col() +
     scale_fill_manual(values = c("gray50", "red")) +
     scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
-    geom_text(aes(label = values),
+    geom_text(aes(label = space_s(values)),
               position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
     theme(text = element_text(size = 14), legend.position = "none") +
     labs(x = input$tec00010_unit, y = NULL, 
          caption = "Източник на данните: Eurostat")
   
-}, height = 800, width = 1550, res = 96)
-  #---------------------------------------
+}, height = 700, width = 750, res = 96)
+
+output$plot_tec00010_line <- renderPlot({
+  
+  tec00010 %>% 
+    filter(geo %in% c(input$tec00010_country),
+           unit %in% c(input$tec00010_unit_line)) %>% 
+    ggplot(aes(TIME_PERIOD, values)) +
+    geom_line() +
+    geom_point() +
+    scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
+    geom_text(aes(label = space_s(values)), check_overlap = T,
+              position = position_dodge(width = 1), vjust = -0.5, size = 4) +
+    theme(text = element_text(size = 14), legend.position = "none") +
+    labs(y = input$tec00010_unit_line, x = NULL, 
+         caption = "Източник на данните: Eurostat")
+}, height = 700, width = 750, res = 96)
+#---------------------------------------
 output$plot_tec00011 <- renderPlot({
   
   tec00011 %>% 
@@ -895,14 +1022,30 @@ output$plot_tec00011 <- renderPlot({
     geom_col() +
     scale_fill_manual(values = c("gray50", "red")) +
     scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
-    geom_text(aes(label = values),
+    geom_text(aes(label = space_s(values)),
               position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
     theme(text = element_text(size = 14), legend.position = "none") +
     labs(x = input$tec00011_unit, y = NULL, 
          caption = "Източник на данните: Eurostat")
   
-}, height = 800, width = 1550, res = 96)
-  #---------------------------------------
+}, height = 700, width = 750, res = 96)
+
+output$plot_tec00011_line <- renderPlot({
+  
+  tec00011 %>% 
+    filter(geo %in% c(input$tec00011_country),
+           unit %in% c(input$tec00011_unit_line)) %>% 
+    ggplot(aes(TIME_PERIOD, values)) +
+    geom_line() +
+    geom_point() +
+    scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
+    geom_text(aes(label = space_s(values)), check_overlap = T,
+              position = position_dodge(width = 1), vjust = -0.5, size = 4) +
+    theme(text = element_text(size = 14), legend.position = "none") +
+    labs(y = input$tec00011_unit_line, x = NULL, 
+         caption = "Източник на данните: Eurostat")
+}, height = 700, width = 750, res = 96)
+#---------------------------------------
 
   session$onSessionEnded(function() {
     stopApp()
