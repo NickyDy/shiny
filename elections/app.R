@@ -3,21 +3,24 @@ library(shiny)
 library(DT)
 library(arrow)
 library(bslib)
+library(scales)
 library(tidytext)
-library(sf)
 
-votes <- read_parquet("votes.parquet")
-mand <- read_parquet("mand.parquet") %>% 
-  mutate(year = paste0("(", year, ")")) %>% 
-  unite("ns_year", 1:2, sep = " ")
+votes <- read_parquet("votes.parquet") %>% 
+  mutate(vote_date = fct_relevel(vote_date,
+                                 "Юни_2024",
+                                 "Април_2023",
+  															 "Октомври_2022",
+  															 "Ноември_2021",
+  															 "Юли_2021",
+  															 "Април_2021",
+  															 "Март_2017"))
+mand <- read_parquet("mand.parquet")
 act <- read_parquet("election_activity.parquet")
 address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
-obsh_map <- read_sf("obsh_map.gpkg")
 
 risk_sec <- votes %>% 
-  group_by(oblast, obshtina, section, code) %>% 
-  summarise(v = var(votes)) %>% 
-  ungroup() %>% 
+  summarise(v = var(votes), .by = c(oblast, obshtina, section, code)) %>%
   mutate(v = round(v, 1), 
          var = case_when(
     v <= 500 ~ "Нисък",
@@ -40,7 +43,7 @@ colors <- c(
   "ГЕРБ" = "blue",
   "ОП (НФСБ, АТАКА и ВМРО)" = "brown",
   "ВОЛЯ" = "pink",
-  "Обединение ДОСТ" = "gray")
+  "ВЕЛИЧИЕ" = "darkgreen")
 
 colors_mand <- c(
   "ПП" = "yellow",
@@ -81,7 +84,21 @@ colors_mand <- c(
   "КП ПФ" = "black",
   "КП ББЦ" = "pink",
   "КП АБВ" = "red",
-  "ИБГНИ" = "green")
+  "ИБГНИ" = "green",
+  "ВЕЛИЧИЕ" = "darkgreen")
+
+space_s <- function (x, accuracy = NULL, scale = 1, prefix = "", suffix = "", 
+                     big.mark = " ", decimal.mark = ".", trim = TRUE, digits, 
+                     ...)
+{
+  if (!missing(digits)) {
+    lifecycle::deprecate_stop(when = "1.0.0", what = "comma(digits)", 
+                              with = "comma(accuracy)")
+  }
+  number(x = x, accuracy = accuracy, scale = scale, prefix = prefix, 
+         suffix = suffix, big.mark = big.mark, decimal.mark = decimal.mark, 
+         trim = trim, ...)
+}
 #----------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
                href = "mailto:nickydyakov@gmail.com", 
@@ -101,23 +118,32 @@ ui <- page_sidebar(
     selectInput("sec", "Секция:", choices = NULL),
     sliderInput("prop_slider", "Филтър проценти:", 
                 min = 0, max = 0.5, value = 0.04, step = 0.01),
-    sliderInput("height_slider", "Височина на графиката (адресна регистрация):", 
+    sliderInput("votes_slider", "Филтър брой гласове:", 
+                min = 0, max = 1000000, value = 50000, step = 10000),
+    sliderInput("height_slider", "Височина на графиката:", 
                 min = 800, max = 4000, value = 800, step = 100))),
   navset_pill(
     nav_panel(title = "Изборни резултати", 
               plotOutput("obsh_perc", height = 290), 
               plotOutput("sett_perc", height = 290),
               plotOutput("sec_perc", height = 290)),
-    nav_panel(title = "Общо за страната", 
+    nav_panel(title = "Общо за страната (%)", 
               plotOutput("country")),
-    nav_panel(title = "Карта на общините", layout_columns(
-              selectInput("vote_date_map", "Изборна дата:",
-                          choices = unique(votes$vote_date),
-                          selected = last(unique(votes$vote_date))),
-              selectInput("party_map", "Партия:",
-                          choices = NULL),
-              col_widths = c(2, 4)),
-              plotOutput("plot_map")),
+    nav_panel(title = "Общо за страната (брой гласове)", 
+              plotOutput("votes_country")),
+    nav_panel(title = "Загуба/Печалба на гласове", layout_columns(
+              selectInput("first_date", "Последни избори:",
+                          choices = "Юни_2024"),
+              selectInput("second_date", "Сравни със:",
+                          choices = c("Април_2023", 
+                                      "Октомври_2022", 
+                                      "Ноември_2021", 
+                                      "Юли_2021", 
+                                      "Април_2021", 
+                                      "Март_2017"),
+                          selected = "Април_2023"),
+              col_widths = c(2, 2)),
+              plotOutput("lost_gained_votes")),
     nav_panel(title = "Рискови секции", 
               DTOutput("dt_table", width = 1600)),
     nav_panel(title = "Адресна регистрация", layout_columns(
@@ -126,10 +152,10 @@ ui <- page_sidebar(
               selectInput("obshtina_add", "Община:",
                           choices = NULL),
               selectInput("month_first", "Месец за сравнение:",
-                          choices = c("януари", "февруари", "март", "април"),
-                          selected = "април"),
+                          choices = c("януари", "февруари", "март", "април", "май", "юни"),
+                          selected = "юни"),
               selectInput("month_last", "Месец за сравнение:",
-                          choices = c("януари", "февруари", "март", "април"),
+                          choices = c("януари", "февруари", "март", "април", "май"),
                           selected = "януари"),
                           col_widths = c(2, 2, 2)),
               plotOutput("add_plot")),
@@ -152,7 +178,7 @@ ui <- page_sidebar(
               tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
                      "Евростат за България!"), br(),
               tags$a(href = "https://ndapps.shinyapps.io/und_water/",
-                     "Чистота на водите в България"), br()),
+                     "Чистота на водите в България!"), br()),
     nav_panel(tags$img(src = "kofi.png", width = 40),
               "Ако Ви харесва приложението,
                можете да ме подкрепите като направите дарение в евро към
@@ -216,13 +242,6 @@ server <- function(input, output, session) {
 output$obsh_perc <- renderPlot({
 		obsh() %>%
 			filter(obshtina %in% c(input$obsh)) %>%
-			mutate(vote_date = fct_relevel(vote_date,
-			                               "Април_2023",
-																		 "Октомври_2022",
-																		 "Ноември_2021",
-																		 "Юли_2021",
-																		 "Април_2021",
-																		 "Март_2017")) %>%
 			group_by(vote_date, party) %>%
 			summarise(sum_votes = sum(votes)) %>%
 			mutate(prop = sum_votes / sum(sum_votes)) %>%
@@ -240,19 +259,12 @@ output$obsh_perc <- renderPlot({
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank()) +
 			labs(x = NULL, y = NULL, title = paste0("Община: ", input$obsh)) +
-			facet_wrap(~ vote_date, ncol = 6, drop = F)
+			facet_wrap(~ vote_date, ncol = 7, drop = F)
 	}, height = 290, width = 1600, res = 96)
 
 output$sett_perc <- renderPlot({
 		sett() %>%
 			filter(section %in% c(input$sett)) %>%
-			mutate(vote_date = fct_relevel(vote_date,
-			                               "Април_2023",
-																		 "Октомври_2022",
-																		 "Ноември_2021",
-																		 "Юли_2021",
-																		 "Април_2021",
-																		 "Март_2017")) %>%
 			group_by(vote_date, party) %>%
 			summarise(sum_votes = sum(votes)) %>%
 			mutate(prop = sum_votes / sum(sum_votes)) %>%
@@ -270,19 +282,12 @@ output$sett_perc <- renderPlot({
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank()) +
 			labs(x = NULL, y = NULL, title = paste0("Населено място: ", input$sett)) +
-			facet_wrap(~ vote_date, ncol = 6, drop = F)
+			facet_wrap(~ vote_date, ncol = 7, drop = F)
 	}, height = 290, width = 1600, res = 96)
 
 output$sec_perc <- renderPlot({
 		sec() %>%
 			filter(code %in% c(input$sec)) %>%
-			mutate(vote_date = fct_relevel(vote_date,
-			                               "Април_2023",
-																		 "Октомври_2022",
-																		 "Ноември_2021",
-																		 "Юли_2021",
-																		 "Април_2021",
-																		 "Март_2017")) %>%
 			group_by(vote_date, party) %>%
 			summarise(sum_votes = sum(votes)) %>%
 			mutate(prop = sum_votes / sum(sum_votes)) %>%
@@ -301,19 +306,12 @@ output$sec_perc <- renderPlot({
 						axis.ticks.x = element_blank()) +
 			labs(x = NULL, y = NULL, title = paste0("Секция: ", input$sec),
 					 caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
-			facet_wrap(~ vote_date, ncol = 6, drop = F)
+			facet_wrap(~ vote_date, ncol = 7, drop = F)
 	}, height = 290, width = 1600, res = 96)
 
 output$country <- renderPlot({
   
   votes %>%
-    mutate(vote_date = fct_relevel(vote_date, 
-                                   "Април_2023",
-                                   "Октомври_2022", 
-                                   "Ноември_2021", 
-                                   "Юли_2021", 
-                                   "Април_2021", 
-                                   "Март_2017")) %>%
     group_by(vote_date, party) %>%
     summarise(sum_votes = sum(votes, na.rm = T)) %>%
     mutate(prop = sum_votes / sum(sum_votes)) %>%
@@ -322,7 +320,7 @@ output$country <- renderPlot({
     ggplot(aes(prop, party, fill = party)) +
     geom_col(position = "dodge", show.legend = F) +
     guides(fill = guide_legend(reverse = TRUE)) +
-    scale_x_continuous(expand = expansion(mult = c(.05, .55))) +
+    scale_x_continuous(expand = expansion(mult = c(.05, .65))) +
     scale_y_discrete(labels = scales::label_wrap(50)) +
     scale_fill_manual(values = colors) +
     geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
@@ -332,58 +330,57 @@ output$country <- renderPlot({
           axis.ticks.x = element_blank()) +
     labs(x = NULL, y = NULL,
          caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
-    facet_wrap(~ vote_date, ncol = 6)
+    facet_wrap(~ vote_date, ncol = 7)
   
-}, height = 800, width = 1600, res = 96)
+}, height = function() input$height_slider, width = 1600, res = 96)
 #---------------------------------------
-vote_date_map <- reactive({
-  filter(votes, vote_date == input$vote_date_map)
-})
-observeEvent(vote_date_map(), {
-  freezeReactiveValue(input, "party_map")
-  choices <- unique(vote_date_map()$party)
-  updateSelectInput(inputId = "party_map", choices = choices)
-})
-party_map <- reactive({
-  req(input$party_map)
-  filter(vote_date_map(), party == input$party_map)
-})
-
-df <- reactive({
+output$votes_country <- renderPlot({
   votes %>%
-  group_by(vote_date, obshtina, party) %>%
-  summarise(sum_party = sum(votes)) %>%
-  group_by(vote_date, obshtina) %>%
-  mutate(sum_obshtina = sum(sum_party), 
-         perc = sum_party / sum_obshtina * 100) %>%
-  filter(party %in% c(input$party_map))
-})
-
-map <- reactive({
-  obsh_map %>%
-  left_join(df(), by = c("obshtina_bg" = "obshtina")) %>%
-  mutate_if(is.numeric, round, 1) %>%
-  filter(vote_date %in% c(input$vote_date_map)) %>%
-  mutate(party = fct_reorder(party, perc))
-})
-
-output$plot_map <- renderPlot({
-map() %>%
-  ggplot() +
-  geom_sf(aes(fill = perc), alpha = .4) +
-  geom_sf_text(aes(label = perc),
-               check_overlap = TRUE, size = 3) +
-  geom_sf_text(aes(label = obshtina_bg),
-               check_overlap = TRUE, size = 2, vjust = -1.5) +
-  theme(text = element_text(size = 16), legend.position = "right",
-        axis.text = element_blank(),
-        axis.ticks = element_blank(), plot.title.position = "plot") +
-  labs(x = NULL, y = NULL, fill = "(%)",
-       title = paste0("Вот за ", input$party_map,
-       " през ", input$vote_date_map, "!")) +
-  scale_fill_gradient(low = "white", high = "red")
-}, height = 800, width = 1600, res = 96)
-#-------------------------------------------------
+  group_by(vote_date, party) %>%
+  summarise(sum_votes = sum(votes)) %>%
+  filter(sum_votes >= input$votes_slider) %>%
+  mutate(party = fct_reorder(party, sum_votes)) %>% 
+  ggplot(aes(sum_votes, party, fill = party)) +
+  geom_col(position = "dodge", show.legend = F) +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  scale_y_discrete(labels = scales::label_wrap(50)) +
+  scale_x_continuous(expand = expansion(mult = c(.05, .9))) +
+  scale_fill_manual(values = colors) +
+  geom_text(aes(label = space_s(sum_votes)), 
+            position = position_dodge(width = 1), hjust = -0.05, size = 4) +
+  theme(text = element_text(size = 16), 
+        axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank()) +
+  labs(y = NULL, x = "Брой гласове", title = NULL,
+       caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
+  facet_wrap(~ vote_date, ncol = 7)
+}, height = function() input$height_slider, width = 1600, res = 96)
+#---------------------------------------
+output$lost_gained_votes <- renderPlot({
+  
+  votes %>%
+    group_by(vote_date, party) %>%
+    summarise(sum_votes = sum(votes)) %>%
+    pivot_wider(names_from = vote_date, values_from = sum_votes) %>% 
+    mutate(diff = .data[[input$first_date]] - .data[[input$second_date]], 
+           party = fct_reorder(party, diff, .na_rm = T),
+           col = diff > 0, col = as.factor(col),
+           col = fct_recode(col, "Загуба на гласове" = "FALSE",
+                            "Печалба на гласове" = "TRUE")) %>% 
+    drop_na(diff) %>% 
+    ggplot(aes(diff, party, fill = col)) +
+    geom_col() +
+    geom_text(aes(label = space_s(diff)), 
+              position = position_dodge(width = 1), hjust = -0.05, size = 16, size.unit = "pt") +
+    scale_fill_manual(values = c("red", "blue")) +
+    scale_x_continuous(expand = expansion(mult = c(.01, .1))) +
+    theme(text = element_text(size = 16), legend.position = "top", 
+          axis.text.x = element_blank(), 
+          axis.ticks.x = element_blank()) +
+    labs(y = NULL, x = "Брой гласове", fill = "Легенда:")
+  
+}, height = 700, width = 1600, res = 96)
+#---------------------------------------
 output$elec_act <- renderPlot({
 
   act %>%

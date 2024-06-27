@@ -3,6 +3,7 @@ library(shiny)
 library(arrow)
 library(bslib)
 library(scales)
+options(scipen = 100)
 
 gdp <- read_parquet("nama_10_gdp.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
@@ -20,6 +21,9 @@ inf <- read_parquet("prc_hicp_mmor.parquet") %>%
   arrange(TIME_PERIOD)
 sal <- read_parquet("nama_10_fte.parquet") %>% 
   filter(!str_detect(geo, "^Euro"), unit == "Euro") %>% 
+  arrange(TIME_PERIOD)
+wage <- read_parquet("earn_mw_cur.parquet") %>% 
+  mutate(geo = fct_recode(geo, "Turkey" = "Türkiye")) %>% 
   arrange(TIME_PERIOD)
 house <- read_parquet("prc_hpi_a.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
@@ -96,7 +100,18 @@ ui <- page_fillable(h3("Евростат за България!"),
                                               choices = NULL),
                                   col_widths = c(2, 4, 6)),
                                 plotOutput("gdp_plot")),
-                      nav_panel(title = "БВП (на глава)",
+                      nav_panel(title = "БВП (in time)",
+                                layout_columns(
+                                  selectInput("country_gdp", "Държава:",
+                                              choices = unique(gdp$geo),
+                                              selected = "Bulgaria"),
+                                  selectInput("na_item_gdp_time", "Показател:",
+                                              choices = NULL),
+                                  selectInput("unit_gdp_time", "Индекс, мерна единица:",
+                                              choices = NULL),
+                                  col_widths = c(2, 4, 6)),
+                                plotOutput("gdp_plot_time")),
+                      nav_panel(title = "БВП на глава",
                                 layout_columns(
                                   selectInput("date_gdp_pc", "Дата:",
                                               choices = unique(gdp_pc$TIME_PERIOD),
@@ -107,6 +122,17 @@ ui <- page_fillable(h3("Евростат за България!"),
                                               choices = NULL),
                                   col_widths = c(2, 4, 6)),
                                 plotOutput("plot_gdp_pc")),
+                      nav_panel(title = "БВП на глава (in time)",
+                                layout_columns(
+                                  selectInput("country_gdp_pc", "Държава:",
+                                              choices = unique(gdp_pc$geo),
+                                              selected = "Bulgaria"),
+                                  selectInput("na_item_gdp_time_pc", "Показател:",
+                                              choices = NULL),
+                                  selectInput("unit_gdp_time_pc", "Индекс, мерна единица:",
+                                              choices = NULL),
+                                  col_widths = c(2, 4, 6)),
+                                plotOutput("gdp_plot_time_pc")),
                       nav_panel(title = "Инфлация",
                                 layout_columns(
                                   dateRangeInput("date_inf", "Дата:",
@@ -141,6 +167,23 @@ ui <- page_fillable(h3("Евростат за България!"),
                                 layout_columns(
                                   plotOutput("gini_plot"),
                                   plotOutput("gini_time"), 
+                                  col_widths = c(6, 6))),
+                      nav_panel("Минимална заплата",
+                                layout_columns(
+                                               selectInput("wage_date", "Дата:",
+                                                           choices = unique(wage$TIME_PERIOD),
+                                                           selected = last(wage$TIME_PERIOD)),
+                                               selectInput("wage_currency", "Мерна единица:",
+                                                           choices = unique(wage$currency)),
+                                               selectInput("wage_country", "Държава:",
+                                                           choices = unique(wage$geo),
+                                                           selected = "Bulgaria"),
+                                               selectInput("wage_currency_line", "Мерна единица:",
+                                                           choices = unique(wage$currency)),
+                                               col_widths = c(2, 4, 2, 4)),
+                                layout_columns(
+                                  plotOutput("wage_plot"),
+                                  plotOutput("wage_time"),
                                   col_widths = c(6, 6))),
                       nav_panel("Средна заплата", 
                                 layout_columns(gap = "400px",
@@ -387,6 +430,47 @@ output$gdp_plot <- renderPlot({
       labs(x = input$unit_gdp, y = NULL, 
            caption = "Източник на данните: Eurostat")
   }, height = 800, width = 1550, res = 96)
+
+# GDP (in time)
+country_gdp <- reactive({
+  filter(gdp, geo %in% c(input$country_gdp))
+})
+
+observeEvent(country_gdp(), {
+  freezeReactiveValue(input, "na_item_gdp_time")
+  choices <- unique(country_gdp()$na_item)
+  updateSelectInput(inputId = "na_item_gdp_time", choices = choices)
+})
+
+na_item_gdp_time <- reactive({
+  req(input$country_gdp)
+  filter(country_gdp(), na_item == input$na_item_gdp_time)
+})
+
+observeEvent(na_item_gdp_time(), {
+  freezeReactiveValue(input, "unit_gdp_time")
+  choices <- unique(na_item_gdp_time()$unit)
+  updateSelectInput(inputId = "unit_gdp_time", choices = choices)
+})
+
+unit_gdp_time <- reactive({
+  req(input$na_item_gdp_time)
+  filter(na_item_gdp_time(), unit == input$unit_gdp_time)
+})
+
+output$gdp_plot_time <- renderPlot({
+  
+  unit_gdp_time() %>% 
+    filter(na_item %in% c(input$na_item_gdp_time),
+           unit %in% c(input$unit_gdp_time)) %>%
+    ggplot(aes(TIME_PERIOD, values)) +
+    geom_line() +
+    geom_point() +
+    theme(text = element_text(size = 12), plot.title.position = "plot") +
+    labs(y = paste0(input$unit_gdp_time), x = NULL,
+         caption = "Източник на данните: Eurostat")
+  
+}, height = 800, width = 1550, res = 96)
 #------------------------------------------
 date_gdp_pc <- reactive({
   filter(gdp_pc, TIME_PERIOD %in% c(input$date_gdp_pc))
@@ -430,8 +514,48 @@ output$plot_gdp_pc <- renderPlot({
     labs(x = input$unit_gdp_pc, y = NULL, 
          caption = "Източник на данните: Eurostat")
 }, height = 800, width = 1550, res = 96)
-  #-----------------------------------------
 
+# GDP per capita (in time)
+country_gdp_pc <- reactive({
+  filter(gdp_pc, geo %in% c(input$country_gdp_pc))
+})
+
+observeEvent(country_gdp_pc(), {
+  freezeReactiveValue(input, "na_item_gdp_time_pc")
+  choices <- unique(country_gdp_pc()$na_item)
+  updateSelectInput(inputId = "na_item_gdp_time_pc", choices = choices)
+})
+
+na_item_gdp_time_pc <- reactive({
+  req(input$country_gdp_pc)
+  filter(country_gdp_pc(), na_item == input$na_item_gdp_time_pc)
+})
+
+observeEvent(na_item_gdp_time_pc(), {
+  freezeReactiveValue(input, "unit_gdp_time_pc")
+  choices <- unique(na_item_gdp_time_pc()$unit)
+  updateSelectInput(inputId = "unit_gdp_time_pc", choices = choices)
+})
+
+unit_gdp_time_pc <- reactive({
+  req(input$na_item_gdp_time_pc)
+  filter(na_item_gdp_time_pc(), unit == input$unit_gdp_time_pc)
+})
+
+output$gdp_plot_time_pc <- renderPlot({
+  
+  unit_gdp_time_pc() %>% 
+    filter(na_item %in% c(input$na_item_gdp_time_pc),
+           unit %in% c(input$unit_gdp_time_pc)) %>%
+    ggplot(aes(TIME_PERIOD, values)) +
+    geom_line() +
+    geom_point() +
+    theme(text = element_text(size = 12), plot.title.position = "plot") +
+    labs(y = paste0(input$unit_gdp_time_pc), x = NULL,
+         caption = "Източник на данните: Eurostat")
+  
+}, height = 800, width = 1550, res = 96)
+  #-----------------------------------------
 inf_last <- reactive({
   inf %>%
   filter(TIME_PERIOD >= input$date_inf[1] & TIME_PERIOD <= input$date_inf[2],
@@ -486,7 +610,6 @@ inf_last() %>%
     
   }, height = 700, width = 750, res = 96)
   #---------------------------------------
-  
   output$gini_plot <- renderPlot({
 
     gini %>% 
@@ -518,8 +641,41 @@ inf_last() %>%
       labs(y = "Коефициент Gini", x = NULL, 
            caption = "Източник на данните: Eurostat")
   }, height = 700, width = 750, res = 96)
-  #---------------------------------------
+  #--------------------------------------
+  output$wage_plot <- renderPlot({
+    
+    wage %>% 
+      filter(TIME_PERIOD %in% c(input$wage_date),
+             currency %in% c(input$wage_currency)) %>% 
+      mutate(geo = fct_reorder(geo, values),
+             col = if_else(geo == "Bulgaria", "1", "0")) %>% 
+      ggplot(aes(values, geo, fill = col)) +
+      geom_col() +
+      scale_fill_manual(values = c("gray50", "red")) +
+      scale_x_continuous(expand = expansion(mult = c(0.01, 0.2))) +
+      geom_text(aes(label = space_s(round(values), 1)),
+                position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
+      theme(text = element_text(size = 14), legend.position = "none") +
+      labs(x = paste0("Минимална месечна заплата ", "(", input$wage_currency, ")"), y = NULL, 
+           caption = "Източник на данните: Eurostat")
+  }, height = 700, width = 750, res = 96)
   
+  output$wage_time <- renderPlot({
+    
+    wage %>% 
+      filter(geo %in% c(input$wage_country),
+             currency %in% c(input$wage_currency_line)) %>% 
+      ggplot(aes(TIME_PERIOD, values)) +
+      geom_line() +
+      geom_point() +
+      scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
+      geom_text(aes(label = space_s(round(values), 1)), check_overlap = T,
+                position = position_dodge(width = 1), vjust = -0.5, size = 4) +
+      theme(text = element_text(size = 14), legend.position = "none") +
+      labs(y = paste0("Минимална месечна заплата ", "(", input$wage_currency_line, ")"), x = NULL, 
+           caption = "Източник на данните: Eurostat")
+  }, height = 700, width = 750, res = 96)
+  #--------------------------------------
   output$sal_plot <- renderPlot({
     
     sal %>% 
