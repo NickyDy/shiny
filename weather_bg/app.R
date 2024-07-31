@@ -126,7 +126,7 @@ output$temp <- renderPlot({
                         unique(temp_nimh_new$date), ", ", 
                         unique(temp_nimh_new$hour), ":00 ч."),
          caption = "Източник на данните: НИМХ") +
-    facet_wrap(vars(weather), scales = "free_y", nrow = 2,
+    facet_wrap(vars(weather), scales = "free_y", nrow = 1,
                labeller = labeller(weather = label_wrap_gen(20)))
   }, height = 800, width = 1800, res = 96)
   #-----------------------------------------
