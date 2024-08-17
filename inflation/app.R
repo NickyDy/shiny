@@ -8,7 +8,7 @@ library(arrow)
 library(bslib)
 
 eur <- st_read("eur.gpkg")
-inf <- read_parquet("inflation.parquet") %>% arrange(TIME_PERIOD)
+inf <- read_parquet("prc_hicp_mmor.parquet") %>% arrange(TIME_PERIOD)
 
 # eur <- ne_download(scale = 50, type = "sovereignty", returnclass = "sf") %>%
 #  janitor::clean_names() %>%

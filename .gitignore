@@ -2,7 +2,3 @@
 .Rhistory
 .RData
 .Ruserdata
-*.csv
-*.rds
-*.gpkg
-*.parquet

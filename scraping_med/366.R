@@ -51,7 +51,7 @@ scrape_prices <- function(page) {
 }
 pages_to_scrape <- 1:258
 lekarstva1 <- map_dfr(pages_to_scrape, scrape_prices)
-#--------------------------------------------------------
+ #--------------------------------------------------------
 base_url <- "https://366.bg/products/bilkova-apteka?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)

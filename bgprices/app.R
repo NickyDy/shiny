@@ -4,9 +4,9 @@ library(bslib)
 library(DT)
 library(arrow)
 
-foods <- read_parquet("foods_week15.parquet")
-pharms <- read_parquet("pharm_week15.parquet")
-user_base <- read_rds("user_base.rds")
+foods <- read_parquet("foods_week31.parquet") %>% mutate(price = round(price, 2)) %>% arrange(price)
+pharms <- read_parquet("pharm_week31.parquet") %>% mutate(price = round(price, 2)) %>% arrange(price)
+#user_base <- read_rds("user_base.rds")
 
 food_levels <- c("Zasiti", "VMV", "Kaufland", "Taraba", "T MARKET",
             "Superbag", "Shop24", "Gladen",

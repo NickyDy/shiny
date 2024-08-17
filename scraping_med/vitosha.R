@@ -24,7 +24,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:220
+pages_to_scrape <- 1:226
 lekarstva <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://aptekaonline.bg/produkt-kategoriya/козметика/page/%d/"

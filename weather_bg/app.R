@@ -179,7 +179,7 @@ output$rain <- renderPlot({
          caption = "Източник на данните: НИМХ",
          title = paste0("Дата: ", unique(rain_nimh_new$date),
                         " (от 7:30 ч. на предния ден до 7:30 ч. на отбелязаната дата)")) +
-    facet_wrap(vars(code), scales = "free_y", ncol = 4)
+    facet_wrap(vars(code), scales = "free_y", nrow = 1)
 }, height = 800, width = 1800, res = 96)
 
 output$forcast <- renderPlot({

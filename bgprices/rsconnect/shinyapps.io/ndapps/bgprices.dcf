@@ -1,0 +1,12 @@
+name: bgprices
+title: bgprices
+username: ndapps
+account: ndapps
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11608264
+bundleId: 8947781
+url: https://ndapps.shinyapps.io/bgprices/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

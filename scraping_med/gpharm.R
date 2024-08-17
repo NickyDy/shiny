@@ -49,7 +49,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:227
+pages_to_scrape <- 1:150
 dobavki <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://gpharm.bg/produkt-kategoriya/kozmetyka/page/%d/"
@@ -149,7 +149,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:35
+pages_to_scrape <- 1:30
 higiena <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://gpharm.bg/produkt-kategoriya/homeopatyya/page/%d/"

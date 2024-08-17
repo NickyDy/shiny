@@ -31,7 +31,7 @@ foods <- foods %>% mutate(date = format(date, "%V"),
   select(-unit) %>% 
   arrange(price) %>% distinct()
 
-write_parquet(foods, "shiny/bgprices/foods_week15.parquet")
+write_parquet(foods, "shiny/bgprices/foods_week31.parquet")
 
 glimpse(foods)
 foods %>% count(unit) %>% view

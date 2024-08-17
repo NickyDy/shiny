@@ -31,7 +31,7 @@ pharm <- bind_rows(sopharmacy, bg366, framar, remedium, gpharm,
   distinct() %>% 
   arrange(price)
 
-write_parquet(pharm, "shiny/bgprices/pharm_week15.parquet")
+write_parquet(pharm, "shiny/bgprices/pharm_week31.parquet")
 
 pharm <- read_parquet("shiny/bgprices/pharm_week14.parquet")
 

@@ -2,7 +2,7 @@ library(tidyverse)
 library(shiny)
 library(arrow)
 library(bslib)
-library(scales)
+library(scales) 
 options(scipen = 100)
 
 gdp <- read_parquet("nama_10_gdp.parquet") %>% 
@@ -24,7 +24,7 @@ sal <- read_parquet("nama_10_fte.parquet") %>%
   arrange(TIME_PERIOD)
 wage <- read_parquet("earn_mw_cur.parquet") %>% 
   mutate(geo = fct_recode(geo, "Turkey" = "Türkiye")) %>% 
-  arrange(TIME_PERIOD)
+  arrange(TIME_PERIOD) %>% drop_na(values)
 house <- read_parquet("prc_hpi_a.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
@@ -389,7 +389,7 @@ ui <- page_fillable(h3("Евростат за България!"),
 server <- function(input, output, session) {
   
   date_gdp <- reactive({
-    filter(gdp, TIME_PERIOD %in% c(input$date_gdp))
+    filter(gdp, TIME_PERIOD == input$date_gdp)
   })
   
   observeEvent(date_gdp(), {
@@ -433,7 +433,7 @@ output$gdp_plot <- renderPlot({
 
 # GDP (in time)
 country_gdp <- reactive({
-  filter(gdp, geo %in% c(input$country_gdp))
+  filter(gdp, geo == input$country_gdp)
 })
 
 observeEvent(country_gdp(), {
@@ -473,7 +473,7 @@ output$gdp_plot_time <- renderPlot({
 }, height = 800, width = 1550, res = 96)
 #------------------------------------------
 date_gdp_pc <- reactive({
-  filter(gdp_pc, TIME_PERIOD %in% c(input$date_gdp_pc))
+  filter(gdp_pc, TIME_PERIOD == input$date_gdp_pc)
 })
 
 observeEvent(date_gdp_pc(), {
@@ -517,7 +517,7 @@ output$plot_gdp_pc <- renderPlot({
 
 # GDP per capita (in time)
 country_gdp_pc <- reactive({
-  filter(gdp_pc, geo %in% c(input$country_gdp_pc))
+  filter(gdp_pc, geo == input$country_gdp_pc)
 })
 
 observeEvent(country_gdp_pc(), {
@@ -613,7 +613,7 @@ inf_last() %>%
   output$gini_plot <- renderPlot({
 
     gini %>% 
-      filter(TIME_PERIOD %in% c(input$date_gini)) %>% 
+      filter(TIME_PERIOD == input$date_gini, age == "Total") %>% 
       mutate(geo = fct_reorder(geo, values),
              col = if_else(geo == "Bulgaria", "1", "0")) %>% 
       ggplot(aes(values, geo, fill = col)) +
@@ -630,7 +630,7 @@ inf_last() %>%
   output$gini_time <- renderPlot({
     
     gini %>% 
-      filter(geo %in% c(input$country_gini)) %>% 
+      filter(geo %in% c(input$country_gini), age == "Total") %>% 
       ggplot(aes(TIME_PERIOD, values)) +
       geom_line() +
       geom_point() +
@@ -645,7 +645,7 @@ inf_last() %>%
   output$wage_plot <- renderPlot({
     
     wage %>% 
-      filter(TIME_PERIOD %in% c(input$wage_date),
+      filter(TIME_PERIOD == input$wage_date,
              currency %in% c(input$wage_currency)) %>% 
       mutate(geo = fct_reorder(geo, values),
              col = if_else(geo == "Bulgaria", "1", "0")) %>% 
@@ -679,7 +679,7 @@ inf_last() %>%
   output$sal_plot <- renderPlot({
     
     sal %>% 
-      filter(TIME_PERIOD %in% c(input$sal_date)) %>% 
+      filter(TIME_PERIOD == input$sal_date) %>% 
       mutate(geo = fct_reorder(geo, values),
              col = if_else(geo == "Bulgaria", "1", "0")) %>% 
       ggplot(aes(values, geo, fill = col)) +
@@ -709,7 +709,7 @@ inf_last() %>%
   }, height = 700, width = 750, res = 96)
   #---------------------------------------
   house_date <- reactive({
-    filter(house, TIME_PERIOD %in% c(input$house_date))
+    filter(house, TIME_PERIOD == input$house_date)
   })
 
   observeEvent(house_date(), {
@@ -737,7 +737,7 @@ inf_last() %>%
   output$house_plot <- renderPlot({
 
     unit_house() %>% 
-      filter(TIME_PERIOD %in% c(input$house_date),
+      filter(TIME_PERIOD == input$house_date,
              purchase %in% c(input$purchase_house),
              unit %in% c(input$unit_house)) %>% 
       mutate(geo = fct_reorder(geo, values),
@@ -758,7 +758,7 @@ inf_last() %>%
   output$unemp_plot <- renderPlot({
 
     unemp %>% 
-      filter(TIME_PERIOD %in% c(input$unemp_date),
+      filter(TIME_PERIOD == input$unemp_date,
              unit %in% c(input$unemp_unit)) %>% 
       mutate(geo = fct_reorder(geo, values),
              col = if_else(geo == "Bulgaria", "1", "0")) %>% 
@@ -791,7 +791,7 @@ inf_last() %>%
   }, height = 700, width = 750, res = 96)
   #---------------------------------------
   date_imp_exp <- reactive({
-    filter(imp_exp, TIME_PERIOD %in% c(input$date_imp_exp))
+    filter(imp_exp, TIME_PERIOD == input$date_imp_exp)
   })
   
   observeEvent(date_imp_exp(), {
@@ -834,7 +834,7 @@ inf_last() %>%
   }, height = 800, width = 1550, res = 96)
   #---------------------------------------
   date_labor <- reactive({
-    filter(labor, TIME_PERIOD %in% c(input$date_labor))
+    filter(labor, TIME_PERIOD == input$date_labor)
   })
   
   observeEvent(date_labor(), {
@@ -879,7 +879,7 @@ inf_last() %>%
   }, height = 800, width = 1550, res = 96)
   #---------------------------------------
   date_debt <- reactive({
-    filter(debt, TIME_PERIOD %in% c(input$date_debt))
+    filter(debt, TIME_PERIOD == input$date_debt)
   })
   
   observeEvent(date_debt(), {
@@ -936,7 +936,7 @@ output$debt_plot <- renderPlot({
   }, height = 800, width = 1550, res = 96)
 #---------------------------------------
 date_ppp <- reactive({
-  filter(ppp, TIME_PERIOD %in% c(input$date_ppp))
+  filter(ppp, TIME_PERIOD == input$date_ppp)
 })
 
 observeEvent(date_ppp(), {
@@ -981,7 +981,7 @@ output$plot_ppp <- renderPlot({
 }, height = 800, width = 1550, res = 96)
   #---------------------------------------
 date_gva <- reactive({
-  filter(gva, TIME_PERIOD %in% c(input$date_gva))
+  filter(gva, TIME_PERIOD == input$date_gva)
 })
 
 observeEvent(date_gva(), {
@@ -1038,7 +1038,7 @@ output$plot_gva <- renderPlot({
 }, height = 800, width = 1550, res = 96)
   #---------------------------------------
 date_emp <- reactive({
-  filter(emp, TIME_PERIOD %in% c(input$date_emp))
+  filter(emp, TIME_PERIOD == input$date_emp)
 })
 
 observeEvent(date_emp(), {
@@ -1098,7 +1098,7 @@ output$plot_emp <- renderPlot({
 output$plot_tec00009 <- renderPlot({
   
   tec00009 %>% 
-    filter(TIME_PERIOD %in% c(input$tec00009_date),
+    filter(TIME_PERIOD == input$tec00009_date,
            unit %in% c(input$tec00009_unit)) %>% 
     mutate(geo = fct_reorder(geo, values),
            col = if_else(geo == "Bulgaria", "1", "0")) %>% 
@@ -1135,7 +1135,7 @@ output$plot_tec00009_line <- renderPlot({
 output$plot_tec00010 <- renderPlot({
   
   tec00010 %>% 
-    filter(TIME_PERIOD %in% c(input$tec00010_date),
+    filter(TIME_PERIOD == input$tec00010_date,
            unit %in% c(input$tec00010_unit)) %>% 
     mutate(geo = fct_reorder(geo, values),
            col = if_else(geo == "Bulgaria", "1", "0")) %>% 
@@ -1170,7 +1170,7 @@ output$plot_tec00010_line <- renderPlot({
 output$plot_tec00011 <- renderPlot({
   
   tec00011 %>% 
-    filter(TIME_PERIOD %in% c(input$tec00011_date),
+    filter(TIME_PERIOD == input$tec00011_date,
            unit %in% c(input$tec00011_unit)) %>% 
     mutate(geo = fct_reorder(geo, values),
            col = if_else(geo == "Bulgaria", "1", "0")) %>% 

@@ -124,7 +124,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:140
+pages_to_scrape <- 1:130
 kozm1 <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://remedium.bg/kozmetika-za-kosa-31752/c?&page=%d#"
@@ -149,7 +149,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:136
+pages_to_scrape <- 1:133
 kozm2 <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://remedium.bg/bebeshka-kozmetika-31544/c?&page=%d#"

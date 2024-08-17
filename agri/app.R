@@ -17,7 +17,9 @@ sheep_goat <- read_parquet("sheep_goat.parquet") %>% arrange(date)
 raw_milk <- read_parquet("raw_milk.parquet") %>% arrange(date)
 dairy <- read_parquet("dairy.parquet") %>% arrange(date)
 fruit_veg <- read_parquet("fruit_veg.parquet") %>% arrange(date)
-cereals <- read_parquet("cereals.parquet") %>% arrange(date) %>% drop_na()
+cereals <- read_parquet("cereals.parquet") %>% 
+  filter(!stage_name == "Unknown") %>% 
+  arrange(date) %>% drop_na()
 oilseeds <- read_parquet("oilseeds.parquet") %>% arrange(date)
 olive_oil <- read_parquet("olive_oil.parquet") %>% arrange(date)
 wine <- read_parquet("wine.parquet") %>% arrange(date)

@@ -24,7 +24,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:83
+pages_to_scrape <- 1:81
 lekarstva <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://www.aptekapromahon.com/bitamines-c-5083.html?page=%d"
@@ -74,7 +74,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:206
+pages_to_scrape <- 1:205
 higiena <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://www.aptekapromahon.com/omorfia-c-39.html?page=%d"
@@ -99,7 +99,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:173
+pages_to_scrape <- 1:175
 krasota <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://www.aptekapromahon.com/adynatisma-c-4961.html?page=%d"
@@ -149,7 +149,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:285
+pages_to_scrape <- 1:274
 oferti <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://www.aptekapromahon.com/epoxiaka-c-3471.html?page=%d"
@@ -174,7 +174,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:61
+pages_to_scrape <- 1:59
 sezonni <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------
 promahon <- bind_rows(lekarstva, krasota, oferti, otslabvane,

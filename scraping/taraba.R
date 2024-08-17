@@ -257,7 +257,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:9
+pages_to_scrape <- 1:3
 konservi <- map_dfr(pages_to_scrape, scrape_prices)
 #-----------------------------------------------------------
 base_url <- "https://taraba.bg/paketirani-krani?page=%d"
