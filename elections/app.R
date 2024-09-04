@@ -17,7 +17,7 @@ votes <- read_parquet("votes.parquet") %>%
   															 "Март_2017"))
 mand <- read_parquet("mand.parquet")
 act <- read_parquet("election_activity.parquet")
-address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
+# address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
 
 risk_sec <- votes %>% 
   summarise(v = var(votes), .by = c(oblast, obshtina, section, code)) %>%
@@ -146,19 +146,19 @@ ui <- page_sidebar(
               plotOutput("lost_gained_votes")),
     nav_panel(title = "Рискови секции", 
               DTOutput("dt_table", width = 1600)),
-    nav_panel(title = "Адресна регистрация", layout_columns(
-              selectInput("oblast_add", "Област:",
-                          choices = unique(address$oblast)),
-              selectInput("obshtina_add", "Община:",
-                          choices = NULL),
-              selectInput("month_first", "Месец за сравнение:",
-                          choices = c("януари", "февруари", "март", "април", "май", "юни"),
-                          selected = "юни"),
-              selectInput("month_last", "Месец за сравнение:",
-                          choices = c("януари", "февруари", "март", "април", "май"),
-                          selected = "януари"),
-                          col_widths = c(2, 2, 2)),
-              plotOutput("add_plot")),
+    # nav_panel(title = "Адресна регистрация", layout_columns(
+    #           selectInput("oblast_add", "Област:",
+    #                       choices = unique(address$oblast)),
+    #           selectInput("obshtina_add", "Община:",
+    #                       choices = NULL),
+    #           selectInput("month_first", "Месец за сравнение:",
+    #                       choices = c("януари", "февруари", "март", "април", "май", "юни"),
+    #                       selected = "юни"),
+    #           selectInput("month_last", "Месец за сравнение:",
+    #                       choices = c("януари", "февруари", "март", "април", "май"),
+    #                       selected = "януари"),
+    #                       col_widths = c(2, 2, 2)),
+    #           plotOutput("add_plot")),
     nav_panel(title = "Избирателна активност", 
               plotOutput("elec_act")),
     nav_panel(title = "Депутатски мандати", 
@@ -419,43 +419,43 @@ output$mand_plot <- renderPlot({
   
 }, height = 800, width = 1600, res = 96)
 #---------------------------------------
-oblast_add <- reactive({
-  filter(address, oblast %in% c(input$oblast_add))
-})
-
-observeEvent(oblast_add(), {
-  freezeReactiveValue(input, "obshtina_add")
-  choices <- unique(oblast_add()$obshtina)
-  updateSelectInput(inputId = "obshtina_add", choices = choices)
-})
-
-obshtina_add <- reactive({
-  req(input$oblast_add)
-  filter(oblast_add(), obshtina == input$obshtina_add)
-})
+# oblast_add <- reactive({
+#   filter(address, oblast %in% c(input$oblast_add))
+# })
+# 
+# observeEvent(oblast_add(), {
+#   freezeReactiveValue(input, "obshtina_add")
+#   choices <- unique(oblast_add()$obshtina)
+#   updateSelectInput(inputId = "obshtina_add", choices = choices)
+# })
+# 
+# obshtina_add <- reactive({
+#   req(input$oblast_add)
+#   filter(oblast_add(), obshtina == input$obshtina_add)
+# })
 #------------------------------
-output$add_plot <- renderPlot({
-  
-  obshtina_add() %>% 
-    filter(obshtina == input$obshtina_add) %>% 
-    mutate(diff = .data[[input$month_first]] - .data[[input$month_last]], 
-           sett = fct_reorder(sett, diff), 
-           col = diff > 0) %>% 
-    filter(diff != 0) %>% 
-    ggplot(aes(diff, sett, fill = col)) +
-    geom_col(show.legend = F) +
-    geom_text(aes(label = diff), 
-              position = position_dodge(width = 1), hjust = -0.05, size = 4) +
-    scale_x_continuous(expand = expansion(mult = c(.01, .15))) +
-    scale_fill_manual(values = c("TRUE" = "#00BFC4", "FALSE" = "#F8766D")) +
-    theme(text = element_text(size = 16)) +
-    labs(x = "Промяна в броя жители", y = NULL, 
-         subtitle = paste0("Разлика в броя жители в съответното населено място между месеците ", 
-                        input$month_first, " и ", input$month_last, " (2024 г.)"),
-         caption = "Източник на данните: МРРБ") +
-    facet_wrap(vars(address))
-  
-}, height = function() input$height_slider, width = 1600, res = 96)
+# output$add_plot <- renderPlot({
+#   
+#   obshtina_add() %>% 
+#     filter(obshtina == input$obshtina_add) %>% 
+#     mutate(diff = .data[[input$month_first]] - .data[[input$month_last]], 
+#            sett = fct_reorder(sett, diff), 
+#            col = diff > 0) %>% 
+#     filter(diff != 0) %>% 
+#     ggplot(aes(diff, sett, fill = col)) +
+#     geom_col(show.legend = F) +
+#     geom_text(aes(label = diff), 
+#               position = position_dodge(width = 1), hjust = -0.05, size = 4) +
+#     scale_x_continuous(expand = expansion(mult = c(.01, .15))) +
+#     scale_fill_manual(values = c("TRUE" = "#00BFC4", "FALSE" = "#F8766D")) +
+#     theme(text = element_text(size = 16)) +
+#     labs(x = "Промяна в броя жители", y = NULL, 
+#          subtitle = paste0("Разлика в броя жители в съответното населено място между месеците ", 
+#                         input$month_first, " и ", input$month_last, " (2024 г.)"),
+#          caption = "Източник на данните: МРРБ") +
+#     facet_wrap(vars(address))
+#   
+# }, height = function() input$height_slider, width = 1600, res = 96)
 
 dt_rend <- reactive({
   risk_sec %>%

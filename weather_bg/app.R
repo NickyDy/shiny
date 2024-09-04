@@ -114,19 +114,19 @@ output$temp <- renderPlot({
     ggplot(aes(temp, station, fill = temp)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = temp), 
-              position = position_dodge(width = 1), hjust = -0.1, size = 4) +
+              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
     scale_x_continuous(expand = expansion(mult = c(.01, .3))) +
     scale_y_reordered() +
-    theme(text = element_text(size = 14), 
+    theme(text = element_text(size = 12), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank()) +
-    scale_fill_gradient(low = "white", high = "red") +
+    scale_fill_gradient2(low = "blue", mid = "white", high = "red") +
     labs(y = NULL, x = "Градуси (\u00B0C)", 
          title = paste0("Дата и час на измерване: ", 
                         unique(temp_nimh_new$date), ", ", 
                         unique(temp_nimh_new$hour), ":00 ч."),
          caption = "Източник на данните: НИМХ") +
-    facet_wrap(vars(weather), scales = "free_y", nrow = 1,
+    facet_wrap(vars(weather), scales = "free_y",
                labeller = labeller(weather = label_wrap_gen(20)))
   }, height = 800, width = 1800, res = 96)
   #-----------------------------------------
@@ -138,10 +138,10 @@ output$wind <- renderPlot({
     ggplot(aes(wind_speed, station, fill = wind_speed)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = wind_speed), 
-              position = position_dodge(width = 1), hjust = -0.1, size = 4) +
+              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
     scale_y_reordered() +
     scale_x_continuous(expand = expansion(mult = c(.01, .5))) +
-    theme(text = element_text(size = 14), 
+    theme(text = element_text(size = 12), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank()) +
     scale_fill_gradient(low = "white", high = "darkgreen") +
@@ -168,10 +168,10 @@ output$rain <- renderPlot({
     ggplot(aes(rain, station, fill = rain)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = rain), 
-              position = position_dodge(width = 1), hjust = -0.1, size = 4) +
+              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
     scale_y_reordered() +
     scale_x_continuous(expand = expansion(mult = c(.01, .5))) +
-    theme(text = element_text(size = 14), 
+    theme(text = element_text(size = 12), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank()) +
     scale_fill_gradient(low = "white", high = "blue") +
@@ -189,7 +189,7 @@ output$forcast <- renderPlot({
     geom_col(position = "dodge") +
     facet_grid(weather ~ date, 
                labeller = labeller(weather = label_wrap_gen(15))) +
-    theme(text = element_text(size = 16), 
+    theme(text = element_text(size = 12), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank(),
           legend.position = "top") +
@@ -197,7 +197,7 @@ output$forcast <- renderPlot({
     scale_fill_manual(values = c("Минимална температура" = "blue", 
                                  "Максимална температура" = "red")) +
     geom_text(aes(label = paste0(value, " (\u00B0C)")), 
-              position = position_dodge(width = 1), hjust = -0.1, size = 5) +
+              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
     labs(y = NULL, x = NULL, fill = "Легенда:", 
          caption = "Източник на данните: НИМХ") +
     guides(fill = guide_legend(reverse = TRUE))

@@ -5,7 +5,8 @@ account: nickydy
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8072983
-bundleId: 8780090
+bundleId: 9001432
 url: https://nickydy.shinyapps.io/elections/
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: df_2024.parquet

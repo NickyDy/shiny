@@ -58,7 +58,7 @@ ui <- page_fillable(h3("Климатът на България!"),
                                             choices = unique(df$month)), 
                                 col_widths = c(2, 1, 1)),
                                 plotOutput("max")),
-                      nav_panel("Валежи",
+                      nav_panel("Дъжд",
                                 layout_columns(
                                 selectInput("location_rain", "Станция:", 
                                             choices = unique(df$location)),
@@ -66,7 +66,7 @@ ui <- page_fillable(h3("Климатът на България!"),
                                             choices = unique(df$month)), 
                                 col_widths = c(2, 1)),
                                 plotOutput("rain")),
-                      nav_panel("Снежна покривка",
+                      nav_panel("Сняг",
                                 layout_columns(
                                 selectInput("location_snow", "Станция:", 
                                             choices = unique(df$location)),
@@ -146,7 +146,9 @@ server <- function(input, output, session) {
   
   output$min <- renderPlot({
     df %>% 
-      filter(location == input$location_min, year == input$year_min, month == input$month_min) %>% 
+      filter(location == input$location_min, 
+             year == input$year_min, 
+             month == input$month_min) %>% 
       mutate(extreme = case_when(Минимална_температура < -20 ~ "<-20 \u00B0C", 
                                  between(Минимална_температура, -20, -10) ~ "-20:-10 \u00B0C",
                                  TRUE ~ ">-10 \u00B0C"),
@@ -157,7 +159,8 @@ server <- function(input, output, session) {
       scale_fill_manual(values = min_colors) +
       scale_y_continuous(expand = expansion(mult = c(.01, .05))) +
       scale_x_discrete(breaks = c(1:31)) +
-      labs(x = "Дни от месеца", y = "Минимална дневна температура (\u00B0C)", fill = "Легенда:",
+      labs(x = "Дни от месеца", 
+           y = "Минимална денонощна температура (\u00B0C)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
            title = paste0("Минимални температури през месец ", input$month_min, " за станция ", 
                           input$location_min, ", ", input$year_min, " година")) +
@@ -167,19 +170,29 @@ server <- function(input, output, session) {
   
   output$mean <- renderPlot({
     df %>% 
-      filter(location == input$location_mean, month == input$month) %>% 
+      filter(location == input$location_mean, 
+             month == input$month) %>% 
       group_by(year) %>% 
       summarise(m = round(mean(Средна_температура, na.rm = T), 1)) %>%
-      mutate(col = m < mean(m)) %>%
+      mutate(mm = mean(m, na.rm = T), iqr = IQR(m), col = case_when(
+        m > mm + iqr ~ "1",
+        m > mm ~ "2",
+        m < mm - iqr ~ "4",
+        m <= mm ~ "3")) %>%
       ggplot(aes(year, m, fill = col)) +
       geom_col() +
-      geom_hline(aes(yintercept = mean(m)), linewidth = 0.5, lty = 2, color = "black") +
-      geom_text(aes(label = m), size = 4, vjust = -0.5) +
-      scale_y_continuous(expand = expansion(mult = c(.01, .05))) +
-      scale_fill_discrete(labels = c("Топла", "Студена")) +
-      theme(text = element_text(size = 18), 
+      geom_hline(aes(yintercept = mean(mm)), linewidth = 0.5, lty = 2, color = "black") +
+      geom_text(aes(label = m), size = 4, hjust = -0.2, angle = 90) +
+      scale_y_continuous(expand = expansion(mult = c(.01, .1))) +
+      scale_fill_manual(values = c("1" = "red", "2" = "orange" ,
+                                   "3" = "green", "4" = "#0096FF"), 
+                        labels = c("1" = "Моного по-топло от средното", 
+                                   "2" = "По-топло от средното", 
+                                   "3" = "По-хладно от средното",
+                                   "4" = "Много по-хладно от средното")) +
+      theme(text = element_text(size = 18), legend.position = "top",
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-      labs(x = "Години", y = "Средна месечна температура (ºС)", fill = "Легенда:",
+      labs(x = "Години", y = "Средна денонощна температура (ºС)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
            title = paste0("Средни температури през месец ", input$month, " за станция ", input$location_mean))
   }, height = 750, width = 1850)
@@ -207,19 +220,29 @@ server <- function(input, output, session) {
   
   output$rain <- renderPlot({
     df %>% 
-      filter(location == input$location_rain, month == input$month_rain) %>% 
+      filter(location == input$location_rain, 
+             month == input$month_rain) %>% 
       group_by(year) %>%
       mutate(sum = sum(Валеж, na.rm = T)) %>%
       group_by(year) %>% 
-      summarise(p = round(mean(sum, na.rm = T), 0)) %>%
-      mutate(col = p > mean(p)) %>%
-      ggplot(aes(year, p, fill = col)) +
+      summarise(s = round(mean(sum, na.rm = T), 0)) %>%
+      mutate(ss = mean(s), iqr = IQR(s), col = case_when(
+        s > ss + iqr / 1.5 ~ "0",
+        s < ss - iqr / 1.5 ~ "3",
+        s > ss ~ "1",
+        s <= ss ~ "2")) %>%
+      ggplot(aes(year, s, fill = col)) +
       geom_col() +
-      geom_hline(aes(yintercept = mean(p)), linewidth = 0.5, lty = 2, color = "black") +
-      geom_text(aes(label = p), size = 4, vjust = -0.5) +
-      scale_y_continuous(expand = expansion(mult = c(.01, .05))) +
-      scale_fill_discrete(labels = c("Суха", "Дъждовна")) +
-      theme(text = element_text(size = 18), 
+      geom_hline(aes(yintercept = mean(s)), linewidth = 0.5, lty = 2, color = "black") +
+      geom_text(aes(label = s), size = 4, hjust = -0.2, angle = 90) +
+      scale_y_continuous(expand = expansion(mult = c(.01, .1))) +
+      scale_fill_manual(values = c("0" = "blue" , "1" = "#0096FF" , 
+                                   "2" = "orange", "3" = "red"), 
+                        labels = c("0" = "Много по-дъждовно от средното", 
+                                   "1" = "По-дъждовно от средното", 
+                                   "2" = "По-сухо от средното",
+                                   "3" = "Много по-сухо от средното")) +
+      theme(text = element_text(size = 18), legend.position = "top",
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = "Години", y = "Месечно количество на валежите (mm)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
@@ -230,17 +253,27 @@ server <- function(input, output, session) {
   
   output$snow_depth <- renderPlot({
     df %>% 
-      filter(location == input$location_snow, month == input$month_snow) %>% 
+      filter(location == input$location_snow, 
+             month == input$month_snow) %>% 
       group_by(year) %>% 
       summarise(s = round(sum(Снеговалеж, na.rm = T), 0)) %>% 
-      mutate(col = s > mean(s)) %>% 
+      mutate(ss = mean(s), iqr = IQR(s), col = case_when(
+        s > ss + iqr / 1.5 ~ "0",
+        s < ss - iqr / 1.5 ~ "3",
+        s > ss ~ "1",
+        s <= ss ~ "2")) %>%
       ggplot(aes(year, s, fill = col)) +
       geom_col() +
       geom_hline(aes(yintercept = mean(s)), linewidth = 0.5, lty = 2, color = "black") +
-      geom_text(aes(label = s), size = 4, vjust = -0.5) +
-      scale_y_continuous(expand = expansion(mult = c(.01, .05))) +
-      scale_fill_discrete(labels = c("Безснежна", "Снежна")) +
-      theme(text = element_text(size = 18), 
+      geom_text(aes(label = s), size = 4, hjust = -0.2, angle = 90) +
+      scale_y_continuous(expand = expansion(mult = c(.01, .1))) +
+      scale_fill_manual(values = c("0" = "blue" , "1" = "#0096FF" , 
+                                   "2" = "orange", "3" = "red"), 
+                        labels = c("0" = "Много по-снежна от средното", 
+                                   "1" = "По-снежна от средното", 
+                                   "2" = "По-безснежна от средното",
+                                   "3" = "Много по-безснежна от средното")) +
+      theme(text = element_text(size = 18), legend.position = "top",
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = "Години", y = "Дебелина на снежната покривка (cm)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo",
@@ -254,14 +287,23 @@ server <- function(input, output, session) {
       filter(location == input$location_yearly) %>% 
       group_by(year) %>% 
       summarise(m = round(mean(Средна_температура, na.rm = T), 1)) %>%
-      mutate(col = m < mean(m)) %>%
+      mutate(mm = mean(m, na.rm = T), iqr = IQR(m), col = case_when(
+        m > mm + iqr ~ "1",
+        m > mm ~ "2",
+        m < mm - iqr ~ "4",
+        m <= mm ~ "3")) %>%
       ggplot(aes(year, m, fill = col)) +
       geom_col() +
       geom_hline(aes(yintercept = mean(m)), linewidth = 0.5, lty = 2, color = "black") +
-      geom_text(aes(label = m), size = 3, vjust = -0.5) +
-      scale_y_continuous(expand = expansion(mult = c(.01, .07))) +
-      scale_fill_discrete(labels = c("Топла", "Студена")) +
-      theme(text = element_text(size = 16),
+      geom_text(aes(label = m), size = 4, hjust = -0.1, angle = 90) +
+      scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
+      scale_fill_manual(values = c("1" = "red", "2" = "orange" ,
+                                   "3" = "green", "4" = "#0096FF"), 
+                        labels = c("1" = "Моного по-топло от средното", 
+                                   "2" = "По-топло от средното", 
+                                   "3" = "По-хладно от средното",
+                                   "4" = "Много по-хладно от средното")) +
+      theme(text = element_text(size = 16), legend.position = "top",
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = NULL, y = "Средна годишна\nтемпература (ºС)", fill = "Легенда:",
            title = paste0("Средногодишна температура, валежи и снежна покривка за станция ", input$location_yearly))
@@ -273,15 +315,24 @@ server <- function(input, output, session) {
       group_by(year) %>%
       mutate(sum = sum(Валеж, na.rm = T)) %>%
       group_by(year) %>% 
-      summarise(p = round(mean(sum, na.rm = T), 0)) %>%
-      mutate(col = p > mean(p)) %>%
-      ggplot(aes(year, p, fill = col)) +
+      summarise(s = round(mean(sum, na.rm = T), 0)) %>%
+      mutate(ss = mean(s), iqr = IQR(s), col = case_when(
+        s > ss + iqr / 1.5 ~ "0",
+        s < ss - iqr / 1.5 ~ "3",
+        s > ss ~ "1",
+        s <= ss ~ "2")) %>%
+      ggplot(aes(year, s, fill = col)) +
       geom_col() +
-      geom_hline(aes(yintercept = mean(p)), linewidth = 0.5, lty = 2, color = "black") +
-      geom_text(aes(label = p), size = 3.5, vjust = -0.5) +
-      scale_y_continuous(expand = expansion(mult = c(.01, .07))) +
-      scale_fill_discrete(labels = c("Суха", "Дъждовна")) +
-      theme(text = element_text(size = 16),
+      geom_hline(aes(yintercept = mean(s)), linewidth = 0.5, lty = 2, color = "black") +
+      geom_text(aes(label = s), size = 4, hjust = -0.1, angle = 90) +
+      scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
+      scale_fill_manual(values = c("0" = "blue" , "1" = "#0096FF" , 
+                                   "2" = "orange", "3" = "red"), 
+                        labels = c("0" = "Много по-дъждовно от средното", 
+                                   "1" = "По-дъждовно от средното", 
+                                   "2" = "По-сухо от средното",
+                                   "3" = "Много по-сухо от средното")) +
+      theme(text = element_text(size = 16), legend.position = "top",
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = NULL, y = "Годишно количество\nна валежите (mm)", fill = "Легенда:") +
       guides(fill = guide_legend(reverse = TRUE))
@@ -292,14 +343,23 @@ server <- function(input, output, session) {
       filter(location == input$location_yearly) %>% 
       group_by(year) %>% 
       summarise(s = round(sum(Снеговалеж, na.rm = T), 0)) %>% 
-      mutate(col = s > mean(s)) %>% 
+      mutate(ss = mean(s), iqr = IQR(s), col = case_when(
+        s > ss + iqr / 1.5 ~ "0",
+        s < ss - iqr / 1.5 ~ "3",
+        s > ss ~ "1",
+        s <= ss ~ "2")) %>%
       ggplot(aes(year, s, fill = col)) +
       geom_col() +
       geom_hline(aes(yintercept = mean(s)), linewidth = 0.5, lty = 2, color = "black") +
-      geom_text(aes(label = s), size = 3.5, vjust = -0.5) +
-      scale_y_continuous(expand = expansion(mult = c(.01, .07))) +
-      scale_fill_discrete(labels = c("Безснежна", "Снежна")) +
-      theme(text = element_text(size = 16),
+      geom_text(aes(label = s), size = 4, hjust = -0.1, angle = 90) +
+      scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
+      scale_fill_manual(values = c("0" = "blue" , "1" = "#0096FF" , 
+                                   "2" = "orange", "3" = "red"), 
+                        labels = c("0" = "Много по-снежна от средното", 
+                                   "1" = "По-снежна от средното", 
+                                   "2" = "По-безснежна от средното",
+                                   "3" = "Много по-безснежна от средното")) +
+      theme(text = element_text(size = 16), legend.position = "top",
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(x = "Години", y = "Дебелина на\nснежната покривка (cm)", fill = "Легенда:",
            caption = "Източник на данните: openmeteo") +
