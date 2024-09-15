@@ -579,9 +579,7 @@ inf_last() %>%
       position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
   theme(text = element_text(size = 12), legend.position = "none", 
         plot.title.position = "plot") +
-  labs(title = paste0("Натрупана инфлация между датите: ",
-      input$date_inf[1], " и ", input$date_inf[2], "!"), 
-  x = "Инфлация (%)", y = NULL, 
+  labs(x = "Натрупана инфлация (%)", y = NULL, 
   caption = "Източник на данните: Eurostat")
 
   }, height = 700, width = 750, res = 96)
@@ -603,9 +601,7 @@ inf_last() %>%
       geom_line() +
       geom_point() +
       theme(text = element_text(size = 12), plot.title.position = "plot") +
-      labs(y = "Инфлация (%)", x = NULL, 
-           title = paste0("Натрупана инфлация в ", input$country_inf, " между датите: ",
-           input$date_inf[1], " и ", input$date_inf[2], "!"),
+      labs(y = "Натрупана инфлация (%)", x = NULL, 
            caption = "Източник на данните: Eurostat")
     
   }, height = 700, width = 750, res = 96)

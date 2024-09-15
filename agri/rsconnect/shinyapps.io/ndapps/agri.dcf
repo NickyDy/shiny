@@ -5,7 +5,7 @@ account: ndapps
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11622909
-bundleId: 8668315
+bundleId: 9079028
 url: https://ndapps.shinyapps.io/agri/
 version: 1
 asMultiple: FALSE
