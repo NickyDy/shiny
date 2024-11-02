@@ -8,6 +8,7 @@ library(tidytext)
 
 votes <- read_parquet("votes.parquet") %>% 
   mutate(vote_date = fct_relevel(vote_date,
+                                 "Октомври_2024",
                                  "Юни_2024",
                                  "Април_2023",
   															 "Октомври_2022",
@@ -19,13 +20,13 @@ mand <- read_parquet("mand.parquet")
 act <- read_parquet("election_activity.parquet")
 # address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
 
-risk_sec <- votes %>% 
-  summarise(v = var(votes), .by = c(oblast, obshtina, section, code)) %>%
+risk_sec <- votes %>% filter(!oblast == "Извън страната") %>% 
+  summarise(v = var(votes, na.rm = T), .by = c(oblast, obshtina, section, code)) %>%
   mutate(v = round(v, 1), 
          var = case_when(
     v <= 500 ~ "Нисък",
-    v > 500 & v <= 1000 ~ "Среден",
-    v > 1000 ~ "Висок"), .after = v,
+    v > 500 & v <= 1500 ~ "Среден",
+    v > 1500 ~ "Висок"), .after = v,
     var = factor(var, levels = c("Висок", "Среден", "Нисък")))
 
 colors <- c(
@@ -43,7 +44,11 @@ colors <- c(
   "ГЕРБ" = "blue",
   "ОП (НФСБ, АТАКА и ВМРО)" = "brown",
   "ВОЛЯ" = "pink",
-  "ВЕЛИЧИЕ" = "darkgreen")
+  "ВЕЛИЧИЕ" = "darkgreen",
+  "ДПС-НH" = "purple",
+  "АПС" = "purple",
+  "МЕЧ" = "maroon",
+  "БСП-ОЛ" = "red")
 
 colors_mand <- c(
   "ПП" = "yellow",
@@ -85,7 +90,11 @@ colors_mand <- c(
   "КП ББЦ" = "pink",
   "КП АБВ" = "red",
   "ИБГНИ" = "green",
-  "ВЕЛИЧИЕ" = "darkgreen")
+  "ВЕЛИЧИЕ" = "darkgreen",
+  "ДПС-НH" = "purple",
+  "АПС" = "purple",
+  "МЕЧ" = "maroon",
+  "БСП-ОЛ" = "red")
 
 space_s <- function (x, accuracy = NULL, scale = 1, prefix = "", suffix = "", 
                      big.mark = " ", decimal.mark = ".", trim = TRUE, digits, 
@@ -123,28 +132,55 @@ ui <- page_sidebar(
     sliderInput("height_slider", "Височина на графиката:", 
                 min = 800, max = 4000, value = 800, step = 100))),
   navset_pill(
-    nav_panel(title = "Изборни резултати", 
-              plotOutput("obsh_perc", height = 290), 
-              plotOutput("sett_perc", height = 290),
-              plotOutput("sec_perc", height = 290)),
-    nav_panel(title = "Общо за страната (%)", 
+    nav_panel(title = "Изборни резултати",
+              textOutput("text"),
+              tags$head(tags$style("#text{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
+              plotOutput("obsh_perc", height = 350), 
+              plotOutput("sett_perc", height = 350),
+              plotOutput("sec_perc", height = 350)),
+    nav_panel(title = "Общо за страната (%)",
+              textOutput("text1"),
+              tags$head(tags$style("#text1{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
               plotOutput("country")),
-    nav_panel(title = "Общо за страната (брой гласове)", 
+    nav_panel(title = "Общо за страната (брой гласове)",
+              textOutput("text2"),
+              tags$head(tags$style("#text2{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
               plotOutput("votes_country")),
-    nav_panel(title = "Загуба/Печалба на гласове", layout_columns(
+    nav_panel(title = "Загуба/Печалба на гласове", 
+              textOutput("text3"),
+              tags$head(tags$style("#text3{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
+              layout_columns(
               selectInput("first_date", "Последни избори:",
-                          choices = "Юни_2024"),
+                          choices = "Октомври_2024"),
               selectInput("second_date", "Сравни със:",
-                          choices = c("Април_2023", 
+                          choices = c("Юни_2024",
+                                      "Април_2023", 
                                       "Октомври_2022", 
                                       "Ноември_2021", 
                                       "Юли_2021", 
                                       "Април_2021", 
                                       "Март_2017"),
-                          selected = "Април_2023"),
+                          selected = "Юни_2024"),
               col_widths = c(2, 2)),
               plotOutput("lost_gained_votes")),
-    nav_panel(title = "Рискови секции", 
+    nav_panel(title = "Рискови секции",
+              textOutput("text4"),
+              tags$head(tags$style("#text4{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
               DTOutput("dt_table", width = 1600)),
     # nav_panel(title = "Адресна регистрация", layout_columns(
     #           selectInput("oblast_add", "Област:",
@@ -160,8 +196,18 @@ ui <- page_sidebar(
     #                       col_widths = c(2, 2, 2)),
     #           plotOutput("add_plot")),
     nav_panel(title = "Избирателна активност", 
+              textOutput("text5"),
+              tags$head(tags$style("#text5{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
               plotOutput("elec_act")),
-    nav_panel(title = "Депутатски мандати", 
+    nav_panel(title = "Депутатски мандати",
+              textOutput("text6"),
+              tags$head(tags$style("#text6{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
               plotOutput("mand_plot")),
     nav_panel(tags$img(src = "shiny.png", width = 40),
               "Други полезни приложения:",
@@ -239,6 +285,8 @@ server <- function(input, output, session) {
 	  filter(sett(), code == input$sec)
 	})
 #-------------------------------
+output$text <- renderText({ "Панелът работи със следните филтри: Избирателен район, Община, Населено място, Секция, Филтър проценти." })
+
 output$obsh_perc <- renderPlot({
 		obsh() %>%
 			filter(obshtina %in% c(input$obsh)) %>%
@@ -250,17 +298,17 @@ output$obsh_perc <- renderPlot({
 			ggplot(aes(prop, party, fill = party)) +
 			geom_col(position = "dodge", show.legend = F) +
 			guides(fill = guide_legend(reverse = TRUE)) +
-			scale_x_continuous(expand = expansion(mult = c(.05, .5))) +
+			scale_x_continuous(expand = expansion(mult = c(.05, .6))) +
 			scale_y_discrete(labels = scales::label_wrap(50)) +
 			scale_fill_manual(values = colors) +
 			geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
-								position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+								position = position_dodge(width = 1), hjust = -0.05, size = 3.5) +
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank()) +
 			labs(x = NULL, y = NULL, title = paste0("Община: ", input$obsh)) +
-			facet_wrap(~ vote_date, ncol = 7, drop = F)
-	}, height = 290, width = 1600, res = 96)
+			facet_wrap(~ vote_date, nrow = 1, drop = F)
+	}, height = 350, width = 1600, res = 96)
 
 output$sett_perc <- renderPlot({
 		sett() %>%
@@ -273,17 +321,17 @@ output$sett_perc <- renderPlot({
 			ggplot(aes(prop, party, fill = party)) +
 			geom_col(position = "dodge", show.legend = F) +
 			guides(fill = guide_legend(reverse = TRUE)) +
-			scale_x_continuous(expand = expansion(mult = c(.05, .5))) +
+			scale_x_continuous(expand = expansion(mult = c(.05, .6))) +
 			scale_y_discrete(labels = scales::label_wrap(50)) +
 			scale_fill_manual(values = colors) +
 			geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
-								position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+								position = position_dodge(width = 1), hjust = -0.05, size = 3.5) +
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank()) +
 			labs(x = NULL, y = NULL, title = paste0("Населено място: ", input$sett)) +
-			facet_wrap(~ vote_date, ncol = 7, drop = F)
-	}, height = 290, width = 1600, res = 96)
+			facet_wrap(~ vote_date, nrow = 1, drop = F)
+	}, height = 350, width = 1600, res = 96)
 
 output$sec_perc <- renderPlot({
 		sec() %>%
@@ -296,20 +344,21 @@ output$sec_perc <- renderPlot({
 			ggplot(aes(prop, party, fill = party)) +
 			geom_col(position = "dodge", show.legend = F) +
 			guides(fill = guide_legend(reverse = TRUE)) +
-			scale_x_continuous(expand = expansion(mult = c(.05, .5))) +
+			scale_x_continuous(expand = expansion(mult = c(.05, .6))) +
 			scale_y_discrete(labels = scales::label_wrap(50)) +
 			scale_fill_manual(values = colors) +
 			geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
-								position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+								position = position_dodge(width = 1), hjust = -0.05, size = 3.5) +
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank()) +
 			labs(x = NULL, y = NULL, title = paste0("Секция: ", input$sec),
-					 caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
-			facet_wrap(~ vote_date, ncol = 7, drop = F)
-	}, height = 290, width = 1600, res = 96)
+					 caption = "Бележка: Оцветени са само партиите и коалициите влизали/щи в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
+			facet_wrap(~ vote_date, nrow = 1, drop = F)
+	}, height = 350, width = 1600, res = 96)
 
 output$country <- renderPlot({
+  output$text1 <- renderText({ "Панелът работи със следните филтри: Филтър проценти, Височина на графиката." })
   
   votes %>%
     group_by(vote_date, party) %>%
@@ -330,11 +379,13 @@ output$country <- renderPlot({
           axis.ticks.x = element_blank()) +
     labs(x = NULL, y = NULL,
          caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
-    facet_wrap(~ vote_date, ncol = 7)
+    facet_wrap(~ vote_date, nrow = 1)
   
 }, height = function() input$height_slider, width = 1600, res = 96)
 #---------------------------------------
 output$votes_country <- renderPlot({
+  output$text2 <- renderText({ "Панелът работи със следните филтри: Филтър брой гласове, Височина на графиката." })
+  
   votes %>%
   group_by(vote_date, party) %>%
   summarise(sum_votes = sum(votes)) %>%
@@ -353,10 +404,11 @@ output$votes_country <- renderPlot({
         axis.ticks.x = element_blank()) +
   labs(y = NULL, x = "Брой гласове", title = NULL,
        caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
-  facet_wrap(~ vote_date, ncol = 7)
+  facet_wrap(~ vote_date, nrow = 1)
 }, height = function() input$height_slider, width = 1600, res = 96)
 #---------------------------------------
 output$lost_gained_votes <- renderPlot({
+  output$text3 <- renderText({ "Панелът не работи с филтрите от страничния бар." })
   
   votes %>%
     group_by(vote_date, party) %>%
@@ -382,9 +434,10 @@ output$lost_gained_votes <- renderPlot({
 }, height = 700, width = 1600, res = 96)
 #---------------------------------------
 output$elec_act <- renderPlot({
+  output$text5 <- renderText({ "Панелът не работи с филтрите от страничния бар." })
 
   act %>%
-    mutate(election = fct_reorder(election, activity)) %>%
+    mutate(election = fct_rev(election)) %>%
     ggplot(aes(activity, election, fill = round)) +
     geom_col(position = "dodge") +
     geom_text(aes(label = paste0(activity, "%")), position = position_dodge(width = 1),
@@ -399,6 +452,7 @@ output$elec_act <- renderPlot({
 }, height = 800, width = 1600, res = 96)
 #---------------------------------------
 output$mand_plot <- renderPlot({
+  output$text6 <- renderText({ "Панелът не работи с филтрите от страничния бар." })
   
   mand %>% 
     mutate(col = party, 
@@ -465,7 +519,9 @@ dt_rend <- reactive({
     select(-v)
 })
 
+output$text4 <- renderText({ "Панелът работи със следните филтри: Избирателен район, Община." })
 output$dt_table <- renderDT(
+  
  dt_rend() %>% 
     datatable(rownames = F,
       colnames = c("Избирателен район" = "oblast",

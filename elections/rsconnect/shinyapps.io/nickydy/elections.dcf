@@ -5,7 +5,7 @@ account: nickydy
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8072983
-bundleId: 9001432
+bundleId: 9297324
 url: https://nickydy.shinyapps.io/elections/
 asMultiple: FALSE
 asStatic: FALSE

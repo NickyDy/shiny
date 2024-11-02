@@ -60,7 +60,7 @@ ui <- page_fillable(h3("Демография на България!"),
                             choices = unique(obl_age_sex$oblast)),
                 selectInput("obl_age_sex_year", "Населено място:",
                             choices = unique(obl_age_sex$year),
-                            selected = "2022"), 
+                            selected = "2023"), 
                             col_widths = c(2, 1)),
               plotOutput("obl_age_sex_plot")),
     nav_panel("Раждаемост",
@@ -468,7 +468,7 @@ server <- function(input, output, session) {
       geom_text(aes(label = round(pop, 1)), 
                 position = position_dodge(width = 1), vjust = -0.1, size = 4) +
       theme(text = element_text(size = 16), legend.position = "right") +
-      labs(y = "Брой починали", x = NULL, fill = "Пол:",
+      labs(y = "Брой починали на 100 000 души", x = NULL, fill = "Пол:",
            caption = "Източник на данните: Infostat") +
       guides(fill = guide_legend(reverse = TRUE))
 

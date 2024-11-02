@@ -5,7 +5,7 @@ account: nickydy
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11588632
-bundleId: 8994535
+bundleId: 9225483
 url: https://nickydy.shinyapps.io/inflation/
 version: 1
 asMultiple: FALSE

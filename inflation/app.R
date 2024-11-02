@@ -107,7 +107,7 @@ server <- function(input, output, session) {
 			geom_sf(aes(fill = sm), alpha = 0.4) +
 			coord_sf(xlim = c(-25, 40), ylim = c(34, 72)) + 
 			geom_sf_text(aes(label = paste0(sm, "%")), check_overlap = TRUE, size = 4) + 
-			scale_fill_gradient(low = "white", high = "red") +
+			scale_fill_gradient2(low = "blue", mid = "white", high = "red") +
 			labs(x = NULL, y = NULL, fill = "%", 
 					 subtitle = paste0("Cumulative inflation for ", "'", 
 					                   input$item, "'", " from ", 
@@ -131,7 +131,7 @@ server <- function(input, output, session) {
 	    labs(x = NULL, y = "Inflation (%)") +
 	    scale_x_date(date_labels = "%Y-%m") +
 	    theme(text = element_text(size = 18), 
-	          axis.text.x = element_text(angle = 45, hjust = 1)) +
+	          axis.text.x = element_text(angle = 90, hjust = 1)) +
 	    facet_wrap(vars(geo), ncol = 6)
 	}, height = 800, width = 1600)
 	

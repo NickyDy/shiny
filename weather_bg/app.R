@@ -21,15 +21,16 @@ rain_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng
 
 bg <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
-  slice(-c(1:8)) %>% select(station = Град, date = name, weather = value)
+  filter(!Град == "") %>% select(station = Град, date = name, weather = value)
 pl <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
   html_element("#planini") %>% html_table() %>% pivot_longer(-Пункт) %>% 
-  slice(-c(1:5)) %>% select(station = Пункт, date = name, weather = value)
+  filter(!Пункт == "") %>% select(station = Пункт, date = name, weather = value)
 eu <- read_html("http://weather.bg/index.php?koiFail=eubp&lng=0") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
-  slice(-c(1:6)) %>% select(station = Град, date = name, weather = value)
+  filter(!Град == "") %>% select(station = Град, date = name, weather = value)
 forcast <- bind_rows(bg, pl, eu)
-temp <- forcast %>% filter(str_detect(weather, "^\\d")) %>% 
+temp <- forcast %>% filter(str_detect(weather, "^\\d"), 
+                           str_detect(weather, "/")) %>%
   separate_wider_delim(weather, delim = "/", 
                        names = c("Минимална температура", 
                                  "Максимална температура")) %>% 
@@ -184,20 +185,20 @@ output$rain <- renderPlot({
 
 output$forcast <- renderPlot({
   forcast_df %>% 
+    mutate(date_weather = paste0(date, "\n(", weather, ")")) %>% 
     filter(station == input$sett) %>% 
-    ggplot(aes(value, station, fill = name)) +
+    ggplot(aes(station, value, fill = name)) +
     geom_col(position = "dodge") +
-    facet_grid(weather ~ date, 
-               labeller = labeller(weather = label_wrap_gen(15))) +
-    theme(text = element_text(size = 12), 
-          axis.text.x = element_blank(), 
-          axis.ticks.x = element_blank(),
+    facet_wrap(vars(date_weather), nrow = 1) +
+    theme(text = element_text(size = 14), 
+          axis.text = element_blank(), 
+          axis.ticks = element_blank(),
           legend.position = "top") +
-    scale_x_continuous(expand = expansion(mult = c(.01, .3))) +
+    scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
     scale_fill_manual(values = c("Минимална температура" = "blue", 
                                  "Максимална температура" = "red")) +
     geom_text(aes(label = paste0(value, " (\u00B0C)")), 
-              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+              position = position_dodge(width = 1), vjust = -0.3, size = 5) +
     labs(y = NULL, x = NULL, fill = "Легенда:", 
          caption = "Източник на данните: НИМХ") +
     guides(fill = guide_legend(reverse = TRUE))
