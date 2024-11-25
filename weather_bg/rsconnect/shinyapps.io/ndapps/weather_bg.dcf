@@ -5,7 +5,7 @@ account: ndapps
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12274111
-bundleId: 9216023
+bundleId: 9367485
 url: https://ndapps.shinyapps.io/weather_bg/
 version: 1
 asMultiple: FALSE

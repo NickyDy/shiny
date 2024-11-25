@@ -5,9 +5,7 @@ library(bslib)
 
 user_base <- read_rds("user_base.rds")
 beef_carc <- read_parquet("beef_carc.parquet") %>% arrange(date)
-beef_live <- read_parquet("beef_live.parquet") %>% 
-  mutate(unit = str_replace(unit, "€", "лв"),
-         category = str_to_title(category)) %>% arrange(date)
+beef_live <- read_parquet("beef_live.parquet") %>% arrange(date)
 piglets <- read_parquet("piglets.parquet") %>% arrange(date)
 pigmeat_carc <- read_parquet("pigmeat_carc.parquet") %>% arrange(date)
 pigmeat_cuts <- read_parquet("pigmeat_cuts.parquet") %>% arrange(date) %>% drop_na()
@@ -222,25 +220,25 @@ ui <- page_fillable(h3("Цени на селскостопанска проду�
                                        "Евростат за България!"), br(),
                                 tags$a(href = "https://ndapps.shinyapps.io/und_water/",
                                        "Чистота на водите в България!"), br()),
-                      nav_panel(tags$img(src = "kofi.png", width = 40),
-                                "Ако Ви харесва приложението,
-                                можете да ме подкрепите като направите дарение в евро към
-                                следната сметка:",
-                                br(),
-                                br(),
-                                "Име: Nikolay Dyakov",
-                                br(),
-                                "IBAN: BE89 9670 3038 2685",
-                                br(),
-                                "BIC: TRWIBEB1XXX",
-                                br(),
-                                "Адрес: Rue de Trone 100, 3rd floor,",
-                                br(),
-                                "Brussels,",
-                                br(),
-                                "1050,",
-                                br(),
-                                "Belgium"),
+                      # nav_panel(tags$img(src = "kofi.png", width = 40),
+                      #           "Ако Ви харесва приложението,
+                      #           можете да ме подкрепите като направите дарение в евро към
+                      #           следната сметка:",
+                      #           br(),
+                      #           br(),
+                      #           "Име: Nikolay Dyakov",
+                      #           br(),
+                      #           "IBAN: BE89 9670 3038 2685",
+                      #           br(),
+                      #           "BIC: TRWIBEB1XXX",
+                      #           br(),
+                      #           "Адрес: Rue de Trone 100, 3rd floor,",
+                      #           br(),
+                      #           "Brussels,",
+                      #           br(),
+                      #           "1050,",
+                      #           br(),
+                      #           "Belgium"),
                       nav_spacer(),
                       nav_menu(
                         title = "Links",
@@ -288,9 +286,9 @@ server <- function(input, output, session) {
     beef_carc_product() %>% 
       filter(date >= input$beef_carc_date[1] & date <= input$beef_carc_date[2],
              product %in% c(input$beef_carc_product)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14), 
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -317,9 +315,9 @@ server <- function(input, output, session) {
       filter(date >= input$beef_live_date[1] & date <= input$beef_live_date[2],
              category %in% c(input$beef_live_category),
              unit %in% c(input$beef_live_unit)) %>% 
-      ggplot(aes(date, price_bgn)) +
+      ggplot(aes(date, price_eur)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв)") +
+      labs(x = NULL, y = "Цена (€)/глава") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -330,9 +328,9 @@ server <- function(input, output, session) {
     
     piglets %>% 
       filter(date >= input$piglets_date[1] & date <= input$piglets_date[2]) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -344,9 +342,9 @@ server <- function(input, output, session) {
     pigmeat_carc %>% 
       filter(date >= input$pigmeat_carc_date[1] & date <= input$pigmeat_carc_date[2],
              product %in% c(input$pigmeat_carc_product)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -373,9 +371,9 @@ server <- function(input, output, session) {
     pigmeat_cuts_price_type() %>% 
       filter(date >= input$pigmeat_cuts_date[1] & date <= input$pigmeat_cuts_date[2],
              price_type %in% c(input$pigmeat_cuts_price_type)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -387,9 +385,9 @@ server <- function(input, output, session) {
     eggs %>% 
       filter(date >= input$eggs_date[1] & date <= input$eggs_date[2],
              farming_method %in% c(input$farming_method)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -401,9 +399,9 @@ server <- function(input, output, session) {
     poultry %>% 
       filter(date >= input$poultry_date[1] & date <= input$poultry_date[2],
              product %in% c(input$poultry_product)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -416,9 +414,9 @@ server <- function(input, output, session) {
       filter(date >= input$sheep_goat_date[1] & date <= input$sheep_goat_date[2],
              category %in% c(input$sheep_goat_category)) %>%
       group_by(state) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -430,9 +428,9 @@ server <- function(input, output, session) {
     raw_milk %>% 
       filter(date >= input$raw_milk_date[1] & date <= input$raw_milk_date[2],
              product %in% c(input$raw_milk_product)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -444,9 +442,9 @@ server <- function(input, output, session) {
     dairy %>% 
       filter(date >= input$dairy_date[1] & date <= input$dairy_date[2],
              product %in% c(input$dairy_product)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -473,9 +471,9 @@ server <- function(input, output, session) {
     fruit_veg_variety() %>% 
       filter(date >= input$fruit_veg_date[1] & date <= input$fruit_veg_date[2],
              variety %in% c(input$fruit_veg_variety)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100_kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(state))
@@ -514,9 +512,9 @@ server <- function(input, output, session) {
       filter(date >= input$cereals_date[1] & date <= input$cereals_date[2],
              stage_name %in% c(input$cereals_stage_name),
              product %in% c(input$cereals_product)) %>% 
-      ggplot(aes(date, price_tonne_bgn)) +
+      ggplot(aes(date, price_tonne_eur)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/тон)") +
+      labs(x = NULL, y = "Цена (€/тон)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(market_name))
@@ -567,9 +565,9 @@ server <- function(input, output, session) {
              market_stage %in% c(input$oilseeds_market_stage),
              product_type %in% c(input$oilseeds_product_type),
              product %in% c(input$oilseeds_product)) %>% 
-      ggplot(aes(date, price_bgn)) +
+      ggplot(aes(date, price_eur)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв)") +
+      labs(x = NULL, y = "Цена (€)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(market))
@@ -596,9 +594,9 @@ server <- function(input, output, session) {
     olive_oil_product() %>% 
       filter(date >= input$olive_oil_date[1] & date <= input$olive_oil_date[2],
              product %in% c(input$olive_oil_product)) %>% 
-      ggplot(aes(date, price_kg_bgn)) +
+      ggplot(aes(date, price_100kg_eur / 100)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/кг)") +
+      labs(x = NULL, y = "Цена (€/кг)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(market))
@@ -610,9 +608,9 @@ server <- function(input, output, session) {
     wine %>% 
       filter(date >= input$wine_date[1] & date <= input$wine_date[2],
              state %in% c(input$wine_state)) %>% 
-      ggplot(aes(date, price_hl_bgn)) +
+      ggplot(aes(date, eur_price_per_hl)) +
       geom_line() +
-      labs(x = NULL, y = "Цена (лв/hl)") +
+      labs(x = NULL, y = "Цена (€/hl)") +
       theme(text = element_text(size = 14),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       facet_wrap(vars(wine_description))

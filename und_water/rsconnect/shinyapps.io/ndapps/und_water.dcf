@@ -5,7 +5,7 @@ account: ndapps
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11860484
-bundleId: 8543717
+bundleId: 9374918
 url: https://ndapps.shinyapps.io/und_water/
 version: 1
 asMultiple: FALSE

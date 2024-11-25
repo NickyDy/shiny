@@ -21,27 +21,50 @@ rain_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng
 
 bg <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
-  filter(!Град == "") %>% select(station = Град, date = name, weather = value)
+  filter(!Град == "") %>% mutate(region = "България", .before = Град) %>% 
+  select(region, station = Град, date = name, weather = value)
+  
 pl <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
   html_element("#planini") %>% html_table() %>% pivot_longer(-Пункт) %>% 
-  filter(!Пункт == "") %>% select(station = Пункт, date = name, weather = value)
+  filter(!Пункт == "") %>% mutate(region = "Планини", .before = Пункт) %>% 
+  select(region, station = Пункт, date = name, weather = value)
+  
 eu <- read_html("http://weather.bg/index.php?koiFail=eubp&lng=0") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
-  filter(!Град == "") %>% select(station = Град, date = name, weather = value)
+  filter(!Град == "") %>% mutate(region = "Европа", .before = Град) %>% 
+  select(region, station = Град, date = name, weather = value)
+  
 forcast <- bind_rows(bg, pl, eu)
-temp <- forcast %>% filter(str_detect(weather, "^\\d"), 
+temp <- forcast %>% filter(str_detect(weather, "^[:punct:]|\\d"), 
                            str_detect(weather, "/")) %>%
   separate_wider_delim(weather, delim = "/", 
-                       names = c("Минимална температура", 
-                                 "Максимална температура")) %>% 
-  mutate(across(3:4, parse_number))
+                       names = c("Min", 
+                                 "Max")) %>% 
+  mutate(across(4:5, parse_number))
 weather <- forcast %>% filter(str_detect(weather, "^[:alpha:]"))
 forcast_df <- inner_join(temp, weather) %>% 
-  pivot_longer(`Минимална температура`:`Максимална температура`) %>%
+  pivot_longer(Min:Max) %>%
   mutate(name = fct_rev(name)) %>% 
   arrange(station) %>% 
   filter(!weather == "n.a.")
-#----------------------------------------
+
+rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") %>% 
+  html_element("center") %>% html_table()
+colnames(rivers) <- c('station_no','river','station', "q_min", 
+                      "q_mean", "q_max", "depth", "ottok", "change_ottok")
+rivers <- rivers %>% 
+  mutate(date = Sys.Date(), .before = everything(), 
+         river = fct_recode(river, "Тунджа" = "Tунджа")) %>% 
+  filter(!station_no == "№ ХМС") %>%
+  mutate(across(5:10, ~ str_replace_all(., " ", ""))) %>% 
+  mutate(across(5:10, ~ str_replace_all(., ",", "."))) %>% 
+  mutate(across(5:10, parse_number)) %>% 
+  mutate(across(5:10, ~ round(., 1))) %>% 
+  drop_na(river) %>% arrange(river)
+
+date_rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") %>% 
+  html_elements("h2") %>% html_text(trim = T) %>% as.data.frame()
+#----------------------------------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
                href = "mailto:nickydyakov@gmail.com", 
                tagret = "_blank")
@@ -58,10 +81,20 @@ ui <- page_fillable(h3("Времето в България!"),
                                 plotOutput("wind")),
                       nav_panel(title = "Валеж",
                                 plotOutput("rain")),
-                      nav_panel(title = "Прогноза",
+                      nav_panel(title = "Прогноза", layout_columns(
+                                selectInput("region", "Регион:",
+                                            choices = c("България", "Планини", "Европа")),
                                 selectInput("sett", "Населено място/Станция:",
-                                            choices = unique(forcast_df$station)),
+                                            choices = NULL), col_widths = c(2, 2)),
                                 plotOutput("forcast")),
+                      nav_panel(title = "Речен отток",
+                                selectInput("river", "Река:",
+                                            choices = unique(rivers$river)),
+                                plotOutput("rivers")),
+                      nav_panel(title = "Речно ниво",
+                                selectInput("river_depth", "Река:",
+                                            choices = unique(rivers$river)),
+                                plotOutput("depths")),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
                                 tags$a(href = "https://nickydy.shinyapps.io/elections/", br(),
@@ -80,25 +113,25 @@ ui <- page_fillable(h3("Времето в България!"),
                                        "Демография на България!"), br(),
                                 tags$a(href = "https://ndapps.shinyapps.io/und_water/",
                                        "Чистота на водите в България!"), br()),
-                      nav_panel(tags$img(src = "kofi.png", width = 40),
-                                "Ако Ви харесва приложението,
-               можете да ме подкрепите като направите дарение в евро към
-               следната сметка:",
-                                br(),
-                                br(),
-                                "Име: Nikolay Dyakov",
-                                br(),
-                                "IBAN: BE89 9670 3038 2685",
-                                br(),
-                                "BIC: TRWIBEB1XXX",
-                                br(),
-                                "Адрес: Rue de Trone 100, 3rd floor,",
-                                br(),
-                                "Brussels,",
-                                br(),
-                                "1050,",
-                                br(),
-                                "Belgium"),
+               #        nav_panel(tags$img(src = "kofi.png", width = 40),
+               #                  "Ако Ви харесва приложението,
+               # можете да ме подкрепите като направите дарение в евро към
+               # следната сметка:",
+               #                  br(),
+               #                  br(),
+               #                  "Име: Nikolay Dyakov",
+               #                  br(),
+               #                  "IBAN: BE89 9670 3038 2685",
+               #                  br(),
+               #                  "BIC: TRWIBEB1XXX",
+               #                  br(),
+               #                  "Адрес: Rue de Trone 100, 3rd floor,",
+               #                  br(),
+               #                  "Brussels,",
+               #                  br(),
+               #                  "1050,",
+               #                  br(),
+               #                  "Belgium"),
                       nav_spacer(),
                       nav_menu(
                         title = "Links",
@@ -182,27 +215,68 @@ output$rain <- renderPlot({
                         " (от 7:30 ч. на предния ден до 7:30 ч. на отбелязаната дата)")) +
     facet_wrap(vars(code), scales = "free_y", nrow = 1)
 }, height = 800, width = 1800, res = 96)
+#---------------------------------------
+forcast_data <- reactive({
+  filter(forcast_df, region == input$region)
+})
+observeEvent(forcast_data(), {
+  freezeReactiveValue(input, "sett")
+  choices <- unique(forcast_data()$station)
+  updateSelectInput(inputId = "sett", choices = choices)
+})
 
 output$forcast <- renderPlot({
-  forcast_df %>% 
+  forcast_data() %>% 
     mutate(date_weather = paste0(date, "\n(", weather, ")")) %>% 
     filter(station == input$sett) %>% 
-    ggplot(aes(station, value, fill = name)) +
-    geom_col(position = "dodge") +
+    ggplot(aes(name, value, fill = value)) +
+    geom_col(show.legend = F, position = "dodge") +
     facet_wrap(vars(date_weather), nrow = 1) +
-    theme(text = element_text(size = 14), 
-          axis.text = element_blank(), 
-          axis.ticks = element_blank(),
-          legend.position = "top") +
+    theme(text = element_text(size = 18),
+          axis.text.y = element_blank(),
+          axis.ticks.y = element_blank()) +
     scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
-    scale_fill_manual(values = c("Минимална температура" = "blue", 
-                                 "Максимална температура" = "red")) +
+    scale_fill_gradient2(low = "blue", mid = "white", high = "red") +
     geom_text(aes(label = paste0(value, " (\u00B0C)")), 
               position = position_dodge(width = 1), vjust = -0.3, size = 5) +
-    labs(y = NULL, x = NULL, fill = "Легенда:", 
+    labs(y = NULL, x = NULL, caption = "Източник на данните: НИМХ")
+}, height = 700, width = 1800, res = 96)
+
+output$rivers <- renderPlot({
+  rivers %>% 
+    filter(river == input$river) %>% 
+    ggplot(aes(station, ottok)) +
+    geom_col(fill = "blue") +
+    geom_text(aes(label = ottok), 
+              position = position_dodge(width = 1), vjust = -1, size = 6, color = "blue") +
+    geom_hline(aes(yintercept = q_min), linewidth = 0.7, lty = 2, color = "red") +
+    geom_hline(aes(yintercept = q_mean), linewidth = 0.7, lty = 2, color = "darkgreen") +
+    #geom_hline(aes(yintercept = q_max), linewidth = 0.7, lty = 2, color = "blue") +
+    geom_label(aes(label = "минимален отток", x = 1.45, y = q_min), size = 4, color = "red", fontface = "bold") +
+    geom_label(aes(label = "среден отток", x = 1.45, y = q_mean), size = 4, color = "darkgreen", fontface = "bold") +
+    #geom_label(aes(label = "максимален", x = 1.5, y = q_max), size = 4, color = "blue") +
+    theme(text = element_text(size = 18), axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) +
+    labs(title = paste("Дата: ", date_rivers$.[3]), x = NULL, 
+         y = expression(paste("Речен отток ", "(", m^3, "/s)")),
          caption = "Източник на данните: НИМХ") +
-    guides(fill = guide_legend(reverse = TRUE))
-}, height = 800, width = 1800, res = 96)
+    facet_wrap(vars(station), scales = "free_x")
+}, height = 700, width = 1800, res = 96)
+
+output$depths <- renderPlot({
+  rivers %>% 
+    filter(river == input$river_depth) %>% 
+    ggplot(aes(station, depth)) +
+    geom_col(fill = "blue") +
+    geom_text(aes(label = paste(depth, "(промяна на нивото: ", change_ottok, ")")), 
+              position = position_dodge(width = 1), vjust = -1, size = 6) +
+    scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
+    theme(text = element_text(size = 18), axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) +
+    labs(title = paste("Дата: ", date_rivers$.[3]), x = NULL, 
+         y = "Дълбочина (cm)", caption = "Източник на данните: НИМХ") +
+    facet_wrap(vars(station), scales = "free_x")
+}, height = 700, width = 1800, res = 96)
  
   session$onSessionEnded(function() {
     stopApp()
