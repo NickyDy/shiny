@@ -76,6 +76,8 @@ ui <- page_fillable(h3("Времето в България!"),
                     theme = bslib::bs_theme(bootswatch = "darkly"),
                     navset_pill(
                       nav_panel(title = "Температура",
+                                selectInput("rows", "Брой колонки:",
+                                            choices = c(2, 1)),
                                 plotOutput("temp")),
                       nav_panel(title = "Вятър",
                                 plotOutput("wind")),
@@ -160,7 +162,7 @@ output$temp <- renderPlot({
                         unique(temp_nimh_new$date), ", ", 
                         unique(temp_nimh_new$hour), ":00 ч."),
          caption = "Източник на данните: НИМХ") +
-    facet_wrap(vars(weather), scales = "free_y",
+    facet_wrap(vars(weather), scales = "free_y", nrow = as.numeric(input$rows),
                labeller = labeller(weather = label_wrap_gen(20)))
   }, height = 800, width = 1800, res = 96)
   #-----------------------------------------

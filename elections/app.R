@@ -20,14 +20,15 @@ mand <- read_parquet("mand.parquet")
 act <- read_parquet("election_activity.parquet")
 # address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
 
-risk_sec <- votes %>% filter(!oblast == "Извън страната") %>% 
+risk_sec <- votes %>% filter(!oblast == "Извън страната") %>%
   summarise(v = var(votes, na.rm = T), .by = c(oblast, obshtina, section, code)) %>%
   mutate(v = round(v, 1), 
          var = case_when(
     v <= 500 ~ "Нисък",
     v > 500 & v <= 1500 ~ "Среден",
     v > 1500 ~ "Висок"), .after = v,
-    var = factor(var, levels = c("Висок", "Среден", "Нисък")))
+    var = factor(var, levels = c("Висок", "Среден", "Нисък"))) %>% 
+  drop_na(var)
 
 colors <- c(
   "ПП" = "yellow",

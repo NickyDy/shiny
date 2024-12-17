@@ -24,7 +24,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
                      "Ямбол", "Петрич", "Стралджа", "Шумен") ~ "unofficial",
       str_detect(station, "Конгур") ~ "unofficial"), 
     .after = station,
-    year = 2024, month = 11,
+    year = 2024, month = 12,
     elev = case_when(
       station == "Видин" ~ 31, station == "Ловеч" ~ 220, str_detect(station, "Конгур") ~ 1284,
       station == "Разград" ~ 345, station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180,
@@ -35,6 +35,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
       station == "Сливен" ~ 257, station == "Ямбол" ~ 147, station == "Бургас" ~ 16,
       station == "Петрич" ~ 200, station == "Сандански" ~ 206, station == "Стралджа" ~ 139,
       station == "Кърджали" ~ 330, station == "Шумен" ~ 218, station == "с. Гложене" ~ 64)) %>%
+  #mutate(station = fct_recode(station, "Гложене" = "с. Гложене")) %>%
   mutate(decade = case_when(
     year %in% c("2004", "2005", "2006", "2007", "2008", "2009") ~ "00s",
     year %in% c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019") ~ "10s",
@@ -42,7 +43,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
   pivot_longer(7:37, names_to = "day", values_to = "rain") %>% 
   mutate(across(c(2, 4:7), as.factor)) %>%
-  mutate(across(c(3, 8), as.double))
+  mutate(rain = parse_number(rain))
 
 temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
   html_element("table") %>% html_table() %>%
@@ -61,7 +62,7 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
                      "Панагюрище", "Ямбол", "Петрич", "Турну Мъгуреле Р.",
                      "Кълъраш Р.", "Одрин Т.", "Рилци", "Добри дол") ~ "unofficial"), 
     .after = station,
-    year = 2024, month = 11,
+    year = 2024, month = 12,
     elev = case_when(
       station == "Видин" ~ 31, station == "Гложене" ~ 64, station == "Ловеч" ~ 220, station == "Разград" ~ 345,
       station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180, station == "Варна-Боровец" ~ 193,
@@ -80,7 +81,7 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
   pivot_longer(7:37, names_to = "day", values_to = "temp") %>% 
   mutate(across(c(2, 4:7), as.factor)) %>%
-  mutate(across(c(3, 8), as.double))
+  mutate(temp = parse_number(temp))
 
 rain <- bind_rows(rain, rain_new) %>% 
   mutate(month = factor(month, levels = c(1:12))) %>% 
