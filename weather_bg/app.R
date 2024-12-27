@@ -6,12 +6,25 @@ library(shiny)
 library(bslib)
 
 temp_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
-  html_element("table") %>% html_table() %>% 
+  html_element("table") %>% html_table() %>%
   select(station = Станция, date = Дата, 
          hour = Час, temp = `Температура[°C]`, 
          weather = Време, wind_speed = `Вятър-скорост[m/s]`, 
-         wind_dir = `Вятър-посока`, pressure = `Налягане[hPa]`) %>% 
-  mutate(date = dmy(date))
+         wind_dir = `Вятър-посока`, pressure = `Налягане[hPa]`) %>%
+  mutate(wind_speed = str_remove(wind_speed, "n.a."), 
+         date = dmy(date), 
+         wind_speed = parse_number(wind_speed))
+
+snow_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+    html_element("td:nth-child(1) table") %>% html_table() %>% slice(-c(1:2))
+colnames(snow_nimh_new) <- c('station_no','station', "station_type", 
+                      "prec", "prec_type", "snow_cover")
+snow_nimh_new <- snow_nimh_new %>% 
+  mutate(across(c(prec, snow_cover), parse_number)) %>% 
+  drop_na(snow_cover)
+date_snow <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+  html_element("#tSnow h2") %>% html_text(trim = T) %>% as.data.frame()
+
 rain_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
   html_element("center") %>% html_table() %>% slice(-c(1, 168)) %>% 
   select(id = X1, station = X2, rain = X3, mean_rain = X4) %>% 
@@ -56,6 +69,7 @@ rivers <- rivers %>%
   mutate(date = Sys.Date(), .before = everything(), 
          river = fct_recode(river, "Тунджа" = "Tунджа")) %>% 
   filter(!station_no == "№ ХМС") %>%
+  mutate(across(5:10, ~ str_remove(., "n.a."))) %>% 
   mutate(across(5:10, ~ str_replace_all(., " ", ""))) %>% 
   mutate(across(5:10, ~ str_replace_all(., ",", "."))) %>% 
   mutate(across(5:10, parse_number)) %>% 
@@ -83,6 +97,8 @@ ui <- page_fillable(h3("Времето в България!"),
                                 plotOutput("wind")),
                       nav_panel(title = "Валеж",
                                 plotOutput("rain")),
+                      nav_panel(title = "Снежна покривка",
+                                plotOutput("snow_cover")),
                       nav_panel(title = "Прогноза", layout_columns(
                                 selectInput("region", "Регион:",
                                             choices = c("България", "Планини", "Европа")),
@@ -218,6 +234,25 @@ output$rain <- renderPlot({
     facet_wrap(vars(code), scales = "free_y", nrow = 1)
 }, height = 800, width = 1800, res = 96)
 #---------------------------------------
+output$snow_cover <- renderPlot({
+  snow_nimh_new %>% 
+    mutate(station = reorder_within(station, snow_cover, station_type)) %>% 
+    ggplot(aes(snow_cover, station, fill = snow_cover)) +
+    geom_col(show.legend = F) +
+    geom_text(aes(label = snow_cover), 
+              position = position_dodge(width = 1), hjust = -0.1, size = 4) +
+    scale_y_reordered() +
+    scale_x_continuous(expand = expansion(mult = c(.01, .1))) +
+    theme(text = element_text(size = 16), 
+          axis.text.x = element_blank(), 
+          axis.ticks.x = element_blank()) +
+    scale_fill_gradient(low = "white", high = "lightblue") +
+    labs(y = NULL, x = "Височина на снежната покривка (cm)", 
+         title = paste(date_snow, "г."),
+         caption = "Източник на данните: НИМХ") +
+    facet_wrap(vars(station_type), scales = "free_y")
+}, height = 800, width = 1800, res = 96)
+#------------------------
 forcast_data <- reactive({
   filter(forcast_df, region == input$region)
 })
@@ -253,10 +288,9 @@ output$rivers <- renderPlot({
               position = position_dodge(width = 1), vjust = -1, size = 6, color = "blue") +
     geom_hline(aes(yintercept = q_min), linewidth = 0.7, lty = 2, color = "red") +
     geom_hline(aes(yintercept = q_mean), linewidth = 0.7, lty = 2, color = "darkgreen") +
-    #geom_hline(aes(yintercept = q_max), linewidth = 0.7, lty = 2, color = "blue") +
-    geom_label(aes(label = "минимален отток", x = 1.45, y = q_min), size = 4, color = "red", fontface = "bold") +
-    geom_label(aes(label = "среден отток", x = 1.45, y = q_mean), size = 4, color = "darkgreen", fontface = "bold") +
-    #geom_label(aes(label = "максимален", x = 1.5, y = q_max), size = 4, color = "blue") +
+    geom_label(aes(label = "минимален отток", x = 1.4, y = q_min), size = 4, color = "red", fontface = "bold") +
+    geom_label(aes(label = "среден отток", x = 1.4, y = q_mean), size = 4, color = "darkgreen", fontface = "bold") +
+    scale_y_continuous(expand = expansion(mult = c(.01, .1))) +
     theme(text = element_text(size = 18), axis.text.x = element_blank(),
           axis.ticks.x = element_blank()) +
     labs(title = paste("Дата: ", date_rivers$.[3]), x = NULL, 
