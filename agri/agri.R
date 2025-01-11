@@ -33,7 +33,7 @@ beef_live_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/liveAnimal/pric
   select(date = begin_date, state = member_state_name, category, 
          unit, price_eur = price)
 
-piglets_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+piglets_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = str_remove(price, "€"), 
@@ -43,7 +43,7 @@ piglets_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/prices?be
   select(date = begin_date, state = member_state_name,
          price_100kg_eur = price)
 
-pigmeat_carc_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+pigmeat_carc_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = str_remove(price, "€"), 
@@ -53,7 +53,7 @@ pigmeat_carc_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/pric
   select(date = begin_date, state = member_state_name, product = pig_class,
          price_100kg_eur = price)
 
-pigmeat_cuts_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/cuts/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+pigmeat_cuts_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/cuts/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = str_remove(price, "€"), 
@@ -62,14 +62,14 @@ pigmeat_cuts_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/pigmeat/cuts
   select(date = begin_date, state = member_state_name, category, price_type,
          price_100kg_eur = price)
 
-eggs_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/poultry/egg/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+eggs_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/poultry/egg/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = parse_number(price)) %>% 
   select(date = begin_date, state = member_state_name, farming_method,
          price_100kg_eur = price)
 
-poultry_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/poultry/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+poultry_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/poultry/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = str_remove(price, "€"), 
@@ -78,14 +78,14 @@ poultry_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/poultry/prices?be
   select(date = begin_date, state = member_state_name, product = product_name,
          price_100kg_eur = price)
 
-sheep_goat_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/sheepAndGoat/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+sheep_goat_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/sheepAndGoat/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date), 
          price = parse_number(price)) %>% 
   select(date = begin_date, state = member_state_name, category,
          price_100kg_eur = price)
 
-raw_milk_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/rawMilk/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+raw_milk_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/rawMilk/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = parse_number(price)) %>% 
@@ -99,14 +99,14 @@ dairy_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/dairy/prices?years=
   select(date = begin_date, state = member_state_name, product,
          price_100kg_eur = price)
 
-fruit_veg_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/fruitAndVegetable/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+fruit_veg_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/fruitAndVegetable/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = parse_number(price)) %>% 
   select(date = begin_date, state = member_state_name, product, variety, 
          product_description = description, price_100_kg_eur = price)
 
-cereals_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/cereal/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+cereals_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/cereal/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = str_remove(price, "€"), 
@@ -115,21 +115,21 @@ cereals_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/cereal/prices?beg
   select(date = begin_date, state = member_state_name, market_name,
          stage_name, product = product_name, price_tonne_eur = price)
 
-oilseeds_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/oilseeds/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+oilseeds_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/oilseeds/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = parse_number(price)) %>% 
   select(date = begin_date, state = member_state_name, market_stage, market,
          product_type, product, price_eur = price)
 
-olive_oil_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/oliveOil/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+olive_oil_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/oliveOil/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = parse_number(price)) %>% 
   select(date = begin_date, state = member_state_name, market,
          product, price_100kg_eur = price)
 
-wine_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/wine/prices?beginDate=01/01/2024&endDate=01/12/2024") %>% 
+wine_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/wine/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = str_remove(price, "€"), 

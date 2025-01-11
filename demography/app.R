@@ -42,7 +42,7 @@ github <- tags$a(icon("github"), "Github",
                  href = "https://github.com/NickyDy", 
                  tagret = "_blank")
 #------------------------------------------------
-ui <- page_fillable(h3("Демография на България!"),
+ui <- page_fillable(#h3("Демография на България!"),
       theme = bslib::bs_theme(bootswatch = "darkly"),
   navset_pill(
     nav_panel(title = "Население",
@@ -145,8 +145,8 @@ ui <- page_fillable(h3("Демография на България!"),
                      "Климатът на България!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/inlation/",
                      "Inflation in EU!"), br(),
-              tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
-                     "Сравнение на цените в България!"), br(),
+              # tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+              #        "Сравнение на цените в България!"), br(),
               tags$a(href = "https://ndapps.shinyapps.io/agri/",
                      "Цени на селскостопанска продукция в ЕС!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
@@ -513,13 +513,14 @@ server <- function(input, output, session) {
 #---------------------------------------
 output$potr_plot <- renderPlot({
   
- potreblenie %>% 
+  potreblenie %>% 
     filter(product %in% c(input$potr_product)) %>% 
-    ggplot(aes(year, value)) +
-    geom_col(position = position_dodge2(preserve = "single"), fill = "#00BFC4") +
+    ggplot(aes(as.numeric(year), value)) +
+    geom_line(color = "#00BFC4", linewidth = 1) +
     scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
+    scale_x_continuous(breaks = seq(2008, 2023, 2)) +
     theme(text = element_text(size = 14), legend.position = "right",
-          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+          axis.text.x = element_text()) +
     labs(y = "Потребление (средно на човек)", x = NULL) +
     facet_wrap(vars(oblast), ncol = 5)
   
@@ -529,15 +530,16 @@ output$potr_plot <- renderPlot({
     
     prestupnost %>% 
       filter(age %in% c(input$prest_age)) %>% 
-      ggplot(aes(year, pop, fill = sex)) +
-      geom_col(position = position_dodge2(preserve = "single")) +
-      scale_fill_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
+      ggplot(aes(as.numeric(year), pop, color = sex)) +
+      geom_line(linewidth = 1) +
+      scale_color_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
+      scale_x_continuous(breaks = seq(2004, 2023, 2)) +
       theme(text = element_text(size = 14), legend.position = "right",
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-      labs(y = "Брой осъдени", x = NULL, fill = "Пол:") +
+            axis.text.x = element_text()) +
+      labs(y = "Брой осъдени", x = NULL, color = "Пол:") +
       facet_wrap(vars(oblast), ncol = 4) +
-      guides(fill = guide_legend(reverse = TRUE))
+      guides(color = guide_legend(reverse = TRUE))
     
   }, height = 800, width = 1800, res = 96)
   

@@ -24,7 +24,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
                      "Ямбол", "Петрич", "Стралджа", "Шумен") ~ "unofficial",
       str_detect(station, "Конгур") ~ "unofficial"), 
     .after = station,
-    year = 2024, month = 12,
+    year = 2025, month = 1,
     elev = case_when(
       station == "Видин" ~ 31, station == "Ловеч" ~ 220, str_detect(station, "Конгур") ~ 1284,
       station == "Разград" ~ 345, station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180,
@@ -39,9 +39,10 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
   mutate(decade = case_when(
     year %in% c("2004", "2005", "2006", "2007", "2008", "2009") ~ "00s",
     year %in% c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019") ~ "10s",
-    year %in% c("2020", "2021", "2022", "2023", "2024") ~ "20s")) %>%
+    year %in% c("2020", "2021", "2022", "2023", "2024", "2025") ~ "20s")) %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
-  pivot_longer(7:37, names_to = "day", values_to = "rain") %>% 
+  pivot_longer(7:37, names_to = "day", values_to = "rain") %>%
+  mutate(rain = str_remove(rain, "---")) %>% 
   mutate(across(c(2, 4:7), as.factor)) %>%
   mutate(rain = parse_number(rain))
 
@@ -62,7 +63,7 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
                      "Панагюрище", "Ямбол", "Петрич", "Турну Мъгуреле Р.",
                      "Кълъраш Р.", "Одрин Т.", "Рилци", "Добри дол") ~ "unofficial"), 
     .after = station,
-    year = 2024, month = 12,
+    year = 2025, month = 1,
     elev = case_when(
       station == "Видин" ~ 31, station == "Гложене" ~ 64, station == "Ловеч" ~ 220, station == "Разград" ~ 345,
       station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180, station == "Варна-Боровец" ~ 193,
@@ -77,17 +78,16 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
   mutate(decade = case_when(
     year %in% c("2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009") ~ "00s",
     year %in% c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019") ~ "10s",
-    year %in% c("2020", "2021", "2022", "2023", "2024") ~ "20s")) %>%
+    year %in% c("2020", "2021", "2022", "2023", "2024", "2025") ~ "20s")) %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
   pivot_longer(7:37, names_to = "day", values_to = "temp") %>% 
+  mutate(temp = str_remove(temp, "---")) %>% 
   mutate(across(c(2, 4:7), as.factor)) %>%
   mutate(temp = parse_number(temp))
 
 rain <- bind_rows(rain, rain_new) %>% 
-  mutate(month = factor(month, levels = c(1:12))) %>% 
-  filter(status == "official")
-temp <- bind_rows(temp, temp_new) %>% 
-  filter(status == "official")
+  mutate(month = factor(month, levels = c(1:12)))
+temp <- bind_rows(temp, temp_new)
 
 colors <- c("1" = "red", "2" = "orange" , "3" = "green", "4" = "#0096FF", "5" = "blue")
 labels <- c("1" = "Много по-топло от средното", "2" = "По-топло от средното" ,
@@ -100,22 +100,20 @@ github <- tags$a(icon("github"), "Github",
                  href = "https://github.com/NickyDy", 
                  tagret = "_blank")
 #-----------------------------------------------
-ui <- page_fillable(h3("Климатът на България!"),
+ui <- page_fillable(#h3("Климатът на България!"),
                     theme = bslib::bs_theme(bootswatch = "darkly"),
                     navset_pill(
                       nav_panel("Температура",
-                                pickerInput("station_temp", "Станция:",
-                                            choices = unique(temp$station),
-                                            options = list(`actions-box` = TRUE),
-                                            multiple = T,
-                                            selected = "София"),
+                                sliderInput("elev_temp", "Надморска височина:",
+                                            min = min(temp$elev, na.rm = T), 
+                                            max = max(temp$elev, na.rm = T),
+                                            value = 1200, step = 100, sep = " "),
                                 plotOutput("temp")),
                       nav_panel("Валеж",
-                                pickerInput("station_rain", "Станция:",
-                                            choices = unique(rain$station),
-                                            options = list(`actions-box` = TRUE),
-                                            multiple = T,
-                                            selected = "София"),
+                                sliderInput("elev_rain", "Надморска височина:",
+                                            min = min(rain$elev, na.rm = T), 
+                                            max = max(rain$elev, na.rm = T),
+                                            value = 1200, step = 100, sep = " "),
                                 plotOutput("rain")),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
@@ -125,8 +123,8 @@ ui <- page_fillable(h3("Климатът на България!"),
                                        "Демография на България!"), br(),
                                 tags$a(href = "https://nickydy.shinyapps.io/inlation/",
                                        "Inflation in EU!"), br(),
-                                tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
-                                       "Сравнение на цените в България!"), br(),
+                                # tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+                                #        "Сравнение на цените в България!"), br(),
                                 tags$a(href = "https://ndapps.shinyapps.io/agri/",
                                        "Цени на селскостопанска продукция в ЕС!"), br(),
                                 tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
@@ -165,7 +163,7 @@ server <- function(input, output, session) {
   
   t_year <- reactive({
     temp %>%
-    filter(month %in% c(1:12), station %in% c(input$station_temp)) %>% 
+    filter(month %in% c(1:12), elev <= input$elev_temp, status == "official") %>% 
     summarise(m = round(mean(temp, na.rm = T), 1), .by = c(year, month)) %>%
     summarise(mean_year = mean(m), .by = year)
   })
@@ -177,7 +175,7 @@ server <- function(input, output, session) {
   
   d_year <- reactive({
     rain %>%
-    filter(month %in% c(1:12), station %in% c(input$station_rain)) %>% 
+    filter(month %in% c(1:12), elev <= input$elev_rain, status == "official") %>% 
     summarise(s = round(sum(rain, na.rm = T), 1), .by = c(station, year, month)) %>%
     summarise(sm = round(mean(s, na.rm = T), 1), .by = c(year, month)) %>%
     summarise(s_year = sum(sm), .by = year)
@@ -191,7 +189,7 @@ server <- function(input, output, session) {
   output$temp <- renderPlot({
     
     temp %>%
-      filter(month %in% c(1:12), station %in% c(input$station_temp)) %>% 
+      filter(month %in% c(1:12), elev <= input$elev_temp, status == "official") %>% 
       summarise(m = round(mean(temp, na.rm = T), 1), .by = c(year, month)) %>%
       group_by(month) %>%
       mutate(mm = round(mean(m, na.rm = T), 1), 
@@ -204,9 +202,9 @@ server <- function(input, output, session) {
       ungroup() %>%
       ggplot(aes(month, m)) +
       geom_col(aes(fill = col), show.legend = T) +
-      geom_text(aes(label = round(m, 1)), size = 4, vjust = -0.2) +
+      geom_text(aes(label = round(m, 1)), size = 3.5, vjust = -0.2) +
       geom_text(data = t_year(),
-                aes(label = paste(round(mean_year, 1), "(\u00B0C)"), x = 7, y = max(mean_year) + 20),
+                aes(label = paste(round(mean_year, 1), "(\u00B0C)"), x = 7, y = 40),
                 size = 8, vjust = -0.2) +
       scale_y_continuous(expand = expansion(mult = c(0, 0.7)), n.breaks = 4) +
       scale_fill_manual(values = colors, labels = labels) +
@@ -219,12 +217,12 @@ server <- function(input, output, session) {
             legend.justification = c(1, 0)) +
       facet_wrap(vars(year))
     
-  }, height = 850, width = 1850)
+  }, height = 800, width = 1850)
   
   output$rain <- renderPlot({
     
     rain %>%
-      filter(month %in% c(1:12), station %in% c(input$station_rain)) %>% 
+      filter(month %in% c(1:12), elev <= input$elev_rain, status == "official") %>% 
       summarise(s = round(sum(rain, na.rm = T), 1), .by = c(station, year, month)) %>%
       summarise(sm = round(mean(s, na.rm = T), 1), .by = c(year, month)) %>%
       group_by(month) %>% 
@@ -240,7 +238,7 @@ server <- function(input, output, session) {
       geom_col(aes(fill = col), show.legend = T) +
       geom_text(aes(label = round(sm, 0)), size = 4, vjust = -0.2) +
       geom_text(data = d_year(), 
-                aes(label = paste(round(s_year, 0), "(mm)"), x = 7, y = min(s_year) + 10), 
+                aes(label = paste(round(s_year, 0), "(mm)"), x = 7, y = 200), 
                 size = 8, vjust = -0.2) +
       scale_y_continuous(expand = expansion(mult = c(0, 0.7)), n.breaks = 4) +
       scale_fill_manual(values = c("1" = "blue" , "2" = "#0096FF" , "3" = "green",
@@ -259,7 +257,7 @@ server <- function(input, output, session) {
             legend.justification = c(1, 0)) +
       facet_wrap(vars(year))
     
-  }, height = 850, width = 1850)
+  }, height = 800, width = 1850)
 
 session$onSessionEnded(function() {
   stopApp()

@@ -5,7 +5,7 @@ account: nickydy
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11457011
-bundleId: 9374883
+bundleId: 9620272
 url: https://nickydy.shinyapps.io/demography/
 version: 1
 asMultiple: FALSE

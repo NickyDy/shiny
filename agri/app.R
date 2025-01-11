@@ -29,7 +29,7 @@ github <- tags$a(icon("github"), "Github",
                  href = "https://github.com/NickyDy", 
                  tagret = "_blank")
 #-----------------------------------------------------------------
-ui <- page_fillable(h3("Цени на селскостопанска продукция в ЕС!"),
+ui <- page_fillable(#h3("Цени на селскостопанска продукция в ЕС!"),
                     theme = bslib::bs_theme(bootswatch = "darkly"),
                     
                     # shinyauthr::loginUI(id = "login"),
@@ -214,8 +214,8 @@ ui <- page_fillable(h3("Цени на селскостопанска проду�
                                        "Демография на България!"), br(),
                                 tags$a(href = "https://nickydy.shinyapps.io/inflation/",
                                        "Inflation in EU"), br(),
-                                tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
-                                       "Сравнение на цените в България!"), br(),
+                                # tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+                                #        "Сравнение на цените в България!"), br(),
                                 tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
                                        "Евростат за България!"), br(),
                                 tags$a(href = "https://ndapps.shinyapps.io/und_water/",

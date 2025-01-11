@@ -64,7 +64,7 @@ forcast_df <- inner_join(temp, weather) %>%
 rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") %>% 
   html_element("center") %>% html_table()
 colnames(rivers) <- c('station_no','river','station', "q_min", 
-                      "q_mean", "q_max", "depth", "ottok", "change_ottok")
+                      "q_mean", "q_max", "depth", "ottok", "change_depth")
 rivers <- rivers %>% 
   mutate(date = Sys.Date(), .before = everything(), 
          river = fct_recode(river, "Тунджа" = "Tунджа")) %>% 
@@ -86,7 +86,7 @@ github <- tags$a(icon("github"), "Github",
                  href = "https://github.com/NickyDy", 
                  tagret = "_blank")
 #--------------------------------------------
-ui <- page_fillable(h3("Времето в България!"),
+ui <- page_fillable(#h3("Времето в България!"),
                     theme = bslib::bs_theme(bootswatch = "darkly"),
                     navset_pill(
                       nav_panel(title = "Температура",
@@ -121,8 +121,8 @@ ui <- page_fillable(h3("Времето в България!"),
                                        "Климатът на България!"), br(),
                                 tags$a(href = "https://nickydy.shinyapps.io/inlation/",
                                        "Inflation in EU!"), br(),
-                                tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
-                                       "Сравнение на цените в България!"), br(),
+                                # tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+                                #        "Сравнение на цените в България!"), br(),
                                 tags$a(href = "https://ndapps.shinyapps.io/agri/",
                                        "Цени на селскостопанска продукция в ЕС!"), br(),
                                 tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
@@ -302,17 +302,20 @@ output$rivers <- renderPlot({
 output$depths <- renderPlot({
   rivers %>% 
     filter(river == input$river_depth) %>% 
-    ggplot(aes(station, depth)) +
-    geom_col(fill = "blue") +
-    geom_text(aes(label = paste(depth, "(промяна на нивото: ", change_ottok, ")")), 
-              position = position_dodge(width = 1), vjust = -1, size = 6) +
+    mutate(old_depth = depth + abs(change_depth)) %>% 
+    pivot_longer(c(depth, old_depth)) %>% 
+    ggplot(aes(name, value, fill = name)) +
+    geom_col(show.legend = F) +
+    geom_text(aes(label = value),
+              position = position_dodge(width = 1), vjust = -0.5, size = 6) +
     scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
-    theme(text = element_text(size = 18), axis.text.x = element_blank(),
-          axis.ticks.x = element_blank()) +
+    scale_x_discrete(labels = c("Нова дълбочина", "Стара дълбочина")) +
+    scale_fill_manual(values = c("blue", "gray")) +
+    theme(text = element_text(size = 18)) +
     labs(title = paste("Дата: ", date_rivers$.[3]), x = NULL, 
          y = "Дълбочина (cm)", caption = "Източник на данните: НИМХ") +
     facet_wrap(vars(station), scales = "free_x")
-}, height = 700, width = 1800, res = 96)
+}, height = 800, width = 1800, res = 96)
  
   session$onSessionEnded(function() {
     stopApp()

@@ -26,7 +26,7 @@ mail <- tags$a(icon("envelope"), "Email", href = "mailto:nickydyakov@gmail.com",
 github <- tags$a(icon("github"), "Github", href = "https://github.com/NickyDy", tagret = "_blank")
 
 ui <- page_sidebar(
-  title = h3("Inflation in EU!"),
+  #title = h3("Inflation in EU!"),
   theme = bslib::bs_theme(bootswatch = "darkly"),
   sidebar = sidebar(width = 270, list(
     selectInput("item", "Item:", choices = choices)),
@@ -47,8 +47,8 @@ ui <- page_sidebar(
                      "Bulgarian climate!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/demography/",
                      "Bulgarian demography!"), br(),
-              tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
-                     "Comparing prices in Bulgaria!"), br(),
+              # tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+              #        "Comparing prices in Bulgaria!"), br(),
               tags$a(href = "https://ndapps.shinyapps.io/agri/",
                      "Prices of agricultural products in EU!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/eurostat/",

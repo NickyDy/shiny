@@ -5,7 +5,7 @@ account: nickydy
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11676158
-bundleId: 9374997
+bundleId: 9580375
 url: https://nickydy.shinyapps.io/eurostat/
 version: 1
 asMultiple: FALSE
