@@ -5,7 +5,7 @@ account: nickydy
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9515921
-bundleId: 9592048
+bundleId: 9645964
 url: https://nickydy.shinyapps.io/climate/
 version: 1
 asMultiple: FALSE

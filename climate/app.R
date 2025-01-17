@@ -215,7 +215,7 @@ server <- function(input, output, session) {
       theme(text = element_text(size = 20), legend.position = "top",
             plot.title = element_text(color = "red", face = "bold"),
             legend.justification = c(1, 0)) +
-      facet_wrap(vars(year))
+      facet_wrap(vars(year), ncol = 5)
     
   }, height = 800, width = 1850)
   

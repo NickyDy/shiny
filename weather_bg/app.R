@@ -240,13 +240,13 @@ output$snow_cover <- renderPlot({
     ggplot(aes(snow_cover, station, fill = snow_cover)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = snow_cover), 
-              position = position_dodge(width = 1), hjust = -0.1, size = 4) +
+              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
     scale_y_reordered() +
     scale_x_continuous(expand = expansion(mult = c(.01, .1))) +
-    theme(text = element_text(size = 16), 
+    theme(text = element_text(size = 12), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank()) +
-    scale_fill_gradient(low = "white", high = "lightblue") +
+    scale_fill_gradient(low = "white", high = "#0096FF") +
     labs(y = NULL, x = "Височина на снежната покривка (cm)", 
          title = paste(date_snow, "г."),
          caption = "Източник на данните: НИМХ") +
@@ -302,7 +302,7 @@ output$rivers <- renderPlot({
 output$depths <- renderPlot({
   rivers %>% 
     filter(river == input$river_depth) %>% 
-    mutate(old_depth = depth + abs(change_depth)) %>% 
+    mutate(old_depth = depth - change_depth) %>% 
     pivot_longer(c(depth, old_depth)) %>% 
     ggplot(aes(name, value, fill = name)) +
     geom_col(show.legend = F) +

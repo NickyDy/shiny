@@ -18,7 +18,7 @@ github <- tags$a(icon("github"), "Github",
                  tagret = "_blank")
 #---------------------------------------
 ui <- page_sidebar(
-  title = h3("Чистота на водите в България!"), 
+  #title = h3("Чистота на водите в България!"), 
   theme = bslib::bs_theme(bootswatch = "darkly"),
   sidebar = sidebar(width = 270, list(
     selectInput("basin", "Водосбор:", 
@@ -50,8 +50,8 @@ ui <- page_sidebar(
                      "Климатът на България!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/inlation/",
                      "Inflation in EU!"), br(),
-              tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
-                     "Сравнение на цените в България!"), br(),
+              # tags$a(href = "https://ndapps.shinyapps.io/bgprices/",
+              #        "Сравнение на цените в България!"), br(),
               tags$a(href = "https://ndapps.shinyapps.io/agri/",
                      "Цени на селскостопанска продукция в ЕС!"), br(),
               tags$a(href = "https://nickydy.shinyapps.io/eurostat/",
