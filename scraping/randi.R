@@ -85,7 +85,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:5
+pages_to_scrape <- 1:4
 zel <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://randi.bg//presni-podpravki-i-svezhi-salati?page=%d"
@@ -343,7 +343,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:3
+pages_to_scrape <- 1:2
 kajma <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://randi.bg//riba?page=%d"
@@ -558,7 +558,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:4
+pages_to_scrape <- 1:3
 salami <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://randi.bg//zamrazena-riba-i-ribni-produkti?page=%d"

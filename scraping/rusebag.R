@@ -217,49 +217,6 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:2
 hlqb <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
-base_url <- "https://rusebag.com/hlyab-i-testeni?page=%d"
-scrape_prices <- function(page) {
-  url <- sprintf(base_url, page)
-  page_content <- read_html(url)
-  pc <- page_content %>% 
-    html_elements(".xl-20") %>%
-    map_dfr(~ tibble(
-      product = .x %>% 
-        html_element(".name a") %>% 
-        html_text2(), 
-      # subproduct = .x %>% 
-      #   html_element(".m-offer-tile__title") %>% 
-      #   html_text2(), 
-      price = .x %>% 
-        html_element(".price") %>% 
-        html_text2(),
-      # price_old = .x %>%
-      #   html_element(".mb-n2") %>%
-      #   html_text2(),
-      # discount = .x %>%
-      #   html_element(".label-discount") %>%
-      #   html_text2(),
-      # price_kg = .x %>% 
-      #   html_element(".m-offer-tile__basic-price") %>% 
-      #   html_text2(),
-      unit = .x %>%
-        html_element(".categorygrid") %>%
-        html_text2()
-    )) %>% 
-    mutate(date = Sys.Date(),
-           location = "Русе",
-           type = "Брашно и хляб",
-           source = "Rusebag", .before = product) %>% 
-    mutate(price = str_replace(price, ",", "."), 
-           #price_old = str_replace(price_old, ",", "."),
-           price = parse_number(price),
-           #price_old = parse_number(price_old)
-    ) %>% distinct()
-  return(pc)
-}
-pages_to_scrape <- 1:2
-hlqb <- map_dfr(pages_to_scrape, scrape_prices)
-#---------------------------------------------------------------------
 base_url <- "https://rusebag.com/zamrazeni-hrani?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
@@ -300,7 +257,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:3
+pages_to_scrape <- 1:4
 frozen <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://rusebag.com/paketirani-hrani?page=%d"

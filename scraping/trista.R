@@ -257,7 +257,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:8
+pages_to_scrape <- 1:7
 milk <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------
 base_url <- "https://trista.bg/index.php?route=product/category&path=173&page=%d"
@@ -386,7 +386,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:20
+pages_to_scrape <- 1:19
 kandy <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------
 base_url <- "https://trista.bg/soleni-izdeliya-51.html?page=%d"
@@ -429,7 +429,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:9
+pages_to_scrape <- 1:8
 salty <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------
 base_url <- "https://trista.bg/zdrave-fitnes-115.html?page=%d"

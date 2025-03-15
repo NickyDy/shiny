@@ -1,6 +1,5 @@
 library(tidyverse)
 library(rvest)
-
 #---------------------------------------------------------------------------------
 base_url <- "https://tmarketonline.bg/category/plodove-zelenchuci-i-yadki?page=%d"
 scrape_prices <- function(page) {

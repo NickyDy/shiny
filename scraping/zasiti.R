@@ -85,7 +85,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:28
+pages_to_scrape <- 1:26
 alc <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://zasiti.bg/category/безалкохолни-напитки/page/%d/"
@@ -128,7 +128,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:24
+pages_to_scrape <- 1:23
 bez <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://zasiti.bg/category/био-продукти/page/%d/"
@@ -386,7 +386,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:48 #49
+pages_to_scrape <- 1:47 #49
 bak <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://zasiti.bg/category/хлебни-изделия/page/%d/"

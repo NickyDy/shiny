@@ -270,7 +270,8 @@ output$forcast <- renderPlot({
     facet_wrap(vars(date_weather), nrow = 1) +
     theme(text = element_text(size = 18),
           axis.text.y = element_blank(),
-          axis.ticks.y = element_blank()) +
+          axis.ticks.y = element_blank(),
+          strip.text = element_text(size = 12)) +
     scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
     scale_fill_gradient2(low = "blue", mid = "white", high = "red") +
     geom_text(aes(label = paste0(value, " (\u00B0C)")), 
@@ -290,7 +291,7 @@ output$rivers <- renderPlot({
     geom_label(aes(label = "минимален отток", x = 1.4, y = q_min), size = 4, color = "red", fontface = "bold") +
     geom_label(aes(label = "среден отток", x = 1.4, y = q_mean), size = 4, color = "darkgreen", fontface = "bold") +
     scale_y_continuous(expand = expansion(mult = c(.01, .1))) +
-    theme(text = element_text(size = 18), axis.text.x = element_blank(),
+    theme(text = element_text(size = 16), axis.text.x = element_blank(),
           axis.ticks.x = element_blank()) +
     labs(title = paste("Дата: ", date_rivers$.[3]), x = NULL, 
          y = expression(paste("Речен отток ", "(", m^3, "/s)")),
@@ -310,7 +311,7 @@ output$depths <- renderPlot({
     scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
     scale_x_discrete(labels = c("Нова дълбочина", "Стара дълбочина")) +
     scale_fill_manual(values = c("blue", "gray")) +
-    theme(text = element_text(size = 18)) +
+    theme(text = element_text(size = 16)) +
     labs(title = paste("Дата: ", date_rivers$.[3]), x = NULL, 
          y = "Дълбочина (cm)", caption = "Източник на данните: НИМХ") +
     facet_wrap(vars(station), scales = "free_x")
