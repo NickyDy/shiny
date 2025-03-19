@@ -3,12 +3,12 @@ library(shiny)
 library(bslib)
 library(DT)
 
-pharms <- read_rds("pharm_week31.rds") %>% mutate(price = round(price, 2))
-df_2025 <- read_rds("df_2025.rds") %>% filter(!source %in% c("T MARKET")) %>% 
+#pharms <- read_rds("pharm_week31.rds") %>% mutate(price = round(price, 2))
+df_2025 <- read_rds("df_2025.rds") %>% 
+  filter(!source %in% c("T MARKET")) %>% 
   mutate(date = str_replace(date, "2025-02-06", "2025-02-08"),
-                            price = round(price, 2))
+                            price = round(price, 2)) %>% arrange(date)
 #user_base <- read_rds("user_base.rds")
-
 food_levels <- c("Zasiti", "VMV", "Kaufland", "Taraba", "T MARKET",
             "Superbag", "Shop24", "Gladen",
             "BulMag", "Trista", "Морски дар", "Randi", "Наслада",
@@ -17,14 +17,14 @@ food_colors <- c("#984ea3", "#4daf4a", "#e41a1c", "#8dd3c7",
             "#ffed6f", "#bebada", "#fb8072", "darkgreen", 
             "#fdb462", "#b3de69", "blue", "pink", "#bc80bd", 
             "#ccebc5", "midnightblue", "#00FFFF")
-pharm_levels <- c("Sopharmacy", "366", "Фрамар", "Remedium",
-                  "Gpharm", "Ozone", "Аптеки Лили", "Салвия",
-                  "Epharm", "Mypharmacy", "Afya", 
-                  "Marvi", "Аптека Промахон", "Аптека Витоша")
-pharm_colors <- c("#984ea3", "#4daf4a", "#e41a1c", "#8dd3c7", 
-                  "midnightblue", "#bebada", "#fb8072", "darkgreen",
-                  "#fdb462", "#b3de69", "blue", "pink", "#bc80bd", 
-                  "#00FFFF")
+# pharm_levels <- c("Sopharmacy", "366", "Фрамар", "Remedium",
+#                   "Gpharm", "Ozone", "Аптеки Лили", "Салвия",
+#                   "Epharm", "Mypharmacy", "Afya", 
+#                   "Marvi", "Аптека Промахон", "Аптека Витоша")
+# pharm_colors <- c("#984ea3", "#4daf4a", "#e41a1c", "#8dd3c7", 
+#                   "midnightblue", "#bebada", "#fb8072", "darkgreen",
+#                   "#fdb462", "#b3de69", "blue", "pink", "#bc80bd", 
+#                   "#00FFFF")
 colors_percent <- c("TRUE" = "#00BFC4", "FALSE" = "#F8766D")
 #-----------------------------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
@@ -43,13 +43,19 @@ ui <- page_fillable(#h3("Сравнение на цените в Българи�
                     navset_pill(
                       nav_panel(title = "Храни",
                                 DTOutput("foods", width = 1850)),
-                      nav_panel(title = "Фармация",
-                                DTOutput("pharms", width = 1850)),
+                      # nav_panel(title = "Фармация",
+                      #           DTOutput("pharms", width = 1850)),
                       nav_panel(title = "Инфлация (храни)", layout_columns(
-                                dateRangeInput("date_range_inf", "Дата (от/до):", language = "bg", 
-                                       weekstart = 1, separator = "до",
-                                       start = first(df_2025$date), end = last(df_2025$date),
-                                       min = first(df_2025$date), max = last(df_2025$date)),
+                                # dateRangeInput("date_range_inf", "Дата (от/до):", language = "bg", 
+                                #        weekstart = 1, separator = "до",
+                                #        start = first(df_2025$date), end = last(df_2025$date),
+                                #        min = first(df_2025$date), max = last(df_2025$date)),
+                                selectInput("date_first", "От дата:",
+                                            choices = unique(df_2025$date),
+                                            selected = first(df_2025$date)),
+                                selectInput("date_last", "До дата:",
+                                            choices = unique(df_2025$date),
+                                            selected = last(df_2025$date)),
                                 selectInput("inf_price_source", "Източник на цените:", 
                                             choices = unique(df_2025$source)),
                                 selectInput("inf_location", "Населено място:", choices = NULL),
@@ -57,7 +63,7 @@ ui <- page_fillable(#h3("Сравнение на цените в Българи�
                                 selectInput("inf_unit", "Грамаж:", choices = NULL),
                                 sliderInput("height", "Височина на графиката:", 
                                             min = 800, max = 7000, value = 800, step = 100),
-                                col_widths = c(2, 2, 2, 2, 2, 2)),
+                                col_widths = c(1, 1, 2, 2, 2, 2, 2)),
                                 plotOutput("inf_price_trend")),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
@@ -132,21 +138,21 @@ server <- function(input, output, session) {
                 options = list(dom = 'frtip', pageLength = 100)) %>% 
       formatStyle("Супермаркет", backgroundColor = styleEqual(food_levels, food_colors)))
   
-  output$pharms <- renderDT(
-    pharms %>% arrange(price) %>% 
-      datatable(rownames = F, filter = "top",
-                colnames = c("Дата" = "date",
-                             "Аптека" = "source", 
-                             "Продуктова група" = "type",
-                             "Продукт" = "product", 
-                             "Цена (лв)" = "price"), 
-                options = list(dom = 'frtip', pageLength = 100)) %>% 
-      formatStyle("Аптека", backgroundColor = styleEqual(pharm_levels, pharm_colors)))
+  # output$pharms <- renderDT(
+  #   pharms %>% arrange(price) %>% 
+  #     datatable(rownames = F, filter = "top",
+  #               colnames = c("Дата" = "date",
+  #                            "Аптека" = "source", 
+  #                            "Продуктова група" = "type",
+  #                            "Продукт" = "product", 
+  #                            "Цена (лв)" = "price"), 
+  #               options = list(dom = 'frtip', pageLength = 100)) %>% 
+  #     formatStyle("Аптека", backgroundColor = styleEqual(pharm_levels, pharm_colors)))
 #-------------------------------------------------------------------------------------
   new_old_df <- reactive({
     
     df_2025 %>% 
-      filter(date >= input$date_range_inf[1] & date <= input$date_range_inf[2]) %>%
+      filter(date %in% c(input$date_first, input$date_last)) %>%
       summarise(price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T), 
                 .by = c(location, source, type, unit, product)) %>% 
       filter(price_change != 0) %>%

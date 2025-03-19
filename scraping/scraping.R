@@ -1,8 +1,8 @@
 library(tidyverse)
 library(rvest)
 
-kaufland <- read_csv("shiny/scraping/kaufland.csv") %>% select(-c(8:10))
-tmarket <- read_csv("shiny/scraping/tmarket.csv") %>% select(-c(8:10))
+# kaufland <- read_csv("shiny/scraping/kaufland.csv") %>% select(-c(8:10))
+# tmarket <- read_csv("shiny/scraping/tmarket.csv") %>% select(-c(8:10))
 taraba <- read_csv("shiny/scraping/taraba.csv") %>% select(-c(8:10))
 gladen <- read_csv("shiny/scraping/gladen.csv") %>% select(-c(8:10))
 superbag <- read_csv("shiny/scraping/superbag.csv") %>% select(-c(8:10))
@@ -13,28 +13,23 @@ vmv <- read_csv("shiny/scraping/vmv.csv") %>% select(-c(8:10))
 trista <- read_csv("shiny/scraping/trista.csv") %>% select(-c(8:10))
 morski_dar <- read_csv("shiny/scraping/morski_dar.csv") %>% select(-c(8:10))
 randi <- read_csv("shiny/scraping/randi.csv") %>% select(-c(8:10))
-naslada <- read_csv("shiny/scraping/naslada.csv") %>% select(-c(8:10))
+# naslada <- read_csv("shiny/scraping/naslada.csv") %>% select(-c(8:10))
 rusebag <- read_csv("shiny/scraping/rusebag.csv") %>% select(-c(8:10))
 bakaliika <- read_csv("shiny/scraping/bakaliika.csv") %>% select(-c(8:10))
-bestmart <- read_csv("shiny/scraping/bestmart.csv") %>% select(-c(8:10))
+# bestmart <- read_csv("shiny/scraping/bestmart.csv") %>% select(-c(8:10))
 
 foods <- bind_rows(bulmag, gladen, shop24, superbag, taraba, 
-                         trista, vmv, zasiti, morski_dar, randi, naslada, rusebag, bakaliika) %>% 
+                         trista, vmv, zasiti, morski_dar, randi, rusebag, bakaliika) %>% 
   drop_na(product, price) %>% distinct()
 
-foods <- foods %>% 
-  mutate(date = format(date, "%V"), 
-       price = round(price, 2), 
-       across(c(2:4, 6), as.factor)) %>% 
-  select(-unit) %>% 
-  arrange(price) %>% distinct()
+# foods <- foods %>% 
+#   mutate(date = format(date, "%V"), 
+#        price = round(price, 2), 
+#        across(c(2:4, 6), as.factor)) %>% 
+#   select(-unit) %>% 
+#   arrange(price) %>% distinct()
 
-week_6_2025 <- read_csv("shiny/bgprices/week_6_2025.csv")
-week_11_2025 <- read_rds("shiny/bgprices/week_11_2025.rds")
-
-df_2025 <- bind_rows(week_6_2025, week_11_2025)
-
-write_rds(df_2025, "shiny/bgprices/df_2025.rds")
+df_2025 <- read_rds("shiny/bgprices/df_2025.rds")
 
 glimpse(foods)
 foods %>% count(unit) %>% view
@@ -142,7 +137,8 @@ foods <- foods %>%
                                         '78 - 108 г', '8 х 70 г', '81 г', '97 г', '70 - 75 г', '75 - 85 г', '29 - 33 г',
                                         '4 х 100 г', '60 - 65 г', '100 - 120 г', '4.2 г', '5 х 70 г', '13,5 г', '5 х 20 г',
                                         '(100 г', '(25 г', '(65 г', '12.6 г', '13.5Г', '15,5 г', '18,5Г', '23,5 г', '27г',
-                                        '31.5 г', '33.3г', '46.7 г', '57.5г', '62.5Г', '63г', '7.5 г', '74Г', '81г', '89г', '99г'),
+                                        '31.5 г', '33.3г', '46.7 г', '57.5г', '62.5Г', '63г', '7.5 г', '74Г', '81г', '89г',
+                                        '99г', '25.6г', '63Г'),
                              "101-200 гр" = c("110г", "110 г", "120 г", "120г", "120Г", "125 г", "125г", "125г", 
                                               "125Г", "130 г", "0.13 кг", "130Г", "130г", "140 г", "140г", "140ГР",
                                               "140 г", "140Г", "150 г", "150г", "150ГР", "150Г", "160 г", "160г", 
@@ -199,7 +195,7 @@ foods <- foods %>%
                                               '159 г', '170 - 240 г', '173 г', '183 г', '2 x 150 г', '2 бр. х 140 г',
                                               '2 х 130 г', '200 - 220 г', '3 х 190 г', '4 х 150 г', '121,2 г', '2 х 115 г',
                                               '150 - 170 г', '157,5 г', '182 - 188 г', '2 х 140 г', '125 г в опаковка',
-                                              '180 - 198 г', '(125 г', '(150 г', '(200 г', '149г', '188g', '199Г'),
+                                              '180 - 198 г', '(125 г', '(150 г', '(200 г', '149г', '188g', '199Г', '121Г'),
                              "201-300 гр" = c("210г", "210 г", "220 г", "0.22 кг", "0.220 кг", "220Г", "220г",
                                               "230 г", "0.23 кг", "240 г", "0.24 кг", "250 г", "0.250 кг.", 
                                               "0.25кг", "250г", "250ГР", "0.250 кг", "0.25 кг", "250Г", "250g",
@@ -238,7 +234,7 @@ foods <- foods %>%
                                               '2 x 250 г', '226Г', '297 г/440 мл', '222 - 300 г', '300 - 400 г',
                                               '280 - 300 г', '280 - 316 г/360 мл', '214,2 - 238 г', '250 г в опаковка', 
                                               '256 г', '269,4 г', '200 - 250 г', '220 - 280 г', '280 - 310 г', '(300 г',
-                                              '228Г', '297г'),
+                                              '228Г', '297г', '201 г', '206 г'),
                              "301-400 гр" = c("320г", "320 г", "330 г", "0.330 кг", "330г", "350 г", "350г",
                                               "0.35 кг", "0.350 кг", "350Г", '350g', "375 г", "375г", "400 г",
                                               "0.400 кг.", "0.400кг", "0.400КГ.", "0.40кг", "0.40кг.", "400 гр.",
@@ -294,7 +290,7 @@ foods <- foods %>%
                                               '410 - 440 г', '450 - 500 г', '430Г', '0,462', '0,495', '450 г/ 900 мл',
                                               '468 г', '500 г в мрежа', '450 - 480 г', '450 г в опаковка', '433 г',
                                               '500 + 50 г', '(425 г', '(480 г', '(500 г', '413 г', '433г', '433Г',
-                                              '461 г', '461г', '461Г', '464г', '477г'),
+                                              '461 г', '461г', '461Г', '464г', '477г', '0,500 кг.'),
                              "501-600 гр" = c("0.52 кг", "520 г", "530 г", "0.53 кг", "550 г", "0.550 кг", "570 г",
                                               "0.57 кг", "580 г", "0.58 кг", "600 г", "0.600кг.", "0.600 кг", "0.60 кг",
                                               '.560 г', '(540 г', '(560 г', '(570 г', '504 г', '505 г', '505г', '507 г',
@@ -442,7 +438,7 @@ foods <- foods %>%
                                               '730 мл', '720Л', '750Л', '0,75 л', '0,800 Л', '720 мл.', '750 мл.', '7,5',
                                               '750ml', '0,75 л + чаша', '725 мл', '800МЛ'),
                              "801-900 мл" = c('0.850Л', '0.900Л', '820 мл', '850 мл', '850мл', '850МЛ', '860МЛ', '870МЛ',
-                                              '900 мл', '900мл', '900МЛ', '850 мл.', '820ml', '850ml', '875 мл'),
+                                              '900 мл', '900мл', '900МЛ', '850 мл.', '820ml', '850ml', '875 мл', '825 мл'),
                              "901-1000 мл" = c('935 мл', '950 мл', '950мл', '950МЛ', '0.950мл'),
                              "1 л" = c("1.00 л", "1.00 л.", "лв/л", "1л", "1Л", '. Л', '1 Л', '1.0л', '.МЛ', "1 л.", '35,1',
                                        '1 л + чаша', ',Л', '1.0 л.', '1 л РЕТ', '1 л + 0,5 л', '1 л PET', '1 л тетрапак', 
@@ -543,4 +539,6 @@ foods %>% count(unit, sort = T) %>% view
 foods <- foods %>% 
   mutate(unit = case_when(is.na(unit) ~ "-", .default = unit))
 
-write_rds(foods, "shiny/bgprices/week_11_2025.rds")
+
+df_2025 <- bind_rows(foods, df_2025)
+write_rds(df_2025, "shiny/bgprices/df_2025.rds")

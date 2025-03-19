@@ -343,7 +343,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:73 #75
+pages_to_scrape <- 1:49 #73
 bak <- map_dfr(pages_to_scrape, scrape_prices)
 #-------------------------------------------------------------------------------
 base_url <- "https://www.superbagplovdiv.bg/sladki-i-soleni.html?page=%d"
