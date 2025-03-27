@@ -1,5 +1,4 @@
 library(tidyverse)
-library(arrow)
 
 sopharmacy <- read_rds("shiny/scraping_med/sopharmacy.rds")
 bg366 <- read_rds("shiny/scraping_med/bg366.rds")

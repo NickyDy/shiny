@@ -8,6 +8,7 @@ df_2025 <- read_rds("df_2025.rds") %>%
   filter(!source %in% c("T MARKET")) %>% 
   mutate(date = str_replace(date, "2025-02-06", "2025-02-08"),
                             price = round(price, 2)) %>% arrange(date)
+kaufland <- read_rds("kaufland.rds") %>% arrange(date)
 #user_base <- read_rds("user_base.rds")
 food_levels <- c("Zasiti", "VMV", "Kaufland", "Taraba", "T MARKET",
             "Superbag", "Shop24", "Gladen",
@@ -45,7 +46,7 @@ ui <- page_fillable(#h3("Сравнение на цените в Българи�
                                 DTOutput("foods", width = 1850)),
                       # nav_panel(title = "Фармация",
                       #           DTOutput("pharms", width = 1850)),
-                      nav_panel(title = "Инфлация (храни)", layout_columns(
+                      nav_panel(title = "Инфлация (хранителни продукти)", layout_columns(
                                 # dateRangeInput("date_range_inf", "Дата (от/до):", language = "bg", 
                                 #        weekstart = 1, separator = "до",
                                 #        start = first(df_2025$date), end = last(df_2025$date),
@@ -65,6 +66,37 @@ ui <- page_fillable(#h3("Сравнение на цените в Българи�
                                             min = 800, max = 7000, value = 800, step = 100),
                                 col_widths = c(1, 1, 2, 2, 2, 2, 2)),
                                 plotOutput("inf_price_trend")),
+                      nav_panel(title = "Инфлация (продуктови групи)", layout_columns(
+                                selectInput("date_first_group", "От дата:",
+                                            choices = unique(df_2025$date),
+                                            selected = first(df_2025$date)),
+                                selectInput("date_last_group", "До дата:",
+                                            choices = unique(df_2025$date),
+                                            selected = last(df_2025$date)),
+                                selectInput("inf_price_source_group", "Източник на цените:", 
+                                            choices = unique(df_2025$source)),
+                                col_widths = c(1, 1, 2)),
+                                plotOutput("inf_price_group")),
+                      nav_panel(title = "Средна инфлация", layout_columns(
+                                selectInput("date_first_total", "От дата:",
+                                           choices = unique(df_2025$date),
+                                           selected = first(df_2025$date)),
+                                selectInput("date_last_total", "До дата:",
+                                           choices = unique(df_2025$date),
+                                           selected = last(df_2025$date)),
+                                col_widths = c(1, 1)),
+                                plotOutput("inf_price_total")),
+                      nav_panel(title = "Kaufland", layout_columns(
+                                selectInput("kaufland_first_date", "От дата:",
+                                           choices = unique(kaufland$date),
+                                           selected = first(kaufland$date)),
+                                selectInput("kaufland_last_date", "До дата:",
+                                           choices = unique(kaufland$date),
+                                           selected = last(kaufland$date)),
+                                sliderInput("kaufland_height", "Височина на графиката:", 
+                                            min = 800, max = 7000, value = 800, step = 100),
+                                col_widths = c(1, 1, 2)),
+                                plotOutput("kaufland_plot")),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
                                 tags$a(href = "https://nickydy.shinyapps.io/elections/", br(),
@@ -207,13 +239,77 @@ server <- function(input, output, session) {
       geom_text(aes(label = scales::percent(price_change, accuracy = 1)),
                 position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
       labs(y = NULL, x = NULL,
-           title = glue::glue("Промяна в цената (%) на продуктите от {input$date_range_inf[1]} до ",
-                              "{input$date_range_inf[2]}.")) +
+           title = glue::glue("Промяна в цената на продуктите от {input$date_first} до ",
+                              "{input$date_last}")) +
       theme(text = element_text(size = 14), axis.text.x = element_blank(), 
             axis.ticks.x = element_blank())
     
   }, height = function() input$height, width = 1550, res = 96)
 #-------------------------------------------------------------
+output$inf_price_group <- renderPlot({
+  df_2025 %>%
+    filter(date %in% c(input$date_first_group, input$date_last_group), source == input$inf_price_source_group) %>%
+    summarise(price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T), 
+              .by = c(location, source, type, unit, product)) %>% 
+    summarise(price_change = mean(price_change, na.rm = T) * 100, .by = c(source, type)) %>% 
+    filter(price_change != 0) %>%
+    mutate(type = fct_reorder(type, price_change), col = price_change > 0) %>% 
+    ggplot(aes(price_change, type, fill = col)) +
+    geom_col(show.legend = F) +
+    scale_fill_manual(values = colors_percent) +
+    scale_x_continuous(expand = expansion(mult = c(0.01, 0.10))) +
+    geom_text(aes(label = paste0(round(price_change, 2), "%")),
+              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+    labs(y = NULL, x = NULL,
+         title = glue::glue("Средна инфлация по продуктови групи и супермаркети от {input$date_first_group} до ",
+                            "{input$date_last_group}")) +
+    theme(text = element_text(size = 14), axis.text.x = element_blank(), 
+          axis.ticks.x = element_blank())
+}, height = 800, width = 1550, res = 96)
+#---------------------------------------
+  output$inf_price_total <- renderPlot({
+    df_2025 %>%
+      filter(date %in% c(input$date_first_total, input$date_last_total)) %>%
+      summarise(price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T), 
+                .by = c(location, source, type, unit, product)) %>% 
+      summarise(price_change = mean(price_change, na.rm = T) * 100, .by = c(type)) %>% 
+      filter(price_change != 0) %>%
+      mutate(type = fct_reorder(type, price_change), col = price_change > 0) %>% 
+      ggplot(aes(price_change, type, fill = col)) +
+      geom_col(show.legend = F) +
+      scale_fill_manual(values = colors_percent) +
+      scale_x_continuous(expand = expansion(mult = c(0.01, 0.10))) +
+      geom_text(aes(label = paste0(round(price_change, 2), "%")),
+                position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+      labs(y = NULL, x = NULL,
+           title = glue::glue("Средна инфлация по продуктови групи от {input$date_first_total} до ",
+                              "{input$date_last_total}")) +
+      theme(text = element_text(size = 14), axis.text.x = element_blank(), 
+            axis.ticks.x = element_blank())
+  }, height = 800, width = 1550, res = 96)
+#-----------------------------------------
+  output$kaufland_plot <- renderPlot({
+    
+    kaufland %>%
+      filter(date %in% c(input$kaufland_first_date, input$kaufland_first_date)) %>%
+      summarise(price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T), 
+                .by = c(unit, product)) %>% 
+      filter(price_change != 0) %>%
+      mutate(product = fct_reorder(product, price_change), col = price_change > 0) %>% 
+      ggplot(aes(price_change, product, fill = col)) +
+      geom_col(show.legend = F) +
+      scale_fill_manual(values = colors_percent) +
+      scale_x_continuous(expand = expansion(mult = c(0.01, 0.10))) +
+      geom_text(aes(label = scales::percent(price_change, accuracy = 1)),
+                position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+      labs(y = NULL, x = NULL,
+           title = glue::glue("Промяна в цената на продуктите от {input$kaufland_first_date} до ",
+                              "{input$kaufland_first_date}")) +
+      theme(text = element_text(size = 14), axis.text.x = element_blank(), 
+            axis.ticks.x = element_blank())
+    
+  }, height = function() input$kaufland_height, width = 1550, res = 96)
+#----------------------------------------
 session$onSessionEnded(function() {
     stopApp()
   })

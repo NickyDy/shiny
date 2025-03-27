@@ -4,7 +4,7 @@ library(rvest)
 # kaufland <- read_csv("shiny/scraping/kaufland.csv") %>% select(-c(8:10))
 # tmarket <- read_csv("shiny/scraping/tmarket.csv") %>% select(-c(8:10))
 taraba <- read_csv("shiny/scraping/taraba.csv") %>% select(-c(8:10))
-gladen <- read_csv("shiny/scraping/gladen.csv") %>% select(-c(8:10))
+#gladen <- read_csv("shiny/scraping/gladen.csv") %>% select(-c(8:10))
 superbag <- read_csv("shiny/scraping/superbag.csv") %>% select(-c(8:10))
 zasiti <- read_csv("shiny/scraping/zasiti.csv") %>% select(-c(8:10))
 bulmag <- read_csv("shiny/scraping/bulmag.csv") %>% select(-c(8:10))
@@ -18,7 +18,7 @@ rusebag <- read_csv("shiny/scraping/rusebag.csv") %>% select(-c(8:10))
 bakaliika <- read_csv("shiny/scraping/bakaliika.csv") %>% select(-c(8:10))
 # bestmart <- read_csv("shiny/scraping/bestmart.csv") %>% select(-c(8:10))
 
-foods <- bind_rows(bulmag, gladen, shop24, superbag, taraba, 
+foods <- bind_rows(bulmag, shop24, superbag, taraba, 
                          trista, vmv, zasiti, morski_dar, randi, rusebag, bakaliika) %>% 
   drop_na(product, price) %>% distinct()
 
@@ -32,7 +32,7 @@ foods <- bind_rows(bulmag, gladen, shop24, superbag, taraba,
 df_2025 <- read_rds("shiny/bgprices/df_2025.rds")
 
 glimpse(foods)
-foods %>% count(unit) %>% view
+df_2025 %>% count(source) %>% view
 foods %>% map_dfr(~ sum(is.na(.)))
 #-------------------------------------------
 foods <- foods %>%
@@ -138,7 +138,7 @@ foods <- foods %>%
                                         '4 х 100 г', '60 - 65 г', '100 - 120 г', '4.2 г', '5 х 70 г', '13,5 г', '5 х 20 г',
                                         '(100 г', '(25 г', '(65 г', '12.6 г', '13.5Г', '15,5 г', '18,5Г', '23,5 г', '27г',
                                         '31.5 г', '33.3г', '46.7 г', '57.5г', '62.5Г', '63г', '7.5 г', '74Г', '81г', '89г',
-                                        '99г', '25.6г', '63Г'),
+                                        '99г', '25.6г', '63Г', '31г'),
                              "101-200 гр" = c("110г", "110 г", "120 г", "120г", "120Г", "125 г", "125г", "125г", 
                                               "125Г", "130 г", "0.13 кг", "130Г", "130г", "140 г", "140г", "140ГР",
                                               "140 г", "140Г", "150 г", "150г", "150ГР", "150Г", "160 г", "160г", 
@@ -371,7 +371,7 @@ foods <- foods %>%
                                             '80мл', "50 мл.", "40 мл.", '0,037 Л', '0,090 Л', '0,100 Л', '20 мл.', 
                                             '38 мл.', '57ml', '60ml', '75ml', '90ml', "5 ml", "080 мл", "010 мл", '51мл',
                                             '1000мл', '40 ML', '66мл', '75мл', '76мл', '26 мл', '4 х 100 мл', '052 мл',
-                                            '30МЛ', '55мл', '25МЛ', '0,060 Л', '35 мл'),
+                                            '30МЛ', '55мл', '25МЛ', '0,060 Л', '35 мл', '20мл'),
                              "101-200 мл" = c("200 мл", "200мл", "200МЛ", "0.200Л", '0.110 Л', '0.150Л', '0.160 Л', 
                                               '0.165Л', '0.175 Л', '0.180 Л', '0.200 Л', '0.2л', '106 мл', '110 мл',
                                               '110мл', '115МЛ', '120 мл', '120мл', '125 мл', '125мл', '130 мл',
@@ -532,8 +532,6 @@ foods %>% filter(!is.na(unit)) %>%
   pull(unit) %>%
   str_flatten(collapse = "', '")
 
-foods %>% filter(unit == 'бр') %>% view
-foods %>% filter(str_detect(product, '0.2')) %>% view
 foods %>% count(unit, sort = T) %>% view
 
 foods <- foods %>% 

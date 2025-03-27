@@ -5,7 +5,7 @@ library(bslib)
 library(scales)
 library(tidytext)
 
-votes <- read_rds("votes.rds") %>% 
+votes <- read_rds("votes_new.rds") %>% 
   mutate(vote_date = fct_relevel(vote_date,
                                  "Октомври_2024",
                                  "Юни_2024",
