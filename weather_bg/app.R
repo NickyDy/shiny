@@ -4,79 +4,79 @@ library(tidytext)
 library(shiny)
 library(bslib)
 
-temp_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
-  html_element("table") %>% html_table() %>%
+temp_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") |>
+  html_element("table") |> html_table() |>
   select(station = Станция, date = Дата, 
          hour = Час, temp = `Температура[°C]`, 
          weather = Време, wind_speed = `Вятър-скорост[m/s]`, 
-         wind_dir = `Вятър-посока`, pressure = `Налягане[hPa]`) %>%
+         wind_dir = `Вятър-посока`, pressure = `Налягане[hPa]`) |>
   mutate(wind_speed = str_remove(wind_speed, "n.a."), 
          date = dmy(date), 
          wind_speed = parse_number(wind_speed))
 
-snow_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
-    html_element("td:nth-child(1) table") %>% html_table() %>% slice(-c(1:2))
+snow_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") |>
+    html_element("td:nth-child(1) table") |> html_table() |> slice(-c(1:2))
 colnames(snow_nimh_new) <- c('station_no','station', "station_type", 
                       "prec", "prec_type", "snow_cover")
-snow_nimh_new <- snow_nimh_new %>% 
-  mutate(across(c(prec, snow_cover), parse_number)) %>% 
+snow_nimh_new <- snow_nimh_new |> 
+  mutate(across(c(prec, snow_cover), parse_number)) |> 
   drop_na(snow_cover)
-date_snow <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
-  html_element("#tSnow h2") %>% html_text(trim = T) %>% as.data.frame()
+date_snow <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") |>
+  html_element("#tSnow h2") |> html_text(trim = T) |> as.data.frame()
 
-rain_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
-  html_element("center") %>% html_table() %>% slice(-c(1, 168)) %>% 
-  select(id = X1, station = X2, rain = X3, mean_rain = X4) %>% 
+rain_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") |>
+  html_element("center") |> html_table() |> slice(-c(1, 168)) |> 
+  select(id = X1, station = X2, rain = X3, mean_rain = X4) |> 
   mutate(rain = str_replace(rain, "n.a.", ""),
-         rain = parse_number(rain), date = Sys.Date(), .after = station) %>% 
+         rain = parse_number(rain), date = Sys.Date(), .after = station) |> 
   filter(rain > 0)
 
-bg <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
-  html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
-  filter(!Град == "") %>% mutate(region = "България", .before = Град) %>% 
+bg <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") |>
+  html_element("table") |> html_table() |> pivot_longer(-Град) |> 
+  filter(!Град == "") |> mutate(region = "България", .before = Град) |> 
   select(region, station = Град, date = name, weather = value)
   
-pl <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
-  html_element("#planini") %>% html_table() %>% pivot_longer(-Пункт) %>% 
-  filter(!Пункт == "") %>% mutate(region = "Планини", .before = Пункт) %>% 
+pl <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") |>
+  html_element("#planini") |> html_table() |> pivot_longer(-Пункт) |> 
+  filter(!Пункт == "") |> mutate(region = "Планини", .before = Пункт) |> 
   select(region, station = Пункт, date = name, weather = value)
   
-eu <- read_html("http://weather.bg/index.php?koiFail=eubp&lng=0") %>%
-  html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
-  filter(!Град == "") %>% mutate(region = "Европа", .before = Град) %>% 
+eu <- read_html("http://weather.bg/index.php?koiFail=eubp&lng=0") |>
+  html_element("table") |> html_table() |> pivot_longer(-Град) |> 
+  filter(!Град == "") |> mutate(region = "Европа", .before = Град) |> 
   select(region, station = Град, date = name, weather = value)
   
 forcast <- bind_rows(bg, pl, eu)
-temp <- forcast %>% filter(str_detect(weather, "^[:punct:]|\\d"), 
-                           str_detect(weather, "/")) %>%
+temp <- forcast |> filter(str_detect(weather, "^[:punct:]|\\d"), 
+                           str_detect(weather, "/")) |>
   separate_wider_delim(weather, delim = "/", 
                        names = c("Min", 
-                                 "Max")) %>% 
+                                 "Max")) |> 
   mutate(across(4:5, parse_number))
-weather <- forcast %>% filter(str_detect(weather, "^[:alpha:]"))
-forcast_df <- inner_join(temp, weather) %>% 
-  pivot_longer(Min:Max) %>%
-  mutate(name = fct_rev(name)) %>% 
-  arrange(station) %>% 
+weather <- forcast |> filter(str_detect(weather, "^[:alpha:]"))
+forcast_df <- inner_join(temp, weather, by = join_by(region, station, date)) |> 
+  pivot_longer(Min:Max) |>
+  mutate(name = fct_rev(name)) |> 
+  arrange(station) |> 
   filter(!weather == "n.a.")
 
-rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") %>% 
-  html_element("center") %>% html_table()
+rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") |> 
+  html_element("center") |> html_table()
 colnames(rivers) <- c('station_no','river','station', "q_min", 
                       "q_mean", "q_max", "depth", "ottok", "change_depth")
-rivers <- rivers %>% 
+rivers <- rivers |> 
   mutate(date = Sys.Date(), .before = everything(), 
-         river = fct_recode(river, "Тунджа" = "Tунджа")) %>% 
-  filter(!station_no == "№ ХМС") %>%
-  mutate(across(5:10, ~ str_remove(., "n.a."))) %>% 
-  mutate(across(5:10, ~ str_replace_all(., " ", ""))) %>% 
-  mutate(across(5:10, ~ str_replace_all(., ",", "."))) %>% 
-  mutate(across(5:10, parse_number)) %>% 
-  mutate(across(5:10, ~ round(., 1))) %>% 
-  drop_na(river) %>% arrange(river)
+         river = fct_recode(river, "Тунджа" = "Tунджа")) |> 
+  filter(!station_no == "№ ХМС") |>
+  mutate(across(5:10, ~ str_remove(., "n.a."))) |> 
+  mutate(across(5:10, ~ str_replace_all(., " ", ""))) |> 
+  mutate(across(5:10, ~ str_replace_all(., ",", "."))) |> 
+  mutate(across(5:10, parse_number)) |> 
+  mutate(across(5:10, ~ round(., 1))) |> 
+  drop_na(river) |> arrange(river)
 
-date_rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") %>% 
-  html_elements("h2") %>% html_text(trim = T) %>% as.data.frame()
+date_rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") |> 
+  html_elements("h2") |> html_text(trim = T) |> as.data.frame()
 #----------------------------------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
                href = "mailto:nickydyakov@gmail.com", 
@@ -90,7 +90,7 @@ ui <- page_fillable(#h3("Времето в България!"),
                     navset_pill(
                       nav_panel(title = "Температура",
                                 selectInput("rows", "Брой колонки:",
-                                            choices = c(1, 2)),
+                                            choices = c(2, 1)),
                                 plotOutput("temp")),
                       nav_panel(title = "Вятър",
                                 plotOutput("wind")),
@@ -160,8 +160,8 @@ ui <- page_fillable(#h3("Времето в България!"),
 #-------------------------------------------
 server <- function(input, output, session) {
 output$temp <- renderPlot({
-  temp_nimh_new %>% 
-    mutate(station = reorder_within(station, temp, weather)) %>% 
+  temp_nimh_new |> 
+    mutate(station = reorder_within(station, temp, weather)) |> 
     ggplot(aes(temp, station, fill = temp)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = temp), 
@@ -182,10 +182,10 @@ output$temp <- renderPlot({
   }, height = 800, width = 1800, res = 96)
   #-----------------------------------------
 output$wind <- renderPlot({
-  temp_nimh_new %>% 
+  temp_nimh_new |> 
     mutate(station = reorder_within(station, wind_speed, weather),
            wind_dir = fct_relevel(wind_dir, "N", "NE", "E", "SE", "S", 
-                                            "SW", "W", "NW", "тихо")) %>% 
+                                            "SW", "W", "NW", "тихо")) |> 
     ggplot(aes(wind_speed, station, fill = wind_speed)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = wind_speed), 
@@ -205,7 +205,7 @@ output$wind <- renderPlot({
   }, height = 800, width = 1800, res = 96)
 #-----------------------------------------
 output$rain <- renderPlot({
-  rain_nimh_new %>% drop_na(rain) %>% 
+  rain_nimh_new |> drop_na(rain) |> 
     mutate(code = case_when(
       str_detect(id, "^1") ~ "1",
       str_detect(id, "^2") ~ "2",
@@ -214,8 +214,8 @@ output$rain <- renderPlot({
       str_detect(id, "^5") ~ "5",
       str_detect(id, "^6") ~ "6",
       str_detect(id, "^7") ~ "7",
-    )) %>% 
-    mutate(station = reorder_within(station, rain, code)) %>% 
+    )) |> 
+    mutate(station = reorder_within(station, rain, code)) |> 
     ggplot(aes(rain, station, fill = rain)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = rain), 
@@ -234,8 +234,8 @@ output$rain <- renderPlot({
 }, height = 800, width = 1800, res = 96)
 #---------------------------------------
 output$snow_cover <- renderPlot({
-  snow_nimh_new %>% 
-    mutate(station = reorder_within(station, snow_cover, station_type)) %>% 
+  snow_nimh_new |> 
+    mutate(station = reorder_within(station, snow_cover, station_type)) |> 
     ggplot(aes(snow_cover, station, fill = snow_cover)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = snow_cover), 
@@ -262,9 +262,9 @@ observeEvent(forcast_data(), {
 })
 
 output$forcast <- renderPlot({
-  forcast_data() %>% 
-    mutate(date_weather = paste0(date, "\n(", weather, ")")) %>% 
-    filter(station == input$sett) %>% 
+  forcast_data() |> 
+    mutate(date_weather = paste0(date, "\n(", weather, ")")) |> 
+    filter(station == input$sett) |> 
     ggplot(aes(name, value, fill = value)) +
     geom_col(show.legend = F, position = "dodge") +
     facet_wrap(vars(date_weather), nrow = 1) +
@@ -280,8 +280,8 @@ output$forcast <- renderPlot({
 }, height = 700, width = 1800, res = 96)
 
 output$rivers <- renderPlot({
-  rivers %>% 
-    filter(river == input$river) %>% 
+  rivers |> 
+    filter(river == input$river) |> 
     ggplot(aes(station, ottok)) +
     geom_col(fill = "blue") +
     geom_text(aes(label = ottok), 
@@ -300,10 +300,10 @@ output$rivers <- renderPlot({
 }, height = 700, width = 1800, res = 96)
 
 output$depths <- renderPlot({
-  rivers %>% 
-    filter(river == input$river_depth) %>% 
-    mutate(old_depth = depth - change_depth) %>% 
-    pivot_longer(c(depth, old_depth)) %>% 
+  rivers |> 
+    filter(river == input$river_depth) |> 
+    mutate(old_depth = depth - change_depth) |> 
+    pivot_longer(c(depth, old_depth)) |> 
     ggplot(aes(name, value, fill = name)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = value),

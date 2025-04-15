@@ -343,7 +343,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:3
+pages_to_scrape <- 1:2
 hlqb <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------
 base_url <- "https://trista.bg/zaharni-izdeliya-7.html?page=%d"

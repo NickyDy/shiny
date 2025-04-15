@@ -46,7 +46,7 @@ scrape_prices <- function(page) {
     distinct()
   return(pc)
 }
-pages_to_scrape <- 1:2
+pages_to_scrape <- 1:3
 pz <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/meso-97d170e1/c"
@@ -92,7 +92,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:1
+pages_to_scrape <- 1:3
 meat <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/riba-97d170e1/c"
@@ -138,7 +138,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:1
+pages_to_scrape <- 1:3
 fish <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/mlechni-produkti-i-yaytsa-97d170e1/c?&page=%d#"
@@ -230,7 +230,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:3
+pages_to_scrape <- 1:4
 kolbasi <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/hlyab-i-testeni-izdelia-97d170e1/c?&page=%d#"
@@ -276,7 +276,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:1
+pages_to_scrape <- 1:2
 hlqb <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/bio-i-dietichni-hrani-97d170e1/c?&page=%d#"

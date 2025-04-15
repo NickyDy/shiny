@@ -354,7 +354,7 @@ output$sec_perc <- renderPlot({
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank()) +
 			labs(x = NULL, y = NULL, title = paste0("Секция: ", input$sec),
-					 caption = "Бележка: Оцветени са само партиите и коалициите влизали/щи в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
+					 caption = "Източник на данните: ЦИК.") +
 			facet_wrap(~ vote_date, nrow = 1, drop = F)
 	}, height = 350, width = 1600, res = 96)
 
@@ -379,7 +379,7 @@ output$country <- renderPlot({
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank()) +
     labs(x = NULL, y = NULL,
-         caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
+         caption = "Източник на данните: ЦИК.") +
     facet_wrap(~ vote_date, nrow = 1)
   
 }, height = function() input$height_slider, width = 1600, res = 96)
@@ -404,7 +404,7 @@ output$votes_country <- renderPlot({
         axis.text.x = element_blank(), 
         axis.ticks.x = element_blank()) +
   labs(y = NULL, x = "Брой гласове", title = NULL,
-       caption = "Бележка: Оцветени са само партиите и коалициите влизали в Парламента, останалите са в сиво.\nИзточник на данните: ЦИК.") +
+       caption = "Източник на данните: ЦИК.") +
   facet_wrap(~ vote_date, nrow = 1)
 }, height = function() input$height_slider, width = 1600, res = 96)
 #---------------------------------------

@@ -1,6 +1,17 @@
 library(tidyverse)
 library(rvest)
+library(httr2)
 
+req <- request("https://shop.gladen.bg/category/fruits-and-vegetables?page=1")
+req |> req_headers(
+  "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+  "Accept" = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+  "Accept-Language" = "en-US,en;q=0.5",
+  "Accept-Encoding" = "gzip, deflate, br",
+  "Connection" = "keep-alive",
+  "Upgrade-Insecure-Requests" = "1",
+  "Cache-Control" = "max-age=0") %>% 
+  req_perform()
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/fruits-and-vegetables?page=%d"
 scrape_prices <- function(page) {

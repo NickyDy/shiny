@@ -42,7 +42,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:3
+pages_to_scrape <- 1:5
 fruits <- map_dfr(pages_to_scrape, scrape_prices)
 #-------------------------------------------------------------------------------
 base_url <- "https://www.superbagplovdiv.bg/hliab-i-testeni-izdeliia.html?page=%d"
@@ -171,7 +171,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:3
+pages_to_scrape <- 1:5
 meat <- map_dfr(pages_to_scrape, scrape_prices)
 #-------------------------------------------------------------------------------
 base_url <- "https://www.superbagplovdiv.bg/riba-1.html?page=%d"
@@ -214,7 +214,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:2
+pages_to_scrape <- 1:5
 fish <- map_dfr(pages_to_scrape, scrape_prices)
 #-------------------------------------------------------------------------------
 base_url <- "https://www.superbagplovdiv.bg/kolbasi-i-delikatesi.html?page=%d"

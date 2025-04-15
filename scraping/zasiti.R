@@ -386,7 +386,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:47 #49
+pages_to_scrape <- 1:46 #49
 bak <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://zasiti.bg/category/хлебни-изделия/page/%d/"
@@ -475,7 +475,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:9
 coffee <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------
-zasiti <- bind_rows(fruit, alc, bez, veg, frozen, kandy, meat, milk, bak, hlqb, coffee)
+zasiti <- bind_rows(fruit, alc, bez, veg, frozen, kandy, meat, milk, bak, hlqb)
 
 zasiti <- zasiti %>% 
   mutate(unit = NA, discount = NA, price_kg = NA) %>% 

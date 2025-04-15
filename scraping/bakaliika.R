@@ -128,7 +128,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:2
+pages_to_scrape <- 1:3
 kolbasi <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://www.bakaliika.com/produkti-1/konservi-i-burkani/page-%d"
@@ -214,7 +214,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:4
+pages_to_scrape <- 1:5
 milk <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://www.bakaliika.com/produkti-1/napitki/page-%d"

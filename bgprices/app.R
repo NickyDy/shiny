@@ -5,19 +5,18 @@ library(DT)
 
 #pharms <- read_rds("pharm_week31.rds") %>% mutate(price = round(price, 2))
 df_2025 <- read_rds("df_2025.rds") %>% 
-  filter(!source %in% c("T MARKET")) %>% 
   mutate(date = str_replace(date, "2025-02-06", "2025-02-08"),
                             price = round(price, 2)) %>% arrange(date)
-kaufland <- read_rds("kaufland.rds") %>% arrange(date)
+kaufland <- read_rds("kaufland.rds") %>% arrange(date) %>% drop_na(price, product)
 #user_base <- read_rds("user_base.rds")
-food_levels <- c("Zasiti", "VMV", "Kaufland", "Taraba", "T MARKET",
+food_levels <- c("Zasiti", "VMV", "Taraba", "T MARKET",
             "Superbag", "Shop24", "Gladen",
-            "BulMag", "Trista", "Морски дар", "Randi", "Наслада",
-            "Rusebag", "Бакалийка", "Bestmart")
+            "BulMag", "Trista", "Морски дар", "Randi",
+            "Rusebag", "Бакалийка")
 food_colors <- c("#984ea3", "#4daf4a", "#e41a1c", "#8dd3c7", 
-            "#ffed6f", "#bebada", "#fb8072", "darkgreen", 
-            "#fdb462", "#b3de69", "blue", "pink", "#bc80bd", 
-            "#ccebc5", "midnightblue", "#00FFFF")
+            "#ffed6f", "#fb8072", "darkgreen", 
+            "#fdb462", "#b3de69", "blue", "pink", 
+            "#ccebc5", "midnightblue")
 # pharm_levels <- c("Sopharmacy", "366", "Фрамар", "Remedium",
 #                   "Gpharm", "Ozone", "Аптеки Лили", "Салвия",
 #                   "Epharm", "Mypharmacy", "Afya", 
@@ -167,7 +166,7 @@ server <- function(input, output, session) {
                              "Продуктова група" = "type",
                              "Продукт" = "product",
                              "Цена (лв)" = "price"),
-                options = list(dom = 'frtip', pageLength = 100)) %>% 
+                options = list(dom = 'frtip', pageLength = 15)) %>% 
       formatStyle("Супермаркет", backgroundColor = styleEqual(food_levels, food_colors)))
   
   # output$pharms <- renderDT(
@@ -291,7 +290,7 @@ output$inf_price_group <- renderPlot({
   output$kaufland_plot <- renderPlot({
     
     kaufland %>%
-      filter(date %in% c(input$kaufland_first_date, input$kaufland_first_date)) %>%
+      filter(date %in% c(input$kaufland_first_date, input$kaufland_last_date)) %>%
       summarise(price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T), 
                 .by = c(unit, product)) %>% 
       filter(price_change != 0) %>%
@@ -304,12 +303,12 @@ output$inf_price_group <- renderPlot({
                 position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
       labs(y = NULL, x = NULL,
            title = glue::glue("Промяна в цената на продуктите от {input$kaufland_first_date} до ",
-                              "{input$kaufland_first_date}")) +
+                              "{input$kaufland_last_date}")) +
       theme(text = element_text(size = 14), axis.text.x = element_blank(), 
             axis.ticks.x = element_blank())
     
   }, height = function() input$kaufland_height, width = 1550, res = 96)
-#----------------------------------------
+#----------------------------------------------------------------------
 session$onSessionEnded(function() {
     stopApp()
   })
