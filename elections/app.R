@@ -126,9 +126,9 @@ ui <- page_sidebar(
     selectInput("obsh", "Община:", choices = NULL),
     selectInput("sett", "Населено място:", choices = NULL),
     selectInput("sec", "Секция:", choices = NULL),
-    sliderInput("prop_slider", "Филтър проценти:", 
-                min = 0, max = 0.5, value = 0.04, step = 0.01),
-    sliderInput("votes_slider", "Филтър брой гласове:", 
+    sliderInput("prop_slider", "Филтър (проценти):", 
+                min = 0, max = 50, value = 4, step = 1),
+    sliderInput("votes_slider", "Филтър (брой гласове):", 
                 min = 0, max = 1000000, value = 50000, step = 10000),
     sliderInput("height_slider", "Височина на графиката:", 
                 min = 800, max = 4000, value = 800, step = 100))),
@@ -142,20 +142,21 @@ ui <- page_sidebar(
               plotOutput("obsh_perc", height = 350), 
               plotOutput("sett_perc", height = 350),
               plotOutput("sec_perc", height = 350)),
-    nav_panel(title = "Общо за страната (%)",
-              textOutput("text1"),
-              tags$head(tags$style("#text1{color: red;
-                                 font-size: 20px;
-                                 font-style: bold;
-                                 }")), br(),
+    nav_panel(title = "Общо за страната",
+              selectInput("votes_perc", "Показател:", c("Брой гласове", "Проценти")),
+              # textOutput("text1"),
+              # tags$head(tags$style("#text1{color: red;
+              #                    font-size: 20px;
+              #                    font-style: bold;
+              #                    }")), br(),
               plotOutput("country")),
-    nav_panel(title = "Общо за страната (брой гласове)",
-              textOutput("text2"),
-              tags$head(tags$style("#text2{color: red;
-                                 font-size: 20px;
-                                 font-style: bold;
-                                 }")), br(),
-              plotOutput("votes_country")),
+    # nav_panel(title = "Общо за страната (брой гласове)",
+    #           textOutput("text2"),
+    #           tags$head(tags$style("#text2{color: red;
+    #                              font-size: 20px;
+    #                              font-style: bold;
+    #                              }")), br(),
+    #           plotOutput("votes_country")),
     nav_panel(title = "Загуба/Печалба на гласове", 
               textOutput("text3"),
               tags$head(tags$style("#text3{color: red;
@@ -293,7 +294,7 @@ output$obsh_perc <- renderPlot({
 			filter(obshtina %in% c(input$obsh)) %>%
 			group_by(vote_date, party) %>%
 			summarise(sum_votes = sum(votes)) %>%
-			mutate(prop = sum_votes / sum(sum_votes)) %>%
+			mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
 			mutate(party = fct_reorder(party, sum_votes)) %>%
 			filter(prop >= input$prop_slider) %>%
 			ggplot(aes(prop, party, fill = party)) +
@@ -302,7 +303,7 @@ output$obsh_perc <- renderPlot({
 			scale_x_continuous(expand = expansion(mult = c(.05, .6))) +
 			scale_y_discrete(labels = scales::label_wrap(50)) +
 			scale_fill_manual(values = colors) +
-			geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
+			geom_text(aes(label = round(prop, 2)),
 								position = position_dodge(width = 1), hjust = -0.05, size = 3.5) +
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
@@ -316,7 +317,7 @@ output$sett_perc <- renderPlot({
 			filter(section %in% c(input$sett)) %>%
 			group_by(vote_date, party) %>%
 			summarise(sum_votes = sum(votes)) %>%
-			mutate(prop = sum_votes / sum(sum_votes)) %>%
+			mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
 			mutate(party = fct_reorder(party, sum_votes)) %>%
 			filter(prop >= input$prop_slider) %>%
 			ggplot(aes(prop, party, fill = party)) +
@@ -325,7 +326,7 @@ output$sett_perc <- renderPlot({
 			scale_x_continuous(expand = expansion(mult = c(.05, .6))) +
 			scale_y_discrete(labels = scales::label_wrap(50)) +
 			scale_fill_manual(values = colors) +
-			geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
+			geom_text(aes(label = round(prop, 2)),
 								position = position_dodge(width = 1), hjust = -0.05, size = 3.5) +
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
@@ -339,7 +340,7 @@ output$sec_perc <- renderPlot({
 			filter(code %in% c(input$sec)) %>%
 			group_by(vote_date, party) %>%
 			summarise(sum_votes = sum(votes)) %>%
-			mutate(prop = sum_votes / sum(sum_votes)) %>%
+			mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
 			mutate(party = fct_reorder(party, sum_votes)) %>%
 			filter(prop >= input$prop_slider) %>%
 			ggplot(aes(prop, party, fill = party)) +
@@ -348,7 +349,7 @@ output$sec_perc <- renderPlot({
 			scale_x_continuous(expand = expansion(mult = c(.05, .6))) +
 			scale_y_discrete(labels = scales::label_wrap(50)) +
 			scale_fill_manual(values = colors) +
-			geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
+			geom_text(aes(label = round(prop, 2)),
 								position = position_dodge(width = 1), hjust = -0.05, size = 3.5) +
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
@@ -359,54 +360,76 @@ output$sec_perc <- renderPlot({
 	}, height = 350, width = 1600, res = 96)
 
 output$country <- renderPlot({
-  output$text1 <- renderText({ "Панелът работи със следните филтри: Филтър проценти, Височина на графиката." })
+  if (input$votes_perc == "Брой гласове") {
+    votes %>%
+      group_by(vote_date, party) %>%
+      summarise(sum_votes = sum(votes)) %>%
+      filter(sum_votes >= input$votes_slider) %>%
+      mutate(party = fct_reorder(party, sum_votes)) %>% 
+      ggplot(aes(sum_votes, party, fill = party)) +
+      geom_col(position = "dodge", show.legend = F) +
+      guides(fill = guide_legend(reverse = TRUE)) +
+      scale_y_discrete(labels = scales::label_wrap(50)) +
+      scale_x_continuous(expand = expansion(mult = c(.05, .9))) +
+      scale_fill_manual(values = colors) +
+      geom_text(aes(label = space_s(sum_votes)), 
+                position = position_dodge(width = 1), hjust = -0.05, size = 4) +
+      theme(text = element_text(size = 16), 
+            axis.text.x = element_blank(), 
+            axis.ticks.x = element_blank()) +
+      labs(y = NULL, x = "Брой гласове", title = NULL,
+           caption = "Източник на данните: ЦИК.") +
+      facet_wrap(~ vote_date, nrow = 1)
+  } else {
+    votes %>%
+      group_by(vote_date, party) %>%
+      summarise(sum_votes = sum(votes, na.rm = T)) %>%
+      mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
+      mutate(party = fct_reorder(party, sum_votes)) %>%
+      filter(prop >= input$prop_slider) %>%
+      ggplot(aes(prop, party, fill = party)) +
+      geom_col(position = "dodge", show.legend = F) +
+      guides(fill = guide_legend(reverse = TRUE)) +
+      scale_x_continuous(expand = expansion(mult = c(.05, .65))) +
+      scale_y_discrete(labels = scales::label_wrap(50)) +
+      scale_fill_manual(values = colors) +
+      geom_text(aes(label = round(prop, 2)),
+                position = position_dodge(width = 1), hjust = -0.1, size = 4) +
+      theme(text = element_text(size = 16), 
+            axis.text.x = element_blank(), 
+            axis.ticks.x = element_blank()) +
+      labs(x = NULL, y = NULL,
+           caption = "Източник на данните: ЦИК.") +
+      facet_wrap(~ vote_date, nrow = 1)
+  }
   
-  votes %>%
-    group_by(vote_date, party) %>%
-    summarise(sum_votes = sum(votes, na.rm = T)) %>%
-    mutate(prop = sum_votes / sum(sum_votes)) %>%
-    mutate(party = fct_reorder(party, sum_votes)) %>%
-    filter(prop >= input$prop_slider) %>%
-    ggplot(aes(prop, party, fill = party)) +
-    geom_col(position = "dodge", show.legend = F) +
-    guides(fill = guide_legend(reverse = TRUE)) +
-    scale_x_continuous(expand = expansion(mult = c(.05, .65))) +
-    scale_y_discrete(labels = scales::label_wrap(50)) +
-    scale_fill_manual(values = colors) +
-    geom_text(aes(label = scales::percent(prop, accuracy = 0.01)),
-              position = position_dodge(width = 1), hjust = -0.1, size = 4) +
-    theme(text = element_text(size = 16), 
-          axis.text.x = element_blank(), 
-          axis.ticks.x = element_blank()) +
-    labs(x = NULL, y = NULL,
-         caption = "Източник на данните: ЦИК.") +
-    facet_wrap(~ vote_date, nrow = 1)
+  #output$text1 <- renderText({ "Панелът работи със следните филтри: Филтър проценти, Височина на графиката." })
   
 }, height = function() input$height_slider, width = 1600, res = 96)
 #---------------------------------------
-output$votes_country <- renderPlot({
-  output$text2 <- renderText({ "Панелът работи със следните филтри: Филтър брой гласове, Височина на графиката." })
-  
-  votes %>%
-  group_by(vote_date, party) %>%
-  summarise(sum_votes = sum(votes)) %>%
-  filter(sum_votes >= input$votes_slider) %>%
-  mutate(party = fct_reorder(party, sum_votes)) %>% 
-  ggplot(aes(sum_votes, party, fill = party)) +
-  geom_col(position = "dodge", show.legend = F) +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  scale_y_discrete(labels = scales::label_wrap(50)) +
-  scale_x_continuous(expand = expansion(mult = c(.05, .9))) +
-  scale_fill_manual(values = colors) +
-  geom_text(aes(label = space_s(sum_votes)), 
-            position = position_dodge(width = 1), hjust = -0.05, size = 4) +
-  theme(text = element_text(size = 16), 
-        axis.text.x = element_blank(), 
-        axis.ticks.x = element_blank()) +
-  labs(y = NULL, x = "Брой гласове", title = NULL,
-       caption = "Източник на данните: ЦИК.") +
-  facet_wrap(~ vote_date, nrow = 1)
-}, height = function() input$height_slider, width = 1600, res = 96)
+# output$votes_country <- renderPlot({
+#   output$text2 <- renderText({ "Панелът работи със следните филтри: Филтър брой гласове, Височина на графиката." })
+#   
+#   votes %>%
+#   group_by(vote_date, party) %>%
+#   summarise(sum_votes = sum(votes)) %>%
+#   filter(sum_votes >= input$votes_slider) %>%
+#   mutate(party = fct_reorder(party, sum_votes)) %>% 
+#   ggplot(aes(sum_votes, party, fill = party)) +
+#   geom_col(position = "dodge", show.legend = F) +
+#   guides(fill = guide_legend(reverse = TRUE)) +
+#   scale_y_discrete(labels = scales::label_wrap(50)) +
+#   scale_x_continuous(expand = expansion(mult = c(.05, .9))) +
+#   scale_fill_manual(values = colors) +
+#   geom_text(aes(label = space_s(sum_votes)), 
+#             position = position_dodge(width = 1), hjust = -0.05, size = 4) +
+#   theme(text = element_text(size = 16), 
+#         axis.text.x = element_blank(), 
+#         axis.ticks.x = element_blank()) +
+#   labs(y = NULL, x = "Брой гласове", title = NULL,
+#        caption = "Източник на данните: ЦИК.") +
+#   facet_wrap(~ vote_date, nrow = 1)
+# }, height = function() input$height_slider, width = 1600, res = 96)
 #---------------------------------------
 output$lost_gained_votes <- renderPlot({
   output$text3 <- renderText({ "Панелът не работи с филтрите от страничния бар." })

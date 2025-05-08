@@ -1,8 +1,14 @@
 library(tidyverse)
 library(shiny)
 library(bslib)
-library(scales) 
+library(scales)
 options(scipen = 100)
+
+# library(eurostat)
+# tec00011  <- get_eurostat("tec00011", type = "label",
+#                                time_format = "date", stringsAsFactors = T)
+# 
+# write_rds(tec00011, "shiny/eurostat/tec00011.rds")
 
 gdp <- read_rds("nama_10_gdp.rds") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
@@ -959,7 +965,7 @@ output$plot_ppp <- renderPlot({
     geom_col() +
     scale_fill_manual(values = c("gray50", "red")) +
     scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
-    geom_text(aes(label = values),
+    geom_text(aes(label = space_s(values)),
               position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
     theme(text = element_text(size = 14), legend.position = "none") +
     labs(x = input$na_item_ppp, y = NULL, 
@@ -1016,7 +1022,7 @@ output$plot_gva <- renderPlot({
     geom_col() +
     scale_fill_manual(values = c("gray50", "red")) +
     scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
-    geom_text(aes(label = values),
+    geom_text(aes(label = space_s(values)),
               position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
     theme(text = element_text(size = 14), legend.position = "none") +
     labs(x = input$unit_gva, y = NULL, 

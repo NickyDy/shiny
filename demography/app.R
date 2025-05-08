@@ -20,7 +20,9 @@ health <- read_rds("health.rds") %>%
 kinder_gardens <- read_rds("kinder_gardens.rds") %>% arrange(obshtina)
 poverty <- read_rds("poverty.rds")
 potreblenie <- read_rds("potreblenie.rds") %>% 
-  filter(value != 0) %>% arrange(oblast)
+  filter(value != 0) %>% 
+  mutate(col = if_else(oblast == "Общо за страната", "1", "0")) %>% 
+  arrange(oblast)
 prestupnost <- read_rds("prestupnost.rds") %>% arrange(oblast)
 #---------------------------------------------------------------------
 colors_sex <- c("Мъже" = "#F8766D", "Жени" = "#00BFC4")
@@ -54,7 +56,8 @@ ui <- page_fillable(#h3("Демография на България!"),
               selectInput("loc_sex_obshtina", "Община:",
                           choices = NULL),
               selectInput("loc_sex_location", "Населено място:",
-                          choices = NULL), col_widths = c(2, 2, 2)),
+                          choices = NULL), 
+              col_widths = c(2, 2, 2)),
               plotOutput("loc_sex_plot")),
     nav_panel(title = "Възраст",
               layout_columns(
@@ -62,49 +65,56 @@ ui <- page_fillable(#h3("Демография на България!"),
                             choices = unique(obl_age_sex$oblast)),
                 selectInput("obl_age_sex_year", "Населено място:",
                             choices = unique(obl_age_sex$year),
-                            selected = "2023"), 
+                            selected = "2024"), 
                             col_widths = c(2, 1)),
               plotOutput("obl_age_sex_plot")),
     nav_panel("Раждаемост",
               layout_columns(
                 selectInput("birth_rate_oblast", "Област:",
-                            choices = unique(birth_rate$oblast)),
+                            choices = unique(birth_rate$oblast),
+                            selected = "Общо за страната"),
                 selectInput("birth_rate_coef", "Коефициент:",
                             choices = NULL),
                             col_widths = c(2, 4)),
              plotOutput("birth_rate_plot")),
     nav_panel("Смъртност", layout_columns(
                 selectInput("mortality_oblast", "Област:",
-                            choices = unique(mortality$oblast)),
+                            choices = unique(mortality$oblast),
+                            selected = "Общо за страната"),
                 selectInput("mortality_coef", "Коефициент:",
                             choices = NULL),
                             col_widths = c(2, 2)),
              plotOutput("mortality_plot")),
     nav_panel("Трудоспособност", layout_columns(
                selectInput("labor_sett_sex_obsh", "Община:",
-                            choices = unique(labor_sett_sex$obsh)), 
-               col_widths = c(1)),
+                            choices = unique(labor_sett_sex$obsh),
+                           selected = "Общо за страната"), 
+               col_widths = c(2)),
              plotOutput("labor_sett_sex_plot")),
     nav_panel("Бракове", layout_columns(
                selectInput("brakove_obsh", "Община:",
-                            choices = unique(brakove$obshtina)),
-               col_widths = c(1)),
+                            choices = unique(brakove$obshtina),
+                           selected = "Общо за страната"),
+               col_widths = c(2)),
              plotOutput("brakove_plot")),
     nav_panel("Разводи", layout_columns(
                selectInput("razvodi_obsh", "Община:",
-                            choices = unique(razvodi$obshtina)),
-               col_widths = c(1)),
+                            choices = unique(razvodi$obshtina),
+                           selected = "Общо за страната"),
+               col_widths = c(2)),
              plotOutput("razvodi_plot")),
     nav_panel("Вътрешна миграция", layout_columns(
                 selectInput("int_migration_obshtina", "Община:",
-                            choices = unique(int_migration$obshtina)),
+                            choices = unique(int_migration$obshtina),
+                            selected = "Общо за страната"),
                 selectInput("int_migration_sett", "Тип населено място:",
                             choices = NULL),
-                            col_widths = c(1, 2)),
+                            col_widths = c(2, 2)),
              plotOutput("int_migration_plot")),
     nav_panel("Външна миграция", layout_columns(
                selectInput("ext_migration_age", "Възраст:",
-                            choices = unique(ext_migration$age)),
+                            choices = unique(ext_migration$age),
+                           selected = "Общо"),
                col_widths = c(1)),
              plotOutput("ext_migration_plot")),
     nav_panel("Средно образование",
@@ -212,18 +222,20 @@ server <- function(input, output, session) {
   })
   
   output$loc_sex_plot <- renderPlot({
-    loc_sex_location() %>% 
-      filter(obshtina %in% c(input$loc_sex_obshtina),
-             location %in% c(input$loc_sex_location)) %>% 
-      ggplot(aes(year, pop, fill = sex)) +
-      geom_col(position = position_dodge2(preserve = "single")) +
-      scale_fill_manual(values = colors_sex) +
-      scale_y_continuous(expand = expansion(mult = c(0.01, 0.3))) +
-      geom_text(aes(label = space_s(pop)), 
-                position = position_dodge(width = 1), hjust = -0.1, size = 4.5, angle = 90) +
-      theme(text = element_text(size = 16), legend.position = "right") +
-      labs(x = NULL, y = "Брой жители", fill = "Пол:",
-           caption = "Източник на данните: Infostat")
+    
+  loc_sex_location() %>% 
+        filter(obshtina %in% c(input$loc_sex_obshtina),
+               location %in% c(input$loc_sex_location)) %>% 
+        ggplot(aes(year, pop, fill = sex)) +
+        geom_col(position = position_dodge2(preserve = "single")) +
+        scale_fill_manual(values = colors_sex) +
+        scale_y_continuous(expand = expansion(mult = c(0.01, 0.3))) +
+        geom_text(aes(label = space_s(pop)), 
+                  position = position_dodge(width = 1), hjust = -0.1, size = 4.5, angle = 90) +
+        theme(text = element_text(size = 16), legend.position = "right") +
+        labs(x = NULL, y = "Брой жители", fill = "Пол:",
+             caption = "Източник на данните: Infostat")
+    
   }, height = 800, width = 1800, res = 96)
   #-----------------------------------------
   obl_age_sex_oblast <- reactive({
@@ -238,7 +250,7 @@ server <- function(input, output, session) {
       geom_col(position = position_dodge2(preserve = "single")) +
       scale_fill_manual(values = colors_sex) +
       scale_x_continuous(expand = expansion(mult = c(.01, .15))) +
-      geom_text(aes(label = pop), position = position_dodge(width = 1), hjust = -0.1, size = 4) +
+      geom_text(aes(label = space_s(pop)), position = position_dodge(width = 1), hjust = -0.1, size = 4) +
       theme(text = element_text(size = 14), legend.position = "none") +
       labs(y = NULL, x = "Брой жители", title = "", fill = "Пол:",
            caption = "Източник на данните: Infostat") +
@@ -256,8 +268,8 @@ server <- function(input, output, session) {
       ggplot(aes(year, pop, fill = sex)) +
       geom_col(position = position_dodge2(preserve = "single")) +
       scale_fill_manual(values = colors_sex) +
-      scale_y_continuous(expand = expansion(mult = c(.01, .45))) +
-      geom_text(aes(label = pop), position = position_dodge(width = 1),
+      scale_y_continuous(expand = expansion(mult = c(.01, .8))) +
+      geom_text(aes(label = space_s(pop)), position = position_dodge(width = 1),
                 hjust = -0.1, size = 4, angle = 90) +
       theme(text = element_text(size = 16), legend.position = "right") +
       labs(x = NULL, y = "Брой хора", title = "", fill = "Пол:",
@@ -336,7 +348,7 @@ server <- function(input, output, session) {
       geom_col(position = position_dodge2(preserve = "single")) +
       scale_fill_manual(values = c("В градовете" = "#00BFC4", "В селата" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .15))) +
-      geom_text(aes(label = pop), position = position_dodge(width = 1), vjust = -0.1, size = 4) +
+      geom_text(aes(label = space_s(pop)), position = position_dodge(width = 1), vjust = -0.1, size = 4) +
       theme(text = element_text(size = 16), legend.position = "none") +
       labs(x = NULL, y = "Брой бракове", fill = "Пол:",
            caption = "Източник на данните: Infostat") +
@@ -352,7 +364,7 @@ server <- function(input, output, session) {
       geom_col(position = position_dodge2(preserve = "single")) +
       scale_fill_manual(values = c("В градовете" = "#00BFC4", "В селата" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .15))) +
-      geom_text(aes(label = pop), position = position_dodge(width = 1), vjust = -0.1, size = 4) +
+      geom_text(aes(label = space_s(pop)), position = position_dodge(width = 1), vjust = -0.1, size = 4) +
       theme(text = element_text(size = 16), legend.position = "none") +
       labs(x = NULL, y = "Брой разводи", fill = "Пол:",
            caption = "Източник на данните: Infostat") +
@@ -383,7 +395,7 @@ server <- function(input, output, session) {
       geom_col(position = position_dodge2(preserve = "single")) +
       scale_fill_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .4))) +
-      geom_text(aes(label = pop), position = position_dodge(width = 1),
+      geom_text(aes(label = space_s(pop)), position = position_dodge(width = 1),
                 hjust = -0.1, size = 4, angle = 90) +
       theme(text = element_text(size = 16), legend.position = "right") +
       labs(y = "Брой хора", x = NULL, fill = "Пол:",
@@ -400,7 +412,7 @@ server <- function(input, output, session) {
       geom_col(position = position_dodge2(preserve = "single")) +
       scale_fill_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .55))) +
-      geom_text(aes(label = pop), position = position_dodge(width = 1),
+      geom_text(aes(label = space_s(pop)), position = position_dodge(width = 1),
                 hjust = -0.1, size = 4, angle = 90) +
       theme(text = element_text(size = 16), legend.position = "right") +
       labs(y = "Брой хора", x = NULL, fill = "Пол:",
@@ -517,11 +529,12 @@ output$potr_plot <- renderPlot({
   
   potreblenie %>% 
     filter(product %in% c(input$potr_product)) %>% 
-    ggplot(aes(as.numeric(year), value)) +
-    geom_line(color = "#00BFC4", linewidth = 1) +
+    ggplot(aes(as.numeric(year), value, color = col)) +
+    geom_line(linewidth = 1) +
+    scale_fill_manual(values = c("0" = "#00BFC4", "1" = "#F8766D")) +
     scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
-    scale_x_continuous(breaks = seq(2008, 2023, 2)) +
-    theme(text = element_text(size = 14), legend.position = "right",
+    scale_x_continuous(breaks = seq(2008, 2024, 4)) +
+    theme(text = element_text(size = 14), legend.position = "none",
           axis.text.x = element_text()) +
     labs(y = "Потребление (средно на човек)", x = NULL) +
     facet_wrap(vars(oblast), ncol = 5)
@@ -536,7 +549,7 @@ output$potr_plot <- renderPlot({
       geom_line(linewidth = 1) +
       scale_color_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .3))) +
-      scale_x_continuous(breaks = seq(2004, 2023, 2)) +
+      scale_x_continuous(breaks = seq(2004, 2023, 4)) +
       theme(text = element_text(size = 14), legend.position = "right",
             axis.text.x = element_text()) +
       labs(y = "Брой осъдени", x = NULL, color = "Пол:") +

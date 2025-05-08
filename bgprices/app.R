@@ -4,19 +4,20 @@ library(bslib)
 library(DT)
 
 #pharms <- read_rds("pharm_week31.rds") %>% mutate(price = round(price, 2))
-df_2025 <- read_rds("df_2025.rds") %>% 
+df_2025 <- read_rds("df_2025.rds") %>%
   mutate(date = str_replace(date, "2025-02-06", "2025-02-08"),
                             price = round(price, 2)) %>% arrange(date)
-kaufland <- read_rds("kaufland.rds") %>% arrange(date) %>% drop_na(price, product)
+kaufland <- read_rds("kaufland.rds") %>% mutate(price = round(price, 2)) %>% 
+  arrange(date) %>% drop_na(price, product)
 #user_base <- read_rds("user_base.rds")
 food_levels <- c("Zasiti", "VMV", "Taraba", "T MARKET",
             "Superbag", "Shop24", "Gladen",
-            "BulMag", "Trista", "Морски дар", "Randi",
+            "BulMag", "Морски дар", "Randi",
             "Rusebag", "Бакалийка")
 food_colors <- c("#984ea3", "#4daf4a", "#e41a1c", "#8dd3c7", 
             "#ffed6f", "#fb8072", "darkgreen", 
             "#fdb462", "#b3de69", "blue", "pink", 
-            "#ccebc5", "midnightblue")
+            "midnightblue")
 # pharm_levels <- c("Sopharmacy", "366", "Фрамар", "Remedium",
 #                   "Gpharm", "Ozone", "Аптеки Лили", "Салвия",
 #                   "Epharm", "Mypharmacy", "Afya", 
@@ -85,6 +86,8 @@ ui <- page_fillable(#h3("Сравнение на цените в Българи�
                                            selected = last(df_2025$date)),
                                 col_widths = c(1, 1)),
                                 plotOutput("inf_price_total")),
+                      nav_panel(title = "Kaufland (таблица)",
+                                DTOutput("kaufland_table", width = 1850)),
                       nav_panel(title = "Kaufland", layout_columns(
                                 selectInput("kaufland_first_date", "От дата:",
                                            choices = unique(kaufland$date),
@@ -165,9 +168,21 @@ server <- function(input, output, session) {
                              "Супермаркет" = "source", 
                              "Продуктова група" = "type",
                              "Продукт" = "product",
+                             "Грамаж" = "unit",
                              "Цена (лв)" = "price"),
                 options = list(dom = 'frtip', pageLength = 15)) %>% 
       formatStyle("Супермаркет", backgroundColor = styleEqual(food_levels, food_colors)))
+  
+  output$kaufland_table <- renderDT(
+    kaufland %>% arrange(price) %>% 
+      datatable(rownames = F, filter = "top",
+                colnames = c("Дата" = "date",
+                             "Населено място" = "location",
+                             "Супермаркет" = "source", 
+                             "Продукт" = "product",
+                             "Грамаж" = "unit",
+                             "Цена (лв)" = "price"),
+                options = list(dom = 'frtip', pageLength = 15)))
   
   # output$pharms <- renderDT(
   #   pharms %>% arrange(price) %>% 
@@ -260,7 +275,7 @@ output$inf_price_group <- renderPlot({
     geom_text(aes(label = paste0(round(price_change, 2), "%")),
               position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
     labs(y = NULL, x = NULL,
-         title = glue::glue("Средна инфлация по продуктови групи и супермаркети от {input$date_first_group} до ",
+         title = glue::glue("Средна инфлация по продуктови групи в {input$inf_price_source_group} от {input$date_first_group} до ",
                             "{input$date_last_group}")) +
     theme(text = element_text(size = 14), axis.text.x = element_blank(), 
           axis.ticks.x = element_blank())

@@ -7,10 +7,10 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".tb_style_1") %>%
+    html_elements(".tb_multiline") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element(".caption a") %>% 
+        html_element(".tb_mt_100 ") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 

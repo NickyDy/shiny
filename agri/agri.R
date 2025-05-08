@@ -17,8 +17,6 @@ oilseeds <- read_rds("shiny/agri/oilseeds.rds")
 olive_oil <- read_rds("shiny/agri/olive_oil.rds")
 wine <- read_rds("shiny/agri/wine.rds")
 
-wine %>% map_dfr(~ sum(is.na(.)))
-
 beef_carc_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/beef/prices?&years=2025") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date), 
@@ -136,7 +134,7 @@ wine_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/wine/prices?beginDat
          price = as.numeric(price)) %>% 
   select(date = begin_date, state = member_state_name, 
          wine_description = description, eur_price_per_hl = price)
-#---------------------------------------------------------
+#-----------------------------------------------------------------
 beef_carc <- bind_rows(beef_carc, beef_carc_new) %>% 
   mutate(product = str_replace_all(product, " ", "")) %>% distinct()
 beef_live <- bind_rows(beef_live, beef_live_new) %>% distinct()

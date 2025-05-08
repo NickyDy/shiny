@@ -7,7 +7,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -50,7 +50,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -85,7 +85,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:4
+pages_to_scrape <- 1:3
 zel <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------------------
 base_url <- "https://randi.bg//presni-podpravki-i-svezhi-salati?page=%d"
@@ -93,7 +93,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -136,7 +136,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -179,7 +179,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -222,7 +222,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -265,7 +265,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -308,7 +308,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -351,7 +351,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -394,7 +394,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -437,7 +437,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -480,7 +480,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -523,7 +523,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -566,7 +566,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -609,7 +609,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -652,7 +652,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -695,7 +695,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 
@@ -738,7 +738,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".product-layout") %>%
+    html_elements(".caption") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element(".name a") %>% 

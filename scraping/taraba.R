@@ -88,48 +88,48 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:2
 meat <- map_dfr(pages_to_scrape, scrape_prices)
 #-----------------------------------------------------------
-base_url <- "https://taraba.bg/млечни-яйца-майонеза?page=%d"
-scrape_prices <- function(page) {
-  url <- sprintf(base_url, page)
-  page_content <- read_html(url)
-  pc <- page_content %>% 
-    html_elements(".col-xs-12") %>%
-    map_dfr(~ tibble(
-      product = .x %>% 
-        html_element(".text-center a") %>% 
-        html_text2(), 
-      # subproduct = .x %>% 
-      #   html_element(".m-offer-tile__title") %>% 
-      #   html_text2(), 
-      price = .x %>% 
-        html_element(".price") %>% 
-        html_text2(),
-      # price_old = .x %>%
-      #   html_element(".mb-n2") %>%
-      #   html_text2(),
-      # discount = .x %>%
-      #   html_element(".label-discount") %>%
-      #   html_text2(),
-      # price_kg = .x %>% 
-      #   html_element(".m-offer-tile__basic-price") %>% 
-      #   html_text2(),
-      unit = .x %>%
-        html_element(".count-disc-pr") %>%
-        html_text2()
-    )) %>% 
-    mutate(date = Sys.Date(),
-           location = "Русе",
-           type = "Мляко и млечни продукти",
-           source = "Taraba", .before = product) %>% 
-    mutate(price = str_replace(price, ",", "."), 
-           #price_old = str_replace(price_old, ",", "."),
-           price = parse_number(price),
-           #price_old = parse_number(price_old)
-    ) %>% distinct()
-  return(pc)
-}
-pages_to_scrape <- 1:8
-milk <- map_dfr(pages_to_scrape, scrape_prices)
+# base_url <- "https://taraba.bg/млечни-яйца-майонеза?page=%d"
+# scrape_prices <- function(page) {
+#   url <- sprintf(base_url, page)
+#   page_content <- read_html(url)
+#   pc <- page_content %>% 
+#     html_elements(".col-xs-12") %>%
+#     map_dfr(~ tibble(
+#       product = .x %>% 
+#         html_element(".text-center a") %>% 
+#         html_text2(), 
+#       # subproduct = .x %>% 
+#       #   html_element(".m-offer-tile__title") %>% 
+#       #   html_text2(), 
+#       price = .x %>% 
+#         html_element(".price") %>% 
+#         html_text2(),
+#       # price_old = .x %>%
+#       #   html_element(".mb-n2") %>%
+#       #   html_text2(),
+#       # discount = .x %>%
+#       #   html_element(".label-discount") %>%
+#       #   html_text2(),
+#       # price_kg = .x %>% 
+#       #   html_element(".m-offer-tile__basic-price") %>% 
+#       #   html_text2(),
+#       unit = .x %>%
+#         html_element(".count-disc-pr") %>%
+#         html_text2()
+#     )) %>% 
+#     mutate(date = Sys.Date(),
+#            location = "Русе",
+#            type = "Мляко и млечни продукти",
+#            source = "Taraba", .before = product) %>% 
+#     mutate(price = str_replace(price, ",", "."), 
+#            #price_old = str_replace(price_old, ",", "."),
+#            price = parse_number(price),
+#            #price_old = parse_number(price_old)
+#     ) %>% distinct()
+#   return(pc)
+# }
+# pages_to_scrape <- 1:8
+# milk <- map_dfr(pages_to_scrape, scrape_prices)
 #-----------------------------------------------------------
 base_url <- "https://taraba.bg/zakarni-izdeliy-4-127?page=%d"
 scrape_prices <- function(page) {
@@ -432,7 +432,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:3
 frozen <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-taraba <- bind_rows(pz, meat, milk, kandy, kolbasi, konservi, bak, hlqb, drinks, frozen)
+taraba <- bind_rows(pz, meat, kandy, kolbasi, konservi, bak, hlqb, drinks, frozen)
 
 taraba <- taraba %>% 
   mutate(price_old = NA, discount = NA, price_kg = NA) %>% 
