@@ -4,8 +4,9 @@ library(shiny)
 library(bslib)
 library(sf)
 
-und_water <- read_rds("underground_water.rds")
-surf_water <- read_rds("surf_water.rds")
+und_water <- read_rds("under_df.rds")
+surf_water <- read_rds("surf_df.rds") %>% 
+  mutate(year = year(date))
 #----------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
                href = "mailto:nickydyakov@gmail.com", 
@@ -14,20 +15,20 @@ github <- tags$a(icon("github"), "Github",
                  href = "https://github.com/NickyDy", 
                  tagret = "_blank")
 #---------------------------------------
-ui <- page_sidebar(
+ui <- page_fillable(
   #title = h3("Чистота на водите в България!"), 
   theme = bslib::bs_theme(bootswatch = "darkly"),
-  sidebar = sidebar(width = 270, list(
-    selectInput("basin", "Водосбор:", 
-                choices = unique(und_water$basin)),
-    selectInput("oblast", "Област:", choices = NULL),
-    selectInput("obshtina", "Община:", choices = NULL),
-    selectInput("pokazatel", "Показател:", choices = NULL))),
-  navset_pill(
-    nav_panel(title = "Чистота на подземната вода", 
+    navset_pill(
+    nav_panel(title = "Чистота на подземната вода", layout_columns(
+              selectInput("basin", "Водосбор:", 
+                          choices = unique(und_water$basin)),
+              selectInput("oblast", "Област:", choices = NULL),
+              selectInput("obshtina", "Община:", choices = NULL),
+              selectInput("pokazatel", "Показател:", choices = NULL),
+              col_widths = c(2, 2, 2)),
               plotOutput("water")),
-    nav_panel(title = "Карта (подземна вода)", 
-              leafletOutput("map", width = 1600, height = 800)),
+    nav_panel(title = "Карта (подземна вода)",
+              leafletOutput("map", width = 1800, height = 900)),
     nav_panel(title = "Чистота на повърхностната вода", layout_columns(
               selectInput("surf_basin", "Водосбор:", 
                           choices = unique(surf_water$basin)),
@@ -119,27 +120,29 @@ server <- function(input, output, session) {
             obshtina %in% c(input$obshtina),
             pokazatel %in% c(input$pokazatel)) %>% 
      mutate(col = value > standart, 
-            date = as.factor(date),
+            #date = as.factor(date),
             col = as.factor(col),
             col = fct_recode(col, "Над нормата" = "TRUE", 
                                   "В нормата" = "FALSE")) %>% 
-     ggplot(aes(date, value, fill = col)) +
-     geom_col() +
-     scale_fill_manual(values = c("В нормата" = "blue", "Над нормата" = "red")) +
+     ggplot(aes(date, value, color = col, group = year)) +
+     geom_smooth(method = "loess", se = F) +
+     geom_point(size = 3) +
+     scale_color_manual(values = c("В нормата" = "blue", "Над нормата" = "red")) +
+     scale_x_date(date_labels = "%b-%Y") +
+     geom_vline(aes(xintercept = as.Date("2024-01-01")), linewidth = 0.3, lty = 2, color = "black") +
      geom_hline(aes(yintercept = standart), linewidth = 0.7, lty = 2, color = "red") +
-     theme(text = element_text(size = 14), 
-           axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-     labs(x = "Дата", y = paste0(pokazatel()$m_edinica), fill = "Легенда:",
+     theme(text = element_text(size = 14)) +
+     labs(x = "Дата", y = paste0(pokazatel()$m_edinica), color = "Легенда:",
           caption = "Източник на данните: ИАОС") +
      facet_wrap(vars(site_name), labeller = labeller(site_name = label_wrap_gen(35)))
- }, height = 800, width = 1600, res = 96)
+ }, height = 800, width = 1800, res = 96)
   
 output$map <- renderLeaflet({
   pokazatel() %>%
   st_as_sf(coords = c("long", "lat"), crs = c(4326)) %>%
-  leaflet() %>% 
-    addProviderTiles(providers$OpenStreetMap) %>% 
-    addCircles(weight = 10, color = "red") %>% 
+  leaflet() %>%
+    addProviderTiles(providers$OpenStreetMap) %>%
+    addCircles(weight = 10, color = "red") %>%
     addLabelOnlyMarkers(label =  ~ site_name)
 })
 #--------------------------------------------
@@ -170,19 +173,21 @@ output$surf_plot <- renderPlot({
   surf_index() %>% 
     filter(site_name %in% c(input$site),
            index %in% c(input$surf_index)) %>% 
-    mutate(date = as.factor(date),
+    mutate(#date = as.factor(date),
            col = fct_recode(col, "Извън нормата" = "1", 
                             "В нормата" = "0")) %>% 
-    ggplot(aes(date, value, fill = col)) +
-    geom_col() +
-    scale_fill_manual(values = c("В нормата" = "blue", "Извън нормата" = "red")) +
+    ggplot(aes(date, value, color = col, group = year)) +
+    geom_smooth(method = "loess", se = F) +
+    geom_point(size = 3) +
+    scale_x_date(date_labels = "%b-%Y") +
+    geom_vline(aes(xintercept = as.Date("2024-01-01")), linewidth = 0.3, lty = 2, color = "black") +
+    scale_color_manual(values = c("В нормата" = "blue", "Извън нормата" = "red")) +
     geom_hline(aes(yintercept = pdk), linewidth = 0.7, lty = 2, color = "red") +
-    theme(text = element_text(size = 14), 
-          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-    labs(x = "Дата", y = paste0(surf_index()$m_edinica), fill = "Легенда:",
+    theme(text = element_text(size = 14)) +
+    labs(x = "Дата", y = paste0(surf_index()$m_edinica), color = "Легенда:",
          caption = "Източник на данните: ИАОС")
   
-}, height = 800, width = 1600, res = 96)
+}, height = 800, width = 1800, res = 96)
 #------------------------------------
   session$onSessionEnded(function() {
     stopApp()

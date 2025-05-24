@@ -24,8 +24,8 @@ kauf_df <- kauf %>%
          source = "Kaufland", .before = product) %>% 
   mutate(price = str_replace(price, ",", "."), 
          price = parse_number(price)) %>% 
-  unite(., "product", product:subproduct, sep = "\n") %>% 
-  distinct() %>% filter(product != "\n")
+  unite(., "product", product:subproduct, sep = "-") %>% 
+  distinct() %>% filter(product != "-")
 #--------------------------------------------------------
 kauf_df <- kauf_df %>% select(date, location, source, product, unit, price)
 glimpse(kauf_df)
