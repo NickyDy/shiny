@@ -1,31 +1,37 @@
 library(shiny)
 library(tidyverse)
-library(sf)
-library(rnaturalearth)
-library(rnaturalearthdata)
 library(eurostat)
 library(bslib)
 
-eur <- st_read("eur.gpkg")
-inf <- read_rds("prc_hicp_mmor.rds") %>% arrange(TIME_PERIOD) %>% drop_na(values)
+inf <- read_rds("prc_hicp_mmor.rds") %>% 
+  filter(!str_detect(geo, "^Euro")) %>% 
+  arrange(TIME_PERIOD) %>% drop_na(values)
 
 mail <- tags$a(icon("envelope"), "Email", href = "mailto:nickydyakov@gmail.com", tagret = "_blank")
 github <- tags$a(icon("github"), "Github", href = "https://github.com/NickyDy", tagret = "_blank")
 
-ui <- page_sidebar(
+ui <- page_fillable(
   #title = h3("Inflation in EU!"),
   theme = bslib::bs_theme(bootswatch = "darkly"),
-  sidebar = sidebar(width = 270, list(
-    selectInput("item", "Item:", choices = unique(inf$coicop))),
-    selectInput("country", "Country:", choices = unique(inf$geo), selected = "Bulgaria"),
-    dateRangeInput("date", "Date:",
-                   weekstart = 1, separator = "to",
-                   start = first(inf$TIME_PERIOD), end = last(inf$TIME_PERIOD),
-                   min = first(inf$TIME_PERIOD), max = last(inf$TIME_PERIOD))),
-  navset_pill(
-    nav_panel(title = "Inflation in space", 
-              plotOutput("price", width = "100%")),
-    nav_panel(title = "Inflation in time", 
+   navset_pill(
+    nav_panel("Инфлация по държави", layout_columns(
+              selectInput("item", "Показател:", 
+                          choices = unique(inf$coicop),
+                          selected = "All-items HICP"),
+              dateRangeInput("date", "Дата:",
+                             weekstart = 1, separator = "до",
+                             start = first(inf$TIME_PERIOD), end = last(inf$TIME_PERIOD),
+                             min = first(inf$TIME_PERIOD), max = last(inf$TIME_PERIOD)),
+              col_widths = c(2, 2)),
+              plotOutput("price")),
+    nav_panel("Инфлация във времето", layout_columns(
+              selectInput("item_time", "Показател:", 
+                          choices = unique(inf$coicop),
+                          selected = "All-items HICP"),
+              selectInput("country", "Държава:", 
+                          choices = unique(inf$geo), 
+                          selected = "Bulgaria"),
+              col_widths = c(2, 2)),
               plotOutput("accum")),
     nav_panel(tags$img(src = "shiny.png", width = 40),
               "Other useful apps:",
@@ -72,44 +78,37 @@ ui <- page_sidebar(
 )
 
 server <- function(input, output, session) {
-	
-	prices <- reactive({
+  
+  prices <- reactive({
 	  inf %>%
-		mutate(geo = fct_recode(geo, "Turkey" = "Türkiye")) %>% 
 		filter(coicop == input$item, 
 		       TIME_PERIOD >= input$date[1] & TIME_PERIOD <= input$date[2]) %>% 
 		group_by(coicop, geo) %>% 
 		summarise(sm = sum(values, na.rm = T)) %>%
 		ungroup() %>% 
-		mutate_if(is.numeric, round, 1)
-	  })
-	
-	df <- reactive({
-	  eur %>% 
-		inner_join(prices(), by = c("name" = "geo"))
+		mutate_if(is.numeric, round, 1) %>% 
+    mutate(col = if_else(geo == "Bulgaria", "0", "1"),
+           geo = fct_reorder(geo, sm))
 	  })
 	
 	output$price <- renderPlot({
-		df() %>% 
-			ggplot() +
-			geom_sf(aes(fill = sm), alpha = 0.4) +
-			coord_sf(xlim = c(-25, 40), ylim = c(34, 72)) + 
-			geom_sf_text(aes(label = paste0(sm, "%")), check_overlap = TRUE, size = 4) + 
-			scale_fill_gradient2(low = "blue", mid = "white", high = "red") +
-			labs(x = NULL, y = NULL, fill = "%", 
-					 subtitle = paste0("Cumulative inflation for ", "'", 
-					                   input$item, "'", " from ", 
-					                   input$date[1], " until ", input$date[2], "!"),
-					 caption = "Data source: Eurostat") +
-			theme(text = element_text(size = 18), legend.position = "none",
-						axis.text = element_blank(),
-						axis.ticks = element_blank())
-	}, height = 800, width = 1600)
+	  
+	  prices() %>%
+	    ggplot(aes(sm, geo, fill = col)) +
+	    geom_col(show.legend = F) +
+	    geom_text(aes(label = paste0(sm, "%")), size = 5, hjust = -0.05) +
+	    scale_x_continuous(expand = expansion(mult = c(0.005, 0.1))) +
+	    labs(y = NULL, x = "Натрупана инфлация", caption = "Източник на данните: Евростат",
+	         title = paste0(input$item, ", от ", input$date[1], " до ", input$date[2])) +
+	    theme(text = element_text(size = 20), axis.text.x = element_blank(),
+	          axis.ticks.x = element_blank())
+	  
+	}, height = 800, width = 1800)
 	
 	output$accum <- renderPlot({
 	  
 	  time <- inf %>%
-	    filter(coicop == input$item,
+	    filter(coicop == input$item_time,
 	           geo == input$country,
 	           TIME_PERIOD >= "2000-01-01")
 	  
@@ -176,9 +175,9 @@ server <- function(input, output, session) {
 	    geom_label(data = euro_zone, aes(label = label, x = x, y = y), 
 	              size = 5, color = "red", hjust = 0 - 0.1, fontface = "bold") +
 	    scale_color_manual(values = c("red", "black")) +
-	    labs(x = NULL, y = "Inflation (%)", caption = "Data source: Eurostat",
-	         title = input$item)
-	}, height = 800, width = 1600)
+	    labs(x = NULL, y = "Инфлация", caption = "Източник на данните: Евростат",
+	         title = paste0(input$item, ", ", input$country))
+	}, height = 800, width = 1800)
 	
 	session$onSessionEnded(function() {
 	  stopApp()

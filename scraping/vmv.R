@@ -29,7 +29,7 @@ scrape_prices <- function(page) {
     distinct()
   return(pc)
 }
-pages_to_scrape <- 1:8
+pages_to_scrape <- 1:5
 pz <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/meso-97d170e1?page=%d"

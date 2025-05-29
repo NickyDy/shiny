@@ -386,7 +386,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:46 #49
+pages_to_scrape <- 1:45 #49
 bak <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://zasiti.bg/category/хлебни-изделия/page/%d/"
