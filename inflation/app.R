@@ -171,9 +171,12 @@ server <- function(input, output, session) {
 	    scale_x_date(breaks = "1 year", date_labels = "%Y", expand = c(0.02, 0.02)) +
 	    scale_y_continuous(n.breaks = 10) +
 	    geom_vline(xintercept = date, color = "black", lty = 2) +
-	    geom_vline(data = euro_zone, aes(xintercept = euro), color = "red", lty = 1, linewidth = 1) +
+	    geom_vline(data = euro_zone, aes(xintercept = euro), color = "blue", lty = 1, linewidth = 1) +
+	    geom_vline(xintercept = as.Date("2022-02-24"), color = "black", lty = 1, linewidth = 1) +
+	    geom_label(aes(label = "UKR\nWAR", x = as.Date("2022-02-24"), y = 0), 
+	               size = 5, color = "black", hjust = -0.1, fontface = "bold") +
 	    geom_label(data = euro_zone, aes(label = label, x = x, y = y), 
-	              size = 5, color = "red", hjust = 0 - 0.1, fontface = "bold") +
+	              size = 5, color = "blue", hjust = -0.1, fontface = "bold") +
 	    scale_color_manual(values = c("red", "black")) +
 	    labs(x = NULL, y = "Инфлация", caption = "Източник на данните: Евростат",
 	         title = paste0(input$item, ", ", input$country))

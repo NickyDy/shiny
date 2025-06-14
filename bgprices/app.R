@@ -281,14 +281,23 @@ output$inf_price_group <- renderPlot({
           axis.ticks.x = element_blank())
 }, height = 800, width = 1550, res = 96)
 #---------------------------------------
-  output$inf_price_total <- renderPlot({
+  inf_total <- reactive({
     df_2025 %>%
       filter(date %in% c(input$date_first_total, input$date_last_total)) %>%
       summarise(price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T), 
                 .by = c(location, source, type, unit, product)) %>% 
       summarise(price_change = mean(price_change, na.rm = T) * 100, .by = c(type)) %>% 
       filter(price_change != 0) %>%
-      mutate(type = fct_reorder(type, price_change), col = price_change > 0) %>% 
+      mutate(type = fct_reorder(type, price_change), col = price_change > 0)
+  })
+  
+  inf_total_total <- reactive({
+    inf_total() %>% 
+      summarise(mean_total = round(mean(price_change), 2))
+  })
+  
+  output$inf_price_total <- renderPlot({
+    inf_total() %>% 
       ggplot(aes(price_change, type, fill = col)) +
       geom_col(show.legend = F) +
       scale_fill_manual(values = colors_percent) +
@@ -297,7 +306,7 @@ output$inf_price_group <- renderPlot({
                 position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
       labs(y = NULL, x = NULL,
            title = glue::glue("Средна инфлация по продуктови групи от {input$date_first_total} до ",
-                              "{input$date_last_total}")) +
+                              "{input$date_last_total}\nОбща средна инфлация: {inf_total_total()$mean_total}%")) +
       theme(text = element_text(size = 14), axis.text.x = element_blank(), 
             axis.ticks.x = element_blank())
   }, height = 800, width = 1550, res = 96)
