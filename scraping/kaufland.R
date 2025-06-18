@@ -35,9 +35,9 @@ kaufland <- bind_rows(kauf_df, kaufland)
 
 write_rds(foods, "shiny/bgprices/kaufland.rds")
 
-kaufland %>% count(unit, sort = T) %>% view
+foods %>% count(unit, sort = T) %>% view
 
-kaufland <- kaufland %>%
+foods <- foods %>%
   mutate(unit = case_when(unit == "" ~ "-", .default = unit)) %>% 
   mutate(unit = case_when(is.na(unit) ~ "-", .default = unit))
 

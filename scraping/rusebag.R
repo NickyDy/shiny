@@ -1,7 +1,7 @@
 library(tidyverse)
 library(rvest)
 
-#---------------------------------------------------------------------
+#-------------------------------------------------------------
 base_url <- "https://rusebag.com/plodove-i-zelenchutsi?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)

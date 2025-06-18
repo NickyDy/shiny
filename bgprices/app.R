@@ -162,7 +162,7 @@ server <- function(input, output, session) {
   #----------------------------------------------
   output$foods <- renderDT(
     df_2025 %>% arrange(price) %>% 
-      datatable(rownames = F, filter = "top",
+      datatable(rownames = F, filter = "top", 
                 colnames = c("Дата" = "date",
                              "Населено място" = "location",
                              "Супермаркет" = "source", 
@@ -175,7 +175,7 @@ server <- function(input, output, session) {
   
   output$kaufland_table <- renderDT(
     kaufland %>% arrange(price) %>% 
-      datatable(rownames = F, filter = "top",
+      datatable(rownames = F, filter = "top", 
                 colnames = c("Дата" = "date",
                              "Населено място" = "location",
                              "Супермаркет" = "source", 
@@ -316,7 +316,7 @@ output$inf_price_group <- renderPlot({
     kaufland %>%
       filter(date %in% c(input$kaufland_first_date, input$kaufland_last_date)) %>%
       summarise(price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T), 
-                .by = c(unit, product)) %>% 
+                .by = c(product)) %>% 
       filter(price_change != 0) %>%
       mutate(product = fct_reorder(product, price_change), col = price_change > 0) %>% 
       ggplot(aes(price_change, product, fill = col)) +
