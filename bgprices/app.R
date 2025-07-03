@@ -86,6 +86,19 @@ ui <- page_fillable(#h3("Сравнение на цените в Българи�
                                            selected = last(df_2025$date)),
                                 col_widths = c(1, 1)),
                                 plotOutput("inf_price_total")),
+                      nav_panel(title = "Ценови тренд", layout_columns(
+                        selectInput("location_trend", "Локация:",
+                                    choices = unique(df_2025$location)),
+                        selectInput("source_trend", "Източник:",
+                                    choices = NULL),
+                        selectInput("type_trend", "Продуктова група:",
+                                    choices = NULL),
+                        selectInput("unit_trend", "Грамаж:",
+                                    choices = NULL),
+                        selectInput("product_trend", "Продукт:",
+                                    choices = NULL),
+                        col_widths = c(2, 2, 2, 2, 4)),
+                        plotOutput("plot_trend")),
                       nav_panel(title = "Kaufland (таблица)",
                                 DTOutput("kaufland_table", width = 1850)),
                       nav_panel(title = "Kaufland", layout_columns(
@@ -311,6 +324,64 @@ output$inf_price_group <- renderPlot({
             axis.ticks.x = element_blank())
   }, height = 800, width = 1550, res = 96)
 #-----------------------------------------
+  observeEvent(input$location_trend, {
+    updateSelectInput(session, "source_trend",
+                      choices = unique(df_2025 %>% 
+                                         filter(location == input$location_trend) %>% 
+                                         pull(source)))
+  })
+  
+  observeEvent(input$source_trend, {
+    updateSelectInput(session, "type_trend",
+                      choices = unique(df_2025 %>%
+                                         filter(location == input$location_trend, 
+                                                source == input$source_trend) %>%
+                                         pull(type)))
+  })
+  
+  observeEvent(input$type_trend, {
+    updateSelectInput(session, "unit_trend",
+                      choices = unique(df_2025 %>%
+                                         filter(location == input$location_trend, 
+                                                source == input$source_trend,
+                                                type == input$type_trend) %>%
+                                         pull(unit)))
+  })
+  
+  observeEvent(input$unit_trend, {
+    updateSelectInput(session, "product_trend",
+                      choices = unique(df_2025 %>%
+                                         filter(location == input$location_trend, 
+                                                source == input$source_trend,
+                                                type == input$type_trend,
+                                                unit == input$unit_trend) %>%
+                                         pull(product)))
+  })
+  
+  
+  filtered_data <- reactive({
+    df_2025 %>%
+      filter(location == input$location_trend,
+             source == input$source_trend,
+             type == input$type_trend,
+             unit == input$unit_trend,
+             product == input$product_trend)
+  })
+  
+  output$plot_trend <- renderPlot({
+    filtered_data() %>% 
+      mutate(date = ymd(date)) %>% 
+      ggplot(aes(date, price)) +
+      geom_line(linewidth = 0.3, linetype = 2) +
+      geom_point(show.legend = F, size = 2) +
+      geom_text(aes(label = price), 
+                position = position_dodge(width = 1), vjust = -0.5, size = 3.5) +
+      scale_x_date(breaks = "1 month", date_labels = "%B-%Y") +
+      labs(y = "Цена (лв)", x = NULL, title = input$product_trend) +
+      theme(text = element_text(size = 14))
+  }, height = 800, width = 1900, res = 96)
+
+#-------------------------------------
   output$kaufland_plot <- renderPlot({
     
     kaufland %>%
