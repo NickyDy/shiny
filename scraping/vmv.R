@@ -16,7 +16,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -46,7 +46,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -75,7 +75,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -104,7 +104,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -133,7 +133,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -162,7 +162,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -191,7 +191,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -220,7 +220,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -249,7 +249,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -261,7 +261,7 @@ scrape_prices <- function(page) {
            ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:32
+pages_to_scrape <- 1:27
 drinks <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/zamrazeni-hrani-97d170e1?page=%d"
@@ -278,7 +278,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -293,7 +293,6 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:3
 frozen <- map_dfr(pages_to_scrape, scrape_prices)
 #-----------------------------------------------
-#---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/paketirani-hrani-97d170e1?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
@@ -308,7 +307,7 @@ scrape_prices <- function(page) {
         html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__bIblG :nth-child(2)") %>%
+        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -324,7 +323,7 @@ pages_to_scrape <- 1:38
 bakaliq <- map_dfr(pages_to_scrape, scrape_prices)
 #------------------------------------------------
 vmv <- bind_rows(pz, meat, fish, milk, kolbasi, hlqb, bio, 
-                 bakaliq, konservi, drinks, frozen)
+                 bakaliq, konservi, frozen)
 
 vmv <- vmv %>% 
   select(date, location, source, type, product, unit, price) %>% 

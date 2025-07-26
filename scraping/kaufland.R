@@ -27,7 +27,8 @@ kauf_df <- kauf %>%
   unite(., "product", product:subproduct, sep = "-") %>% 
   distinct() %>% filter(product != "-")
 #--------------------------------------------------------
-kauf_df <- kauf_df %>% select(date, location, source, product, unit, price)
+kauf_df <- kauf_df %>% select(date, location, source, product, unit, price) %>% 
+  mutate(date = as.character(date))
 glimpse(kauf_df)
 
 kaufland <- read_rds("shiny/bgprices/kaufland.rds")
@@ -39,7 +40,7 @@ foods <- foods %>%
   mutate(unit = case_when(unit == "" ~ "-", .default = unit)) %>% 
   mutate(unit = case_when(is.na(unit) ~ "-", .default = unit))
 
-kaufland %>% 
+foods %>% 
   filter(!is.na(unit)) %>%
   count(unit) %>% 
   pull(unit) %>%

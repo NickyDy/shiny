@@ -22,7 +22,7 @@ ui <- page_fillable(
                              weekstart = 1, separator = "до",
                              start = first(inf$TIME_PERIOD), end = last(inf$TIME_PERIOD),
                              min = first(inf$TIME_PERIOD), max = last(inf$TIME_PERIOD)),
-              col_widths = c(2, 2)),
+              col_widths = c(4, 2)),
               plotOutput("price")),
     nav_panel("Инфлация във времето", layout_columns(
               selectInput("item_time", "Показател:", 

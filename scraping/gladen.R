@@ -139,7 +139,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:11
+pages_to_scrape <- 1:10
 meat <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/kolbasi-i-delikatesi?page=%d"
