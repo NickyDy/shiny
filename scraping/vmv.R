@@ -232,7 +232,7 @@ scrape_prices <- function(page) {
            ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:13
+pages_to_scrape <- 1:12
 konservi <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/napitki-97d170e1?page=%d"
@@ -261,7 +261,7 @@ scrape_prices <- function(page) {
            ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:27
+pages_to_scrape <- 1:26
 drinks <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/zamrazeni-hrani-97d170e1?page=%d"

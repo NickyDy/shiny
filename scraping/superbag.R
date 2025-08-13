@@ -10,7 +10,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -53,7 +53,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -96,7 +96,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -139,7 +139,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -182,7 +182,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -225,7 +225,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -268,7 +268,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -311,7 +311,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -354,7 +354,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -397,7 +397,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -440,7 +440,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 
@@ -483,7 +483,7 @@ scrape_prices <- function(page) {
     html_elements(".gs-item-data") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("h6 a") %>% 
+        html_element(".gs-product-list-title") %>% 
         html_text2(), 
       # subproduct = .x %>% 
       #   html_element(".m-offer-tile__title") %>% 

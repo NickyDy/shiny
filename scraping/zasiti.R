@@ -429,7 +429,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:5
+pages_to_scrape <- 1:4
 hlqb <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 # base_url <- "https://zasiti.bg/category/топли-напитки/page/%d/"
