@@ -115,15 +115,15 @@ server <- function(input, output, session) {
 	  pos <- time %>%
 	    mutate(year = year(TIME_PERIOD), 
 	           csum = round(cumsum(values), 1)) %>%
-	    summarise(max = max(csum), .by = year) %>% 
-	    filter(year != 2025)
+	    summarise(max = max(csum), .by = year)# %>% 
+	    #filter(year != 2025)
 	  
 	  level <- max(pos$max) / 2
 	  
 	  tot_year <- time %>% 
 	    mutate(year = year(TIME_PERIOD)) %>% 
-	    summarise(s = round(sum(values), 1), .by = year) %>% 
-	    filter(year != 2025)
+	    summarise(s = round(sum(values), 1), .by = year)# %>% 
+	    #filter(year != 2025)
 	  
 	  tot <- time %>% 
 	    summarise(s = round(sum(values), 0))

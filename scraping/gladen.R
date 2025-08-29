@@ -53,7 +53,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
     return(pc)
 }
-pages_to_scrape <- 1:11
+pages_to_scrape <- 1:12
 pz <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/mlechni-produkti-i-yayca?page=%d"
@@ -96,7 +96,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:39
+pages_to_scrape <- 1:12
 milk <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/meso-i-mesni-produkti?page=%d"
@@ -139,7 +139,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:10
+pages_to_scrape <- 1:9
 meat <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/kolbasi-i-delikatesi?page=%d"
@@ -182,7 +182,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:19
+pages_to_scrape <- 1:16
 kolbasi <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/brashno-zarneni-hrani-i-variva?page=%d"
@@ -268,7 +268,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:21
+pages_to_scrape <- 1:19
 konservi <- map_dfr(pages_to_scrape, scrape_prices)
 #----------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/hlyab-i-testeni-produkti?page=%d"
@@ -311,7 +311,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:15
+pages_to_scrape <- 1:2
 hlqb <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/lyutenica-sosove-pesto-gorchica-i-mayoneza?page=%d"
@@ -354,7 +354,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:18
+pages_to_scrape <- 1:17
 lutenica <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/sladki-soleni-i-yadki?page=%d"
@@ -440,7 +440,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:6
+pages_to_scrape <- 1:5
 olio <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/podpravki-sol-zahar-smesi?page=%d"
@@ -483,7 +483,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:25
+pages_to_scrape <- 1:22
 podpravki <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/zarneni-zakuski-i-myusli?page=%d"
@@ -526,7 +526,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:5
+pages_to_scrape <- 1:4
 zurneni <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/med-sladka-techen-shokolad-i-tahani?page=%d"
@@ -569,7 +569,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:7
+pages_to_scrape <- 1:5
 med <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/zamrazeni-i-ohladeni-hrani?page=%d"
@@ -655,7 +655,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:14
+pages_to_scrape <- 1:12
 vegan <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------
 gladen <- bind_rows(pz, milk, meat, kolbasi, bakaliq, konservi, hlqb, 

@@ -18,7 +18,9 @@ cereals <- read_rds("cereals.rds") %>%
   filter(!stage_name == "Unknown") %>% 
   arrange(date) %>% drop_na()
 oilseeds <- read_rds("oilseeds.rds") %>% arrange(date)
-olive_oil <- read_rds("olive_oil.rds") %>% arrange(date)
+olive_oil <- read_rds("olive_oil.rds") %>%
+  mutate(product = str_replace_all(product, c("°" = "%", "," = "."))) %>% 
+  arrange(date)
 wine <- read_rds("wine.rds") %>% arrange(date)
 #-----------------------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 

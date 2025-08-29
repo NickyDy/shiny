@@ -69,7 +69,7 @@ ui <- page_fillable(
         ),
         col_widths = c(1, 1, 2, 2, 2, 2, 2)
       ),
-      plotOutput("inf_price_trend")
+      plotOutput("inf_price_change")
     ),
     nav_panel(
       title = "Инфлация (продуктови групи)", layout_columns(
@@ -128,7 +128,7 @@ ui <- page_fillable(
       DTOutput("kaufland_table", width = 1850)
     ),
     nav_panel(
-      title = "Kaufland", layout_columns(
+      title = "Kaufland (инфлация)", layout_columns(
         selectInput("kaufland_first_date", "От дата:",
           choices = unique(kaufland$date),
           selected = first(kaufland$date)
@@ -145,11 +145,19 @@ ui <- page_fillable(
       plotOutput("kaufland_plot")
     ),
     nav_panel(
+      title = "Kaufland (тренд)", layout_columns(
+      selectInput("kaufland_trend_product", "Продукт:",
+                  choices = unique(kaufland$product)),
+      col_widths = c(4)
+      ),
+      plotOutput("kaufland_trend_plot")
+    ),
+    nav_panel(
       title = "Борса (таблица)",
       DTOutput("market_foods", width = 1850)
     ),
     nav_panel(
-      title = "Инфлация борса", layout_columns(
+      title = "Инфлация (борса)", layout_columns(
         selectInput("market_date_first", "От дата:",
           choices = unique(df_market$date),
           selected = first(df_market$date)
@@ -163,7 +171,7 @@ ui <- page_fillable(
       plotOutput("market_inf_plot")
     ),
     nav_panel(
-      title = "Ценови тренд борса", layout_columns(
+      title = "Тренд (борса)", layout_columns(
         selectInput("market_unit_trend", "Грамаж:",
           choices = unique(df_market$unit)
         ),
@@ -312,7 +320,7 @@ server <- function(input, output, session) {
     filter(inf_type(), unit == input$inf_unit)
   })
 
-  output$inf_price_trend <- renderPlot(
+  output$inf_price_change <- renderPlot(
     {
       inf_unit() %>%
         ggplot(aes(price_change, product, fill = col)) +
@@ -429,71 +437,60 @@ server <- function(input, output, session) {
     res = 96
   )
   #-----------------------------------------
-  observeEvent(input$location_trend, {
-    updateSelectInput(session, "source_trend",
-      choices = unique(df_2025 %>%
-        filter(location == input$location_trend) %>%
-        pull(source))
-    )
+  location_trend <- reactive({
+    filter(df_2025, location == input$location_trend)
   })
-
-  observeEvent(input$source_trend, {
-    updateSelectInput(session, "type_trend",
-      choices = unique(df_2025 %>%
-        filter(
-          location == input$location_trend,
-          source == input$source_trend
-        ) %>%
-        pull(type))
-    )
+  
+  observeEvent(location_trend(),{
+    freezeReactiveValue(input, "source_trend")
+    choices <- unique(location_trend()$source)
+    updateSelectInput(inputId = "source_trend", choices = choices)
   })
-
-  observeEvent(input$type_trend, {
-    updateSelectInput(session, "unit_trend",
-      choices = unique(df_2025 %>%
-        filter(
-          location == input$location_trend,
-          source == input$source_trend,
-          type == input$type_trend
-        ) %>%
-        pull(unit))
-    )
+  
+  source_trend <- reactive({
+    req(input$source_trend)
+    filter(location_trend(), source == input$source_trend)
   })
-
-  observeEvent(input$unit_trend, {
-    updateSelectInput(session, "product_trend",
-      choices = unique(df_2025 %>%
-        filter(
-          location == input$location_trend,
-          source == input$source_trend,
-          type == input$type_trend,
-          unit == input$unit_trend
-        ) %>%
-        pull(product))
-    )
+  
+  observeEvent(source_trend(), {
+    freezeReactiveValue(input, "type_trend")
+    choices <- unique(source_trend()$type)
+    updateSelectInput(inputId = "type_trend", choices = choices)
   })
-
-
-  filtered_data <- reactive({
-    df_2025 %>%
-      filter(
-        location == input$location_trend,
-        source == input$source_trend,
-        type == input$type_trend,
-        unit == input$unit_trend,
-        product == input$product_trend
-      )
+  
+  type_trend <- reactive({
+    req(input$type_trend)
+    filter(source_trend(), type == input$type_trend)
   })
-
-  output$plot_trend <- renderPlot(
-    {
-      filtered_data() %>%
+  
+  observeEvent(type_trend(), {
+    freezeReactiveValue(input, "unit_trend")
+    choices <- unique(type_trend()$unit)
+    updateSelectInput(inputId = "unit_trend", choices = choices)
+  })
+  
+  unit_trend <- reactive({
+    req(input$unit_trend)
+    filter(type_trend(), unit == input$unit_trend)
+  })
+  
+  observeEvent(unit_trend(), {
+    freezeReactiveValue(input, "product_trend")
+    choices <- unique(unit_trend()$product)
+    updateSelectInput(inputId = "product_trend", choices = choices)
+  })
+  
+  product_trend <- reactive({
+    req(input$product_trend)
+    filter(unit_trend(), product == input$product_trend)
+  })
+  
+output$plot_trend <- renderPlot({
+      product_trend() %>%
         mutate(date = ymd(date)) %>%
         ggplot(aes(date, price)) +
         geom_point(show.legend = F, size = 2) +
         geom_smooth(linewidth = 1, se = F, method = "loess") +
-        # geom_text(aes(label = price),
-        #           position = position_dodge(width = 1), vjust = -0.5, size = 3.5) +
         scale_x_date(breaks = "1 month", date_labels = "%B-%Y") +
         labs(y = "Цена (лв)", x = NULL, title = input$product_trend) +
         theme(text = element_text(size = 14))
@@ -502,8 +499,7 @@ server <- function(input, output, session) {
     width = 1850,
     res = 96
   )
-
-  #-------------------------------------
+#-------------------------------------
   output$kaufland_plot <- renderPlot(
     {
       kaufland %>%
@@ -537,7 +533,23 @@ server <- function(input, output, session) {
     width = 1550,
     res = 96
   )
-  #----------------------------------------------------------------------
+
+output$kaufland_trend_plot <- renderPlot({
+  kaufland %>%
+    mutate(date = ymd(date)) %>%
+    filter(product == input$kaufland_trend_product) %>% 
+    ggplot(aes(date, price)) +
+    geom_point(show.legend = F, size = 2) +
+    geom_smooth(linewidth = 1, se = F, method = "loess") +
+    scale_x_date(breaks = "1 month", date_labels = "%B-%Y") +
+    labs(y = "Цена (лв)", x = NULL, title = input$kaufland_trend_product) +
+    theme(text = element_text(size = 14))
+},
+height = 800,
+width = 1850,
+res = 96
+)
+#----------------------------------------------------------------------
 df_market_plot <- reactive(
     df_market %>%
       filter(date %in% c(input$market_date_first, input$market_date_last)) %>%

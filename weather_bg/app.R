@@ -161,11 +161,15 @@ ui <- page_fillable(#h3("Времето в България!"),
 server <- function(input, output, session) {
 output$temp <- renderPlot({
   temp_nimh_new %>% 
-    mutate(station = reorder_within(station, temp, weather)) %>% 
+    mutate(col = case_when(station == "Елхово" ~ "1",
+                           station == "Сливен" ~ "1",
+                           .default = "2"),
+           station = reorder_within(station, temp, weather)) %>%
     ggplot(aes(temp, station, fill = temp)) +
     geom_col(show.legend = F) +
-    geom_text(aes(label = temp), 
+    geom_text(aes(label = temp, color = col, fontface = "bold"), show.legend = F,
               position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+    scale_color_manual(values = c("red", "black")) +
     scale_x_continuous(expand = expansion(mult = c(.01, .3))) +
     scale_y_reordered() +
     theme(text = element_text(size = 12), 
