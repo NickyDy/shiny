@@ -145,7 +145,7 @@ scrape_prices <- function(page) {
            ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:6
+pages_to_scrape <- 1:5
 kolbasi <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/hlyab-i-testeni-izdelia-97d170e1?page=%d"

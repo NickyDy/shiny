@@ -34,8 +34,6 @@ glimpse(kauf_df)
 kaufland <- read_rds("shiny/bgprices/kaufland.rds")
 kaufland <- bind_rows(kauf_df, kaufland)
 
-foods %>% count(unit, sort = T) %>% view
-
 foods <- foods %>%
   mutate(unit = case_when(unit == "" ~ "-", .default = unit)) %>% 
   mutate(unit = case_when(is.na(unit) ~ "-", .default = unit))
@@ -45,5 +43,7 @@ foods %>%
   count(unit) %>% 
   pull(unit) %>%
   str_flatten(collapse = "', '")
+
+foods %>% count(unit, sort = T) %>% view
 
 write_rds(foods, "shiny/bgprices/kaufland.rds")

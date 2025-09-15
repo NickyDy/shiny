@@ -48,7 +48,7 @@ github <- tags$a(icon("github"), "Github",
 #------------------------------------------------
 ui <- page_fillable(#h3("Демография на България!"),
       theme = bslib::bs_theme(bootswatch = "darkly"),
-  navset_pill(
+  navset_pill_list(widths = c(2, 10),
     nav_panel(title = "Население",
               layout_columns(
               selectInput("loc_sex_oblast", "Област:",
@@ -66,7 +66,7 @@ ui <- page_fillable(#h3("Демография на България!"),
                 selectInput("obl_age_sex_year", "Населено място:",
                             choices = unique(obl_age_sex$year),
                             selected = "2024"), 
-                            col_widths = c(2, 1)),
+                            col_widths = c(2, 2)),
               plotOutput("obl_age_sex_plot")),
     nav_panel("Раждаемост",
               layout_columns(
@@ -83,7 +83,7 @@ ui <- page_fillable(#h3("Демография на България!"),
                             selected = "Общо за страната"),
                 selectInput("mortality_coef", "Коефициент:",
                             choices = NULL),
-                            col_widths = c(2, 2)),
+                            col_widths = c(2, 4)),
              plotOutput("mortality_plot")),
     nav_panel("Трудоспособност", layout_columns(
                selectInput("labor_sett_sex_obsh", "Община:",
@@ -147,7 +147,7 @@ ui <- page_fillable(#h3("Демография на България!"),
     nav_panel("Престъпност", layout_columns(
       selectInput("prest_age", "Възраст:",
                   choices = unique(prestupnost$age)),
-      col_widths = c(1)),
+      col_widths = c(2)),
       plotOutput("prest_plot")),
     nav_panel(tags$img(src = "shiny.png", width = 40),
               "Други полезни приложения:",
@@ -236,7 +236,7 @@ server <- function(input, output, session) {
         labs(x = NULL, y = "Брой жители", fill = "Пол:",
              caption = "Източник на данните: Infostat")
     
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #-----------------------------------------
   obl_age_sex_oblast <- reactive({
     filter(obl_age_sex, oblast %in% c(input$obl_age_sex_oblast))
@@ -256,7 +256,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_grid(age ~ settlement)
 
-  }, height = 1400, width = 1800, res = 96)
+  }, height = 1400, width = 1550, res = 96)
 #---------------------------------------
   labor_sett_sex_obsh <- reactive({
     filter(labor_sett_sex, obsh %in% c(input$labor_sett_sex_obsh))
@@ -276,7 +276,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_wrap(vars(labor), ncol = 1)
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
 #---------------------------------------
   birth_rate_oblast <- reactive({
     filter(birth_rate, oblast %in% c(input$birth_rate_oblast))
@@ -307,7 +307,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_wrap(vars(sett), ncol = 1)
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
 #---------------------------------------
   mortality_oblast <- reactive({
     filter(mortality, oblast %in% c(input$mortality_oblast))
@@ -338,7 +338,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_wrap(vars(sett), ncol = 1)
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
 #---------------------------------------
   output$brakove_plot <- renderPlot({
 
@@ -354,7 +354,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_wrap(vars(sett), ncol = 1)
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
 #---------------------------------------
   output$razvodi_plot <- renderPlot({
 
@@ -370,7 +370,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_wrap(vars(sett), ncol = 1)
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #---------------------------------------
   int_migration_obshtina <- reactive({
     filter(int_migration, obshtina %in% c(input$int_migration_obshtina))
@@ -402,7 +402,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_wrap(vars(migrated), ncol = 1)
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #---------------------------------------
   output$ext_migration_plot <- renderPlot({
 
@@ -419,7 +419,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       facet_wrap(vars(migrated), ncol = 1)
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #---------------------------------------
   output$school_plot <- renderPlot({
 
@@ -436,7 +436,7 @@ server <- function(input, output, session) {
       facet_wrap(vars(education), ncol = 1) +
       guides(fill = guide_legend(reverse = TRUE))
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #---------------------------------------
 
   output$university_plot <- renderPlot({
@@ -454,7 +454,7 @@ server <- function(input, output, session) {
       facet_wrap(vars(grade), ncol = 1) +
       guides(fill = guide_legend(reverse = TRUE))
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #---------------------------------------
   health_oblast <- reactive({
     filter(health, oblast %in% c(input$health_oblast))
@@ -486,7 +486,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       guides(fill = guide_legend(reverse = TRUE))
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #---------------------------------------
 
   output$kinder_gardens_plot <- renderPlot({
@@ -505,7 +505,7 @@ server <- function(input, output, session) {
            caption = "Източник на данните: Infostat") +
       guides(fill = guide_legend(reverse = TRUE))
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   #---------------------------------------
 
   output$poverty_plot <- renderPlot({
@@ -523,7 +523,7 @@ server <- function(input, output, session) {
       facet_wrap(vars(age), ncol = 1) +
       guides(fill = guide_legend(reverse = TRUE))
 
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
 #---------------------------------------
 output$potr_plot <- renderPlot({
   
@@ -539,7 +539,7 @@ output$potr_plot <- renderPlot({
     labs(y = "Потребление (средно на човек)", x = NULL) +
     facet_wrap(vars(oblast), ncol = 5)
   
-}, height = 800, width = 1800, res = 96)
+}, height = 800, width = 1550, res = 96)
 #---------------------------------------
   output$prest_plot <- renderPlot({
     
@@ -556,7 +556,7 @@ output$potr_plot <- renderPlot({
       facet_wrap(vars(oblast), ncol = 4) +
       guides(color = guide_legend(reverse = TRUE))
     
-  }, height = 800, width = 1800, res = 96)
+  }, height = 800, width = 1550, res = 96)
   
 session$onSessionEnded(function() {
     stopApp()

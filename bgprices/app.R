@@ -491,7 +491,7 @@ output$plot_trend <- renderPlot({
         ggplot(aes(date, price)) +
         geom_point(show.legend = F, size = 2) +
         geom_smooth(linewidth = 1, se = F, method = "loess") +
-        scale_x_date(breaks = "1 month", date_labels = "%B-%Y") +
+        scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
         labs(y = "Цена (лв)", x = NULL, title = input$product_trend) +
         theme(text = element_text(size = 14))
     },
@@ -541,7 +541,7 @@ output$kaufland_trend_plot <- renderPlot({
     ggplot(aes(date, price)) +
     geom_point(show.legend = F, size = 2) +
     geom_smooth(linewidth = 1, se = F, method = "loess") +
-    scale_x_date(breaks = "1 month", date_labels = "%B-%Y") +
+    scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
     labs(y = "Цена (лв)", x = NULL, title = input$kaufland_trend_product) +
     theme(text = element_text(size = 14))
 },
@@ -616,6 +616,7 @@ df_market_plot <- reactive(
         ggplot(aes(date, price, group = m)) +
         geom_smooth(linewidth = 1, se = F) +
         geom_point(size = 2) +
+        scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
         theme(text = element_text(size = 16)) +
         labs(x = "Дата", y = "Цена (лв)")
     },
