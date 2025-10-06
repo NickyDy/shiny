@@ -7,16 +7,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -37,16 +37,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -66,16 +66,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -95,16 +95,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -116,7 +116,7 @@ scrape_prices <- function(page) {
            ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:12
+pages_to_scrape <- 1:11
 milk <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/kolbasi-i-delikatesi-97d170e1?page=%d"
@@ -124,16 +124,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -153,16 +153,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -182,16 +182,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -203,7 +203,7 @@ scrape_prices <- function(page) {
            ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:14
+pages_to_scrape <- 1:13
 bio <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/konservi-97d170e1?page=%d"
@@ -211,16 +211,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -240,16 +240,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -269,16 +269,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),
@@ -298,16 +298,16 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements(".ProductCard_product-card__content___gikB") %>%
+    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
     map_dfr(~ tibble(
       product = .x %>% 
-        html_element("._title--h3_1ldrp_26") %>% 
+        html_element("._title--line-clamp_9vvqx_88") %>% 
         html_text2(), 
       price = .x %>% 
-        html_element(".ProductCard_product-card__price__regular-price__dhOL9") %>% 
+        html_element(".ProductCard_product-price__regular-price__B6ZT1") %>% 
         html_text2(),
       unit = .x %>%
-        html_element(".ProductCard_product-price__per-unit__unit__sSEY7") %>%
+        html_element(".ProductCard_product-price__price-per-unit-label__Ou_BA") %>%
         html_text2()
     )) %>% 
     mutate(date = Sys.Date(),

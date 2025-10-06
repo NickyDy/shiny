@@ -144,14 +144,14 @@ ui <- page_fillable(
       ),
       plotOutput("kaufland_plot")
     ),
-    nav_panel(
-      title = "Kaufland (тренд)", layout_columns(
-      selectInput("kaufland_trend_product", "Продукт:",
-                  choices = unique(kaufland$product)),
-      col_widths = c(4)
-      ),
-      plotOutput("kaufland_trend_plot")
-    ),
+    #nav_panel(
+      #title = "Kaufland (тренд)", layout_columns(
+      #selectInput("kaufland_trend_product", "Продукт:",
+                  #choices = unique(kaufland$product)),
+      #col_widths = c(4)
+      #),
+      #plotOutput("kaufland_trend_plot")
+    #),
     nav_panel(
       title = "Борса (таблица)",
       DTOutput("market_foods", width = 1850)
@@ -534,21 +534,21 @@ output$plot_trend <- renderPlot({
     res = 96
   )
 
-output$kaufland_trend_plot <- renderPlot({
-  kaufland %>%
-    mutate(date = ymd(date)) %>%
-    filter(product == input$kaufland_trend_product) %>% 
-    ggplot(aes(date, price)) +
-    geom_point(show.legend = F, size = 2) +
-    geom_smooth(linewidth = 1, se = F, method = "loess") +
-    scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
-    labs(y = "Цена (лв)", x = NULL, title = input$kaufland_trend_product) +
-    theme(text = element_text(size = 14))
-},
-height = 800,
-width = 1850,
-res = 96
-)
+#output$kaufland_trend_plot <- renderPlot({
+  #kaufland %>%
+    #mutate(date = ymd(date)) %>%
+    #filter(product == input$kaufland_trend_product) %>% 
+    #ggplot(aes(date, price)) +
+    #geom_point(show.legend = F, size = 2) +
+    #geom_smooth(linewidth = 1, se = F, method = "loess") +
+    #scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
+    #labs(y = "Цена (лв)", x = NULL, title = input$kaufland_trend_product) +
+    #theme(text = element_text(size = 14))
+#},
+#height = 800,
+#width = 1850,
+#res = 96
+#)
 #----------------------------------------------------------------------
 df_market_plot <- reactive(
     df_market %>%
@@ -608,12 +608,12 @@ df_market_plot <- reactive(
     req(input$market_product_trend)
     filter(market_unit_trend(), product == input$market_product_trend)
   })
-
-  output$market_trend_plot <- renderPlot(
+  
+output$market_trend_plot <- renderPlot(
     {
       market_product_trend() %>%
         mutate(date = ymd(date), m = month(date)) %>%
-        ggplot(aes(date, price, group = m)) +
+        ggplot(aes(date, price)) +
         geom_smooth(linewidth = 1, se = F) +
         geom_point(size = 2) +
         scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +

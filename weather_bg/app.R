@@ -14,15 +14,15 @@ temp_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng
          date = dmy(date), 
          wind_speed = parse_number(wind_speed))
 
-# snow_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
-#     html_element("td:nth-child(1) table") %>% html_table() %>% slice(-c(1:2))
-# colnames(snow_nimh_new) <- c('station_no','station', "station_type", 
-#                       "prec", "prec_type", "snow_cover")
-# snow_nimh_new <- snow_nimh_new %>% 
-#   mutate(across(c(prec, snow_cover), parse_number)) %>% 
-#   drop_na(snow_cover)
-# date_snow <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
-#   html_element("#tSnow h2") %>% html_text(trim = T) %>% as.data.frame()
+snow_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+    html_element("td:nth-child(1) table") %>% html_table() %>% slice(-c(1:2))
+colnames(snow_nimh_new) <- c('station_no','station', "station_type",
+                      "prec", "prec_type", "snow_cover")
+snow_nimh_new <- snow_nimh_new %>%
+  mutate(across(c(prec, snow_cover), parse_number)) %>%
+  drop_na(snow_cover)
+date_snow <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+  html_element("#tSnow h2") %>% html_text(trim = T) %>% as.data.frame()
 
 rain_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
   html_element("center") %>% html_table() %>% slice(-c(1, 168)) %>% 
@@ -90,14 +90,14 @@ ui <- page_fillable(#h3("Времето в България!"),
                     navset_pill(
                       nav_panel(title = "Температура",
                                 selectInput("rows", "Брой колонки:",
-                                            choices = c(2, 1)),
+                                            choices = c(1, 2)),
                                 plotOutput("temp")),
                       nav_panel(title = "Вятър",
                                 plotOutput("wind")),
                       nav_panel(title = "Валеж",
                                 plotOutput("rain")),
-                      # nav_panel(title = "Снежна покривка",
-                      #           plotOutput("snow_cover")),
+                      nav_panel(title = "Снежна покривка",
+                                plotOutput("snow_cover")),
                       nav_panel(title = "Прогноза", layout_columns(
                                 selectInput("region", "Регион:",
                                             choices = c("България", "Планини", "Европа")),
@@ -237,24 +237,24 @@ output$rain <- renderPlot({
     facet_wrap(vars(code), scales = "free_y", nrow = 1)
 }, height = 800, width = 1800, res = 96)
 #---------------------------------------
-# output$snow_cover <- renderPlot({
-#   snow_nimh_new %>% 
-#     mutate(station = reorder_within(station, snow_cover, station_type)) %>% 
-#     ggplot(aes(snow_cover, station, fill = snow_cover)) +
-#     geom_col(show.legend = F) +
-#     geom_text(aes(label = snow_cover), 
-#               position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
-#     scale_y_reordered() +
-#     scale_x_continuous(expand = expansion(mult = c(.01, .1))) +
-#     theme(text = element_text(size = 12), 
-#           axis.text.x = element_blank(), 
-#           axis.ticks.x = element_blank()) +
-#     scale_fill_gradient(low = "white", high = "#0096FF") +
-#     labs(y = NULL, x = "Височина на снежната покривка (cm)", 
-#          title = paste(date_snow, "г."),
-#          caption = "Източник на данните: НИМХ") +
-#     facet_wrap(vars(station_type), scales = "free_y")
-# }, height = 800, width = 1800, res = 96)
+output$snow_cover <- renderPlot({
+  snow_nimh_new %>%
+    mutate(station = reorder_within(station, snow_cover, station_type)) %>%
+    ggplot(aes(snow_cover, station, fill = snow_cover)) +
+    geom_col(show.legend = F) +
+    geom_text(aes(label = snow_cover),
+              position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
+    scale_y_reordered() +
+    scale_x_continuous(expand = expansion(mult = c(.01, .1))) +
+    theme(text = element_text(size = 12),
+          axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) +
+    scale_fill_gradient(low = "white", high = "#0096FF") +
+    labs(y = NULL, x = "Височина на снежната покривка (cm)",
+         title = paste(date_snow, "г."),
+         caption = "Източник на данните: НИМХ") +
+    facet_wrap(vars(station_type), scales = "free_y")
+}, height = 800, width = 1800, res = 96)
 #------------------------
 forcast_data <- reactive({
   filter(forcast_df, region == input$region)

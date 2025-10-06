@@ -126,16 +126,16 @@ ui <- page_fillable(#h3("Демография на България!"),
                             choices = unique(university$oblast)),
              plotOutput("university_plot")),
     nav_panel("Здравеопазване", layout_columns(
-               selectInput("health_oblast", "Област:",
-                            choices = unique(health$oblast)),
+               # selectInput("health_oblast", "Област:",
+               #              choices = unique(health$oblast)),
                selectInput("health_zab", "Причина за смъртта:",
-                            choices = NULL),
-               col_widths = c(2, 8)),
+                            choices = unique(health$zabolqvane)),
+               col_widths = c(8)),
              plotOutput("health_plot")),
     nav_panel("Детски градини", layout_columns(
                selectInput("kinder_gardens_obsh", "Община:",
                             choices = unique(kinder_gardens$obshtina)),
-               col_widths = c(1)),
+               col_widths = c(2)),
              plotOutput("kinder_gardens_plot")),
     nav_panel("Работещи бедни",
              plotOutput("poverty_plot")),
@@ -456,35 +456,37 @@ server <- function(input, output, session) {
 
   }, height = 800, width = 1550, res = 96)
   #---------------------------------------
-  health_oblast <- reactive({
-    filter(health, oblast %in% c(input$health_oblast))
-  })
-
-  observeEvent(health_oblast(), {
-    freezeReactiveValue(input, "health_zab")
-    choices <- unique(health_oblast()$zabolqvane)
-    updateSelectInput(inputId = "health_zab", choices = choices)
-  })
-
-  health_zab <- reactive({
-    req(input$health_oblast)
-    filter(health_oblast(), zabolqvane == input$health_zab)
-  })
+  # health_oblast <- reactive({
+  #   filter(health, oblast %in% c(input$health_oblast))
+  # })
+  # 
+  # observeEvent(health_oblast(), {
+  #   freezeReactiveValue(input, "health_zab")
+  #   choices <- unique(health_oblast()$zabolqvane)
+  #   updateSelectInput(inputId = "health_zab", choices = choices)
+  # })
+  # 
+  # health_zab <- reactive({
+  #   req(input$health_oblast)
+  #   filter(health_oblast(), zabolqvane == input$health_zab)
+  # })
 
   output$health_plot <- renderPlot({
 
-    health_zab() %>%
+    health %>%
       filter(zabolqvane %in% c(input$health_zab)) %>%
-      ggplot(aes(year, pop, fill = sex)) +
-      geom_col(position = position_dodge2(preserve = "single")) +
+      ggplot(aes(as.numeric(year), pop, colour = sex)) +
+      geom_line(linewidth = 1) +
       scale_fill_manual(values = c("Жени" = "#00BFC4", "Мъже" = "#F8766D")) +
       scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
-      geom_text(aes(label = round(pop, 1)), 
-                position = position_dodge(width = 1), vjust = -0.1, size = 4) +
-      theme(text = element_text(size = 16), legend.position = "right") +
-      labs(y = "Брой починали на 100 000 души", x = NULL, fill = "Пол:",
-           caption = "Източник на данните: Infostat") +
-      guides(fill = guide_legend(reverse = TRUE))
+      # geom_text(aes(label = round(pop, 1)), 
+      #           position = position_dodge(width = 1), vjust = -0.1, size = 4) +
+      theme(text = element_text(size = 14), legend.position = "right") +
+      labs(y = "Брой починали на 100 000 души", x = NULL, color = "Пол:",
+           caption = "Източник на данните: Infostat",
+           title = paste0("Причина за смъртта: ", input$health_zab)) +
+      guides(color = guide_legend(reverse = TRUE)) +
+      facet_wrap(vars(oblast), ncol = 5)
 
   }, height = 800, width = 1550, res = 96)
   #---------------------------------------
