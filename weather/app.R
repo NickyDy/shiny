@@ -90,7 +90,7 @@ ui <- page_fillable(#h3("Времето в България!"),
                     navset_pill(
                       nav_panel(title = "Температура",
                                 selectInput("rows", "Брой колонки:",
-                                            choices = c(1, 2)),
+                                            choices = c(2, 1)),
                                 plotOutput("temp")),
                       nav_panel(title = "Вятър",
                                 plotOutput("wind")),

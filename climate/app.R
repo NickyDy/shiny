@@ -121,6 +121,24 @@ ui <- page_fillable(#h3("Климатът на България!"),
                                             max = max(rain$elev, na.rm = T),
                                             value = 1200, step = 100, sep = " "),
                                 plotOutput("rain")),
+                      nav_panel("Температура (по дни)", layout_columns(
+                                sliderInput("elev_temp_day", "Надморска височина:",
+                                            min = min(temp$elev, na.rm = T), 
+                                            max = max(temp$elev, na.rm = T),
+                                            value = 1200, step = 100, sep = " "),
+                                selectInput("month_temp_day", "Месец: ",
+                                            choices = 1:12, selected = month(Sys.Date())),
+                                col_widths = c(2, 1)),
+                                plotOutput("temp_day")),
+                      nav_panel("Валеж (по дни)", layout_columns(
+                                sliderInput("elev_rain_day", "Надморска височина:",
+                                            min = min(rain$elev, na.rm = T), 
+                                            max = max(rain$elev, na.rm = T),
+                                            value = 1200, step = 100, sep = " "),
+                                selectInput("month_rain_day", "Месец: ",
+                                            choices = 1:12, selected = month(Sys.Date())),
+                                col_widths = c(2, 1)),
+                                plotOutput("rain_day")),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
                                 tags$a(href = "https://nickydy.shinyapps.io/elections/", br(),
@@ -183,7 +201,7 @@ server <- function(input, output, session) {
       ungroup() %>%
       group_by(year) %>% 
       mutate(mean_year = mean(m, na.rm = T), 
-             label_year = paste0(year, " - ", round(mean_year, 1), " (\u00B0C)"),
+             label_year = paste0(year, ": ", round(mean_year, 1), " (\u00B0C)"),
              total_mean = mean(mean_year, na.rm = T)) %>% 
       ungroup() %>% 
       ggplot(aes(month, m)) +
@@ -219,7 +237,7 @@ server <- function(input, output, session) {
       ungroup() %>%
       group_by(year) %>% 
       mutate(mean_year = sum(sm, na.rm = T), 
-             mean_year = paste0(year, " - ", round(mean_year, 0), " (mm)")) %>% 
+             mean_year = paste0(year, ": ", round(mean_year, 0), " (mm)")) %>% 
       ungroup() %>% 
       ggplot(aes(month, sm)) +
       geom_col(aes(fill = col), show.legend = T) +
@@ -235,6 +253,78 @@ server <- function(input, output, session) {
             legend.justification = c(1, 0)) +
       facet_wrap(vars(mean_year), ncol = 5)
     
+  }, height = 800, width = 1850)
+  
+  month_mean_temp <- reactive({
+  temp %>% 
+    filter(month %in% c(input$month_temp_day), elev <= input$elev_temp_day, status == "official") %>%
+    summarise(m = round(mean(temp, na.rm = T), 1), .by = c(year)) %>%
+    summarise(month_m = mean(m, na.rm = T))
+})
+  
+  output$temp_day <- renderPlot({
+    
+  temp %>% 
+      filter(month %in% c(input$month_temp_day), elev <= input$elev_temp_day, status == "official") %>%
+      summarise(mean_temp = mean(temp, na.rm = T), .by = c(year, month, day)) %>%
+      group_by(year) %>% 
+      mutate(temp_year = mean(mean_temp, na.rm = T), 
+             label_year = paste0(year, ": ", round(temp_year, 1), " (\u00B0C)")) %>% 
+      ungroup() %>%
+      mutate(col = case_when(
+        mean_temp <= 0 ~ "1",
+        mean_temp <= 5 ~ "2", 
+        mean_temp >= 25 ~ "4",
+        .default = "3")) %>%
+      ggplot(aes(day, mean_temp)) +
+      geom_col(aes(fill = col), show.legend = T) +
+      theme(text = element_text(size = 20), legend.position = "top",
+            plot.title = element_text(color = "red", face = "bold")) +
+      scale_y_continuous(n.breaks = 3) +
+      scale_x_discrete(breaks = c(1, 5, 10, 15, 20, 25, 30)) +
+      scale_fill_manual(values = c("1" = "blue", "2" = "green", "3" = "orange", "4" = "red"),
+                        labels = c("1" = "< 0 \u00B0C", "2" = "0-5 \u00B0C", "3" = "5-25 \u00B0C", "4" = "25-30 \u00B0C"),
+                        name = "Легенда: ") +
+      labs(x = "Ден", y = "Средна денонощна температура (\u00B0C)",
+           title = paste0("Средно за месеца за целия период: ", round(month_mean_temp()$month_m, 1), " (\u00B0C)")) +
+      facet_wrap(vars(label_year), ncol = 4)
+    
+  }, height = 800, width = 1850)
+  
+  month_mean_rain <- reactive({
+  rain %>% 
+      filter(month %in% c(input$month_rain_day), elev <= input$elev_rain_day, status == "official") %>%
+    summarise(s = round(sum(rain, na.rm = T), 1), .by = c(station, year, month)) %>%
+    summarise(s = mean(s, na.rm = T), .by = c(year)) %>%
+    summarise(month_m = mean(s))
+  })
+  
+  output$rain_day <- renderPlot({
+  rain %>% 
+      filter(month %in% c(input$month_rain_day), elev <= input$elev_rain_day, status == "official") %>%
+    summarise(sum_rain = round(sum(rain, na.rm = T), 1), .by = c(station, year, month, day)) %>%
+    summarise(mean_year = mean(sum_rain, na.rm = T), .by = c(year, month, day)) %>% 
+    group_by(year) %>% 
+    mutate(rain_year = sum(mean_year, na.rm = T), 
+           label_year = paste0(year, ": ", round(rain_year, 0), " (mm)")) %>% 
+    ungroup() %>% 
+    mutate(col = case_when(
+      mean_year <= 5 ~ "1",
+      mean_year <= 15 ~ "2", 
+      mean_year >= 30 ~ "4",
+      .default = "3")) %>%
+    ggplot(aes(day, mean_year)) +
+    geom_col(aes(fill = col), show.legend = T) +
+    theme(text = element_text(size = 20), legend.position = "top",
+          plot.title = element_text(color = "blue", face = "bold")) +
+    scale_y_continuous(n.breaks = 5) +
+    scale_x_discrete(breaks = c(1, 5, 10, 15, 20, 25, 30)) +
+    scale_fill_manual(values = c("4" = "blue", "3" = "#0096FF", "2" = "green", "1" = "orange"),
+                      labels = c("1" = "< 5 (mm)", "2" = "5-15 (mm)", "3" = "15-30 (mm)", "4" = "> 30 (mm)"),
+                      name = "Легенда: ") +
+    labs(x = "Ден", y = "Средно количетсво на валежите (mm)", 
+         title = paste0("Средно за месеца за целия период: ", round(month_mean_rain()$month_m, 0), " (mm)")) +
+    facet_wrap(vars(label_year), ncol = 4)
   }, height = 800, width = 1850)
 
 session$onSessionEnded(function() {
