@@ -4,7 +4,11 @@ library(tidytext)
 library(shiny)
 library(bslib)
 
-temp_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+download.file("http://www.weather.bg/index.php?koiFail=tekushti&lng=0", destfile = "temp_nimh_new")
+download.file("http://weather.bg/index.php?koiFail=bg&lng=0", destfile = "forecast_new")
+download.file("http://meteo.bg/meteo7/bg/rekiTablitsa", destfile = "rivers_new")
+
+temp_nimh_new <- read_html("temp_nimh_new") %>%
   html_element("table") %>% html_table() %>%
   select(station = Станция, date = Дата, 
          hour = Час, temp = `Температура[°C]`, 
@@ -13,39 +17,35 @@ temp_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng
   mutate(wind_speed = str_remove(wind_speed, "n.a."), 
          date = dmy(date), 
          wind_speed = parse_number(wind_speed))
-
-snow_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+snow_nimh_new <- read_html("temp_nimh_new") %>%
     html_element("td:nth-child(1) table") %>% html_table() %>% slice(-c(1:2))
 colnames(snow_nimh_new) <- c('station_no','station', "station_type",
                       "prec", "prec_type", "snow_cover")
 snow_nimh_new <- snow_nimh_new %>%
   mutate(across(c(prec, snow_cover), parse_number)) %>%
   drop_na(snow_cover)
-date_snow <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+date_snow <- read_html("temp_nimh_new") %>%
   html_element("#tSnow h2") %>% html_text(trim = T) %>% as.data.frame()
 
-rain_nimh_new <- read_html("http://www.weather.bg/index.php?koiFail=tekushti&lng=0") %>%
+rain_nimh_new <- read_html("temp_nimh_new") %>%
   html_element("center") %>% html_table() %>% slice(-c(1, 168)) %>% 
   select(id = X1, station = X2, rain = X3, mean_rain = X4) %>% 
   mutate(rain = str_replace(rain, "n.a.", ""),
          rain = parse_number(rain), date = Sys.Date(), .after = station) %>% 
   filter(rain > 0)
 
-bg <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
+bg <- read_html("forecast_new") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
   filter(!Град == "") %>% mutate(region = "България", .before = Град) %>% 
   select(region, station = Град, date = name, weather = value)
-  
-pl <- read_html("http://weather.bg/index.php?koiFail=bg&lng=0") %>%
+pl <- read_html("forecast_new") %>%
   html_element("#planini") %>% html_table() %>% pivot_longer(-Пункт) %>% 
   filter(!Пункт == "") %>% mutate(region = "Планини", .before = Пункт) %>% 
   select(region, station = Пункт, date = name, weather = value)
-  
-eu <- read_html("http://weather.bg/index.php?koiFail=eubp&lng=0") %>%
+eu <- read_html("forecast_new") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
   filter(!Град == "") %>% mutate(region = "Европа", .before = Град) %>% 
   select(region, station = Град, date = name, weather = value)
-  
 forcast <- bind_rows(bg, pl, eu)
 temp <- forcast %>% filter(str_detect(weather, "^[:punct:]|\\d"), 
                            str_detect(weather, "/")) %>%
@@ -60,7 +60,7 @@ forcast_df <- inner_join(temp, weather, by = join_by(region, station, date)) %>%
   arrange(station) %>% 
   filter(!weather == "n.a.")
 
-rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") %>%
+rivers <- read_html("rivers_new") %>%
   html_element("center") %>% html_table()
 colnames(rivers) <- c('station_no','river','station', "q_min",
                       "q_mean", "q_max", "depth", "ottok", "change_depth")
@@ -74,8 +74,7 @@ rivers <- rivers %>%
   mutate(across(5:10, parse_number)) %>%
   mutate(across(5:10, ~ round(., 1))) %>%
   drop_na(river) %>% arrange(river)
-
-date_rivers <- read_html("http://meteo.bg/meteo7/bg/rekiTablitsa") %>%
+date_rivers <- read_html("rivers_new") %>%
   html_elements("h2") %>% html_text(trim = T) %>% as.data.frame()
 #----------------------------------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
@@ -294,7 +293,7 @@ output$rivers <- renderPlot({
     geom_hline(aes(yintercept = q_mean), linewidth = 0.7, lty = 2, color = "darkgreen") +
     geom_label(aes(label = "минимален отток", x = 1.4, y = q_min), size = 4, color = "red", fontface = "bold") +
     geom_label(aes(label = "среден отток", x = 1.4, y = q_mean), size = 4, color = "darkgreen", fontface = "bold") +
-    scale_y_continuous(expand = expansion(mult = c(.01, .1))) +
+    scale_y_continuous(expand = expansion(mult = c(.01, .2))) +
     theme(text = element_text(size = 16), axis.text.x = element_blank(),
           axis.ticks.x = element_blank()) +
     labs(title = paste("Дата: ", date_rivers$.[3]), x = NULL,

@@ -129,7 +129,7 @@ ui <- page_sidebar(
     sliderInput("prop_slider", "Филтър (проценти):", 
                 min = 0, max = 50, value = 4, step = 1),
     sliderInput("votes_slider", "Филтър (брой гласове):", 
-                min = 0, max = 1000000, value = 50000, step = 10000),
+                min = 0, max = 1000000, value = 50000, step = 1000),
     sliderInput("height_slider", "Височина на графиката:", 
                 min = 800, max = 4000, value = 800, step = 100))),
   navset_pill(
@@ -374,7 +374,7 @@ output$country <- renderPlot({
       scale_fill_manual(values = colors) +
       geom_text(aes(label = space_s(sum_votes)), 
                 position = position_dodge(width = 1), hjust = -0.05, size = 4) +
-      theme(text = element_text(size = 16), 
+      theme(text = element_text(size = 14), 
             axis.text.x = element_blank(), 
             axis.ticks.x = element_blank()) +
       labs(y = NULL, x = "Брой гласове", title = NULL,
@@ -395,7 +395,7 @@ output$country <- renderPlot({
       scale_fill_manual(values = colors) +
       geom_text(aes(label = round(prop, 2)),
                 position = position_dodge(width = 1), hjust = -0.1, size = 4) +
-      theme(text = element_text(size = 16), 
+      theme(text = element_text(size = 14), 
             axis.text.x = element_blank(), 
             axis.ticks.x = element_blank()) +
       labs(x = NULL, y = NULL,

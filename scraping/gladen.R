@@ -96,7 +96,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:12
+pages_to_scrape <- 1:5
 milk <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/meso-i-mesni-produkti?page=%d"
@@ -182,7 +182,7 @@ scrape_prices <- function(page) {
     ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:16
+pages_to_scrape <- 1:15
 kolbasi <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------------
 base_url <- "https://shop.gladen.bg/category/brashno-zarneni-hrani-i-variva?page=%d"

@@ -4,12 +4,6 @@ library(bslib)
 library(scales)
 options(scipen = 100)
 
-# library(eurostat)
-# tec00011  <- get_eurostat("tec00011", type = "label",
-#                                time_format = "date", stringsAsFactors = T)
-# 
-# write_rds(tec00011, "shiny/eurostat/tec00011.rds")
-
 gdp <- read_rds("nama_10_gdp.rds") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
