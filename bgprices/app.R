@@ -16,8 +16,11 @@ kaufland <- read_rds("kaufland.rds") %>%
   drop_na(price, product)
 df_market <- read_parquet("df_market.parquet") %>% mutate(
   date = as.character(date),
-  product = str_replace(product, "\\\n", " ")
-)
+  product = str_replace(product, "\\\n", " ")) %>% 
+  mutate(product = fct_recode(product, 'Брашно тип "500" /пакет 1 кг/' = 'Брашно тип"500" /пакет 1 кг/'),
+             product = fct_recode(product, "Брашно тип \"500\" /пакет 1 кг/" = "Брашно тип \"500\" /пакет 1 кг/ "),
+             product = fct_recode(product, "Прясно мляко 3% кутия/бутилка 1 л" = "Прясно мляко 3%  кутия/бутилка 1 л"))
+
 food_levels <- c(
   "Zasiti", "VMV", "Taraba", "T MARKET",
   "Superbag", "Shop24", "Gladen",
@@ -490,7 +493,7 @@ output$plot_trend <- renderPlot({
         mutate(date = ymd(date)) %>%
         ggplot(aes(date, price)) +
         geom_point(show.legend = F, size = 2) +
-        geom_smooth(linewidth = 1, se = F, method = "loess") +
+        geom_line(linetype = 2) +
         scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
         labs(y = "Цена (лв)", x = NULL, title = input$product_trend) +
         theme(text = element_text(size = 14))
@@ -614,7 +617,8 @@ output$market_trend_plot <- renderPlot(
       market_product_trend() %>%
         mutate(date = ymd(date), m = month(date)) %>%
         ggplot(aes(date, price)) +
-        geom_smooth(linewidth = 1, se = F) +
+        geom_smooth(method = "loess", se = F) +
+        geom_line(linetype = 2) +
         geom_point(size = 2) +
         scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
         theme(text = element_text(size = 16)) +

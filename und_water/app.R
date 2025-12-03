@@ -125,7 +125,7 @@ server <- function(input, output, session) {
             col = fct_recode(col, "Над нормата" = "TRUE", 
                                   "В нормата" = "FALSE")) %>% 
      ggplot(aes(date, value, color = col, group = year)) +
-     geom_smooth(method = "loess", se = F) +
+     geom_line(linewidth = 1) +
      geom_point(size = 3) +
      scale_color_manual(values = c("В нормата" = "blue", "Над нормата" = "red")) +
      scale_x_date(date_labels = "%b-%Y") +
@@ -177,7 +177,7 @@ output$surf_plot <- renderPlot({
            col = fct_recode(col, "Извън нормата" = "1", 
                             "В нормата" = "0")) %>% 
     ggplot(aes(date, value, color = col, group = year)) +
-    geom_smooth(method = "loess", se = F) +
+    geom_line(linewidth = 1) +
     geom_point(size = 3) +
     scale_x_date(date_labels = "%b-%Y") +
     geom_vline(aes(xintercept = as.Date("2024-01-01")), linewidth = 0.3, lty = 2, color = "black") +

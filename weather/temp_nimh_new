@@ -1,0 +1,4141 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="styles/style.Grid.sin.css" />
+<link rel="stylesheet" type="text/css" href="styles/style.tekushti.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Department of Weather Forecasts - NIMH</title>
+<script language="JavaScript" type="text/javascript">
+<!-- Copyright 2005, Sandeep Gangadharan -->
+<!-- For more free scripts go to http://www.sivamdesign.com/scripts/ -->
+<!--
+if (document.getElementById) {
+document.writeln('<style>')
+document.writeln('.texter {display:none} @media print {.texter {display:block;}}')
+document.writeln('</style>') }
+
+function openClose(theID) {
+if (document.getElementById(theID).style.display == "block") { document.getElementById(theID).style.display = "none" }
+else { document.getElementById(theID).style.display = "block" } }
+// -->
+</script>
+
+</head>
+
+<body>
+<div class="wrapper">
+  <header>
+    <logo  class="logo"><a href="http://www.meteo.bg" target="_blank" ><img src="images/static/NIMH-Logo-color200.png" width="150" height="150"/></a></logo>
+
+    <div class="title" ><h1> ПРОГНОЗИ ЗА ВРЕМЕТО </h1>
+        <h1>Национален институт по метеорология и хидрология</h1>
+    </div>
+    
+    <div class="lang" > 
+      <a href="index.php?lng=0" ><img src="images/static/bg1.jpg" class="zname" /></a>&nbsp;<a href="1en/index.php?lng=1" ><img src="images/static/gb.jpg" class="zname"/></a>
+    </div>
+
+
+    <div class="alarm" dateDnes="02.12.2025" >
+      <img class="alarm kartaOpasniM" src="images/static/opasniSS_0.png" />
+      <div class="akcent2" cool-typ="за опасно време"><a class="noline" href="obshtini/" target="_blank">няма <br /> опасност  <img class="alarm icon" src="images/static/0.new.gif"/></a></div>
+    </div>
+
+<div class="poj" >
+  <div class="subpoj" cool-typ="за пожароопасност">
+    <a href="pojaroopasnostPlus" target="_blank"> <img src="images/static/fireButton.0.png" alt="Препоръчителна готовност за борба с пожари"></a>
+  </div>
+</div>
+
+  </header>
+<!---------------------- Izvanredno - moje i da go niama --------------- -->
+<izvanredno>
+<p><a href="https://storm.cfd.meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/POZICIA_NIMH_Murgash_12032025.pdf" target="_blank">Позиция на Националния институт по метеорология и хидрология относно вероломното нахлуване във високопланинската синоптична станция вр. Мургаш</a></p>
+<p><a href="https://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/20240805PMS273.pdf" target="_blank">Писмо от НИМХ до държавни институции и до медиите</a> във връзка с ПМС № 273 от 5 август 2024 г.</p>
+</izvanredno>
+
+<!-- -------------------  MENU -------------- -->  
+
+<!-- -------------------  MENU -------------- -->  
+    <input type="checkbox" id="toggle">
+<nav>    
+        <label class="navbar-toggler" for="toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+
+  <menu>
+    <menucard     
+      cool-typ="Начална страница">
+      <a class="submenuhead"  href="index.php" ><img src="karti/icons/home-blue3-icon.png"></a>
+    </menucard>
+    <menucard class="tekusht"    
+      cool-typ="Последни данни, спътникови анимации">
+      <a class="submenuhead"  href="index.php?koiFail=tekushti&lng=0" >Текущи данни</a>
+    </menucard>    
+    <menucard     
+      cool-typ="Карти на средните температури и на валежите за минали периоди">
+      <a class="submenuhead"  href="index.php?koiFail=analizi&lng=0" >Анализи</a>
+    </menucard>
+    <menucard     
+      cool-typ="В нов прозорец" >
+      <a class="submenuhead"  href="obshtini" target="_blank">Прогнози<br/><p class="small-italic">Опасни явления</p></a>
+    </menucard>
+    <menucard     
+      cool-typ="Карти Бг-3 дена, море, планини, пожароопасност, индекс на комфорт">
+      <a class="submenuhead"  href="index.php?koiFail=bg&lng=0">Прогнози<br/><p class="small-italic">Краткосрочни за България</p></a>
+    </menucard>
+    <menucard     
+      cool-typ=" Седмична, месечна, сезонна">
+      <a class="submenuhead"  href="index.php?koiFail=bg2&lng=0">Прогнози<br/><p class="small-italic">Средносрочни и дългосрочни за България</p></a>
+    </menucard>
+    <menucard     
+      cool-typ="Карти - Европа и Балканите " >
+      <a class="submenuhead"  href="index.php?koiFail=eubp&lng=0" >Прогнози<br/><p class="small-italic">Европа и Балканите</p></a>
+    </menucard>
+    <menucard     
+      cool-typ="таблици по градове за България и Европа " >
+      <a class="submenuhead"  href="index.php?koiFail=tablitsi&lng=0">  Прогнози<br/><p class="small-italic">в точки</p></a>
+    </menucard>
+
+    <menucard     
+      cool-typ="ALADIN/AROME, вълнение на морето, комфорт, пожароопасност " >
+      <a class="submenuhead"  href="index.php?koiFail=prognChisleni&lng=0"> Числени прогнози<br/><p class="small-italic">полета</p></a>
+    </menucard>
+    <menucard     
+      cool-typ="Метеограми за 72 часа, морско вълнение" >
+      <a class="submenuhead"  href="index.php?koiFail=poGradoveAJ&lng=0"> Числени прогнози<br/><p class="small-italic">в точки</p></a>
+    </menucard>
+    <menucard class="last"     
+      cool-typ="Контакти, продукти, модели" >
+      <a class="submenuhead"  href="index.php?koiFail=zaNas&lng=0" >За нас</a>
+    </menucard>
+  </menu>
+</nav>  
+<!-- End Menu -->
+  
+<!-- End Menu -->
+
+<!-- ----------------Main content --------------- --> 
+
+        	  <h1 class="zaglavie">Последни измервания</h1>
+   <div class="card"> 
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/Show/Observations.png" style="width:1000px;max-width:90vw;max-height: 760px;">
+   </div>
+ <p>&nbsp;</p>
+ 
+     <div onClick="openClose('gradDanni')"  class="linkOpenClose">Таблица с данните</div>
+        <p>&nbsp;</p>
+     <div id="gradDanni" class="texter">
+
+<table border=1>
+<tr><th>Станция</th><th>Дата</th><th>&nbsp;Час&nbsp;</th><th>Температура<br/>[&deg;C]</th><th>Време</th><th>Вятър-скорост<br/>[m/s]</th><th>Вятър-посока</th><th>Налягане<br/>[hPa]</th></tr>
+<tr><td>Ново село</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image04.gif'>видимост под 10km</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1014.3</td></tr><tr><td>Видин</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1016.7</td></tr><tr><td>Враца</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>3</td><td style='text-align:center'>SW</td><td style='text-align:center'>983.8</td></tr><tr><td>Монтана</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>3</td><td style='text-align:center'>SW</td><td style='text-align:center'>999.1</td></tr><tr><td>Лом</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1018.1</td></tr><tr><td>Оряхово</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1018.2</td></tr><tr><td>Кнежа</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>SW</td><td style='text-align:center'>1007.3</td></tr><tr><td>Ловеч</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>3</td><td style='text-align:center'>S</td><td style='text-align:center'>994.8</td></tr><tr><td>Плевен</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1001.4</td></tr><tr><td>Велико Търново</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>997.8</td></tr><tr><td>Свищов</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла в последния час</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1016.2</td></tr><tr><td>Русе</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1016.8</td></tr><tr><td>Шумен</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>996</td></tr><tr><td>Разград</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>S</td><td style='text-align:center'>978.9</td></tr><tr><td>Силистра</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>7</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1018.6</td></tr><tr><td>Силистра НИМХ</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>7</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1019.7</td></tr><tr><td>Варна</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>1</td><td style='text-align:center'>W</td><td style='text-align:center'>1016.8</td></tr><tr><td>Шабла</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>2</td><td style='text-align:center'>W</td><td style='text-align:center'>1021.4</td></tr><tr><td>Калиакра</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>9</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>4</td><td style='text-align:center'>N</td><td style='text-align:center'>1013.6</td></tr><tr><td>Добрич</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>996.8</td></tr><tr><td>вр. Мургаш</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>8</td><td style='text-align:center'>W</td><td style='text-align:center'>832.9</td></tr><tr><td>Кюстендил</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>959.5</td></tr><tr><td>Драгоман</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>937.2</td></tr><tr><td>Благоевград</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-0</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>1</td><td style='text-align:center'>E</td><td style='text-align:center'>971.3</td></tr><tr><td>Черни връх</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>6</td><td style='text-align:center'>W</td><td style='text-align:center'>770.7</td></tr><tr><td>София-ЦМС</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>S</td><td style='text-align:center'>951.5</td></tr><tr><td>вр. Мусала</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-9</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>6</td><td style='text-align:center'>W</td><td style='text-align:center'>712.2</td></tr><tr><td>Пловдив - Тракия</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1002.7</td></tr><tr><td>вр. Ботев</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>4</td><td style='text-align:center'>NW</td><td style='text-align:center'>762.4</td></tr><tr><td>Пазарджик</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>3</td><td style='text-align:center'>N</td><td style='text-align:center'>996.6</td></tr><tr><td>Чирпан</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>E</td><td style='text-align:center'>999.9</td></tr><tr><td>Казанлък</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>0</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>973.8</td></tr><tr><td>Стара Загора</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1001.2</td></tr><tr><td>Сливен</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>990.6</td></tr><tr><td>Елхово</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1001.3</td></tr><tr><td>Карнобат</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>999</td></tr><tr><td>н. Емине</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>10</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>4</td><td style='text-align:center'>W</td><td style='text-align:center'>1014.3</td></tr><tr><td>Бургас</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>2</td><td style='text-align:center'>SW</td><td style='text-align:center'>1018.8</td></tr><tr><td>Ахтопол</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>4</td><td style='text-align:center'>W</td><td style='text-align:center'>1020.4</td></tr><tr><td>Сандански</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>SW</td><td style='text-align:center'>997.6</td></tr><tr><td>Рожен</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>SE</td><td style='text-align:center'>826.3</td></tr><tr><td>Кърджали</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image04.gif'>видимост под 10km</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>982.3</td></tr><tr><td>Хасково</td><td style='text-align:center'>02.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>2</td><td style='text-align:center'>W</td><td style='text-align:center'>994.3</td></tr></table> 
+     </div>
+  <div onClick="openClose('a2')"  class="linkOpenClose">Легенда - измервания</div>
+        <p>&nbsp;</p>
+  <div id="a2" class="texter">
+
+<h3>Легенда измервания</h3>
+<table  style="max-width:1700px;"><caption>&nbsp;</caption>
+<tbody>
+
+<tr><td>Символ</td><td>Явление</td><td>Символ</td><td>Явление</td><td>Символ</td><td>Явление</td>
+		<td>Вятър - символ</td>
+		<td>m/s</td>
+		<td>km/h</td>
+		<td>Възли</td>
+</tr>
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image01.gif"></td><td>слънчево/ясно</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image19.gif"></td><td>ръмеж/снежни зърна в последния час</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image30.gif"></td><td>силен ръмеж</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind0ms.png"></td>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+</tr>	
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image02.gif"></td><td>разкъсана облачност</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image20.gif"></td><td>ръмеж с дъжд; дъжд в последния час; слаб краткотраен дъжд;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image31.gif"></td><td>умерен дъжд;</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind2ms.png"></td>
+		<td>2</td>
+		<td>7</td>
+		<td>3</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image03.gif"></td><td>значителна облачност</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image21.gif"></td><td>сняг в последния час; слаб сняг; снежни зърна или снежни кристали</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image32.gif"></td><td>умерен дъжд; умерен краткотраен дъжд</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind4ms.png"></td>
+		<td>3,5</td>
+		<td>12</td>
+		<td>7</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image04.gif"></td><td>димка; намалена от дим, прах или пясък видимост; прашна или пясъчна вихрушка;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image22.gif"></td><td>дъжд и сняг</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image33.gif"></td><td>силен дъжд</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind5ms.png"></td>
+		<td>5</td>
+		<td>18</td>
+		<td>12</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image05.gif"></td><td>силна прашна буря; плътна мъгла;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image23.gif"></td><td>преохладен дъжд; дъжд с поледица</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image34.gif"></td><td>много силен краткотраен дъжд</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind8ms.png"></td>
+		<td>8</td>
+		<td>28</td>
+		<td>17</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image09.gif"></td><td>суха мъгла(омара); приземна мъгла;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image25.gif"></td><td>краткотраен сняг; слаб сняг;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image35.gif"></td><td>дъжд и сняг</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind10ms.png"></td>
+		<td>10</td>
+		<td>36</td>
+		<td>22</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image13.gif"></td><td>светкавици</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image26.gif"></td><td>град/суграшица в последния час; град с дъжд</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image36.gif"></td><td>силен сняг; обилен снеговалеж;</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind15ms.png"></td>
+		<td>15</td>
+		<td>55</td>
+		<td>32</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image14.gif"></td><td>облачно; вирга</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image27.gif"></td><td>поземка; снежна виелица; умерен сняг</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image37.gif"></td><td>ледени игли, слаба суграшица</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind25ms.png"></td>
+		<td>25</td>
+		<td>90</td>
+		<td>52</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image15.gif"></td><td>валеж в околността</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image28.gif"></td><td>лека или разнасяща се мъгла;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image38.gif"></td><td>(обилен) дъжд със сняг</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind30ms.png"></td>
+		<td>30</td>
+		<td>110</td>
+		<td>62</td>
+</tr>
+
+<tr><td><img src="https://info.meteo.bg/i/meteo/naborizm/image18.gif"></td><td>шквал; смерч; гръмотевична буря в последния час;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image29.gif"></td><td>слаб или умерен ръмеж;</td><td><img src="https://info.meteo.bg/i/meteo/naborizm/image39.gif"></td><td>силна гръмотевична буря с град</td>
+		<td><img src="https://info.meteo.bg/i/meteo/Wind.Symbols/wind50ms.png"></td>
+		<td>50</td>
+		<td>180</td>
+		<td>102</td>
+</tr>
+</tbody></table>
+ 
+ </div>
+
+<!------------------------- Minimalni e maksimalni T ----------------------------->
+
+<div class="cardProzrachna">
+  <h2 id="toziMesets">Минимални и максимални температури за изминалото денонощие</h2>
+  <div class="images analyses">
+   <div class="card image"> 
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/Tmin.png"  width="800">
+        	  <p class="imageText"></p>
+   </div>
+   <div class="card image"> 
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/Tmax.png" width="800" >
+        	  <p class="imageText"></p> 
+   </div>
+ </div>
+      <div onClick="openClose('mm2')"  class="linkOpenClose">Какво се вижда на картите с минималните и максималните температури?</div>
+        <p>&nbsp;</p>
+     <div id="mm2" class="texter">
+<p class="bulg"><b>Какво ще виждате на картите с минималните и максималните температури?</b> На картата с минималните/максималните измерени стойности на температурите по синоптични станции, ще виждате една стойност в градуси по Целзий (℃) над изписаното име на всеки град, в който има синоптична станция на НИМХ. Тя е минималната/максималната стойност, регистрирана от измерванията по съответния начин за конкретното денонощие. Долу вдясно на картата е изписана датата, за която се отнасят съответните измервания на температурата.</p>
+
+<p class="bulg"><b>Температура на въздуха:</b> Температурата на въздуха е мярка за средната топлинна енергия на молекулите на атмосферния въздух - колкото по-висока е температурата, толкова по-висока е кинетичната енергията на молекулите. В исторически план най-разпространеният използван инструмент е бил стъклен термометър с течност, която се разширява или свива в резултат на нагряване или охлаждане. Най-често се е използвал живак. От почти десетилетие в метеорологията вече не се използват живачни термометри, тъй като живакът е опасен, ако изтече при счупване на термометъра. В метеорологичните служби по света, вкл. и в Националния институт по метеорология и хидрология (НИМХ), като част от Световната метеорологична организация (СМО), тези термометри бяха заменени такива, с течност на алкохолна основа или с цифрови термометри. Съвременните автоматични метеорологични станции обикновено използват електронен сензор. Точността на измерване на тези сензори зависи от материала, от който са изработени. Висока точност се постига, например, при сензори изработени от платина. За да се измери най-точно температурата, уредите се поставят при радиационна защита -  метеорологична клетка със специална конструкция, така че да се избегне влиянието на директното нагряване от Слънцето. Конструкцията на метеорологичната клетка позволява въздухът да преминава безпрепятствено през нея, обърната е винаги на север и е боядисана в бяло. В съчетание със задължителното разполагане на клетката с уреди на 2 метра над земната повърхност, на затревена окосена площадка, води до избягване на максимален брой смущения при измерванията и гарантира отчитане на реалната температура на въздуха. В НИМХ по стандартните препоръки на СМО дневната максимална (най-високата) и минимална (най-ниската) температура се отчитат веднъж в денонощието, съответно в 06 UTC (в 08:00/09:00 - в зимно/лятно часово време в България) и в 18 UTC (в 20:00/21:00 - в зимно/лятно часово време в България), докато моментните измервания на температурата на въздуха могат да се правят във всеки час на денонощието, практически непрекъснато. </p>
+
+<p class="bulg"><b>Как се измерва температурата за метеорологични цели?</b> Данните за температурата преди 1910 г. трябва да се използват с изключително внимание, тъй като много станции преди тази дата са били изложени в нестандартни места, някои от които дават показания, които са с няколко градуса по-високи или по-ниски от тези, измерени според стандартите след 1910 г. Дневните максимални температури обикновено се наблюдават следобед, а дневните минимални температури през нощта или около зазоряване. При ясно и тихо време минимума на температурата се постига около изгрева на Слънцето. Т.е. обичайният дневен ход е свързан с минимум сутрин и максимум след обяд. Има и изключения, които са свързани с определени синоптични обстановки със студено нахлуване, температурите са с т.нар. „обратен дневен ход“, което означава, че след обяд е по-студено отколкото сутринта.</p>
+      </div>
+</div>
+ 
+ <div class="images data">
+   <div class="card"> 
+        	  <h2  id="satelit">Спътник IR</h2>
+         	  <img src="https://object-store.os-api.cci1.ecmwf.int/nimhbg-web/anims/IR.gif"  style="max-width:600px;">
+<!--          	  <img src="images/gif/IR108.gif" style="max-width:600px;"> -->
+        	  <br/><h4>Облачни системи<br> (Температура на горната граница на облаците или на земната повърхност, ако няма облаци)</h4><p>Скалата е в келвини, но е дублирана в градуси по Целзий:</p><img src="https://info.meteo.bg/i/meteo/airmass/pal-IR-BTs.png">
+   </div>
+   <div class="card"> 
+        	  <h2>Спътник RGB</h2>
+         	  <img src="https://object-store.os-api.cci1.ecmwf.int/nimhbg-web/anims/RG.gif"  style="max-width:600px;"> 
+<!--          	  <img src="images/gif/RGB07-Airmass.gif"  style="max-width:600px;">-->
+        	  <br/><h4>Въздушни маси</h4>
+         	  <div onClick="openClose('vazdushniMasi')" class="linkOpenClose">Легенда - въздушни маси </div>
+             <p>&nbsp;</p>
+            <div id="vazdushniMasi" class="texter">
+          	  <table cellspacing="0" cellpadding="0" border="0">
+          	  <tbody>
+          	  <tr><td><img src="https://info.meteo.bg/i/meteo/airmass/airmass1.png" style="border: 1px solid grey;"></td><td>Плътна висока облачност</td></tr>
+          	  <tr><td><img src="https://info.meteo.bg/i/meteo/airmass/airmass2.png"></td><td>Плътна средна облачност</td></tr>
+          	  <tr><td><img src="https://info.meteo.bg/i/meteo/airmass/airmass3.png"></td><td>Струйно течение, висока стойност на потенциалния вихър (PV)</td></tr>
+          	  <tr><td><img src="https://info.meteo.bg/i/meteo/airmass/airmass4.png"></td><td>Студена въздушна маса (ВМ)</td></tr>
+          	  <tr><td><img src="https://info.meteo.bg/i/meteo/airmass/airmass5.png"></td><td>Топла ВМ - високо ниво на тропопауза</td></tr>
+          	  <tr><td><img src="https://info.meteo.bg/i/meteo/airmass/airmass6.png"></td><td>Топла ВМ – ниско ниво на тропопауза</td></tr>
+          	  </tbody>
+          	  </table>
+          	</div>
+        	  <p class="bulg">
+        	  <div onClick="openClose('eumetsat')" class="linkOpenClose">За Eumetsat</div>
+             <p>&nbsp;</p>
+            <div id="eumetsat" class="texter">
+               <p class="small-italic">EUMETSAT е Европейска междуправителствена спътникова организация за мониторинг на времето, климата и околната среда.</p>
+               <p class="small-italic">EUMETSAT поддържа и развива европейската система от метеорологични спътници, наблюдаващи атмосферата, океана и земната повърхност, и даващи информация, свързана с времето и климата, под формата на данни, изображения и други продукти 24 часа в денонощието/365 дена в годината. Тази информация се предоставя на националните метеорологични служби на страните-членки и асоциираните държави (в България - НИМХ) и на други потребители в целия свят.</p>
+
+               <p class="small-italic">България е асоцииран член на <a href="http://eumetsat.eu" target="_blank">EUMETSAT</a> (link is external) от 25 май 2005 г.</p>
+            </div>
+   </div>
+ </div> <!-- krai images data -->
+ 
+ <!-- Valej i snejna pokrivka -->
+ <div class="images analyses">
+   <div class="card"> 
+        	  <h2 id="valej">Карта на валежа</h2>
+        	  <img src="images/others/nosel.php?imageToShow=prec&karta=prec&coeff=100&chd=12&d=0" >
+        	  <p class="small-italic">Площно разпределение на 24-часово (от 7:30 ч. предния ден до 7:30 ч. до деня отбелязан на картата) количество валеж (mm, l/m2) според данни от класически валежомерни станции на НИМХ и данни от оперативен атмосферен числен модел за прогноза на времето (ALADIN) на НИМХ. Картите са достъпни към 12 ч. Произвеждат се автоматично и понякога е възможно да съдържат неточни данни, които се коригират по-късно.
+           </p>
+           
+     <div onClick="openClose('iRain')"  class="linkOpenClose">Карта с данните за валежа
+     </div>
+     <div id="iRain" class="texter">
+       <img src="images/others/nosel.php?imageToShow=prec_obs&karta=prec&coeff=100&chd=12&d=0">
+     </div>        
+                <div onClick="openClose('tRain')"  class="linkOpenClose">Таблица с данните за валежа в 166 станции от мрежата на НИМХ
+     </div>
+     <div id="tRain" class="texter">
+       <center>
+<h2>Ежедневни данни за валежа в 166 станции от мрежата на НИМХ<br/>   1.12.2025</h2>
+<center>
+ <table  cellpadding="1" cellspacing="1" border="0" width=70%>
+ 
+   <tr>
+    <td><b>No</b>
+    </td>
+    <td><b>Станция</b>
+    </td>
+    <td><b>Валеж [mm]</b>
+    </td>
+    <td><b>Средни месечни стойности на валежа [mm]<br/> за периода 1993-2008<br/> за месец 12</b>
+    </td>
+  </tr>
+ 
+ 
+ 
+  <tr>
+    <td>1010    </td>
+    <td>Ново село    </td>
+    <td  align="right">2.    </td>
+    <td align="right">56    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>1020    </td>
+    <td>Видин    </td>
+    <td  align="right">1.    </td>
+    <td align="right">52    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>1030    </td>
+    <td>Грамада    </td>
+    <td  align="right">3.    </td>
+    <td align="right">58    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>1040    </td>
+    <td>Белоградчик    </td>
+    <td  align="right">6.    </td>
+    <td align="right">54    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>1460    </td>
+    <td>Кула    </td>
+    <td  align="right">2.    </td>
+    <td align="right">53    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>2015    </td>
+    <td>Монтана    </td>
+    <td  align="right">3.    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>2020    </td>
+    <td>Д-р Йосифово    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">47    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>2030    </td>
+    <td>Вършец    </td>
+    <td  align="right">2.    </td>
+    <td align="right">53    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>2050    </td>
+    <td>Бъзовец    </td>
+    <td  align="right">0.    </td>
+    <td align="right">42    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>2060    </td>
+    <td>Лом    </td>
+    <td  align="right">2.    </td>
+    <td align="right">47    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>2401    </td>
+    <td>Чипровци    </td>
+    <td  align="right">1.    </td>
+    <td align="right">55    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>2430    </td>
+    <td>Берковица    </td>
+    <td  align="right">2.    </td>
+    <td align="right">62    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>3010    </td>
+    <td>Враца    </td>
+    <td  align="right">1.    </td>
+    <td align="right">52    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>3040    </td>
+    <td>Кнежа    </td>
+    <td  align="right">    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>3050    </td>
+    <td>Оряхово    </td>
+    <td  align="right">1.    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>3401    </td>
+    <td>Бяла Слатина    </td>
+    <td  align="right">    </td>
+    <td align="right">51    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>3440    </td>
+    <td>Борован    </td>
+    <td  align="right">1.    </td>
+    <td align="right">44    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>3530    </td>
+    <td>Роман    </td>
+    <td  align="right">0.    </td>
+    <td align="right">46    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>4010    </td>
+    <td>Плевен    </td>
+    <td  align="right">0.    </td>
+    <td align="right">42    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>4020    </td>
+    <td>Сомовит    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>4040    </td>
+    <td>Новачене    </td>
+    <td  align="right">    </td>
+    <td align="right">40    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>4060    </td>
+    <td>Николаево    </td>
+    <td  align="right">0.    </td>
+    <td align="right">43    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>4430    </td>
+    <td>Пордим    </td>
+    <td  align="right">0.    </td>
+    <td align="right">49    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>4500    </td>
+    <td>Ореховица    </td>
+    <td  align="right">0.    </td>
+    <td align="right">42    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>4590    </td>
+    <td>Левски    </td>
+    <td  align="right">    </td>
+    <td align="right">46    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5010    </td>
+    <td>Ловеч    </td>
+    <td  align="right">    </td>
+    <td align="right">50    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5020    </td>
+    <td>Борима    </td>
+    <td  align="right">1.    </td>
+    <td align="right">53    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5030    </td>
+    <td>Тетевен    </td>
+    <td  align="right">0.    </td>
+    <td align="right">51    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5040    </td>
+    <td>Троян    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">55    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5080    </td>
+    <td>Дерманци    </td>
+    <td  align="right">    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5401    </td>
+    <td>Луковит    </td>
+    <td  align="right">0.    </td>
+    <td align="right">40    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5460    </td>
+    <td>Рибарица    </td>
+    <td  align="right">0.    </td>
+    <td align="right">65    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5490    </td>
+    <td>Чифлик    </td>
+    <td  align="right">1.    </td>
+    <td align="right">70    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5510    </td>
+    <td>Черни Осъм    </td>
+    <td  align="right">2.    </td>
+    <td align="right">80    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>5520    </td>
+    <td>Априлци    </td>
+    <td  align="right">2.    </td>
+    <td align="right">55    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>6010    </td>
+    <td>Севлиево    </td>
+    <td  align="right">    </td>
+    <td align="right">43    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>6020    </td>
+    <td>Габрово    </td>
+    <td  align="right">1.    </td>
+    <td align="right">70    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>6470    </td>
+    <td>Трявна    </td>
+    <td  align="right">1.    </td>
+    <td align="right">60    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>7010    </td>
+    <td>Велико Търново    </td>
+    <td  align="right">    </td>
+    <td align="right">56    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>7020    </td>
+    <td>Павликени    </td>
+    <td  align="right">    </td>
+    <td align="right">37    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>7040    </td>
+    <td>Елена    </td>
+    <td  align="right">    </td>
+    <td align="right">59    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>7440    </td>
+    <td>Костел    </td>
+    <td  align="right">1.    </td>
+    <td align="right">76    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>7470    </td>
+    <td>Кесарево    </td>
+    <td  align="right">    </td>
+    <td align="right">52    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>7580    </td>
+    <td>Полски Тръмбеш    </td>
+    <td  align="right">    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>21010    </td>
+    <td>Русе-АППД    </td>
+    <td  align="right">    </td>
+    <td align="right">48    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>21020    </td>
+    <td>Две могили    </td>
+    <td  align="right">    </td>
+    <td align="right">50    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>21030    </td>
+    <td>Образцов чифлик    </td>
+    <td  align="right">    </td>
+    <td align="right">46    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>22010    </td>
+    <td>Търговище    </td>
+    <td  align="right">    </td>
+    <td align="right">53    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>22020    </td>
+    <td>Омуртаг    </td>
+    <td  align="right">    </td>
+    <td align="right">59    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>22030    </td>
+    <td>Славяново    </td>
+    <td  align="right">    </td>
+    <td align="right">61    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>22480    </td>
+    <td>Врани кон    </td>
+    <td  align="right">    </td>
+    <td align="right">38    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>22520    </td>
+    <td>Надарево    </td>
+    <td  align="right">    </td>
+    <td align="right">47    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>23010    </td>
+    <td>Разград    </td>
+    <td  align="right">    </td>
+    <td align="right">45    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>23020    </td>
+    <td>Самуил    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">46    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>23030    </td>
+    <td>Исперих    </td>
+    <td  align="right">    </td>
+    <td align="right">50    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>23480    </td>
+    <td>Цар Калоян    </td>
+    <td  align="right">    </td>
+    <td align="right">46    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>23490    </td>
+    <td>Кубрат    </td>
+    <td  align="right">    </td>
+    <td align="right">43    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>24010    </td>
+    <td>Силистра - АППД    </td>
+    <td  align="right">0.    </td>
+    <td align="right">39    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>24020    </td>
+    <td>Алфатар    </td>
+    <td  align="right">    </td>
+    <td align="right">40    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>24030    </td>
+    <td>Главиница    </td>
+    <td  align="right">    </td>
+    <td align="right">51    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>24430    </td>
+    <td>Тутракан    </td>
+    <td  align="right">    </td>
+    <td align="right">42    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>25010    </td>
+    <td>Шумен    </td>
+    <td  align="right">    </td>
+    <td align="right">48    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>25040    </td>
+    <td>Царев брод    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">43    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>25401    </td>
+    <td>Преслав    </td>
+    <td  align="right">    </td>
+    <td align="right">70    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>25410    </td>
+    <td>Нови пазар    </td>
+    <td  align="right">    </td>
+    <td align="right">45    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>25420    </td>
+    <td>Върбица    </td>
+    <td  align="right">    </td>
+    <td align="right">66    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>25500    </td>
+    <td>Риш    </td>
+    <td  align="right">    </td>
+    <td align="right">71    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>26010    </td>
+    <td>Добрич    </td>
+    <td  align="right">    </td>
+    <td align="right">47    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>26020    </td>
+    <td>Шабла    </td>
+    <td  align="right">    </td>
+    <td align="right">35    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>26030    </td>
+    <td>Калиакра    </td>
+    <td  align="right">    </td>
+    <td align="right">36    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>26060    </td>
+    <td>Крушари    </td>
+    <td  align="right">    </td>
+    <td align="right">44    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>26080    </td>
+    <td>Генерал Тошево    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">42    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>26630    </td>
+    <td>Оброчище    </td>
+    <td  align="right">    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>27010    </td>
+    <td>Варна    </td>
+    <td  align="right">    </td>
+    <td align="right">45    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>27020    </td>
+    <td>Старо Оряхово    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">62    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>27030    </td>
+    <td>Горен чифлик    </td>
+    <td  align="right">    </td>
+    <td align="right">61    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>27050    </td>
+    <td>Суворово    </td>
+    <td  align="right">    </td>
+    <td align="right">42    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>27070    </td>
+    <td>Дългопол    </td>
+    <td  align="right">    </td>
+    <td align="right">55    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>27460    </td>
+    <td>Белослав    </td>
+    <td  align="right">    </td>
+    <td align="right">43    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>27490    </td>
+    <td>Нова шипка    </td>
+    <td  align="right">    </td>
+    <td align="right">60    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28010    </td>
+    <td>Бургас    </td>
+    <td  align="right">    </td>
+    <td align="right">49    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28021    </td>
+    <td>Ахтопол    </td>
+    <td  align="right">    </td>
+    <td align="right">84    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28040    </td>
+    <td>Карнобат    </td>
+    <td  align="right">    </td>
+    <td align="right">46    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28045    </td>
+    <td>Сунгурларе    </td>
+    <td  align="right">    </td>
+    <td align="right">56    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28050    </td>
+    <td>Люляково    </td>
+    <td  align="right">    </td>
+    <td align="right">48    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28060    </td>
+    <td>Средец    </td>
+    <td  align="right">    </td>
+    <td align="right">71    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28120    </td>
+    <td>Резово    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">83    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28150    </td>
+    <td>Малко Търново    </td>
+    <td  align="right">    </td>
+    <td align="right">93    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28510    </td>
+    <td>Веселие    </td>
+    <td  align="right">    </td>
+    <td align="right">80    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28550    </td>
+    <td>Кости    </td>
+    <td  align="right">    </td>
+    <td align="right">120    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28610    </td>
+    <td>Факия    </td>
+    <td  align="right">0.    </td>
+    <td align="right">62    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>28630    </td>
+    <td>Зидарово    </td>
+    <td  align="right">    </td>
+    <td align="right">66    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>29010    </td>
+    <td>Ямбол    </td>
+    <td  align="right">    </td>
+    <td align="right">48    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>29020    </td>
+    <td>Елхово    </td>
+    <td  align="right">    </td>
+    <td align="right">46    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>29060    </td>
+    <td>Тополовград    </td>
+    <td  align="right">0.    </td>
+    <td align="right">68    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>29465    </td>
+    <td>Странджа    </td>
+    <td  align="right">    </td>
+    <td align="right">63    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>41010    </td>
+    <td>Сливен    </td>
+    <td  align="right">    </td>
+    <td align="right">53    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>41030    </td>
+    <td>Садиево    </td>
+    <td  align="right">    </td>
+    <td align="right">51    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>41040    </td>
+    <td>Котел    </td>
+    <td  align="right">    </td>
+    <td align="right">95    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>41430    </td>
+    <td>Злати войвода    </td>
+    <td  align="right">    </td>
+    <td align="right">51    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>41530    </td>
+    <td>Градец    </td>
+    <td  align="right">    </td>
+    <td align="right">77    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>42010    </td>
+    <td>Стара Загора - инст    </td>
+    <td  align="right">    </td>
+    <td align="right">48    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>42020    </td>
+    <td>Чирпан    </td>
+    <td  align="right">    </td>
+    <td align="right">55    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>42030    </td>
+    <td>Казанлък    </td>
+    <td  align="right">    </td>
+    <td align="right">49    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>42042    </td>
+    <td>Раднево    </td>
+    <td  align="right">    </td>
+    <td align="right">43    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>42420    </td>
+    <td>Дълбоки    </td>
+    <td  align="right">0.    </td>
+    <td align="right">63    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>42450    </td>
+    <td>Пчелиново    </td>
+    <td  align="right">    </td>
+    <td align="right">84    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>42470    </td>
+    <td>Шипка    </td>
+    <td  align="right">1.    </td>
+    <td align="right">64    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>43010    </td>
+    <td>Хасково    </td>
+    <td  align="right">0.    </td>
+    <td align="right">77    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>43040    </td>
+    <td>Любимец    </td>
+    <td  align="right">    </td>
+    <td align="right">50    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>43420    </td>
+    <td>Симеоновград    </td>
+    <td  align="right">    </td>
+    <td align="right">54    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>43520    </td>
+    <td>Царева поляна    </td>
+    <td  align="right">    </td>
+    <td align="right">90    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>44010    </td>
+    <td>Кърджали    </td>
+    <td  align="right">2.    </td>
+    <td align="right">90    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>44020    </td>
+    <td>Джебел    </td>
+    <td  align="right">1.    </td>
+    <td align="right">108    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>44030    </td>
+    <td>Крумовград    </td>
+    <td  align="right">0.    </td>
+    <td align="right">103    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>44040    </td>
+    <td>Ивайловград    </td>
+    <td  align="right">1.    </td>
+    <td align="right">80    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>44540    </td>
+    <td>Ардино    </td>
+    <td  align="right">3.    </td>
+    <td align="right">110    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>44470    </td>
+    <td>Момчилград    </td>
+    <td  align="right">0.    </td>
+    <td align="right">114    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>44510    </td>
+    <td>Кирково    </td>
+    <td  align="right">1.    </td>
+    <td align="right">194    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45030    </td>
+    <td>Чепеларе    </td>
+    <td  align="right">0.    </td>
+    <td align="right">65    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45040    </td>
+    <td>Райково    </td>
+    <td  align="right">0.    </td>
+    <td align="right">123    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45070    </td>
+    <td>Златоград    </td>
+    <td  align="right">1.    </td>
+    <td align="right">136    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45120    </td>
+    <td>Рожен    </td>
+    <td  align="right">0.    </td>
+    <td align="right">118    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45130    </td>
+    <td>Девин    </td>
+    <td  align="right">    </td>
+    <td align="right">74    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45450    </td>
+    <td>Мугла    </td>
+    <td  align="right">0.    </td>
+    <td align="right">101    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45480    </td>
+    <td>Барутин    </td>
+    <td  align="right">    </td>
+    <td align="right">82    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45530    </td>
+    <td>Манастир    </td>
+    <td  align="right">1.    </td>
+    <td align="right">112    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>45541    </td>
+    <td>Михалково    </td>
+    <td  align="right">1.    </td>
+    <td align="right">70    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46011    </td>
+    <td>Пловдив    </td>
+    <td  align="right">    </td>
+    <td align="right">54    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46020    </td>
+    <td>Садово    </td>
+    <td  align="right">    </td>
+    <td align="right">57    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46030    </td>
+    <td>Асеновград    </td>
+    <td  align="right">0.    </td>
+    <td align="right">59    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46060    </td>
+    <td>Карлово    </td>
+    <td  align="right">    </td>
+    <td align="right">55    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46090    </td>
+    <td>Вр. Ботев    </td>
+    <td  align="right">0.    </td>
+    <td align="right">64    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46440    </td>
+    <td>Първомай    </td>
+    <td  align="right">0.    </td>
+    <td align="right">65    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46680    </td>
+    <td>Свежен    </td>
+    <td  align="right">0.    </td>
+    <td align="right">64    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>46760    </td>
+    <td>Клисура    </td>
+    <td  align="right">    </td>
+    <td align="right">68    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>47010    </td>
+    <td>Пазарджик    </td>
+    <td  align="right">    </td>
+    <td align="right">51    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>47040    </td>
+    <td>Велинград    </td>
+    <td  align="right">2.    </td>
+    <td align="right">54    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>47050    </td>
+    <td>Панагюрище    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">53    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>47070    </td>
+    <td>Пещера    </td>
+    <td  align="right">1.    </td>
+    <td align="right">52    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>47570    </td>
+    <td>Батак    </td>
+    <td  align="right">    </td>
+    <td align="right">81    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>47590    </td>
+    <td>Фотиново    </td>
+    <td  align="right">3.    </td>
+    <td align="right">91    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>47640    </td>
+    <td>Сърница    </td>
+    <td  align="right">    </td>
+    <td align="right">114    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61010    </td>
+    <td>Благоевград    </td>
+    <td  align="right">0.    </td>
+    <td align="right">60    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61040    </td>
+    <td>Банско    </td>
+    <td  align="right">    </td>
+    <td align="right">79    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61100    </td>
+    <td>Сандански    </td>
+    <td  align="right">    </td>
+    <td align="right">64    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61111    </td>
+    <td>Първомай    </td>
+    <td  align="right">    </td>
+    <td align="right">67    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61420    </td>
+    <td>Якоруда    </td>
+    <td  align="right">    </td>
+    <td align="right">67    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61570    </td>
+    <td>Сатовча    </td>
+    <td  align="right">    </td>
+    <td align="right">90    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61600    </td>
+    <td>Гайтаниново    </td>
+    <td  align="right">    </td>
+    <td align="right">64    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61631    </td>
+    <td>Полена    </td>
+    <td  align="right">    </td>
+    <td align="right">80    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>61695    </td>
+    <td>С. Пирин    </td>
+    <td  align="right">    </td>
+    <td align="right">96    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>62010    </td>
+    <td>Кюстендил    </td>
+    <td  align="right">    </td>
+    <td align="right">55    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>62050    </td>
+    <td>Дупница    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">48    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>63010    </td>
+    <td>Перник    </td>
+    <td  align="right">1.    </td>
+    <td align="right">44    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>63406    </td>
+    <td>Чуйпетлово    </td>
+    <td  align="right">4.    </td>
+    <td align="right">69    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64132    </td>
+    <td>Златица    </td>
+    <td  align="right">0.    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64201    </td>
+    <td>София    </td>
+    <td  align="right">1.    </td>
+    <td align="right">42    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64205    </td>
+    <td>Черни връх    </td>
+    <td  align="right">4.    </td>
+    <td align="right">54    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64210    </td>
+    <td>Вр. Мургаш    </td>
+    <td  align="right">    </td>
+    <td align="right">37    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64215    </td>
+    <td>Вр. Мусала    </td>
+    <td  align="right">1.    </td>
+    <td align="right">69    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64235    </td>
+    <td>Самоков    </td>
+    <td  align="right">    </td>
+    <td align="right">52    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64305    </td>
+    <td>Божурище    </td>
+    <td  align="right">    </td>
+    <td align="right">36    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64310    </td>
+    <td>Драгоман    </td>
+    <td  align="right">0.    </td>
+    <td align="right">38    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64315    </td>
+    <td>Банкя    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">48    </td>
+  </tr>
+	
+	
+  <tr>
+    <td>64420    </td>
+    <td>Етрополе    </td>
+    <td  align="right">    </td>
+    <td align="right">63    </td>
+  </tr>
+	
+	
+<tr><td colspan="4"  bgcolor=#fbf6e9>
+<i><b>Забележка: </b></i>Това са неверифицирани оперативни данни за валежа в три вида станции: синоптични, климатични, валежомерни. 
+</td></tr>
+</table>
+     </div>        
+           
+   </div>
+   <div class="card"> 
+        	  <h2  id="sniag">Снежна покривка</h2>
+        	  <img src="images/others/nosel.php?imageToShow=snow&karta=snow&coeff=100&chd=12&d=0">
+        	  <p class="small-italic">Височина на снежната покривка по данни от станциите на НИМХ към 7.30 ч на датата, посочена на картата. Обновява се веднъж дневно към 12 ч. Лява скала — снежна покривка в сантиметри. Дясна скала — надморска височина в метри за местата без снежна покривка.
+            </p>             
+            <p class="small-italic"><b>Забележка:</b> Това е оперативна карта и е подходяща за ориентиране само за общото състояние на снежната покривка в страната. Тя съдържа в себе си несъвършенства в резултат на методите за моделиране и оперативното предаване на данните.
+            </p>
+     <div onClick="openClose('iSnow')"  class="linkOpenClose">Карта с данните за снежната покривка
+     </div>
+     <div id="iSnow" class="texter">
+       <img src="images/others/nosel.php?imageToShow=snow_obs&karta=snow&coeff=100&chd=12&d=0">
+     </div>        
+                <div onClick="openClose('tSnow')"  class="linkOpenClose">Таблица с данните за валежа в 166 станции от мрежата на НИМХ
+     </div>
+     <div id="tSnow" class="texter">
+       <html>
+<head>
+  <title>NIMH Sofia</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><center>
+<h2>Ежедневни данни за снежната покривка в 166 станции от мрежата на НИМХ<br/> за  1.12.2025</h2>
+<center>
+ <table cellpadding="1" cellspacing="1" border="0" width=100%>
+ <tr><td>
+ <table cellpadding="1" cellspacing="1" border="0" >
+ 
+   <tr >
+    <td  rowspan='2' align="center"><b>No</b>
+    </td>
+    <td   rowspan='2' align="center"><b>Станция</b>
+    </td>
+    <td   rowspan='2' align="center"><b>Вид</b>
+    </td>
+    <td  colspan="3" align="center"><b>Валеж </b>
+    </td>
+  </tr>
+     <tr >
+     <td  align="center"><b> Количество [mm*10]</b></td><td><b> Вид </b></td><td>  <b>Снежна покривка [cm]</b>
+    </td>
+  </tr>
+ 
+ 
+ 
+  <tr >
+    <td align="center">1010    </td>
+    <td  align="center">Ново село    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">23    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">1020    </td>
+    <td  align="center">Видин    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">5    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">1030    </td>
+    <td  align="center">Грамада    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">31    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">1040    </td>
+    <td  align="center">Белоградчик    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">56    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">1460    </td>
+    <td  align="center">Кула    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">16    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">2015    </td>
+    <td  align="center">Монтана    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">26    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">2020    </td>
+    <td  align="center">Д-р Йосифово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">2030    </td>
+    <td  align="center">Вършец    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">16    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">2050    </td>
+    <td  align="center">Бъзовец    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">2060    </td>
+    <td  align="center">Лом    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">17    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">2401    </td>
+    <td  align="center">Чипровци    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">5    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">2430    </td>
+    <td  align="center">Берковица    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">23    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">3010    </td>
+    <td  align="center">Враца    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">7    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">3040    </td>
+    <td  align="center">Кнежа    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">3050    </td>
+    <td  align="center">Оряхово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">5    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">3401    </td>
+    <td  align="center">Бяла Слатина    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">3440    </td>
+    <td  align="center">Борован    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">7    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">3530    </td>
+    <td  align="center">Роман    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">4010    </td>
+    <td  align="center">Плевен    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">4020    </td>
+    <td  align="center">Сомовит    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">4040    </td>
+    <td  align="center">Новачене    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">4060    </td>
+    <td  align="center">Николаево    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">4430    </td>
+    <td  align="center">Пордим    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">1    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">4500    </td>
+    <td  align="center">Ореховица    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">2    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">4590    </td>
+    <td  align="center">Левски    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5010    </td>
+    <td  align="center">Ловеч    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5020    </td>
+    <td  align="center">Борима    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">11    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5030    </td>
+    <td  align="center">Тетевен    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5040    </td>
+    <td  align="center">Троян    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5080    </td>
+    <td  align="center">Дерманци    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5401    </td>
+    <td  align="center">Луковит    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5460    </td>
+    <td  align="center">Рибарица    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5490    </td>
+    <td  align="center">Чифлик    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">9    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5510    </td>
+    <td  align="center">Черни Осъм    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">15    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">5520    </td>
+    <td  align="center">Априлци    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">15    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">6010    </td>
+    <td  align="center">Севлиево    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">6020    </td>
+    <td  align="center">Габрово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">7    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">6470    </td>
+    <td  align="center">Трявна    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">9    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">7010    </td>
+    <td  align="center">Велико Търново    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">7020    </td>
+    <td  align="center">Павликени    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">7040    </td>
+    <td  align="center">Елена    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">7440    </td>
+    <td  align="center">Костел    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">5    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">7470    </td>
+    <td  align="center">Кесарево    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">7580    </td>
+    <td  align="center">Полски Тръмбеш    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">21010    </td>
+    <td  align="center">Русе-АППД    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">21020    </td>
+    <td  align="center">Две могили    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">21030    </td>
+    <td  align="center">Образцов чифлик    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">22010    </td>
+    <td  align="center">Търговище    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">22020    </td>
+    <td  align="center">Омуртаг    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">22030    </td>
+    <td  align="center">Славяново    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">22480    </td>
+    <td  align="center">Врани кон    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">22520    </td>
+    <td  align="center">Надарево    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">23010    </td>
+    <td  align="center">Разград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">23020    </td>
+    <td  align="center">Самуил    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">23030    </td>
+    <td  align="center">Исперих    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">23480    </td>
+    <td  align="center">Цар Калоян    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">23490    </td>
+    <td  align="center">Кубрат    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">24010    </td>
+    <td  align="center">Силистра - АППД    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">2    </td>    <td  align="center">ръмеж    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">24020    </td>
+    <td  align="center">Алфатар    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">24030    </td>
+    <td  align="center">Главиница    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">24430    </td>
+    <td  align="center">Тутракан    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">25010    </td>
+    <td  align="center">Шумен    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">25040    </td>
+    <td  align="center">Царев брод    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">25401    </td>
+    <td  align="center">Преслав    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">25410    </td>
+    <td  align="center">Нови пазар    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">25420    </td>
+    <td  align="center">Върбица    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">25500    </td>
+    <td  align="center">Риш    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">26010    </td>
+    <td  align="center">Добрич    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">26020    </td>
+    <td  align="center">Шабла    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">26030    </td>
+    <td  align="center">Калиакра    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">26060    </td>
+    <td  align="center">Крушари    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">26080    </td>
+    <td  align="center">Генерал Тошево    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">26630    </td>
+    <td  align="center">Оброчище    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">27010    </td>
+    <td  align="center">Варна    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">27020    </td>
+    <td  align="center">Старо Оряхово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">27030    </td>
+    <td  align="center">Горен чифлик    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">27050    </td>
+    <td  align="center">Суворово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">27070    </td>
+    <td  align="center">Дългопол    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">27460    </td>
+    <td  align="center">Белослав    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">27490    </td>
+    <td  align="center">Нова шипка    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28010    </td>
+    <td  align="center">Бургас    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28021    </td>
+    <td  align="center">Ахтопол    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28040    </td>
+    <td  align="center">Карнобат    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28045    </td>
+    <td  align="center">Сунгурларе    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28050    </td>
+    <td  align="center">Люляково    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28060    </td>
+    <td  align="center">Средец    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28120    </td>
+    <td  align="center">Резово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28150    </td>
+    <td  align="center">Малко Търново    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28510    </td>
+    <td  align="center">Веселие    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28550    </td>
+    <td  align="center">Кости    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28610    </td>
+    <td  align="center">Факия    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">28630    </td>
+    <td  align="center">Зидарово    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">29010    </td>
+    <td  align="center">Ямбол    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">29020    </td>
+    <td  align="center">Елхово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">29060    </td>
+    <td  align="center">Тополовград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">1    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">29465    </td>
+    <td  align="center">Странджа    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">41010    </td>
+    <td  align="center">Сливен    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">41030    </td>
+    <td  align="center">Садиево    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">41040    </td>
+    <td  align="center">Котел    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">41430    </td>
+    <td  align="center">Злати войвода    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">41530    </td>
+    <td  align="center">Градец    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">42010    </td>
+    <td  align="center">Стара Загора - инст    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">42020    </td>
+    <td  align="center">Чирпан    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">0    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">42030    </td>
+    <td  align="center">Казанлък    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">42042    </td>
+    <td  align="center">Раднево    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">42420    </td>
+    <td  align="center">Дълбоки    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">42450    </td>
+    <td  align="center">Пчелиново    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">42470    </td>
+    <td  align="center">Шипка    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">8    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">43010    </td>
+    <td  align="center">Хасково    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">1    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">43040    </td>
+    <td  align="center">Любимец    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">43420    </td>
+    <td  align="center">Симеоновград    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">43520    </td>
+    <td  align="center">Царева поляна    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">44010    </td>
+    <td  align="center">Кърджали    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">16    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">44020    </td>
+    <td  align="center">Джебел    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">8    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">44030    </td>
+    <td  align="center">Крумовград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">44040    </td>
+    <td  align="center">Ивайловград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">8    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">44540    </td>
+    <td  align="center">Ардино    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">30    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">44470    </td>
+    <td  align="center">Момчилград    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">44510    </td>
+    <td  align="center">Кирково    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">8    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45030    </td>
+    <td  align="center">Чепеларе    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">4    </td>    <td  align="center">ръмеж    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45040    </td>
+    <td  align="center">Райково    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45070    </td>
+    <td  align="center">Златоград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">8    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45120    </td>
+    <td  align="center">Рожен    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">2    </td>    <td  align="center">сняг    </td>    <td  align="center">6    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45130    </td>
+    <td  align="center">Девин    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45450    </td>
+    <td  align="center">Мугла    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45480    </td>
+    <td  align="center">Барутин    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45530    </td>
+    <td  align="center">Манастир    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">7    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">45541    </td>
+    <td  align="center">Михалково    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">10    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46011    </td>
+    <td  align="center">Пловдив    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">0    </td>    <td  align="center">ръмеж    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46020    </td>
+    <td  align="center">Садово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46030    </td>
+    <td  align="center">Асеновград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46060    </td>
+    <td  align="center">Карлово    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46090    </td>
+    <td  align="center">Вр. Ботев    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">4    </td>    <td  align="center">скреж    </td>    <td  align="center">18    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46440    </td>
+    <td  align="center">Първомай    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46680    </td>
+    <td  align="center">Свежен    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">46760    </td>
+    <td  align="center">Клисура    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">47010    </td>
+    <td  align="center">Пазарджик    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">47040    </td>
+    <td  align="center">Велинград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">20    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">47050    </td>
+    <td  align="center">Панагюрище    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">47070    </td>
+    <td  align="center">Пещера    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">14    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">47570    </td>
+    <td  align="center">Батак    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">47590    </td>
+    <td  align="center">Фотиново    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">31    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">47640    </td>
+    <td  align="center">Сърница    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61010    </td>
+    <td  align="center">Благоевград    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">1    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61040    </td>
+    <td  align="center">Банско    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61100    </td>
+    <td  align="center">Сандански    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61111    </td>
+    <td  align="center">Първомай    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61420    </td>
+    <td  align="center">Якоруда    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61570    </td>
+    <td  align="center">Сатовча    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61600    </td>
+    <td  align="center">Гайтаниново    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61631    </td>
+    <td  align="center">Полена    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">61695    </td>
+    <td  align="center">С. Пирин    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">62010    </td>
+    <td  align="center">Кюстендил    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">62050    </td>
+    <td  align="center">Дупница    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">63010    </td>
+    <td  align="center">Перник    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">11    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">63406    </td>
+    <td  align="center">Чуйпетлово    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">37    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64132    </td>
+    <td  align="center">Златица    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64201    </td>
+    <td  align="center">София    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">7    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64205    </td>
+    <td  align="center">Черни връх    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">41    </td>    <td  align="center">    </td>    <td  align="center">29    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64210    </td>
+    <td  align="center">Вр. Мургаш    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">5    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64215    </td>
+    <td  align="center">Вр. Мусала    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">13    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64235    </td>
+    <td  align="center">Самоков    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">0    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64305    </td>
+    <td  align="center">Божурище    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64310    </td>
+    <td  align="center">Драгоман    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">1    </td>    <td  align="center">краткотраен сняг    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64315    </td>
+    <td  align="center">Банкя    </td>
+    <td  align="center">климатична    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+  <tr >
+    <td align="center">64420    </td>
+    <td  align="center">Етрополе    </td>
+    <td  align="center">валежомерна    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+  </tr>
+	
+	
+</table>
+</td>
+<td align="justify" valign="top" bgcolor=#e5f1ff>
+<h3>Легенда</h3>
+<p class="bulg">В таблицата са дадени данни за количество валеж в „линии“ (десети от милиметър или десети от литър на квадратен метър) в лявата колона, за вид на валежа – в средната колона, и за наличие на снежна покривка и нейната височина (в сантиметри) – в дясната колона. Когато в лявата колона с данни няма число, няма валеж. За климатичните станции се подава информация всеки ден. В случай че липсва информация за дадена дата, в средната колона се изписва n.a. От 2021 г. в НИМХ мрежата от валежомерни станции е оборудвана с автоматизирани уреди за измерване на валеж в реално време, но за валежомерните станции продължава да се подава оперативна информация за 24-часово количество валеж и по класически начин веднъж в денонощието. Традиционно тя се подава само за дните с измерено количество валеж  ≥  0.5 mm, но е възможно да има и дни с информация за валеж с количество < 0.5 mm, и това не е грешно. За тези станции е възможно да има дни, в които има валеж, но не е подадена информация. За такъв тип станция празно поле означава, че не е постъпила информация за съответната дата. Също за такъв тип станция информация n.a. и в трите колони означава, че за тази дата е постъпила грешна информация, която е коригирана.</p>
+<center>
+ 
+<table border=1>
+ <caption><b>Легенда 1:</b> Специални символи за снежна покривка в дясно подполе.</caption>
+<tr><td><b>Символ</b></td><td><b>Снежна покривка</b></td></tr>
+<tr><td>p%N</td><td>на по-малко от половината земна повърхност, където N е средна височина на снежната покривка в cm, когaто е <10 cm, или N=A, когато е >=10cm</td></tr>
+<tr><td>P%N</td><td>на повече от половината земна повърхност, където N е средна височина на снежната покривка в cm, когaто е <10 cm, или N=A, когато е >=10cm</td></tr>
+<tr><td>n.a</td><td>има петна снежна покривка, с неизмерима височина</td></tr>
+<tr><td>err</td><td>грешка</td></tr>
+</table>
+</td>
+</tr>
+<tr><td colspan="2"  bgcolor=#e5f1ff>
+<i><b>Забележка 1: </b></i>Това са неверифицирани оперативни данни за валежа и снежната покривка в три вида станции: синоптични, климатични, валежомерни. <br />
+<i><b>Забележка 2: </b></i>На високопланинска станция Мусала не се измерва снежна покривка. 
+</td></tr>
+
+</table>
+     </div>        
+   </div>
+   </div> 
+
+   <div class="cardProzrachna">
+     <h2 id="gramotevitsi">Гръмотевична дейност над България </h2>
+     <p  class='align:center;'>UTC - при лятно часово време в България часът е UTC+3, а при зимното часово време UTC+2</p>
+     <div class="images analyses">
+       <div class="card">  
+          <h2 id="gramotevitsi">Почасово (в UTC)  разпределение на регистрираните мълнии над района на страната за изминалото денонощие</h2>               
+          <img src="m/sferici/vchera.png"  style='width:800px;'>
+       </div>
+       <div class="card">  
+          <h2 id="gramotevitsi">Почасово (в UTC)  разпределение на регистрираните мълнии над България за днес до момента (обновява се на всеки час)</h2>               
+          <img src="m/sferici/dnes.png"  style='width:800px;'>
+       </div>
+      </div>
+       <p>Системата <a href="https://www.metoffice.gov.uk/binaries/content/assets/metofficegovuk/pdf/business/data/leela-data-sheet-final-v2.pdf" target="_blank">LEELA  (Lightning Electromagnetic Emission Location by Arrival time difference)</a> на метеорологичната служба на Великобритания е новата автоматична мрежа за регистриране на мълнии. Тя се състои от десет сензора, разположени в цяла Европа, които служат за определяне на местоположението и момента на регистрираните мълнии.</p>
+    </div>
+   
+   <div class="card"> 
+     <h2 id="tSh2">Температура на земната повърхност</h2>
+       <img src="pojar/kartitS.php?imageToShow=ts&amp;chas=03&amp;coeff=100&amp;chd=3&amp;d=0"><p>Картите са на базата на оперативен обективен анализ на данните от синоптичните станции на НИМХ.</p>
+  <p><i>Забележка:</i> Данните са оперативни. Възможни са грешки. Да се използват за вземане на решения само след консултация с дежурния прогнозист на време.</p>     <div onClick="openClose('tS')"  class="linkOpenClose">Таблица на температурата на земната повърхност в синоптичните ни станции
+     </div>
+     <div id="tS" class="texter">
+       
+<h2>Температура на земната повърхност в синоптичните ни станции на 02.12.2025 в 03 ч.(UTC)</h2>
+<p>Данните са от последното наблюдение в българските синоптични станции.</p>
+<p>Часът в България е UTC+2 ч. през зимата и UTC+3 ч. през лятото.</p>
+<center><table border=1>
+<tr><th>Станция</th><th>Температура на въздуха на 2 m височина<br/>[&deg;C]</th><th>Относителна влажност<br/>[%]</th><th>Вятър-скорост<br/>[m/s]</th><th>Облачност<br/>[десети]</th><th>Температура на земната повърхност<br/>[&deg;C]</th>
+</tr>
+<tr>
+        <td>Ново село</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center;'>-0.5</td>
+      </tr><tr>
+        <td>Видин</td>
+        <td style='text-align:center'>-0.7</td>
+        <td style='text-align:center'>100</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-4.0</td>
+      </tr><tr>
+        <td>Враца</td>
+        <td style='text-align:center'>3.9</td>
+        <td style='text-align:center'>85</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>2.0</td>
+      </tr><tr>
+        <td>Монтана</td>
+        <td style='text-align:center'>2.4</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>0.7</td>
+      </tr><tr>
+        <td>Лом</td>
+        <td style='text-align:center'>2.4</td>
+        <td style='text-align:center'>87</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-1.3</td>
+      </tr><tr>
+        <td>Оряхово</td>
+        <td style='text-align:center'>2.7</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>-0.6</td>
+      </tr><tr>
+        <td>Кнежа</td>
+        <td style='text-align:center'>-1.3</td>
+        <td style='text-align:center'>99</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-3.7</td>
+      </tr><tr>
+        <td>Ловеч</td>
+        <td style='text-align:center'>2.8</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>1.0</td>
+      </tr><tr>
+        <td>Плевен</td>
+        <td style='text-align:center'>2.0</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-1.5</td>
+      </tr><tr>
+        <td>Велико Търново</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center;'>-1.1</td>
+      </tr><tr>
+        <td>Свищов</td>
+        <td style='text-align:center'>1.4</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-2.1</td>
+      </tr><tr>
+        <td>Русе</td>
+        <td style='text-align:center'>4.5</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>3.7</td>
+      </tr><tr>
+        <td>Шумен</td>
+        <td style='text-align:center'>1.0</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-2.5</td>
+      </tr><tr>
+        <td>Разград</td>
+        <td style='text-align:center'>1.8</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-0.8</td>
+      </tr><tr>
+        <td>Силистра</td>
+        <td style='text-align:center'>7.1</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>6.2</td>
+      </tr><tr>
+        <td>Силистра НИМХ</td>
+        <td style='text-align:center'>6.9</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>6.0</td>
+      </tr><tr>
+        <td>Варна</td>
+        <td style='text-align:center'>5.6</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center;'>4.5</td>
+      </tr><tr>
+        <td>Шабла</td>
+        <td style='text-align:center'>5.8</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>5.3</td>
+      </tr><tr>
+        <td>Калиакра</td>
+        <td style='text-align:center'>8.8</td>
+        <td style='text-align:center'>81</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>8.3</td>
+      </tr><tr>
+        <td>Добрич</td>
+        <td style='text-align:center'>3.7</td>
+        <td style='text-align:center'>97</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center;'>2.2</td>
+      </tr><tr>
+        <td>вр. Мургаш</td>
+        <td style='text-align:center'>-3.2</td>
+        <td style='text-align:center'>94</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center;'>-4.2</td>
+      </tr><tr>
+        <td>Кюстендил</td>
+        <td style='text-align:center'>-1.5</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-5.1</td>
+      </tr><tr>
+        <td>Драгоман</td>
+        <td style='text-align:center'>-3.0</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-6.8</td>
+      </tr><tr>
+        <td>Благоевград</td>
+        <td style='text-align:center'>-0.1</td>
+        <td style='text-align:center'>100</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center;'>-2.1</td>
+      </tr><tr>
+        <td>Черни връх</td>
+        <td style='text-align:center'>-5.0</td>
+        <td style='text-align:center'>90</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center;'>-6.4</td>
+      </tr><tr>
+        <td>София-ЦМС</td>
+        <td style='text-align:center'>-0.9</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-3.5</td>
+      </tr><tr>
+        <td>вр. Мусала</td>
+        <td style='text-align:center'>-8.7</td>
+        <td style='text-align:center'>86</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center;'>-10.3</td>
+      </tr><tr>
+        <td>Пловдив - Тракия</td>
+        <td style='text-align:center'>0.7</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-2.7</td>
+      </tr><tr>
+        <td>вр. Ботев</td>
+        <td style='text-align:center'>-5.2</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-7.0</td>
+      </tr><tr>
+        <td>Пазарджик</td>
+        <td style='text-align:center'>0.6</td>
+        <td style='text-align:center'>94</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-1.0</td>
+      </tr><tr>
+        <td>Чирпан</td>
+        <td style='text-align:center'>0.6</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-1.9</td>
+      </tr><tr>
+        <td>Стара Загора</td>
+        <td style='text-align:center'>1.2</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-2.4</td>
+      </tr><tr>
+        <td>Сливен</td>
+        <td style='text-align:center'>4.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>0.5</td>
+      </tr><tr>
+        <td>Елхово</td>
+        <td style='text-align:center'>0.9</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-2.6</td>
+      </tr><tr>
+        <td>Карнобат</td>
+        <td style='text-align:center'>3.5</td>
+        <td style='text-align:center'>97</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center;'>1.4</td>
+      </tr><tr>
+        <td>н. Емине</td>
+        <td style='text-align:center'>10.1</td>
+        <td style='text-align:center'>67</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>8.3</td>
+      </tr><tr>
+        <td>Бургас</td>
+        <td style='text-align:center'>5.3</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center;'>3.3</td>
+      </tr><tr>
+        <td>Ахтопол</td>
+        <td style='text-align:center'>4.8</td>
+        <td style='text-align:center'>89</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>3.3</td>
+      </tr><tr>
+        <td>Сандански</td>
+        <td style='text-align:center'>2.6</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>0.0</td>
+      </tr><tr>
+        <td></td>
+        <td style='text-align:center'>0.9</td>
+        <td style='text-align:center'>100</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>-2.1</td>
+      </tr><tr>
+        <td>Рожен</td>
+        <td style='text-align:center'>-1.6</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-4.6</td>
+      </tr><tr>
+        <td>Кърджали</td>
+        <td style='text-align:center'>2.5</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-1.1</td>
+      </tr><tr>
+        <td>Хасково</td>
+        <td style='text-align:center'>1.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-1.6</td>
+      </tr></table></center>     </div>
+     <div onClick="openClose('atS')"  class="linkOpenClose">Температура на земната повърхност
+     </div>
+     <div id="atS" class="texter">
+            <p class="bulg">Температурата на земната повърхност е изчислена за затревена хоризонтална, равна земна повърхност на открито без ограничение на хоризонта. Това е температурата на горна ефективна граница на тревата или на откритата повърхност на снежната покривка, ако има такава. Приема се, че тревната повърхност се поддържа в съответствие с препоръките на Световната метеорологична организация за устройство на парк за провеждане на метеорологични измервания. Трябва да е окосена на височина няколко сантиметра над повърхността на почвата. Температурата на височина 5 cm над повърхността на почвата е най-близката температура, измервана на стандартно ниво, която да съответства на температура на затревената земна повърхност.</p>
+    <p class="bulg">Температурата на земна повърхност е определена с числен модел на топлинен баланс, конструиран така, че да се използват стандартни данни за метеорологичните параметри: температура и относителна влажност на въздуха на височина 2 м, скорост на вятъра на 10 м, количество облачност, както и географско местоположение, дата и час за определяне на слънчевата радиация.</p>
+    <p class="bulg">Температурата на огрята от слънце земна повърхност може да е много по-висока от температурата на въздуха на 2 м, докато температурата на земната повърхност през нощта може да е много по-ниска при безоблачно, сухо и тихо време. </p>
+ 
+ 
+
+     </div>  
+   </div> <!-- krai card -->
+</div> <!-- krai images analyses -->
+     
+     
+<div class="images analyses">
+   <div class="card"> 
+        	  <h2 id="pojarI">Готовност за борба с пожари</h2>
+        	  <img src="pojar/nosel.new.php?imageToShow=dsr&amp;karta=dsr&amp;coeff=100&amp;chd=3&amp;d=0">
+        	       <div><a href="pojaroopasnostPlus" target="_blank" class="linkOpenClose">Пълната информация за условията на пожароопасност в България (в нов прозорец)</a></div>
+
+        	       <div onClick="openClose('aPojar')"  class="linkOpenClose">Легенда - пожароопасност</div>
+     <div id="aPojar" class="texter">
+        <center><table style="max-width: 1300px;" cellspacing="10" cellpadding="10" border="2"><tbody><tr><td width="5%" valign="top" bgcolor="ffffff" align="center"><strong>Степен на риск/ Hazard</strong></td><td bgcolor="ffffff" align="center"><strong>Описание на български</strong></td><td bgcolor="ffffff" align="center"><strong>Description in English</strong></td></tr><tr><td style="width: 5%; background-color: #3366ff;" valign="top" align="center">Малък<br>Low</td><td bgcolor="ffffff" align="center">Съществуващи пожари се самозагасяват и е малко вероятно да възникват нови. Жизнени пожари са възможни само като тлеене в дълбоки сухи слоеве.</td><td bgcolor="ffffff" align="center">Fires likely to be self-extinguishing and new ignitions unlikely. Any existing fires limited to smoldering in deep, drier layers.</td></tr><tr><td style="width: 5%; background-color: lime;" valign="top" align="center">Умерен<br>Moderate</td><td bgcolor="ffffff" align="center">Възможни са леки и бавно развиващи се пожари. Съществуващи пожари се гасят лесно от наземни екипи с помпи и ръчни инструменти.</td><td bgcolor="ffffff" align="center">Creeping or gentle surface fires. Fires easily contained by ground crews with pumps and hand tools.</td></tr><tr><td style="width: 5%; background-color: yellow;" valign="top" align="center">Голям<br>High</td><td bgcolor="ffffff" align="center">Възможни са умерени до силни пожари с въвличане на дървесни корони само локално. Пожарите са трудни за овладяване от наземни екипи. Често се налага използване на тежка екипировка за овладяване на пожарите (булдозери, камиони-цистерни, самолети).</td><td bgcolor="ffffff" align="center">Moderate to vigorous surface fire with intermittent crown involvement. Challenging for ground crews to handle; heavy equipment (bulldozers, tanker trucks, aircraft) often required to contain fire.</td></tr><tr><td style="width: 5%; background-color: #ff9900;" valign="top" align="center">Много голям<br> Very High</td><td bgcolor="ffffff" align="center">Възможни са много силни пожари с частично или пълно въвличане на дървесните корони. Предните фронтове на пожарите е невъзможно да бъдат овладени от наземни екипи. Налагат се въздушни атаки със забавящ агент (retardant), за да се атакуват успешно предните фронтове на пожарите.</td><td bgcolor="ffffff" align="center">High-intensity fire with partial to full crown involvement. Head fire conditions beyond the ability of ground crews; air attack with retardant required to effectively attack fire's head.</td></tr><tr><td style="width: 5%; background-color: red;" valign="top" align="center">Екстремален<br>Extreme</td><td bgcolor="ffffff" align="center">Възможни са бързо разпространяващи се много силни пожари с въвличане на дървесните корони. Пожарите са трудни за овладяване. Действията по погасяване се ограничени само по фланговете на пожара. Възможни са само индиректни действия, насочени срещу предните фронтове на пожарите.</td><td bgcolor="ffffff" align="center">Fast-spreading, high-intensity crown fire. Very difficult to control. Suppression actions limited to flanks, with only indirect actions possible against the fire's head.</td></tr><tr><td style="width: 5%; background-color: #969696;" valign="top" align="center">Не се пресмята (сняг)<br> (Snow)</td><td bgcolor="ffffff" align="center">Не се извършват изчисления за този район. (Наличие на снежна покривка).</td><td bgcolor="ffffff" align="center">No calculations were performed for this region.</td></tr></tbody></table>
+       <p align="center">Източник: Canadian Forest Service (http://cfs.nrcan.gc.ca/)</p>
+     </div>
+     <div onClick="openClose('aCanada')"  class="linkOpenClose">Относно канадския индекс на пожароопасност </div>
+       <p>&nbsp;</p>
+     <div id="aCanada" class="texter">
+        <p class="bulg">Системата работи от април 2008 г. и се експлоатира през топлото полугодие от април до октомври. Използва се Канадски индекс на пожароопасност (Fire Weather Index, FWI), който е разработен в изследователския център на <a href="http://cfs.nrcan.gc.ca/" target="_blank">Канадската служба за горите</a>.</p>
+        <h4>Използвани данни (входни елементи за изчисляване на FWI):</h4>
+<ul  class="bulg">
+<li>количество валеж за предходните 24 часа;</li>
+<li>температура на въздуха;</li>
+<li>относителна влажност на въздуха;</li>
+<li>скорост на вятъра; наличие на снежна покривка;</li>
+<li>продължителност на деня.</li>
+</ul>
+        <p class="bulg">FWI има три подиндекса, които показват "сухотата" на различните видове "гориво". Всеки от тези подиндекси е сложна функция на метео-елементите. На базата на тези подиндекси и данни за скоростта на вятъра се определят други два подиндекса, които дават оценка за скоростта на първоначално разпалване на възникнал пожар, както и за наличното „гориво” за по-нататъшно разгаряне на пожара. На базата на тези подиндекси се изчислява FWI, който дава обобщена оценка на интензитета на разгарящ се пожар (в количество отделена енергия за единица време на единица дължина от линията на фронта на пожара).</p>
+    </div>
+   </div>
+   <div class="card"> 
+        	  <h2  id="komfort">Анализ на индекса на комфорт в последния синоптичен срок</h2>
+  <img src="pojar/kartiKomfort.php?imageToShow=comfort&amp;chas=03&amp;coeff=100&amp;chd=3&amp;d=0"><p>Картите са на базата на оперативен обективен анализ на данните от синоптичните станции на НИМХ.</p>
+  <p><i>Забележка:</i> Данните са оперативни. Възможни са грешки. Да се използват за вземане на решения само след консултация с дежурния прогнозист на време.</p>     <div onClick="openClose('tWCI')"  class="linkOpenClose">Таблица на температурата на усещане в синоптичните ни станции
+     </div>
+     <div id="tWCI" class="texter">
+       
+<h2>Индекс на комфорт в синоптичните ни станции на 02.12.2025 в 03 ч.(UTC)</h2>
+<p>Данните са от последното наблюдение в българските синоптични станции.</p>
+<p>Часът в България е UTC+2 ч. през зимата и UTC+3 ч. през лятото.</p>
+<table border=1>
+<tr><th rowspan='2'>Станция</th><th colspan='4'>Измерени</th><th colspan='3'>Изчислени</th>
+</tr>
+
+<tr><th>Температура<br/>[&deg;C]</th><th>Относителна влажност<br/>[%]</th><th>Вятър-скорост<br/>[m/s]</th><th>Облачност<br/>[десети]</th><th>Температура на усещане<br/>[&deg;C]</th><th>Индекс на комфорт</th><th>Препоръчително облекло</th>
+</tr>
+<tr>
+        <td>Ново село</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.8</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.56</td>
+      </tr><tr>
+        <td>Видин</td>
+        <td style='text-align:center'>-0.7</td>
+        <td style='text-align:center'>100</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.78</td>
+      </tr><tr>
+        <td>Враца</td>
+        <td style='text-align:center'>3.9</td>
+        <td style='text-align:center'>85</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.72</td>
+      </tr><tr>
+        <td>Монтана</td>
+        <td style='text-align:center'>2.4</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.7</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.82</td>
+      </tr><tr>
+        <td>Лом</td>
+        <td style='text-align:center'>2.4</td>
+        <td style='text-align:center'>87</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.61</td>
+      </tr><tr>
+        <td>Оряхово</td>
+        <td style='text-align:center'>2.7</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.0</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.57</td>
+      </tr><tr>
+        <td>Кнежа</td>
+        <td style='text-align:center'>-1.3</td>
+        <td style='text-align:center'>99</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-9.4</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>2.01</td>
+      </tr><tr>
+        <td>Ловеч</td>
+        <td style='text-align:center'>2.8</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.2</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.79</td>
+      </tr><tr>
+        <td>Плевен</td>
+        <td style='text-align:center'>2.0</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.0</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.62</td>
+      </tr><tr>
+        <td>Велико Търново</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.5</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.59</td>
+      </tr><tr>
+        <td>Свищов</td>
+        <td style='text-align:center'>1.4</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.66</td>
+      </tr><tr>
+        <td>Русе</td>
+        <td style='text-align:center'>4.5</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>4.4</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.28</td>
+      </tr><tr>
+        <td>Шумен</td>
+        <td style='text-align:center'>1.0</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.2</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.68</td>
+      </tr><tr>
+        <td>Разград</td>
+        <td style='text-align:center'>1.8</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.78</td>
+      </tr><tr>
+        <td>Силистра</td>
+        <td style='text-align:center'>7.1</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>6.1</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.19</td>
+      </tr><tr>
+        <td>Силистра НИМХ</td>
+        <td style='text-align:center'>6.9</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>6.1</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.19</td>
+      </tr><tr>
+        <td>Варна</td>
+        <td style='text-align:center'>5.6</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.43</td>
+      </tr><tr>
+        <td>Шабла</td>
+        <td style='text-align:center'>5.8</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.4</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.44</td>
+      </tr><tr>
+        <td>Калиакра</td>
+        <td style='text-align:center'>8.8</td>
+        <td style='text-align:center'>81</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>4.5</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.28</td>
+      </tr><tr>
+        <td>Добрич</td>
+        <td style='text-align:center'>3.7</td>
+        <td style='text-align:center'>97</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>2.6</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.38</td>
+      </tr><tr>
+        <td>вр. Мургаш</td>
+        <td style='text-align:center'>-3.2</td>
+        <td style='text-align:center'>94</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-14.7</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.29</td>
+      </tr><tr>
+        <td>Кюстендил</td>
+        <td style='text-align:center'>-1.5</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-6.2</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.84</td>
+      </tr><tr>
+        <td>Драгоман</td>
+        <td style='text-align:center'>-3.0</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-8.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.94</td>
+      </tr><tr>
+        <td>Благоевград</td>
+        <td style='text-align:center'>-0.1</td>
+        <td style='text-align:center'>100</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-7.0</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.88</td>
+      </tr><tr>
+        <td>Черни връх</td>
+        <td style='text-align:center'>-5.0</td>
+        <td style='text-align:center'>90</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-17.2</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.41</td>
+      </tr><tr>
+        <td>София-ЦМС</td>
+        <td style='text-align:center'>-0.9</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-8.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.98</td>
+      </tr><tr>
+        <td>вр. Мусала</td>
+        <td style='text-align:center'>-8.7</td>
+        <td style='text-align:center'>86</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>-22.4</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>4</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>2.69</td>
+      </tr><tr>
+        <td>Пловдив - Тракия</td>
+        <td style='text-align:center'>0.7</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.5</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.70</td>
+      </tr><tr>
+        <td>вр. Ботев</td>
+        <td style='text-align:center'>-5.2</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-17.0</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.40</td>
+      </tr><tr>
+        <td>Пазарджик</td>
+        <td style='text-align:center'>0.6</td>
+        <td style='text-align:center'>94</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-8.3</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.95</td>
+      </tr><tr>
+        <td>Чирпан</td>
+        <td style='text-align:center'>0.6</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-6.7</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.86</td>
+      </tr><tr>
+        <td>Стара Загора</td>
+        <td style='text-align:center'>1.2</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.68</td>
+      </tr><tr>
+        <td>Сливен</td>
+        <td style='text-align:center'>4.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.48</td>
+      </tr><tr>
+        <td>Елхово</td>
+        <td style='text-align:center'>0.9</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.3</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.69</td>
+      </tr><tr>
+        <td>Карнобат</td>
+        <td style='text-align:center'>3.5</td>
+        <td style='text-align:center'>97</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.42</td>
+      </tr><tr>
+        <td>н. Емине</td>
+        <td style='text-align:center'>10.1</td>
+        <td style='text-align:center'>67</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>4.4</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.28</td>
+      </tr><tr>
+        <td>Бургас</td>
+        <td style='text-align:center'>5.3</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.57</td>
+      </tr><tr>
+        <td>Ахтопол</td>
+        <td style='text-align:center'>4.8</td>
+        <td style='text-align:center'>89</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.7</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.66</td>
+      </tr><tr>
+        <td>Сандански</td>
+        <td style='text-align:center'>2.6</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.73</td>
+      </tr><tr>
+        <td></td>
+        <td style='text-align:center'>0.9</td>
+        <td style='text-align:center'>100</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.77</td>
+      </tr><tr>
+        <td>Рожен</td>
+        <td style='text-align:center'>-1.6</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-9.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>2.03</td>
+      </tr><tr>
+        <td>Кърджали</td>
+        <td style='text-align:center'>2.5</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.4</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.59</td>
+      </tr><tr>
+        <td>Хасково</td>
+        <td style='text-align:center'>1.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.81</td>
+      </tr></table>     </div>
+     <div onClick="openClose('aWCI')"  class="linkOpenClose">Индекс на топлинен комфорт на базата на температура на усещане
+          </div>
+     <div id="aWCI" class="texter">
+            <p class="bulg">Предложените карти показват географско разпределение за България на актуалното или очакваното усещане за топлинен комфорт/дискомфорт на преобладаваща част от хората. Картите се отнасят за стандартен час от деня, който съответства на класическите срокове за наблюдение в метеорологични станции. Например 12 UTC (Coordinated Universal Time) съответства на 14 ч. българско време (15 ч. лятно време), което обикновено е близо до най-топлите часове от денонощието, а 03 UTC  съответства на 05 ч. българско време (06 ч. лятно време), което обикновено е близо до най-студените часове от денонощието.</p>
+     <h2>Класове на топлинен комфорт, усещане за комфорт/дискомфорт и препоръчителна степен на обличане</h2>
+     <p>Таблицата показва степените на топлинен комфорт/дискомфорт. Категориите за комфортно, топло и горещо са определени на базата на степените на физиологичен стрес, на който е подложена човешката терморегулационна система, при различните температурни условия според температурата на усещане. Категориите за студено следват степените на опасност според Wind Chill Index.</p>
+ 		
+<table border="1">
+	<tr>
+		<td>Клас на топлинен комфорт</td>
+		<td>от температура на усещане, &deg;С</td>
+		<td>до температура на усещане, &deg;С</td>
+		<td>Градации в цвят</td>
+		<td>Усещане за топлинен комфорт/дискомфорт</td>
+		<td>Описание </td>
+		<td >Степен на обличане</td>
+	</tr>
+	<tr>
+		<td>13</td>
+		<td>44</td>
+		<td>-</td>
+		<td bgcolor="#ff99cc"></td>
+		<td>Опасно горещо</td>
+		<td>Възможен е топлинен шок при продължителна работа / престой на открито.</td>
+		<td >0.4</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>38</td>
+		<td>44</td>
+		<td bgcolor="#990000"></td>
+		<td>Много горещо</td>
+		<td>Механизмът на самоохлаждане чрез потене е затруднен.</td>
+		<td >0.4</td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td>32</td>
+		<td >38</td>
+		<td bgcolor="#FF0000"></td>
+		<td>Горещо</td>
+		<td>Почти цялото тяло е покрито с пот.</td>
+		<td >0.4</td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td>26</td>
+		<td>32</td>
+		<td bgcolor="#FF9933"></td>
+		<td>Много топло</td>
+		<td>Голяма част от тялото е покрита с пот.</td>
+		<td>0.4</td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td>20</td>
+		<td>26</td>
+		<td bgcolor="#FFFF00"></td>
+		<td>Топло</td>
+		<td>Започнало е потене. Малка част от тялото е покрита с пот.</td>
+		<td>0.5-0.4</td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>10</td>
+		<td>20</td>
+		<td bgcolor="#FFFF99"></td>
+		<td>Комфортно</td>
+		<td>Усещане за топлинен комфорт с подходящо облекло</td>
+		<td >1.0-0.5</td>
+	</tr>
+	<tr>
+		<td >7</td>
+		<td>0</td>
+		<td>10</td>
+		<td bgcolor="#CCFFCC"></td>
+		<td>Лек дискомфорт</td>
+		<td>Може да бъде постигнат топлинен комфорт с подходящо облекло, но по откритите части на тялото се усеща лек дискомфорт за студено.</td>
+		<td >1.5-1.0</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>-10</td>
+		<td>0</td>
+		<td bgcolor="#00FFFF"></td>
+		<td>Студено</td>
+		<td>Кожата настръхва.</td>
+		<td >2.0-1.5</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>-18</td>
+		<td>-10</td>
+		<td bgcolor="#0000FF"></td>
+		<td>Много студено</td>
+		<td>Започва треперене.</td>
+		<td>2.4-2.0</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>-27</td>
+		<td>-18</td>
+		<td bgcolor="#003399"></td>
+		<td>Възможно измръзване</td>
+		<td>Възможно е измръзване на открити части на тялото.</td>
+		<td >2.9-2.4</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>-35</td>
+		<td>-27</td>
+		<td bgcolor="#660066"></td>
+		<td>Измръзване на незащитени части от тялото</td>
+		<td>Измръзване на незащитени части от тялото при престой на открито от 10 до 30 min</td>
+		<td >3.3-2.9</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>-47</td>
+		<td>-35</td>
+		<td bgcolor="#9900cc"></td>
+		<td>Бързо измръзване на незащитени части от тялото</td>
+		<td>Измръзване на незащитени части от тялото при престой на открито от 5 до 10 min</td>
+		<td >3.9-3.3</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>-</td>
+		<td>-47</td>
+		<td bgcolor="#cc66cc"></td>
+		<td>Много бързо измръзване</td>
+		<td>Много бързо измръзване при престой на открито до 5 min</td>
+		<td >4.0</td>
+	</tr>
+</table>
+
+<h2>Значение на препоръчителната степен на обличане</h2>
+<table>
+<tr><th>Схематично описание на примерно облекло</th><th>Препоръчителна степен на обличане</th></tr><tr>
+<td>Без дрехи</td><td>	0</td>
+</tr><tr>
+<td>Къси панталони</td><td>0.1</td>
+</tr><tr>
+<td>Къси панталони, отворена блуза/риза с къси ръкави, отворени обувки</td><td>0.35</td>
+</tr><tr>
+<td>Дълги леки панталони, отворена блуза/риза с къси ръкави, отворени обувки</td><td>0.5</td>
+</tr><tr>
+<td>Дълги панталони, отворена памучна блуза/риза с дълги ръкави, обувки</td><td>0.7</td>
+</tr><tr>
+<td>Дълги панталони, памучна блуза/риза с дълъг ръкав, обувки и връхна дреха/яке</td><td>0.9</td>
+</tr><tr>
+<td>Пълен работен костюм (дълги панталони, памучна блуза/риза с дълъг ръкав, елек, обувки и връхна дреха/яке)</td><td>1.0</td>
+</tr><tr>
+<td>Пълен работен костюм и памучно палто/яке</td><td>1.5</td>
+</tr><tr>
+<td>Дълги панталони, вълнена фланела, вълнени чорапи, обувки, палто/яке, изолиращи от влага и вятър, шапка и ръкавици</td><td>1.5-2.0</td>
+</tr><tr>
+<td>Облекло с пух, многослойно облекло, подходящо за полярни условия с топлоизолиращи обувки, шапка, качулка и дебели ръкавици</td><td>3.0-4.0</td>
+</tr>
+</table>
+     <h2>Температура на усещане</h2>
+     <p class="bulg">Температурата на усещане е температура на въздуха в еталонна атмосферна среда, където усещането за топлинен комфорт/дискомфорт на човек би било същото, както при реалните метеорологични условия. Усещането за топлинен комфорт се изчислява с помощта на пълен числен модел на топлинен баланс на тялото на „стандартен“ човек, поставен в атмосферни условия при земната повърхност, на открито, върху тревна площ или снежна покривка, ако има такава. Усещането за топлинен комфорт/дискомфорт зависи от морфологичните параметри на човека – възраст, пол, ръст, тегло и други, но за общи цели тук са използвани параметрите на „стандартен“ човек. Това е 35-годишен мъж, висок 1.75 m, с тегло 75 kg, в добро здраве. Температурата на усещане зависи от извършваната от човек работа и може да се изчислява при различна мощност. В този случай се приема, че „стандартният“ човек извършва работа с мощност, съответстваща на ходене със скорост 4 km/h по хоризонтална повърхност. Приема се, че вятърът духа винаги отстрани на посоката на движение. Облеклото се адаптира (лятно/зимно) така, че „стандартният“ човек, ако е възможно, да постигне топлинен комфорт при конкретните метеорологични условия на открито. За определяне на температурата на усещане се използват данни за метеорологични елементи в слоя въздух близо до земната повърхност (0–2 m), където се намира „стандартният“ човек: температура на въздуха; относителна влажност на въздуха; скорост на вятъра; наличие на снежна покривка. Използват се също: количество облачност; географски координати и надморска височина на мястото; дата и час.</p>
+     </div>
+ 
+
+     </div>        	  
+   </div>
+ </div> <!-- krai images analyses -->
+ <div class="images  data">
+
+ </div> 
+
+<!------------------------- Tekushtiat mesets ----------------------------->
+
+ <div class="cardProzrachna">
+  <h2 id="toziMesets">Карти-анализ за текущия месец до днес</h2>
+
+ <div class="images analyses">
+   <div class="card"> 
+     <h2>Средна месечна температура (градуси С), декември до днес</h2>
+     <p><img src="https://info.meteo.bg/obstanovki/month/temp/T_total_202512.png"  style="border:groove;margin-top: 5px;"></p>
+   </div>
+   <div class="card"> 
+        	  <h2>Отклонение на средната месечна температура от климатичната норма (градуси&nbsp;С), декември до днес</h2> 
+        	  <p><img src="https://info.meteo.bg/obstanovki/month/temp/T_anomaly_202512.png" style="border:groove;margin-top: 5px;"></p>
+   </div>
+ </div>
+ <div class="images analyses">
+   <div class="card"> 
+        	  <h2>Месечна сума на валежа в mm (l/m<sup>2</sup>), декември до днес</h2>
+        	  <p><img src="https://info.meteo.bg/obstanovki/month/prec/R_total_202512.png" style="border:groove;margin-top: 5px;"></p>
+   </div>
+   <div class="card"> 
+        	  <h2>Месечна сума на валежа в % от климатичната норма,декември до днес</h2> 
+        	  <p><img src="https://info.meteo.bg/obstanovki/month/prec/R_percent_202512.png" style="border:groove;margin-top: 5px;"></p>
+   </div>
+ </div>
+  
+</div> <!-- end cardProzrachna -->
+  <div class="cardProzrachna">
+    <h2 id="sst">Температура на морската вода</h2>
+     <img class="sst" src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/SST.png" ><br/>
+     <p><a href="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/SSTbig.png" target="_blank"><b>Голяма карта на температурата на морската вода за цялото Средиземноморие и Черноморие (4800х2700 пиксела, отваря се в нов прозорец)</b></a></p>
+  </div>
+ </div>
+</div>
+
+
+<!-- -------------------  FOOTER -------------- -->  
+
+<footer>
+<div  class="vestnik">
+<h2 class="footer">Карта на сайта</h2>
+<a name="karta"></a>
+<h3><a class="footer" href="index.php?koiFail=tekushti&lng=0"> => Текущи данни и измервания </a></h3>
+  <ul>
+    <li>Температура, вятър и явления в България</li>
+    <li>Минимални и максимални температури за изминалото денонощие</li>
+    <li>Спътникови анимации - температура на горната граница на облаците и въздушни маси</li>
+    <li>Валежи за 24 часа</li>
+    <li>Снежна покривка</li>
+    <li>Гръмотевична дейност</li>
+    <li>Температура на земната повърхност&nbsp;&mdash; анализ</li>
+    <li>Условията за борба с пожари&nbsp;&mdash; анализ</li>
+    <li>Условията на комфорт&nbsp;&mdash; анализ на последните данни</li>
+    <li>Карти-анализ за текущия месец до днес</li>
+    <li>Температура на морската повърхност&nbsp;&mdash; Черно и Средиземно море</li>
+ </ul>
+ <h3><a class="footer" href="index.php?koiFail=vecherenBiuletin&lng=0"> => Вечерен метеорологичен бюлетин </a></h3>
+  <ul>
+    <li>Видео - преглед на времето през изминалото денонощие и прогноза за следващите дни</li>
+  </ul>
+ <h3><a class="footer" href="index.php?koiFail=analizi&lng=0"> => Анализи </a></h3>
+  <ul>
+    <li>Карти-анализ за текущия месец до днес</li>
+    <li>Минимални и максимални температури за изминалото денонощие</li>
+    <li>Изминалият месец</li>
+    <li>Месечен ход на температурата и валежите м 4 града</li>  
+    <li>Изминалият сезон</li>
+  </ul>
+<h3><a class="footer" href="https://storm.cfd.meteo.bg/weather/obshtini/"> => Прогнози - опасни явления </a></h3>
+  <ul>
+    <li>Прогноза за опасни метеорологични явления (в нов прозорец)</li>
+ </ul>
+<h3><a class="footer" href="index.php?koiFail=bg&lng=0"> => Прогнози за България - краткосрочни </a></h3>
+  <ul>
+    <li>Карти за 3 или 4 дена и текст</li>
+    <li>Прогноза по градове</li>
+    <li>Прогноза за планините</li>
+    <li>Прогноза за морето </li>
+    <li>Прогноза на препоръчителна готовност за борба с пожари</li>
+    <li>Прогноза на условията на комфорт</li>
+    <li>Прогноза на температурата на земната повърхност</li>
+    <li>Прогноза на вероятност за гръмотевична дейност</li>
+ </ul>
+<h3><a class="footer" href="index.php?koiFail=bg2&lng=0"> => Прогнози за България -средносрочни</a></h3>
+  <ul>
+    <li>Седмична</li>
+    <li>15-дневна</li>
+    <li>Месечна</li>
+    <li>Сезонна</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=eubp&lng=0"> => Прогнози за Балканите и Европа</a></h3>
+  <ul>
+    <li>За Балканите - карти за 3 дена и текст</li>
+    <li>За Европа - карти за 3 дена и текст</li>
+    <li>Прогноза по градове </li>
+    <li>Продукти от НИМХ на базата на модела GFS</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=tablitsi&lng=0"> => Синоптични прогнози в точки</a></h3>
+  <ul>
+    <li>Прогноза по градове в България</li>
+    <li>Прогноза за морските курорти </li>
+    <li>Прогноза за планинските курорти</li>
+    <li>Прогноза по градове - Европа</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=prognChisleni&lng=0"> => Числени прогнози за България и Европа</a></h3>
+  <ul>
+    <li>ALADIN - облачност и вятър и температура при земята за 72 часа</li>
+    <li>AROME - облачност и вятър и температура при земята за 48 часа</li>
+    <li>Морско вълнение - височина на вълната и вятър над Черно море</li>
+    <li>Прогноза на вероятността за слана</li>
+    <li>Прогноза на вероятността за гръмотевична дейност</li>
+    <li>Прогноза на условията на комфорт</li>
+    <li>Прогноза на температурата на земната повърхност</li>
+    <li>Прогноза на препоръчителна готовност за борба с пожари</li>
+    <li>Продукти от НИМХ на базата на модела GFS</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=poGradoveAJ&lng=0"> => Числени прогнози в точки</a></h3>
+  <ul>
+    <li>Метеограми за 72 часа за всички областни центрове и за всичките ни синоптични станции </li>
+    <li>Морско вълнение за 12 курорта</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=zaNas&lng=0"> => За нас</a></h3>
+  <ul>
+    <li>Контакти</li>
+    <li>Предлагани продукти и услуги</li>
+    <li>Повече за прогнозите, които издаваме - краткосрочни, средносрочни, дългосрочни и числени</li>
+    <li>Повече за моделите, които пускаме и поддържаме оперативно в нашия институт</li>
+    <li>Повече за другите модели, които използваме</li>
+ </ul> 
+
+
+</div>
+<hr/>
+<b>Copyright © 2025, НИМХ. </b>   Съдържанието на сайта на Националния институт по метеорология и хидрология (НИМХ) и технологиите, използвани в него, са под закрила на Закона за авторското право и сродните му права. Всички текстови и графични изображения, публикувани в сайта, са собственост на НИМХ, освен ако изрично не е посочено друго. Ползвателите на съдържанието на сайта на НИМХ се задължават, ако го разпространяват, да не го променят, изменят, редактират или модифицират и задължително да посочват източника на информация – НИМХ. </footer>
+</div>
+
+
+</body>
+</html>

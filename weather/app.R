@@ -5,8 +5,8 @@ library(shiny)
 library(bslib)
 
 download.file("http://www.weather.bg/index.php?koiFail=tekushti&lng=0", destfile = "temp_nimh_new")
-download.file("http://weather.bg/index.php?koiFail=bg&lng=0", destfile = "forecast_new")
-download.file("http://meteo.bg/meteo7/bg/rekiTablitsa", destfile = "rivers_new")
+download.file("http://weather.bg/index.php?koiFail=bg&lng=0", destfile = "forcast_nimh_new")
+download.file("http://meteo.bg/meteo7/bg/rekiTablitsa", destfile = "rivers_nimh_new")
 
 temp_nimh_new <- read_html("temp_nimh_new") %>%
   html_element("table") %>% html_table() %>%
@@ -34,15 +34,15 @@ rain_nimh_new <- read_html("temp_nimh_new") %>%
          rain = parse_number(rain), date = Sys.Date(), .after = station) %>% 
   filter(rain > 0)
 
-bg <- read_html("forecast_new") %>%
+bg <- read_html("forcast_nimh_new") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
   filter(!Град == "") %>% mutate(region = "България", .before = Град) %>% 
   select(region, station = Град, date = name, weather = value)
-pl <- read_html("forecast_new") %>%
+pl <- read_html("forcast_nimh_new") %>%
   html_element("#planini") %>% html_table() %>% pivot_longer(-Пункт) %>% 
   filter(!Пункт == "") %>% mutate(region = "Планини", .before = Пункт) %>% 
   select(region, station = Пункт, date = name, weather = value)
-eu <- read_html("forecast_new") %>%
+eu <- read_html("forcast_nimh_new") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
   filter(!Град == "") %>% mutate(region = "Европа", .before = Град) %>% 
   select(region, station = Град, date = name, weather = value)
@@ -60,7 +60,7 @@ forcast_df <- inner_join(temp, weather, by = join_by(region, station, date)) %>%
   arrange(station) %>% 
   filter(!weather == "n.a.")
 
-rivers <- read_html("rivers_new") %>%
+rivers <- read_html("rivers_nimh_new") %>%
   html_element("center") %>% html_table()
 colnames(rivers) <- c('station_no','river','station', "q_min",
                       "q_mean", "q_max", "depth", "ottok", "change_depth")
@@ -74,7 +74,7 @@ rivers <- rivers %>%
   mutate(across(5:10, parse_number)) %>%
   mutate(across(5:10, ~ round(., 1))) %>%
   drop_na(river) %>% arrange(river)
-date_rivers <- read_html("rivers_new") %>%
+date_rivers <- read_html("rivers_nimh_new") %>%
   html_elements("h2") %>% html_text(trim = T) %>% as.data.frame()
 #----------------------------------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
@@ -89,7 +89,7 @@ ui <- page_fillable(#h3("Времето в България!"),
                     navset_pill(
                       nav_panel(title = "Температура",
                                 selectInput("rows", "Брой колонки:",
-                                            choices = c(2, 1)),
+                                            choices = c(1, 2)),
                                 plotOutput("temp")),
                       nav_panel(title = "Вятър",
                                 plotOutput("wind")),

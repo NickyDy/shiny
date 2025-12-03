@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="shortcut icon" href="http://meteo.bg/meteo7/sites/meteo.bg/files/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="description" content="08:00 ч. местно време" />
+<meta name="robots" content="noarchive, nosnippet" />
+<meta name="generator" content="Drupal 7 (https://www.drupal.org)" />
+<link rel="canonical" href="http://meteo.bg/meteo7/bg/rekiTablitsa" />
+<link rel="shortlink" href="http://meteo.bg/meteo7/bg/node/111" />
+<title>Оперативна информация за речния отток - таблица | meteo.bg</title>
+<style type="text/css" media="all">
+@import url("http://meteo.bg/meteo7/modules/system/system.base.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/system/system.menus.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/system/system.messages.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/system/system.theme.css?t3scra");
+</style>
+<style type="text/css" media="all">
+@import url("http://meteo.bg/meteo7/modules/aggregator/aggregator.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/calendar/css/calendar_multiday.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/date/date_api/date.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/date/date_popup/themes/datepicker.1.7.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/date/date_repeat_field/date_repeat_field.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/field/theme/field.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/node/node.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/user/user.css?t3scra");
+@import url("http://meteo.bg/meteo7/sites/all/modules/extlink/extlink.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/views/css/views.css?t3scra");
+</style>
+<style type="text/css" media="all">
+@import url("http://meteo.bg/meteo7/modules/ctools/css/ctools.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/panels/css/panels.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/locale/locale.css?t3scra");
+</style>
+<style type="text/css" media="all">
+@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/font-awesome.css?t3scra");
+@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/style.css?t3scra");
+@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/media.css?t3scra");
+</style>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/jquery_update/replace/jquery/1.10/jquery.min.js?v=1.10.2"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery-extend-3.4.0.js?v=1.10.2"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery-html-prefilter-3.5.0-backport.js?v=1.10.2"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery.once.js?v=1.2"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/misc/drupal.js?t3scra"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/modules/admin_menu/admin_devel/admin_devel.js?t3scra"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/extlink/extlink.js?t3scra"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/meteo.bg/files/languages/bg_zm-s9E0dbosLYSFvnk34t8II4bdn-3QHJddeOFzzrkk.js?t3scra"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/js/custom.js?t3scra"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","setHasJsCookie":0,"ajaxPageState":{"theme":"software","theme_token":"tRvySVHBn8dWwwlBBP0wArC8l5-6z04exUl_biY4R4E","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"public:\/\/languages\/bg_zm-s9E0dbosLYSFvnk34t8II4bdn-3QHJddeOFzzrkk.js":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/js\/custom.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/aggregator\/aggregator.css":1,"modules\/calendar\/css\/calendar_multiday.css":1,"modules\/date\/date_api\/date.css":1,"modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"modules\/views\/css\/views.css":1,"modules\/ctools\/css\/ctools.css":1,"modules\/panels\/css\/panels.css":1,"modules\/locale\/locale.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/font-awesome.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/style.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/media.css":1}},"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":0,"extExclude":"","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-111 node-type-izmervania i18n-bg">
+    
+<div id="header_wrapper">
+
+  <div class="user-menu-wrapper clearfix">
+    <div class="full-wrap">
+      <div class="region region-user-menu">
+  <div id="block-locale-language" class="block block-locale">
+
+        <h2 > </h2>
+    
+  <div class="content">
+    <ul class="language-switcher-locale-url"><li class="bg first active"><a href="/meteo7/bg/rekiTablitsa" class="language-link active" xml:lang="bg" title="Оперативна информация за речния отток - таблица"><img class="language-icon" typeof="foaf:Image" src="http://meteo.bg/meteo7/modules/languageicons/flags/bg.png" width="16" height="12" alt="Български" title="Български" /> Български</a></li>
+<li class="en last"><span class="language-link locale-untranslated" xml:lang="en"><img class="language-icon" typeof="foaf:Image" src="http://meteo.bg/meteo7/modules/languageicons/flags/en.png" width="16" height="12" alt="English" title="English" /> English</span></li>
+</ul>  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+    </div>
+  </div>
+
+  <div id="inner_header_wrapper">
+
+    <header id="header" role="banner">
+
+      <div class="top_left">
+
+                  <div id="logo">
+            <a href="/meteo7/bg" title="Начало">
+              <img src="http://meteo.bg/meteo7/sites/meteo.bg/files/logoZaSite8.1020.png"/>
+            </a>
+          </div>
+        
+        <h1 id="site-title">
+          <a href="/meteo7/bg" title="Начало"></a>
+          <div id="site-description"></div>
+        </h1>
+      </div>
+
+      <div class="top_right">
+        <!-- Search -->
+              </div>
+    <div class="clear"></div>
+    </header>
+
+  </div>
+
+  <div class="menu_wrapper">
+    <nav id="main-menu"  role="navigation">
+      <a class="nav-toggle" href="#">Navigation</a>
+      <div class="menu-navigation-container">
+        <ul class="menu"><li class="first expanded"><a href="/meteo7/bg/izmervania" title="">Измервания</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/meteoNow">Текущи метеоданни</a></li>
+<li class="leaf"><a href="/meteo7/bg/spatnik">Спътник</a></li>
+<li class="leaf"><a href="/meteo7/bg/valej">24-часов валеж</a></li>
+<li class="leaf"><a href="http://sea.meteo-varna.net/" title="Връзка към страницата с данните от буйовете по проета MARSI ">Морски измервания</a></li>
+<li class="leaf"><a href="/meteo7/bg/acidRain">pH на валежите</a></li>
+<li class="leaf"><a href="/meteo7/bg/sferici">Гръмотевична дейност</a></li>
+<li class="leaf"><a href="/meteo7/bg/snPokrivka">Снежна покривка</a></li>
+<li class="leaf"><a href="/meteo7/bg/rekiKarta">Състояние на рекитe</a></li>
+<li class="leaf"><a href="/meteo7/bg/minalMesets">Изминалият месец-карти</a></li>
+<li class="leaf"><a href="/meteo7/bg/mesetsAnaliz">Изминалият месец - кратък анализ</a></li>
+<li class="leaf"><a href="/meteo7/bg/seasonAnalysesMaps">Изминалият сезон - карти</a></li>
+<li class="leaf"><a href="/meteo7/bg/seasonAnalysesTexts">Изминалият сезон - анализ</a></li>
+<li class="last leaf"><a href="http://hydro.bg/gwMap/htdocs/gwmap.phtml" title="Хидроложки и хидрогеоложки станции, пунктове и кладенци.">Хидромрежа</a></li>
+</ul></li>
+<li class="expanded"><a href="/meteo7/bg/prognozi" title="Всички прогнози, които издава НИМХ">Прогнози</a><ul class="menu"><li class="first expanded"><a href="/meteo7/bg/forecast/dnesUtre">Времето в България - 3 дена</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/forecast/planini">В планините</a></li>
+<li class="leaf"><a href="/meteo7/bg/forecast/moreto">По Черноморието</a></li>
+<li class="leaf"><a href="/meteo7/bg/forecasts/sea">Вълнение на морето</a></li>
+<li class="last leaf"><a href="/meteo7/bg/forecasts/wci">Комфорт</a></li>
+</ul></li>
+<li class="expanded"><a href="/meteo7/bg/ffire" title="">Пожароопасност</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/forecasts/fireindex">Индекс на пожароопасност</a></li>
+<li class="last leaf"><a href="/meteo7/bg/forecasts/treva">Състояние на растителната покривка</a></li>
+</ul></li>
+<li class="leaf"><a href="/meteo7/bg/forecasts/hydro">Хидропрогноза</a></li>
+<li class="leaf"><a href="http://agro.meteo.bg/bg/sedmichna" title="">Агропрогноза =&gt;</a></li>
+<li class="leaf"><a href="/meteo7/bg/forecast/sedmichna">Седмична</a></li>
+<li class="leaf"><a href="/meteo7/bg/forecasts/15dn">15-дневна</a></li>
+<li class="leaf"><a href="/meteo7/bg/forecast/mesechna">Месечна прогноза</a></li>
+<li class="leaf"><a href="/meteo7/bg/forecast/season">Сезонна прогноза</a></li>
+<li class="leaf"><a href="/meteo7/bg/node/1078">Химическо време</a></li>
+<li class="leaf"><a href="http://airquality.meteo.bg" title="Link to CAMS-BG site">Атмосферно замърсяване</a></li>
+<li class="leaf"><a href="/meteo7/bg/cams">Пренос на пустинен прах</a></li>
+<li class="leaf"><a href="/meteo7/bg/node/1076">Ранно предупреждение при ядрена авария</a></li>
+<li class="expanded"><a href="/meteo7/bg/forecast/bkeu" title="Нашите прогнози за Европа и Балканите">Европа и Балканите</a><ul class="menu"><li class="first last leaf"><a href="/meteo7/bg/forecast/fields" title="Полета на температурата, облачността и валежите, произвеждани от Пламен Нейчев на s1 от GFS(?) Коментарите се извличат от базата Работно място на синоптика.">Европа - валежи и температура</a></li>
+</ul></li>
+<li class="last leaf"><a href="/meteo7/bg/node/27">Прогнози на СМО</a></li>
+</ul></li>
+<li class="leaf"><a href="https://weather.bg/obshtini" title="">Опасни явления</a></li>
+<li class="leaf"><a href="http://storm.cfd.meteo.bg/op7/" title="връзка към сайта Профил на купувача, т.е. обществените поръчки">Профил на купувача</a></li>
+<li class="expanded"><a href="/meteo7/bg/aboutus" title="Първата страница от група статични страници с обща информация за НИМХ">За нас</a><ul class="menu"><li class="first expanded"><a href="/meteo7/bg/novini" title="">Новини</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/novini/arhiv" title="">Архив на новините</a></li>
+<li class="last leaf"><a href="/meteo7/bg/docProtest">Документи, свързани с протеста 2018 г.</a></li>
+</ul></li>
+<li class="leaf"><a href="/meteo7/bg/history">История</a></li>
+<li class="expanded"><a href="/meteo7/bg/organisation">Организация</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/scientificcouncil">Научен съвет</a></li>
+<li class="leaf"><a href="/meteo7/bg/organisation/head">Ръководство</a></li>
+<li class="leaf"><a href="/meteo7/bg/organisation/administration">Администрация</a></li>
+<li class="last expanded"><a href="/meteo7/bg/aboutus/filiali">Филиали</a><ul class="menu"><li class="first leaf"><a href="http://varna.meteo.bg/" title="">Варна</a></li>
+<li class="leaf"><a href="http://kyustendil.meteo.bg/" title="">Кюстендил</a></li>
+<li class="leaf"><a href="http://pleven.meteo.bg/" title="">Плевен</a></li>
+<li class="last leaf"><a href="http://plovdiv.meteo.bg/" title="">Пловдив</a></li>
+</ul></li>
+</ul></li>
+<li class="leaf"><a href="http://storm.cfd.meteo.bg/nsad/" title="">Процедури НС и АД</a></li>
+<li class="collapsed"><a href="/meteo7/bg/doktoranturiVersia5">Докторантури</a></li>
+<li class="leaf"><a href="/meteo7/bg/node/1330">Стратегически план  на НИМХ</a></li>
+<li class="leaf"><a href="/meteo7/bg/node/1109">Стратегия за научни изследвания</a></li>
+<li class="expanded"><a href="/meteo7/bg/conference">НИМХ конференция</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/conference/2026">Конференция НИМХ 2026</a></li>
+<li class="leaf"><a href="/meteo7/bg/conference/2025">Конференция НИМХ 2025</a></li>
+<li class="last leaf"><a href="/meteo7/bg/conference/2024">Конференция НИМХ 2024</a></li>
+</ul></li>
+<li class="expanded"><a href="/meteo7/bg/aboutus/drugiresursi">Другите ни сайтове</a><ul class="menu"><li class="first leaf"><a href="http://weather.bg/" title="">Прогнози на времето</a></li>
+<li class="leaf"><a href="http://hydro.bg/" title="">Хидрология</a></li>
+<li class="leaf"><a href="http://agro.meteo.bg" title="">Агрометеорология </a></li>
+<li class="leaf"><a href="http://storm.cfd.meteo.bg/Lib/" title="">Библиотека</a></li>
+<li class="last leaf"><a href="http://info.meteo.bg/clouds/" title="">Облаци </a></li>
+</ul></li>
+<li class="leaf"><a href="/meteo7/bg/otcheti" title="Годишни отчети за дейността и финансови отчети">Отчети</a></li>
+<li class="expanded"><a href="/meteo7/bg/projects">Проекти</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/zanas/niplan">Научноизследователски план</a></li>
+<li class="leaf"><a href="/meteo7/bg/proekti/priklyuchili">Приключили проекти</a></li>
+<li class="last leaf"><a href="/meteo7/bg/proekti/produkti">Продукти и системи по проекти</a></li>
+</ul></li>
+<li class="leaf"><a href="/meteo7/bg/node/15" title="Клиенти и организации, в които членуваме или с които имаме договори">Партньори</a></li>
+<li class="leaf"><a href="/meteo7/bg/aboutus/izdania">Периодични издания</a></li>
+<li class="leaf"><a href="/meteo7/bg/zaNas/knigi">Книги</a></li>
+<li class="expanded"><a href="/meteo7/bg/aboutus/ogranichendostap">Ограничен достъп</a><ul class="menu"><li class="first leaf"><a href="https://roundcube.meteo.bg/" title="">WebMail-НИМХ</a></li>
+<li class="last leaf"><a href="http://storm.cfd.meteo.bg/intranet/" title="">Интранет</a></li>
+</ul></li>
+<li class="last leaf"><a href="/meteo7/bg/otkritoUpravlenie">Открито управление</a></li>
+</ul></li>
+<li class="expanded"><a href="/meteo7/bg/saobshtenia" title="">Обяви</a><ul class="menu"><li class="first leaf"><a href="/meteo7/bg/node/13">Търгове</a></li>
+<li class="last leaf"><a href="/meteo7/bg/karieri" title="обяви за работа">Кариери</a></li>
+</ul></li>
+<li class="leaf"><a href="/meteo7/bg/kontakti">Услуги и контакти</a></li>
+<li class="last leaf"><a href="/meteo7/bg/node/424">Първични архивни данни</a></li>
+</ul>      </div>
+      <div class="clear"></div>
+    </nav><!-- end main-menu -->
+  </div>
+
+</div>
+
+
+
+  <div id="container">
+    <div class="container-wrap">
+      <div class="content-sidebar-wrap">
+        <div id="content">
+          <div id="breadcrumbs"><h2 class="element-invisible">You are here</h2><nav class="breadcrumb"><a href="/meteo7/bg">Начало</a> » Оперативна информация за речния отток - таблица</nav></div>          <section id="post-content" role="main">
+                                    <h1 class="page-title">Оперативна информация за речния отток - таблица</h1>                                                            <div class="region region-content">
+  <div id="block-system-main" class="block block-system">
+
+      
+  <div class="content">
+                          <span property="dc:title" content="Оперативна информация за речния отток - таблица" class="rdf-meta element-hidden"></span>  
+      
+    
+  <div class="content node-izmervania">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded">
+<h2> <br/> 01.12.2025 08:00&nbsp;ч. местно време</h2>
+ <center>
+ 
+<h3>Дунавски басейн </h3>
+<table cellpadding="1" cellspacing="1" border="0" width=95%>
+ 
+   <tr >
+    <th>№ ХМС </th>
+
+    <th>Река </th>
+    <th>Хидрометрична станция (ХМС)</th>
+    <th>Q<sub>min</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>ср.</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>max</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>H &nbsp; [cm]</th>
+    <th>Q &nbsp; [m<sup>3</sup>/s]</th>
+    <th>&Delta;H &nbsp; [cm]</th>
+  </tr>
+  <tr bgcolor=#fbf6e9>
+    <td align="center">14840    </td>
+    <td align="left">Лом    </td>
+    <td align="left">с. Василовци    </td>
+    <td align="right">0,079    </td>
+    <td align="right">4,898    </td>
+    <td align="right">233,000    </td>
+    <td align="right">65    </td>
+    <td align="right">18,553    </td>
+    <td align="right">-6    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">16800    </td>
+    <td align="left">Огоста    </td>
+    <td align="left">с. Кобиляк    </td>
+    <td align="right">3,099    </td>
+    <td align="right">16,480    </td>
+    <td align="right">560,000    </td>
+    <td align="right">87    </td>
+    <td align="right">21,710    </td>
+    <td align="right">-3    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">16850    </td>
+    <td align="left">Огоста    </td>
+    <td align="left">с. Бутан    </td>
+    <td align="right">2,000    </td>
+    <td align="right">18,273    </td>
+    <td align="right">735,000    </td>
+    <td align="right">94    </td>
+    <td align="right">33,913    </td>
+    <td align="right">-9    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">18650    </td>
+    <td align="left">Искър    </td>
+    <td align="left">с. Бели Искър    </td>
+    <td align="right">0,500    </td>
+    <td align="right">6,968    </td>
+    <td align="right">97,000    </td>
+    <td align="right">65    </td>
+    <td align="right">20,659    </td>
+    <td align="right">-5    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">18360    </td>
+    <td align="left">Бистрица(Мусаленска)    </td>
+    <td align="left">лет. Боровец    </td>
+    <td align="right">0,003    </td>
+    <td align="right">0,442    </td>
+    <td align="right">9,400    </td>
+    <td align="right">52    </td>
+    <td align="right">1,074    </td>
+    <td align="right">-1    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">18370    </td>
+    <td align="left">Палакария    </td>
+    <td align="left">с. Рельово    </td>
+    <td align="right">0,017    </td>
+    <td align="right">1,372    </td>
+    <td align="right">33,850    </td>
+    <td align="right">112    </td>
+    <td align="right">4,471    </td>
+    <td align="right">0    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">18700    </td>
+    <td align="left">Искър    </td>
+    <td align="left">Нови Искър    </td>
+    <td align="right">7,510    </td>
+    <td align="right">21,412    </td>
+    <td align="right">1 330,000    </td>
+    <td align="right">74    </td>
+    <td align="right">26,919    </td>
+    <td align="right">-18    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">18560    </td>
+    <td align="left">Малки Искър    </td>
+    <td align="left">с. Своде    </td>
+    <td align="right">0,649    </td>
+    <td align="right">9,186    </td>
+    <td align="right">650,000    </td>
+    <td align="right">80    </td>
+    <td align="right">18,126    </td>
+    <td align="right">-16    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">18800    </td>
+    <td align="left">Искър    </td>
+    <td align="left">Роман    </td>
+    <td align="right">8,000    </td>
+    <td align="right">49,874    </td>
+    <td align="right">1 102,000    </td>
+    <td align="right">115    </td>
+    <td align="right">110,526    </td>
+    <td align="right">-16    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">18850    </td>
+    <td align="left">Искър    </td>
+    <td align="left">с. Ореховица    </td>
+    <td align="right">6,889    </td>
+    <td align="right">46,482    </td>
+    <td align="right">1 117,000    </td>
+    <td align="right">184    </td>
+    <td align="right">139,617    </td>
+    <td align="right">-1    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">21350    </td>
+    <td align="left">Черни Вит    </td>
+    <td align="left">с. Черни Вит    </td>
+    <td align="right">0,270    </td>
+    <td align="right">2,673    </td>
+    <td align="right">195,000    </td>
+    <td align="right">62    </td>
+    <td align="right">5,741    </td>
+    <td align="right">-6    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">21650    </td>
+    <td align="left">Вит (Бели Вит)    </td>
+    <td align="left">Тетевен    </td>
+    <td align="right">0,259    </td>
+    <td align="right">4,658    </td>
+    <td align="right">322,000    </td>
+    <td align="right">138    </td>
+    <td align="right">17,930    </td>
+    <td align="right">-3    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">21750    </td>
+    <td align="left">Вит    </td>
+    <td align="left">с. Крушовица    </td>
+    <td align="right">0,189    </td>
+    <td align="right">8,804    </td>
+    <td align="right">520,000    </td>
+    <td align="right">102    </td>
+    <td align="right">26,059    </td>
+    <td align="right">3    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">21800    </td>
+    <td align="left">Вит    </td>
+    <td align="left">с. Търнене    </td>
+    <td align="right">0,150    </td>
+    <td align="right">11,925    </td>
+    <td align="right">572,000    </td>
+    <td align="right">116    </td>
+    <td align="right">41,695    </td>
+    <td align="right">10    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">22700    </td>
+    <td align="left">Осъм    </td>
+    <td align="left">Троян    </td>
+    <td align="right">0,200    </td>
+    <td align="right">6,009    </td>
+    <td align="right">290,000    </td>
+    <td align="right">41    </td>
+    <td align="right">11,204    </td>
+    <td align="right">-7    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">22750    </td>
+    <td align="left">Осъм    </td>
+    <td align="left">Ловеч    </td>
+    <td align="right">0,300    </td>
+    <td align="right">9,715    </td>
+    <td align="right">562,000    </td>
+    <td align="right">54    </td>
+    <td align="right">11,982    </td>
+    <td align="right">-6    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">22800    </td>
+    <td align="left">Осъм    </td>
+    <td align="left">с. Изгрев    </td>
+    <td align="right">0,200    </td>
+    <td align="right">11,017    </td>
+    <td align="right">285,000    </td>
+    <td align="right">190    </td>
+    <td align="right">22,042    </td>
+    <td align="right">20    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">23650    </td>
+    <td align="left">Янтра    </td>
+    <td align="left">Габрово    </td>
+    <td align="right">0,300    </td>
+    <td align="right">3,944    </td>
+    <td align="right">192,000    </td>
+    <td align="right">138    </td>
+    <td align="right">5,694    </td>
+    <td align="right">-25    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">23700    </td>
+    <td align="left">Янтра    </td>
+    <td align="left">В. Търново    </td>
+    <td align="right">0,259    </td>
+    <td align="right">11,656    </td>
+    <td align="right">944,000    </td>
+    <td align="right">166    </td>
+    <td align="right">35,146    </td>
+    <td align="right">-30    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">23400    </td>
+    <td align="left">Джулюница    </td>
+    <td align="left">с. Джулюница    </td>
+    <td align="right">0,070    </td>
+    <td align="right">7,044    </td>
+    <td align="right">575,000    </td>
+    <td align="right">140    </td>
+    <td align="right">13,458    </td>
+    <td align="right">-14    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">23150    </td>
+    <td align="left">Голяма река    </td>
+    <td align="left">Стражица    </td>
+    <td align="right">0,009    </td>
+    <td align="right">1,917    </td>
+    <td align="right">213,000    </td>
+    <td align="right">68    </td>
+    <td align="right">0,217    </td>
+    <td align="right">-1    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">23500    </td>
+    <td align="left">Росица    </td>
+    <td align="left">Севлиево    </td>
+    <td align="right">0,119    </td>
+    <td align="right">8,536    </td>
+    <td align="right">558,000    </td>
+    <td align="right">116    </td>
+    <td align="right">34,660    </td>
+    <td align="right">-12    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">23850    </td>
+    <td align="left">Янтра    </td>
+    <td align="left">с. Каранци    </td>
+    <td align="right">3,400    </td>
+    <td align="right">42,043    </td>
+    <td align="right">1 925,000    </td>
+    <td align="right">177    </td>
+    <td align="right">83,339    </td>
+    <td align="right">41    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">31550    </td>
+    <td align="left">Черни Лом    </td>
+    <td align="left">с. Широково    </td>
+    <td align="right">0,500    </td>
+    <td align="right">3,444    </td>
+    <td align="right">161,489    </td>
+    <td align="right">22    </td>
+    <td align="right">1,107    </td>
+    <td align="right">-1    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">31830    </td>
+    <td align="left">Русенски Лом    </td>
+    <td align="left">с. Божичен    </td>
+    <td align="right">0,836    </td>
+    <td align="right">5,450    </td>
+    <td align="right">63,000    </td>
+    <td align="right">150    </td>
+    <td align="right">2,363    </td>
+    <td align="right">-3    </td>
+  </tr>
+	
+	
+</table>
+<h3>Черноморски басейн </h3>
+<table cellpadding="1" cellspacing="1" border="0" width=95%>
+ 
+   <tr >
+    <th>№ ХМС </th>
+
+    <th>Река </th>
+    <th>Хидрометрична станция (ХМС)</th>
+    <th>Q<sub>min</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>ср.</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>max</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>H &nbsp; [cm]</th>
+    <th>Q &nbsp; [m<sup>3</sup>/s]</th>
+    <th>&Delta;H &nbsp; [cm]</th>
+  </tr>
+  <tr bgcolor=#fbf6e9>
+    <td align="center">42800    </td>
+    <td align="left">Провадийска река    </td>
+    <td align="left">Провадия    </td>
+    <td align="right">0,025    </td>
+    <td align="right">0,657    </td>
+    <td align="right">35,750    </td>
+    <td align="right">18    </td>
+    <td align="right">0,132    </td>
+    <td align="right">0    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">42850    </td>
+    <td align="left">Провадийска река    </td>
+    <td align="left">гара Синдел    </td>
+    <td align="right">0,095    </td>
+    <td align="right">1,527    </td>
+    <td align="right">43,000    </td>
+    <td align="right">170    </td>
+    <td align="right">0,795    </td>
+    <td align="right">2    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">43400    </td>
+    <td align="left">Врана    </td>
+    <td align="left">с. Кочово    </td>
+    <td align="right">0,480    </td>
+    <td align="right">2,922    </td>
+    <td align="right">110,000    </td>
+    <td align="right">10    </td>
+    <td align="right">0,735    </td>
+    <td align="right">0    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">43700    </td>
+    <td align="left">Голяма Камчия    </td>
+    <td align="left">Велики Преслав    </td>
+    <td align="right">0,004    </td>
+    <td align="right">3,437    </td>
+    <td align="right">160,000    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">43500    </td>
+    <td align="left">Луда Камчия    </td>
+    <td align="left">с. Бероново    </td>
+    <td align="right">0,010    </td>
+    <td align="right">4,678    </td>
+    <td align="right">554,170    </td>
+    <td align="right">152    </td>
+    <td align="right">13,175    </td>
+    <td align="right">-12    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">43800    </td>
+    <td align="left">Камчия    </td>
+    <td align="left">с. Гроздьово    </td>
+    <td align="right">0,961    </td>
+    <td align="right">15,631    </td>
+    <td align="right">418,000    </td>
+    <td align="right">80    </td>
+    <td align="right">6,280    </td>
+    <td align="right">6    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">81800    </td>
+    <td align="left">Айтоска река    </td>
+    <td align="left">Камено    </td>
+    <td align="right">0,009    </td>
+    <td align="right">0,664    </td>
+    <td align="right">46,500    </td>
+    <td align="right">30    </td>
+    <td align="right">0,212    </td>
+    <td align="right">-2    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">82850    </td>
+    <td align="left">Факийска река    </td>
+    <td align="left">с. Зидарово    </td>
+    <td align="right">0    </td>
+    <td align="right">3,866    </td>
+    <td align="right">288,000    </td>
+    <td align="right">64    </td>
+    <td align="right">0,208    </td>
+    <td align="right">0    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">83620    </td>
+    <td align="left">Ропотамо    </td>
+    <td align="left">с. Веселие    </td>
+    <td align="right">0    </td>
+    <td align="right">1,366    </td>
+    <td align="right">279,000    </td>
+    <td align="right">78    </td>
+    <td align="right">0,065    </td>
+    <td align="right">-4    </td>
+  </tr>
+	
+	
+</table>
+<h3>Източнобеломорски басейн </h3>
+<table cellpadding="1" cellspacing="1" border="0" width=95%>
+ 
+   <tr >
+    <th>№ ХМС </th>
+
+    <th>Река </th>
+    <th>Хидрометрична станция (ХМС)</th>
+    <th>Q<sub>min</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>ср.</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>max</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>H &nbsp; [cm]</th>
+    <th>Q &nbsp; [m<sup>3</sup>/s]</th>
+    <th>&Delta;H &nbsp; [cm]</th>
+  </tr>
+  <tr bgcolor=#fbf6e9>
+    <td align="center">74650    </td>
+    <td align="left">Тунджа    </td>
+    <td align="left">Пaвел баня    </td>
+    <td align="right">0,039    </td>
+    <td align="right">2,806    </td>
+    <td align="right">104,400    </td>
+    <td align="right">61    </td>
+    <td align="right">11,278    </td>
+    <td align="right">-18    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">74850    </td>
+    <td align="left">Tунджа    </td>
+    <td align="left">Елхово    </td>
+    <td align="right">0,800    </td>
+    <td align="right">15,468    </td>
+    <td align="right">210,000    </td>
+    <td align="right">109    </td>
+    <td align="right">9,132    </td>
+    <td align="right">23    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">71650    </td>
+    <td align="left">Марица    </td>
+    <td align="left">с. Радуил    </td>
+    <td align="right">0,012    </td>
+    <td align="right">0,302    </td>
+    <td align="right">32,349    </td>
+    <td align="right">10    </td>
+    <td align="right">0,200    </td>
+    <td align="right">-2    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">71700    </td>
+    <td align="left">Марица    </td>
+    <td align="left">Белово    </td>
+    <td align="right">0,019    </td>
+    <td align="right">6,185    </td>
+    <td align="right">702,229    </td>
+    <td align="right">38    </td>
+    <td align="right">3,717    </td>
+    <td align="right">-6    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">71400    </td>
+    <td align="left">Чепинска река    </td>
+    <td align="left">Велинград    </td>
+    <td align="right">0,140    </td>
+    <td align="right">1,475    </td>
+    <td align="right">154,492    </td>
+    <td align="right">43    </td>
+    <td align="right">3,129    </td>
+    <td align="right">-4    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">71480    </td>
+    <td align="left">Тополница    </td>
+    <td align="left">с. Поибрене    </td>
+    <td align="right">0,400    </td>
+    <td align="right">5,761    </td>
+    <td align="right">399,897    </td>
+    <td align="right">81    </td>
+    <td align="right">16,233    </td>
+    <td align="right">-10    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">71800    </td>
+    <td align="left">Марица    </td>
+    <td align="left">Пазарджик    </td>
+    <td align="right">0,300    </td>
+    <td align="right">14,390    </td>
+    <td align="right">1 136,000    </td>
+    <td align="right">-16    </td>
+    <td align="right">26,627    </td>
+    <td align="right">-4    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">71801    </td>
+    <td align="left">канал "Пашаарк"    </td>
+    <td align="left">Пазарджик    </td>
+    <td align="right">0    </td>
+    <td align="right">1,019    </td>
+    <td align="right">7,030    </td>
+    <td align="right">23    </td>
+    <td align="right">0,238    </td>
+    <td align="right">1    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">72340    </td>
+    <td align="left">Въча    </td>
+    <td align="left">Девин - м. Забрал    </td>
+    <td align="right">1,250    </td>
+    <td align="right">9,772    </td>
+    <td align="right">301,705    </td>
+    <td align="right">188    </td>
+    <td align="right">67,369    </td>
+    <td align="right">-12    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">72700    </td>
+    <td align="left">Марица    </td>
+    <td align="left">Пловдив    </td>
+    <td align="right">4,000    </td>
+    <td align="right">42,940    </td>
+    <td align="right">1 204,284    </td>
+    <td align="right">-11    </td>
+    <td align="right">33,260    </td>
+    <td align="right">1    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">72460    </td>
+    <td align="left">Чепеларска река    </td>
+    <td align="left">с. Бачково    </td>
+    <td align="right">0,779    </td>
+    <td align="right">8,622    </td>
+    <td align="right">361,500    </td>
+    <td align="right">76    </td>
+    <td align="right">16,215    </td>
+    <td align="right">-16    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">72850    </td>
+    <td align="left">Марица    </td>
+    <td align="left">Първомай    </td>
+    <td align="right">5,889    </td>
+    <td align="right">51,628    </td>
+    <td align="right">864,000    </td>
+    <td align="right">223    </td>
+    <td align="right">161,810    </td>
+    <td align="right">17    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">73480    </td>
+    <td align="left">Сазлийка    </td>
+    <td align="left">Гълъбово    </td>
+    <td align="right">1,570    </td>
+    <td align="right">11,793    </td>
+    <td align="right">211,970    </td>
+    <td align="right">169    </td>
+    <td align="right">15,639    </td>
+    <td align="right">45    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">73550    </td>
+    <td align="left">Харманлийска    </td>
+    <td align="left">Харманли    </td>
+    <td align="right">0,159    </td>
+    <td align="right">4,175    </td>
+    <td align="right">259,000    </td>
+    <td align="right">97    </td>
+    <td align="right">5,039    </td>
+    <td align="right">-11    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">73750    </td>
+    <td align="left">Марица    </td>
+    <td align="left">Харманли    </td>
+    <td align="right">5,000    </td>
+    <td align="right">100,581    </td>
+    <td align="right">1 335,000    </td>
+    <td align="right">167    </td>
+    <td align="right">86,656    </td>
+    <td align="right">8    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">73850    </td>
+    <td align="left">Марица    </td>
+    <td align="left">Свиленград    </td>
+    <td align="right">2,000    </td>
+    <td align="right">109,809    </td>
+    <td align="right">1 280,000    </td>
+    <td align="right">123    </td>
+    <td align="right">115,020    </td>
+    <td align="right">11    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">61650    </td>
+    <td align="left">Арда    </td>
+    <td align="left">Рудозем    </td>
+    <td align="right">0,230    </td>
+    <td align="right">3,972    </td>
+    <td align="right">258,000    </td>
+    <td align="right">108    </td>
+    <td align="right">11,890    </td>
+    <td align="right">4    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">61700    </td>
+    <td align="left">Арда    </td>
+    <td align="left">с. Вехтино    </td>
+    <td align="right">0,920    </td>
+    <td align="right">13,680    </td>
+    <td align="right">672,000    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">61500    </td>
+    <td align="left">Върбица    </td>
+    <td align="left">сп. Джебел    </td>
+    <td align="right">0,003    </td>
+    <td align="right">14,345    </td>
+    <td align="right">1 536,000    </td>
+    <td align="right">18    </td>
+    <td align="right">59,893    </td>
+    <td align="right">-53    </td>
+  </tr>
+	
+	
+</table>
+<h3>Западнобеломорски басейн </h3>
+<table cellpadding="1" cellspacing="1" border="0" width=95%>
+ 
+   <tr >
+    <th>№ ХМС </th>
+
+    <th>Река </th>
+    <th>Хидрометрична станция (ХМС)</th>
+    <th>Q<sub>min</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>ср.</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>Q<sub>max</sub>&nbsp; [m<sup>3</sup>/s]</th>
+    <th>H &nbsp; [cm]</th>
+    <th>Q &nbsp; [m<sup>3</sup>/s]</th>
+    <th>&Delta;H &nbsp; [cm]</th>
+  </tr>
+  <tr bgcolor=#fbf6e9>
+    <td align="center">52800    </td>
+    <td align="left">Места    </td>
+    <td align="left">м. Момина кула    </td>
+    <td align="right">1,280    </td>
+    <td align="right">15,398    </td>
+    <td align="right">334,000    </td>
+    <td align="right">156    </td>
+    <td align="right">59,035    </td>
+    <td align="right">-12    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">52850    </td>
+    <td align="left">Места    </td>
+    <td align="left">Хаджидимово    </td>
+    <td align="right">0,800    </td>
+    <td align="right">18,859    </td>
+    <td align="right">369,000    </td>
+    <td align="right">142    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">-24    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51650    </td>
+    <td align="left">Струма    </td>
+    <td align="left">Перник    </td>
+    <td align="right">0,200    </td>
+    <td align="right">1,616    </td>
+    <td align="right">71,500    </td>
+    <td align="right">64    </td>
+    <td align="right">2,805    </td>
+    <td align="right">-1    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51370    </td>
+    <td align="left">Бистрица (Соволян.)    </td>
+    <td align="left">с. Гърляно    </td>
+    <td align="right">0,001    </td>
+    <td align="right">0,408    </td>
+    <td align="right">13,320    </td>
+    <td align="right">60    </td>
+    <td align="right">3,125    </td>
+    <td align="right">-18    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51371    </td>
+    <td align="left">Бистрица (Сов.)  лк    </td>
+    <td align="left">с. Гърляно    </td>
+    <td align="right">0    </td>
+    <td align="right">0,280    </td>
+    <td align="right">0,770    </td>
+    <td align="right">40    </td>
+    <td align="right">0,195    </td>
+    <td align="right">-2    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51100    </td>
+    <td align="left">Речица    </td>
+    <td align="left">с. Ваксево    </td>
+    <td align="right">0    </td>
+    <td align="right">0,332    </td>
+    <td align="right">15,280    </td>
+    <td align="right">60    </td>
+    <td align="right">1,360    </td>
+    <td align="right">-10    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51410    </td>
+    <td align="left">Елешница    </td>
+    <td align="left">с. Ваксево    </td>
+    <td align="right">0,150    </td>
+    <td align="right">2,420    </td>
+    <td align="right">58,600    </td>
+    <td align="right">95    </td>
+    <td align="right">11,662    </td>
+    <td align="right">-16    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51750    </td>
+    <td align="left">Струма    </td>
+    <td align="left">Бобошево    </td>
+    <td align="right">1,718    </td>
+    <td align="right">21,282    </td>
+    <td align="right">215,000    </td>
+    <td align="right">148    </td>
+    <td align="right">63,338    </td>
+    <td align="right">-22    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51430    </td>
+    <td align="left">Джерман    </td>
+    <td align="left">Дупница    </td>
+    <td align="right">0,286    </td>
+    <td align="right">2,506    </td>
+    <td align="right">60,250    </td>
+    <td align="right">48    </td>
+    <td align="right">6,331    </td>
+    <td align="right">-4    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51510    </td>
+    <td align="left">Сушицка река    </td>
+    <td align="left">с. Полена    </td>
+    <td align="right">0,025    </td>
+    <td align="right">0,620    </td>
+    <td align="right">18,750    </td>
+    <td align="right">75    </td>
+    <td align="right">1,560    </td>
+    <td align="right">-5    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51800    </td>
+    <td align="left">Струма    </td>
+    <td align="left">Кресненско ханче    </td>
+    <td align="right">2,000    </td>
+    <td align="right">36,597    </td>
+    <td align="right">340,000    </td>
+    <td align="right">161    </td>
+    <td align="right">116,546    </td>
+    <td align="right">-24    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51550    </td>
+    <td align="left">Лебница    </td>
+    <td align="left">с. Лебница    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">42    </td>
+    <td align="right">4,601    </td>
+    <td align="right">-10    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51560    </td>
+    <td align="left">Струмешница    </td>
+    <td align="left">с. Струмешница    </td>
+    <td align="right">0,050    </td>
+    <td align="right">3,679    </td>
+    <td align="right">52,400    </td>
+    <td align="right">150    </td>
+    <td align="right">18,800    </td>
+    <td align="right">-2    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51880    </td>
+    <td align="left">Струма    </td>
+    <td align="left">с. Марино поле    </td>
+    <td align="right">3,650    </td>
+    <td align="right">58,558    </td>
+    <td align="right">575,000    </td>
+    <td align="right">46    </td>
+    <td align="right">196,587    </td>
+    <td align="right">-27    </td>
+  </tr>
+	
+	
+  <tr bgcolor=#fbf6e9>
+    <td align="center">51590    </td>
+    <td align="left">Пирин. Бистрица    </td>
+    <td align="left">с. Горно Спанчево    </td>
+    <td align="right">0,037    </td>
+    <td align="right">0,438    </td>
+    <td align="right">17,700    </td>
+    <td align="right">38    </td>
+    <td align="right">1,499    </td>
+    <td align="right">-2    </td>
+  </tr>
+	
+	
+</table>
+
+
+
+
+<center><table width="600"><tr><th>
+<p class="small"><a name="niva"><i><sup>(*)</sup>Забележка:</i> </a>
+<p class="small">Нивата са моментни стойности, измерени в 8ч. местно време. Водните количества са изчислени по временни ключови криви. Информацията е само за лично ползване и не може да бъде копирана или разпространявана без изрична договореност с НИМХ. 
+Характерните водни количества Q мин. [m3/s], Q ср. [m3/s] и Q макс. [m3/s] са определени за периода 1993 – 2008 г. </p>
+<p class="small"><a name="ici"><i><sup>(**)</sup>Забележка 2:</i> </a>
+<p class="small">Данните за нивата  и водните количества в тази хидрометрична станция са ненадеждни поради добив на инертни материали в района на станцията. </p>
+</td></tr></table>
+</div></div></div><div class="field field-name-field-tags field-type-taxonomy-term-reference field-label-above"><div class="field-label">Tags:&nbsp;</div><div class="field-items"><div class="field-item even"><a href="/meteo7/bg/taxonomy/term/126" typeof="skos:Concept" property="rdfs:label skos:prefLabel">реки</a></div><div class="field-item odd"><a href="/meteo7/bg/taxonomy/term/111" typeof="skos:Concept" property="rdfs:label skos:prefLabel">измервания</a></div><div class="field-item even"><a href="/meteo7/bg/taxonomy/term/127" typeof="skos:Concept" property="rdfs:label skos:prefLabel">ниво</a></div><div class="field-item odd"><a href="/meteo7/bg/taxonomy/term/128" typeof="skos:Concept" property="rdfs:label skos:prefLabel">водно количество</a></div></div></div>  </div>
+
+      <footer>
+          </footer>
+  
+    </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+          </section> <!-- /#main -->
+        </div>
+      
+              
+        </div>
+
+        
+        
+    </div>
+</div>
+
+<div id="footer">
+
+  <div id="footer_wrapper">
+     
+      <div id="footer-area" class="clearfix">
+                <div class="column"><div class="region region-footer-first">
+  <div id="block-block-8" class="block block-block">
+
+        <h2 >Последвайте ни</h2>
+    
+  <div class="content">
+    <p><a href="https://www.facebook.com/PrognozataZaVremeto" target="_blank">във Facebook <img src="/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/facebook1.png" width="36" height="37" /></a></p>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>
+                        <div class="column"><div class="region region-footer-second">
+  <div id="block-block-2" class="block block-block">
+
+        <h2 >Друга информация</h2>
+    
+  <div class="content">
+    <ul><li><a href="/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/politiki.pdf" target="_blank">Политика за поверителност на НИМХ при обработване на лични данни</a></li>
+</ul>  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>
+                              </div>
+      </div>
+  
+  <div class="footer_credit">
+
+  <!-- Social Links -->
+        
+    <div id="copyright">
+     <p class="copyright"><span style="font-weight:bold;color:#bbbbbb">Copyright &copy; 2025, НИМХ.</span>&nbsp;&nbsp;&nbsp;&nbsp;Съдържанието на сайта на Националния институт по метеорология и хидрология (НИМХ) и технологиите, използвани в него, са под закрила на Закона за авторското право и сродните му права. Всички текстови и графични изображения, публикувани в сайта, са собственост на НИМХ, освен ако изрично не е посочено друго. Ползвателите на съдържанието на сайта на НИМХ се задължават, ако го разпространяват, да не го променят, изменят, редактират или модифицират и задължително да посочват източника на информация – НИМХ. </p>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+  </body>
+</html>

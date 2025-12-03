@@ -103,7 +103,7 @@ server <- function(input, output, session) {
 	    theme(text = element_text(size = 20), axis.text.x = element_blank(),
 	          axis.ticks.x = element_blank())
 	  
-	}, height = 800, width = 1800)
+	}, height = 750, width = 1800)
 	
 	output$accum <- renderPlot({
 	  
@@ -181,7 +181,7 @@ server <- function(input, output, session) {
 	    scale_color_manual(values = c("red", "black")) +
 	    labs(x = NULL, y = "Инфлация", caption = "Източник на данните: Евростат",
 	         title = paste0(input$item, ", ", input$country))
-	}, height = 800, width = 1800)
+	}, height = 750, width = 1800)
 	
 	session$onSessionEnded(function() {
 	  stopApp()

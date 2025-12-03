@@ -45,7 +45,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 fruit <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/mesni-produkti?page=%d&hasQuantity=1"
+base_url <- "https://bulmag.org/category/meso?hasQuantity=1"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
@@ -131,7 +131,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 milk <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/zamrazeni-hrani?page=%d"
+base_url <- "https://bulmag.org/category/zamrazeni-hrani?hasQuantity=1?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
@@ -174,7 +174,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 frozen <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/paketirani-hrani?page=%d"
+base_url <- "https://bulmag.org/category/paketirani-hrani?hasQuantity=1?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
@@ -217,7 +217,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 bak <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/sladki-i-soleni?page=%d"
+base_url <- "https://bulmag.org/category/sladki-i-soleni?hasQuantity=1?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
@@ -260,7 +260,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 slad_sol <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/napitki?page=%d"
+base_url <- "https://bulmag.org/category/napitki?hasQuantity=1?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
@@ -303,7 +303,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 drinks <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/alkoholni-napitki?page=%d"
+base_url <- "https://bulmag.org/category/alkoholni-napitki?hasQuantity=1?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
@@ -346,7 +346,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 alc <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/specialni-hrani?page=%d"
+base_url <- "https://bulmag.org/category/specialni-hrani?hasQuantity=1?page=%d"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
