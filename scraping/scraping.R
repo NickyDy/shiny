@@ -1,4 +1,5 @@
 library(tidyverse)
+library(nanoparquet)
 
 tmarket <- read_csv("shiny/scraping/tmarket.csv") %>% select(-c(8:10))
 taraba <- read_csv("shiny/scraping/taraba.csv") %>% select(-c(8:10))
@@ -461,7 +462,7 @@ foods <- foods %>%
                                               '520МЛ', '550 мл', '553мл', '553МЛ', '555МЛ', '580 мл', '580мл', '580МЛ',
                                               '600мл', '600МЛ', "0,600 Л", '0,680 Л', '550 мл.', '580 ml', '580ml', '0,550 Л',
                                               '0,6 л PET', '0,500 - 0,553 л кен', '0,545 л - 0,900 л', '0,6', '510 мл',
-                                              '0,52', '0,550 л', '555мл'),
+                                              '0,52', '0,550 л', '555мл', '530 мл'),
                              "601-700 мл" = c("700 мл", "0.7 л", "700МЛ", "700мл", "0.7л", "0.700Л", '0.700 л', 
                                               '0.700 Л', '0.700. Л', '0.700л', '0.7Л', '0.680 Л', '625 мл', '636 мл', 
                                               '660 мл', '680 мл', '680мл', '70мл', '700Л', "700 мл.", "0,700 Л",
@@ -602,6 +603,6 @@ foods <- foods %>%
   mutate(unit = case_when(is.na(unit) ~ "-", .default = unit)) %>% 
   mutate(date = as.character(date))
 
-df_2025 <- read_rds("shiny/bgprices/df_2025.rds")
+df_2025 <- read_parquet("shiny/bgprices/df_2025.parquet")
 df_2025 <- bind_rows(foods, df_2025) %>% distinct()
-write_rds(df_2025, "shiny/bgprices/df_2025.rds")
+write_parquet(df_2025, "shiny/bgprices/df_2025.parquet")

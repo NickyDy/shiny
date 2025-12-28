@@ -2,8 +2,9 @@ library(shiny)
 library(tidyverse)
 library(eurostat)
 library(bslib)
+library(nanoparquet)
 
-inf <- read_rds("prc_hicp_mmor.rds") %>% 
+inf <- read_parquet("prc_hicp_mmor.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD) %>% drop_na(values)
 

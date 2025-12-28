@@ -4,7 +4,7 @@ library(shiny)
 library(bslib)
 library(DT)
 
-df_2025 <- read_rds("df_2025.rds") %>%
+df_2025 <- read_parquet("df_2025.parquet") %>%
   mutate(
     date = str_replace(date, "2025-02-06", "2025-02-08"),
     price = round(price, 2)
@@ -564,7 +564,7 @@ df_market_plot <- reactive(
       mutate(product = fct_reorder(product, price_change))
   )
 
-  inf_mean <- reactive(
+  inf_sum <- reactive(
     df_market %>%
       filter(date %in% c(input$market_date_first, input$market_date_last)) %>%
       summarise(
@@ -572,7 +572,7 @@ df_market_plot <- reactive(
         .by = c(unit, product)
       ) %>%
       filter(price_change != 0) %>%
-      summarise(mean_inflation = mean(price_change)) %>% pull()
+      summarise(sum_inflation = sum(price_change)) %>% pull()
   )
 
   output$market_inf_plot <- renderPlot(
@@ -589,7 +589,7 @@ df_market_plot <- reactive(
         labs(
           x = NULL, y = NULL,
           title = paste0("Изчислена инфлация от ", input$market_date_first, " до ", input$market_date_last),
-          subtitle = paste0("Средна инфлация: ", round(inf_mean(), 3), "%")
+          subtitle = paste0("Обща инфлация: ", round(inf_sum(), 2), "%")
         )
     },
     height = 800,
@@ -617,7 +617,7 @@ output$market_trend_plot <- renderPlot(
       market_product_trend() %>%
         mutate(date = ymd(date), m = month(date)) %>%
         ggplot(aes(date, price)) +
-        geom_smooth(method = "loess", se = F) +
+        #geom_smooth(method = "loess", se = F) +
         geom_line(linetype = 2) +
         geom_point(size = 2) +
         scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +

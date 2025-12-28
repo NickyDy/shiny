@@ -1,4 +1,5 @@
 library(tidyverse)
+library(nanoparquet)
 library(shiny)
 library(bslib)
 library(scales)
@@ -13,8 +14,10 @@ gdp_pc <- read_rds("nama_10_pc.rds") %>%
 gini <- read_rds("ilc_di12.rds") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-inf <- read_rds("prc_hicp_mmor.rds") %>% 
+inf <- read_parquet("prc_hicp_mmor.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
+  arrange(TIME_PERIOD)
+ind <- read_parquet("sts_inpr_m.parquet") %>% 
   arrange(TIME_PERIOD)
 sal <- read_rds("nama_10_fte.rds") %>% 
   filter(!str_detect(geo, "^Euro"), unit == "Euro") %>% 
@@ -131,11 +134,11 @@ ui <- page_fillable(#h3("Евростат за България!"),
                                             end = last(inf$TIME_PERIOD),
                                             min = first(inf$TIME_PERIOD),
                                             max = last(inf$TIME_PERIOD),
-                                            language = "bg",),
+                                            language = "bg"),
                                   selectInput("coicop_inf", "Показател:",
                                             choices = unique(inf$coicop),
                                             selected = "All-items HICP"),
-                                  selectInput("country_inf", "Държава",
+                                  selectInput("country_inf", "Държава:",
                                               choices = unique(inf$geo),
                                               selected = "Bulgaria"),
                                   selectInput("coicop_inf_line", "Показател:",
@@ -145,6 +148,22 @@ ui <- page_fillable(#h3("Евростат за България!"),
                                 layout_columns(
                                   plotOutput("inf_plot"),
                                   plotOutput("inf_line"),
+                                  col_widths = c(6, 6))),
+                      nav_panel(title = "Индустриално производство",
+                                layout_columns(gap = "400px",
+                                  dateRangeInput("date_ind", "Дата:",
+                                                 start = first(ind$TIME_PERIOD),
+                                                 end = last(ind$TIME_PERIOD),
+                                                 min = first(ind$TIME_PERIOD),
+                                                 max = last(ind$TIME_PERIOD),
+                                                 language = "bg"),
+                                  selectInput("country_ind", "Държава:",
+                                              choices = unique(ind$geo),
+                                              selected = "BG"),
+                                  col_widths = c(2, 2)),
+                                layout_columns(
+                                  plotOutput("ind_plot"),
+                                  plotOutput("ind_line"),
                                   col_widths = c(6, 6))),
                       nav_panel(title = "Gini",
                                 layout_columns(gap = "400px",
@@ -593,6 +612,54 @@ inf_last() %>%
       geom_point() +
       theme(text = element_text(size = 12), plot.title.position = "plot") +
       labs(y = "Натрупана инфлация (%)", x = NULL, 
+           caption = "Източник на данните: Eurostat")
+    
+  }, height = 700, width = 750, res = 96)
+  #---------------------------------------
+  ind_last <- reactive({
+    ind %>%
+      filter(TIME_PERIOD >= input$date_ind[1] & TIME_PERIOD <= input$date_ind[2],
+             nace_r2 == "C", s_adj == "SCA", unit == "PCH_PRE") %>% 
+      summarise(sm = sum(values, na.rm = T), .by = c(geo)) %>%
+      mutate_if(is.numeric, round, 1) %>% 
+      mutate(geo = fct_reorder(geo, sm),
+             col = if_else(geo == "BG", "1", "0"))
+  })
+  
+  output$ind_plot <- renderPlot({
+    
+    ind_last() %>% 
+      ggplot(aes(sm, geo, fill = col)) +
+      geom_col() +
+      scale_fill_manual(values = c("gray50", "red")) +
+      scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
+      geom_text(aes(label = sm),
+                position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
+      theme(text = element_text(size = 12), legend.position = "none", 
+            plot.title.position = "plot") +
+      labs(x = "Индустриално производство (%)", y = NULL, 
+           caption = "Източник на данните: Eurostat")
+    
+  }, height = 700, width = 750, res = 96)
+  
+  ind_line_r <- reactive({
+    ind %>% 
+      filter(TIME_PERIOD >= input$date_ind[1] & TIME_PERIOD <= input$date_ind[2],
+             nace_r2 == "C", s_adj == "SCA", unit == "PCH_PRE",
+             geo %in% c(input$country_ind)) %>% 
+      group_by(geo) %>%
+      mutate(cs = cumsum(values)) %>%
+      ungroup()
+  })
+  
+  output$ind_line <- renderPlot({
+    
+    ind_line_r() %>% 
+      ggplot(aes(TIME_PERIOD, cs)) +
+      geom_line() +
+      geom_point() +
+      theme(text = element_text(size = 12), plot.title.position = "plot") +
+      labs(y = "Индустриално производство (%)", x = NULL, 
            caption = "Източник на данните: Eurostat")
     
   }, height = 700, width = 750, res = 96)

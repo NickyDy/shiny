@@ -7,7 +7,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -37,7 +37,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -58,7 +58,7 @@ scrape_prices <- function(page) {
            ) %>% distinct()
   return(pc)
 }
-pages_to_scrape <- 1:1
+pages_to_scrape <- 1:2
 meat <- map_dfr(pages_to_scrape, scrape_prices)
 #---------------------------------------------------------------------
 base_url <- "https://vmv.bg/categories/riba-97d170e1"
@@ -66,7 +66,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -95,7 +95,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -124,7 +124,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -153,7 +153,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -182,7 +182,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -211,7 +211,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -240,7 +240,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -269,7 +269,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 
@@ -298,7 +298,7 @@ scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
   pc <- page_content %>% 
-    html_elements("._product-card__content-clickable-area_ccegz_35") %>%
+    html_elements("._collection-products-listing_khpel_1") %>%
     map_dfr(~ tibble(
       product = .x %>% 
         html_element("._title--line-clamp_9vvqx_88") %>% 

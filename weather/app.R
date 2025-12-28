@@ -6,6 +6,7 @@ library(bslib)
 
 download.file("http://www.weather.bg/index.php?koiFail=tekushti&lng=0", destfile = "temp_nimh_new")
 download.file("http://weather.bg/index.php?koiFail=bg&lng=0", destfile = "forcast_nimh_new")
+download.file("http://weather.bg/index.php?koiFail=eubp&lng=0", destfile = "forcast_eu_new")
 download.file("http://meteo.bg/meteo7/bg/rekiTablitsa", destfile = "rivers_nimh_new")
 
 temp_nimh_new <- read_html("temp_nimh_new") %>%
@@ -42,7 +43,7 @@ pl <- read_html("forcast_nimh_new") %>%
   html_element("#planini") %>% html_table() %>% pivot_longer(-Пункт) %>% 
   filter(!Пункт == "") %>% mutate(region = "Планини", .before = Пункт) %>% 
   select(region, station = Пункт, date = name, weather = value)
-eu <- read_html("forcast_nimh_new") %>%
+eu <- read_html("forcast_eu_new") %>%
   html_element("table") %>% html_table() %>% pivot_longer(-Град) %>% 
   filter(!Град == "") %>% mutate(region = "Европа", .before = Град) %>% 
   select(region, station = Град, date = name, weather = value)

@@ -88,7 +88,7 @@ scrape_prices <- function(page) {
 pages_to_scrape <- 1:1
 meat <- map_dfr(pages_to_scrape, scrape_prices)
 #--------------------------------------------
-base_url <- "https://bulmag.org/category/mlechni-produkti?page=%d"
+base_url <- "https://bulmag.org/category/mlechni-produkti?page=%d&hasQuantity=1"
 scrape_prices <- function(page) {
   url <- sprintf(base_url, page)
   page_content <- read_html(url)
