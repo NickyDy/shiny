@@ -28,7 +28,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
       str_detect(station, "Рупите") ~ "unofficial",
       str_detect(station, "Илинденци") ~ "unofficial",
       str_detect(station, "Конгур") ~ "unofficial"), .after = station,
-    year = 2025, month = 12,
+    year = 2026, month = 1,
     elev = case_when(
       station == "Видин" ~ 31, station == "Ловеч" ~ 220, str_detect(station, "Конгур") ~ 1284,
       station == "Разград" ~ 345, station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180,
@@ -42,7 +42,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
   mutate(decade = case_when(
     year %in% c("2004", "2005", "2006", "2007", "2008", "2009") ~ "00s",
     year %in% c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019") ~ "10s",
-    year %in% c("2020", "2021", "2022", "2023", "2024", "2025") ~ "20s")) %>%
+    year %in% c("2020", "2021", "2022", "2023", "2024", "2025", "2026") ~ "20s")) %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
   pivot_longer(7:37, names_to = "day", values_to = "rain") %>%
   mutate(rain = str_remove(rain, "---")) %>% 
@@ -68,7 +68,7 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
                      "Обзор", "Дупница", "Орландовци", "Бояна", "Княжево",
                      "Панагюрище", "Ямбол", "Петрич", "Турну Мъгуреле Р.",
                      "Кълъраш Р.", "Одрин Т.", "Рилци", "Добри дол") ~ "unofficial"), .after = station,
-    year = 2025, month = 12,
+    year = 2026, month = 1,
     elev = case_when(
       station == "Видин" ~ 31, station == "Гложене" ~ 64, station == "Ловеч" ~ 220, station == "Разград" ~ 345,
       station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180, station == "Варна-Боровец" ~ 193,
@@ -83,7 +83,7 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
   mutate(decade = case_when(
     year %in% c("2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009") ~ "00s",
     year %in% c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019") ~ "10s",
-    year %in% c("2020", "2021", "2022", "2023", "2024", "2025") ~ "20s")) %>%
+    year %in% c("2020", "2021", "2022", "2023", "2024", "2025", "2026") ~ "20s")) %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
   pivot_longer(7:37, names_to = "day", values_to = "temp") %>% 
   mutate(temp = str_remove(temp, "---")) %>% 
