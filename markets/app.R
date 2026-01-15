@@ -34,11 +34,12 @@ df_markets <- bind_rows(df_markets_2025, df_markets_2026) %>%
                                     "Препарат за съдове" = "79", "Краве сирене" = c("8", "9"), "Четки за зъби" = "80",
                                     "Паста за зъби" = "81", "Шампоани" = "82", "Сапуни" = "83", 
                                     "Мокри кърпички" = "84", "Тоалетна хартия" = "85"), .after = kategoria) %>% 
-  mutate(kategoria = as.numeric(kategoria)) %>% 
-  filter(!cena_na_drebno == 0) %>% 
+  mutate(kategoria = as.numeric(kategoria), naimenovanie_na_produkta = as.character(naimenovanie_na_produkta)) %>% 
+  filter(!cena_na_drebno == 0, !kategoria_c %in% c("0043157", "6800057")) %>% 
   arrange(date, kategoria)
 
-df_market <- read_parquet("df_market.parquet") %>% mutate(
+df_market <- read_parquet("df_market.parquet") %>% 
+  mutate(
   date = as.character(date),
   product = str_replace(product, "\\\n", " ")) %>% 
   mutate(product = fct_recode(product, 'Брашно тип "500" /пакет 1 кг/' = 'Брашно тип"500" /пакет 1 кг/'),
@@ -78,11 +79,21 @@ ui <- page_fillable(
                 col_widths = c(12))),
     nav_panel(title = "Инфлация (по ключова дума)",
               layout_columns(
-                selectInput("key_market", "Супермаркет:",
-                            choices = c("Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")),
+                dateRangeInput("inf_keyword_date", "Дата:",
+                               start = "2026-01-01",
+                               end = last(df_markets$date),
+                               min = first(df_markets$date),
+                               max = last(df_markets$date),
+                               separator = " до ",
+                               weekstart = 1,
+                               language = "bg"),
+                # selectInput("key_market", "Супермаркет:",
+                #             choices = c("Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")),
                 textInput("key_input", "Ключова дума/думи:", value = "", 
                           placeholder = "ключова дума"),
-                col_widths = c(2)),
+                textInput("key_input_unit", "Грамаж:", value = "", 
+                          placeholder = "ключова дума"),
+                col_widths = c(2, 2, 2, 2)),
               layout_columns(
                 plotOutput("key_plot"),
                 col_widths = c(12))),
@@ -104,9 +115,17 @@ ui <- page_fillable(
                 col_widths = c(12))),
     nav_panel(title = "Групи храни (време)",
               layout_columns(
+                dateRangeInput("inf_date_time", "Дата:",
+                               start = "2026-01-01",
+                               end = last(df_markets$date),
+                               min = first(df_markets$date),
+                               max = last(df_markets$date),
+                               separator = " до ",
+                               weekstart = 1,
+                               language = "bg"),
                 selectInput("cat_select", "Категория:",
                             choices = unique(df_markets$kategoria_c)),
-                col_widths = c(2)),
+                col_widths = c(2, 2)),
               layout_columns(
                 plotOutput("time_plot"),
                 col_widths = c(12))),
@@ -155,8 +174,8 @@ server <- function(input, output, session) {
           "Супермаркет" = "market",
           "Категория" = "kategoria_c",
           "Продукт" = "naimenovanie_na_produkta",
-          "Цена на дребно" = "cena_na_drebno",
-          "Цена в промоция" = "cena_v_promocia"),
+          "Цена на дребно (евро)" = "cena_na_drebno",
+          "Цена в промоция (евро)" = "cena_v_promocia"),
         options = list(dom = "frtip", pageLength = 15))
     
   )
@@ -170,7 +189,7 @@ server <- function(input, output, session) {
         price_change = (last(cena_na_drebno) - first(
           cena_na_drebno)) / first(cena_na_drebno) * 100,
         .by = c(market, naimenovanie_na_produkta)) %>%
-      filter(!between(price_change, -1, 1)) %>%
+      filter(price_change != 0) %>%
       mutate(naimenovanie_na_produkta = fct_reorder(
         naimenovanie_na_produkta, price_change), col = price_change > 0,
              market = fct_relevel(market, "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")) %>% 
@@ -186,15 +205,19 @@ server <- function(input, output, session) {
     
 }, height = function() input$height, width = 1800, res = 96)
   
-  debounced <- reactive({input$key_input}) %>% debounce(1000)
+  #debounced <- reactive({input$key_input}) %>% throttle(1000)
   
   online <- reactive({
     
-    validate(need(input$key_input != "", "Моля, въведете ключова дума на кирилица!"))
+    validate(need(input$key_input != "", "Моля, въведете ключова дума!"))
+    validate(need(input$key_input_unit != "", "Моля, въведете ключова дума!"))
     
     df_markets %>% 
-      filter(market == input$key_market,
-             str_detect(naimenovanie_na_produkta, regex(debounced(), ignore_case = T)))
+      filter(
+        date >= input$inf_keyword_date[1] & date <= input$inf_keyword_date[2],
+        #market == input$key_market,
+        str_detect(naimenovanie_na_produkta, regex(glue::glue(
+          "^(?=.*{input$key_input})(?=.*{input$key_input_unit}).*$"), ignore_case = T)))
   })
   
   output$key_plot <- renderPlot({
@@ -202,7 +225,6 @@ server <- function(input, output, session) {
     online() %>%
       mutate(naimenovanie_na_produkta = str_remove(naimenovanie_na_produkta, "___.+$"),
              date = ymd(date)) %>% 
-     mutate(naimenovanie_na_produkta = str_wrap(naimenovanie_na_produkta, 30)) %>%
       pivot_longer(7:8) %>% drop_na(value) %>%
       mutate(market = glue::glue(" <span style='color:blue'>**{market}**</span>")) %>% 
       unite(c(market, naimenovanie_na_produkta), col = "market_product", sep = ": ") %>%
@@ -235,10 +257,12 @@ df_markets %>%
     ggplot(aes(price_change, kategoria_c, fill = col)) +
     geom_col(show.legend = F) +
     scale_fill_manual(values = colors_percent) +
-    scale_x_continuous(expand = expansion(mult = c(0.01, 0.4))) +
+    scale_x_continuous(expand = expansion(mult = c(0.01, 0.45))) +
     geom_text(aes(label = paste0(round(price_change, 2), "%")),
               position = position_dodge(width = 1), hjust = -0.1, size = 4) +
-    labs(y = NULL, x = NULL) +
+    labs(y = NULL, x = "Средна инфлация", 
+         title = paste0("Натрупана инфлация за периода от ", input$inf_markets_date[1], " до ",
+                        input$inf_markets_date[2])) +
     theme(text = element_text(size = 16),
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank()) +
@@ -253,7 +277,8 @@ output$time_plot <- renderPlot({
       market = fct_relevel(market, "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон"),
       date = ymd(date),
       cena_v_promocia = as.numeric(cena_v_promocia)) %>%
-    filter(kategoria_c == input$cat_select) %>%
+    filter(date >= input$inf_date_time[1] & date <= input$inf_date_time[2], 
+           kategoria_c == input$cat_select) %>%
     summarise(cena_na_drebno = mean(cena_na_drebno, na.rm = T),
               cena_v_promocia = mean(cena_v_promocia, na.rm = T),
               .by = c(market, kategoria_c, date)) %>%
@@ -280,7 +305,7 @@ output$market_foods <- renderDT(
         "Дата" = "date",
         "Продукт" = "product",
         "Грамаж" = "unit",
-        "Цена (лв)" = "price"),
+        "Цена (евро)" = "price"),
       options = list(dom = "frtip", pageLength = 15))
   
 )
@@ -342,12 +367,12 @@ output$market_trend_plot <- renderPlot({
     market_product_trend() %>%
       mutate(date = ymd(date), m = month(date)) %>%
       ggplot(aes(date, price)) +
-      #geom_smooth(method = "loess", se = F) +
+      geom_vline(xintercept = as.Date("2026-01-01"), linetype = 2, linewidth = 0.3) +
       geom_line(linetype = 2) +
       geom_point(size = 2) +
       scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
       theme(text = element_text(size = 16)) +
-      labs(x = "Дата", y = "Цена (лв)")
+      labs(x = "Дата", y = "Цена (евро)")
   }, height = 800, width = 1850, res = 96)
   
 session$onSessionEnded(function() {stopApp()})

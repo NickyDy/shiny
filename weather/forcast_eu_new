@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="styles/style.Grid.sin.css" />
+<link rel="stylesheet" type="text/css" href="styles/style.eubp.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Department of Weather Forecasts - NIMH</title>
+<script language="JavaScript" type="text/javascript">
+<!-- Copyright 2005, Sandeep Gangadharan -->
+<!-- For more free scripts go to http://www.sivamdesign.com/scripts/ -->
+<!--
+if (document.getElementById) {
+document.writeln('<style>')
+document.writeln('.texter {display:none} @media print {.texter {display:block;}}')
+document.writeln('</style>') }
+
+function openClose(theID) {
+if (document.getElementById(theID).style.display == "block") { document.getElementById(theID).style.display = "none" }
+else { document.getElementById(theID).style.display = "block" } }
+// -->
+</script>
+
+</head>
+
+<body>
+<div class="wrapper">
+  <header>
+    <logo  class="logo"><a href="http://www.meteo.bg" target="_blank" ><img src="images/static/NIMH-Logo-color200.png" width="150" height="150"/></a></logo>
+
+    <div class="title" ><h1> ПРОГНОЗИ ЗА ВРЕМЕТО </h1>
+        <h1>Национален институт по метеорология и хидрология</h1>
+    </div>
+    
+    <div class="lang" > 
+      <a href="index.php?lng=0" ><img src="images/static/bg1.jpg" class="zname" /></a>&nbsp;<a href="1en/index.php?lng=1" ><img src="images/static/gb.jpg" class="zname"/></a>
+    </div>
+
+
+    <div class="alarm" dateDnes="13.12.2025" >
+      <img class="alarm kartaOpasniM" src="images/static/opasniSS_0.png" />
+      <div class="akcent2" cool-typ="за опасно време"><a class="noline" href="obshtini/" target="_blank">няма <br /> опасност  <img class="alarm icon" src="images/static/0.new.gif"/></a></div>
+    </div>
+
+<div class="poj" >
+  <div class="subpoj" cool-typ="за пожароопасност">
+    <a href="pojaroopasnostPlus" target="_blank"> <img src="images/static/fireButton.0.png" alt="Препоръчителна готовност за борба с пожари"></a>
+  </div>
+</div>
+
+  </header>
+<!---------------------- Izvanredno - moje i da go niama --------------- -->
+<izvanredno>
+<p><a href="https://storm.cfd.meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/POZICIA_NIMH_Murgash_12032025.pdf" target="_blank">Позиция на Националния институт по метеорология и хидрология относно вероломното нахлуване във високопланинската синоптична станция вр. Мургаш</a></p>
+<p><a href="https://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/20240805PMS273.pdf" target="_blank">Писмо от НИМХ до държавни институции и до медиите</a> във връзка с ПМС № 273 от 5 август 2024 г.</p>
+</izvanredno>
+
+<!-- -------------------  MENU -------------- -->  
+
+<!-- -------------------  MENU -------------- -->  
+    <input type="checkbox" id="toggle">
+<nav>    
+        <label class="navbar-toggler" for="toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+
+  <menu>
+    <menucard     
+      cool-typ="Начална страница">
+      <a class="submenuhead"  href="index.php" ><img src="karti/icons/home-blue3-icon.png"></a>
+    </menucard>
+    <menucard     
+      cool-typ="Последни данни, спътникови анимации">
+      <a class="submenuhead"  href="index.php?koiFail=tekushti&lng=0" >Текущи данни</a>
+    </menucard>    
+    <menucard     
+      cool-typ="Карти на средните температури и на валежите за минали периоди">
+      <a class="submenuhead"  href="index.php?koiFail=analizi&lng=0" >Анализи</a>
+    </menucard>
+    <menucard     
+      cool-typ="В нов прозорец" >
+      <a class="submenuhead"  href="obshtini" target="_blank">Прогнози<br/><p class="small-italic">Опасни явления</p></a>
+    </menucard>
+    <menucard     
+      cool-typ="Карти Бг-3 дена, море, планини, пожароопасност, индекс на комфорт">
+      <a class="submenuhead"  href="index.php?koiFail=bg&lng=0">Прогнози<br/><p class="small-italic">Краткосрочни за България</p></a>
+    </menucard>
+    <menucard     
+      cool-typ=" Седмична, месечна, сезонна">
+      <a class="submenuhead"  href="index.php?koiFail=bg2&lng=0">Прогнози<br/><p class="small-italic">Средносрочни и дългосрочни за България</p></a>
+    </menucard>
+    <menucard class="tekusht"    
+      cool-typ="Карти - Европа и Балканите " >
+      <a class="submenuhead"  href="index.php?koiFail=eubp&lng=0" >Прогнози<br/><p class="small-italic">Европа и Балканите</p></a>
+    </menucard>
+    <menucard     
+      cool-typ="таблици по градове за България и Европа " >
+      <a class="submenuhead"  href="index.php?koiFail=tablitsi&lng=0">  Прогнози<br/><p class="small-italic">в точки</p></a>
+    </menucard>
+
+    <menucard     
+      cool-typ="ALADIN/AROME, вълнение на морето, комфорт, пожароопасност " >
+      <a class="submenuhead"  href="index.php?koiFail=prognChisleni&lng=0"> Числени прогнози<br/><p class="small-italic">полета</p></a>
+    </menucard>
+    <menucard     
+      cool-typ="Метеограми за 72 часа, морско вълнение" >
+      <a class="submenuhead"  href="index.php?koiFail=poGradoveAJ&lng=0"> Числени прогнози<br/><p class="small-italic">в точки</p></a>
+    </menucard>
+    <menucard class="last"     
+      cool-typ="Контакти, продукти, модели" >
+      <a class="submenuhead"  href="index.php?koiFail=zaNas&lng=0" >За нас</a>
+    </menucard>
+  </menu>
+</nav>  
+<!-- End Menu -->
+  
+<!-- End Menu -->
+
+<!-- ----------------Main content --------------- --> 
+
+ <div class="images">
+   <div class="cardProzrachna bp" > 
+        	  <h2> Прогноза за Балканите </h2>
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/PrognozaBP_0.png" >
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/PrognozaBP_1.png" >
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/PrognozaBP_2.png" >
+          <div class="card bptekst"> 
+ <h2>13.12.2025</h2><p class="bulg">Над повечето райони на Балканите през по-голямата част от деня ще има значителна ниска облачност или мъгли; временно подобрение на видимостта и разкъсване на облачността ще има след обяд. Повече слънчеви часове ще има над планините и планинските райони, както и в югозападната част на полуострова.</p>
+<p class='bulg'><b>Дежурен синоптик:</b> Красимир Стоев<br/>
+<a href='http://weather.bg' target='_blank'>Отдел "Метеорологични прогнози"</a></p>
+
+	
+	        </div>
+   </div>
+   <div class="cardProzrachna eu"> 
+	         <h2>Прогноза за Европа</h2>
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/PrognozaEU_0.png" > 
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/PrognozaEU_1.png" > 
+        	  <img src="https://sfsynop.cfd.meteo.bg/www/www.plots/png/0/PrognozaEU_2.png" > 
+           <div class="card euteksta"> 
+ <h2>13.12.2025</h2><p class="bulg">На Пиренейския полуостров от север на юг валежите ще спрат, облачността ще се разкъсва и ще намалее до предимно слънчево, вятърът ще отслабне. Над Западна и Централна Европа, в Централното Средиземноморие, в западната част от Източна Европа ще преобладава облачно време, с мъгли или димки; временно подобрение на видимостта и разкъсване на облачността ще има в следобедните часове; повече слънце ще има в планините и планинските райони. Предимно слънчево ще бъде в южните райони на Великобритания, на север, както и в Ирландия ще бъде ветровито, с валежи от дъжд, значителни на места в Шотландия. Облачно ще бъде и на Скандинавския полуостров, с валежи, в северните и централните райони от сняг, на места ще са интензивни, на юг ще вали дъжд. Облачно, ветровито, с валежи, предимно от сняг ще бъде в крайните източни райони на континента.</p>
+<p class='bulg'><b>Дежурен синоптик:</b> Красимир Стоев<br/>
+<a href='http://weather.bg' target='_blank'>Отдел "Метеорологични прогнози"</a></p>
+	
+           </div>
+    </div>
+</div>
+<div style="margin-top:1rem;">
+    <div class="card poGradove"> 
+       <div onClick="openClose('eu')"   class="linkOpenClose">Прогноза по градове - Европа</div>
+       <p>&nbsp;</p>
+       <div id="eu" class="texter">
+         <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body>
+<table >
+<tr><th>Град</th><th colspan=2>13.12.2025</th><th colspan=2 >14.12.2025</th><th colspan=2 >15.12.2025</th></tr>
+
+<tr><th>&nbsp;</th><th  style="background-color:#aaaaaa;"><span style="color:blue;"> t<sub>min</sub></span>&nbsp;/&nbsp;<span style="color:red;">t<sub>max</sub> </span><br/>[&deg;C] </th><th  style="background-color:#aaaaaa;"> Време </th><th  style="background-color:#aaaaaa;"><span style="color:blue;"> t<sub>min</sub></span>&nbsp;/&nbsp;<span style="color:red;">t<sub>max</sub> </span><br/>[&deg;C] </th><th  style="background-color:#aaaaaa;"> Време </th><th  style="background-color:#aaaaaa;"><span style="color:blue;"> t<sub>min</sub></span>&nbsp;/&nbsp;<span style="color:red;">t<sub>max</sub> </span><br/>[&deg;C] </th><th  style="background-color:#aaaaaa;"> Време </th></tr>
+<tr>
+ <tr> 
+      <td>Лондон</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>10</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol01.jpg'> Слънчево/Ясно</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>8&nbsp;/&nbsp;</span><span style='color:red;'>10</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol02.jpg'> Променлива облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>9&nbsp;/&nbsp;</span><span style='color:red;'>11</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+      </tr>  
+ <tr> 
+      <td>Париж</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>9&nbsp;/&nbsp;</span><span style='color:red;'>12</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol16.jpg'> Мъгла</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>8&nbsp;/&nbsp;</span><span style='color:red;'>10</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol16.jpg'> Мъгла</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>6&nbsp;/&nbsp;</span><span style='color:red;'>13</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol01.jpg'> Слънчево/Ясно</td>
+      </tr>  
+ <tr> 
+      <td>Брюксел</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>6&nbsp;/&nbsp;</span><span style='color:red;'>10</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol09.jpg'> Облачно</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>6&nbsp;/&nbsp;</span><span style='color:red;'>10</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol08.jpg'> Предимно слънчево</td>
+      </tr>  
+ <tr> 
+      <td>Мадрид</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>3&nbsp;/&nbsp;</span><span style='color:red;'>14</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol08.jpg'> Предимно слънчево</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>13</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol06.jpg'> Значителна облачност с дъжд</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>7&nbsp;/&nbsp;</span><span style='color:red;'>13</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol10.jpg'> Дъжд</td>
+      </tr>  
+ <tr> 
+      <td>Стокхолм</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>4&nbsp;/&nbsp;</span><span style='color:red;'>6</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol06.jpg'> Значителна облачност с дъжд</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>4&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol06.jpg'> Значителна облачност с дъжд</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>7&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol06.jpg'> Значителна облачност с дъжд</td>
+      </tr>  
+ <tr> 
+      <td>Берлин</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>3&nbsp;/&nbsp;</span><span style='color:red;'>9</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol09.jpg'> Облачно</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>4&nbsp;/&nbsp;</span><span style='color:red;'>7</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>3&nbsp;/&nbsp;</span><span style='color:red;'>7</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+      </tr>  
+ <tr> 
+      <td>Варшава</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>4&nbsp;/&nbsp;</span><span style='color:red;'>6</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol02.jpg'> Променлива облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>4&nbsp;/&nbsp;</span><span style='color:red;'>6</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol03.jpg'> Променлива облачност; възможно е да превали</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>0&nbsp;/&nbsp;</span><span style='color:red;'>6</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol08.jpg'> Предимно слънчево</td>
+      </tr>  
+ <tr> 
+      <td>Рим</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>12</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol08.jpg'> Предимно слънчево</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>13</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol16.jpg'> Мъгла</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>10&nbsp;/&nbsp;</span><span style='color:red;'>13</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol10.jpg'> Дъжд</td>
+      </tr>  
+ <tr> 
+      <td>Прага</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>3&nbsp;/&nbsp;</span><span style='color:red;'>6</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>2&nbsp;/&nbsp;</span><span style='color:red;'>6</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>2&nbsp;/&nbsp;</span><span style='color:red;'>4</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+      </tr>  
+ <tr> 
+      <td>Будапеща</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>2&nbsp;/&nbsp;</span><span style='color:red;'>5</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol09.jpg'> Облачно</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>3&nbsp;/&nbsp;</span><span style='color:red;'>5</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol09.jpg'> Облачно</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>3&nbsp;/&nbsp;</span><span style='color:red;'>5</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol09.jpg'> Облачно</td>
+      </tr>  
+ <tr> 
+      <td>Киев</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>-3&nbsp;/&nbsp;</span><span style='color:red;'>0</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol08.jpg'> Предимно слънчево</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>-1&nbsp;/&nbsp;</span><span style='color:red;'>2</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol13.jpg'> Дъжд и сняг</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>1&nbsp;/&nbsp;</span><span style='color:red;'>4</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol13.jpg'> Дъжд и сняг</td>
+      </tr>  
+ <tr> 
+      <td>Москва</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>-6&nbsp;/&nbsp;</span><span style='color:red;'>-4</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>-7&nbsp;/&nbsp;</span><span style='color:red;'>-4</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+      </tr>  
+ <tr> 
+      <td>Белград</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>4&nbsp;/&nbsp;</span><span style='color:red;'>7</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>0&nbsp;/&nbsp;</span><span style='color:red;'>5</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol06.jpg'> Значителна облачност с дъжд</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>1&nbsp;/&nbsp;</span><span style='color:red;'>6</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol08.jpg'> Предимно слънчево</td>
+      </tr>  
+ <tr> 
+      <td>Букурещ</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>2&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>1&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol02.jpg'> Променлива облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>0&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol02.jpg'> Променлива облачност</td>
+      </tr>  
+ <tr> 
+      <td>Солун</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>14</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol08.jpg'> Предимно слънчево</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>14</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol01.jpg'> Слънчево/Ясно</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>4&nbsp;/&nbsp;</span><span style='color:red;'>14</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol01.jpg'> Слънчево/Ясно</td>
+      </tr>  
+ <tr> 
+      <td>Атина</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>8&nbsp;/&nbsp;</span><span style='color:red;'>17</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol02.jpg'> Променлива облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>6&nbsp;/&nbsp;</span><span style='color:red;'>16</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>5&nbsp;/&nbsp;</span><span style='color:red;'>16</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol01.jpg'> Слънчево/Ясно</td>
+      </tr>  
+ <tr> 
+      <td>Истанбул</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>8&nbsp;/&nbsp;</span><span style='color:red;'>13</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol05.jpg'> Значителна облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>8&nbsp;/&nbsp;</span><span style='color:red;'>11</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol10.jpg'> Дъжд</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>7&nbsp;/&nbsp;</span><span style='color:red;'>12</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol02.jpg'> Променлива облачност</td>
+      </tr>  
+ <tr> 
+      <td>Анкара</td>
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>3&nbsp;/&nbsp;</span><span style='color:red;'>9</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol02.jpg'> Променлива облачност</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>0&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol10.jpg'> Дъжд</td>
+
+              <td style='text-align:center;font-size:130%'><span style='color:blue;'>1&nbsp;/&nbsp;</span><span style='color:red;'>8</span></td>            
+              <td style='background-color:#eeeeee;'><img src='https://info.meteo.bg/i/meteo/naborP/simvol10.jpg'> Дъжд</td>
+      </tr>  
+  </table>
+ 
+       </div>
+    </div>
+</div>
+<div class="cardProzrachna aladin">
+<h2>Продукти, произведени от НИМХ на базата на модела GFS на NCEP-NOAA</h2>
+
+         
+       <div class="gfsKarti ">
+         <div style="max-width:600px;"><p class="bulg">По-голямата част от континента е обхваната от обширен антициклон. Дълбок циклон се развива в северната част на Атлантическия океан и се премества бавно на североизток; Ирландия и северната половина на Великобритания, както и Скандинавския полуостров, ще са в периферията му, а Британските острови ще са в градиентната фронтална зона. Друг циклон, с арктически произход, ще се спуска от север в източната половина от европейската територия на Русия. 
+Балканите остават в антициклонално почти безградиентно поле.</p></div><div style="max-width:600px;"><p class="bulg">Студената въздушна маса от Британските острови бързо се премества на североизток и достига Скандинавския полуостров, отстъпвайки на топъл въздух от югозапад. Чувствително се понижават температурите в източната половина от европейската територия на Русия, в тила на арктическия циклон. В останалата част от континента температурите са по-високи от обичайните, слабо се понижават.
+На Балканите слабо понижение настъпва в източните райони на полуострова, но въпреки това остава по-топло от обичайното.</p></div><div style="max-width:600px;"><p class="bulg">Дъжд ще вали в северната половина на Великобритания и в Ирландия; на места в Шотландия валежите ще са значителни. На Скандинавския полуостров ще има валежи, в северните и централните райони от сняг, на места ще са интензивни, на юг ще вали дъжд. Валежи, предимно от сняг ще има и в крайните източни райони на континента.
+На Балканите вероятността за валежи е много малка.</p></div></div>
+  <div class="card gfsKartaKombi">
+  <h2> GFS - прогноза за 7 дни за:</h2>
+  <div style="text-align:left;">
+  <ul>
+    <li>TCDC: облачност - процент общо покритие с облаци: вид - сиво-бели петна с прозрачност (от 10% до 100%) от няма облачност и е прозрачно до бяло - плътна облачност;</li>
+    <li>APCP: валеж: вид - сини петна в облачността - дъжд; лилави петна - сняг; и количество за 3 часа - дълбочина на цвета;</li>
+    <li>850 mb temp: температура на около 1500 m над морско ниво в свободната атмосфера: вид - цветни изолинии;</li>
+    <li>500 mb: водещ атмосферен поток в средната тропосфера: вид - бели изолинии на изобарна повърхност 500 hPa;</li>
+    <li>LFIX : индекс на атмосферна неустойчивост - lifted index: вид - прекъснати изолинии.</li>
+  </ul>
+  </div>
+  <img  width="1000" src="https://sfsynop.cfd.meteo.bg/www/www.plots/gif/0/Cloud.gif">
+    <h2>Вятър</h2>
+  <img  width="1000" src="https://sfsynop.cfd.meteo.bg/www/www.plots/gif/0/Wind.gif">
+  
+    <h2 id="globus">Температурно поле на изобарна височина 850 hPa </h2>
+    <h3>Начален час на прогнозата: горе вляво, прогнозиран срок: горе вдясно, краен час: +118</h3>
+  <img  width="1000" src="https://sfsynop.cfd.meteo.bg/www/www.plots/gif/0/T850mb.gif">
+
+<p><b>Анимирана информация от Глобалната прогностична система (Global Forecasting System) на НОАА за очакваната температура на въздуха на височина около 1500&nbsp;m.</b></p>
+  <div style="text-align:left;padding-left:100px;padding-right:100px;">
+<p><b>През студеното полугодие</b> със светлосиня линия се изчертава изотерма минус 5&deg;C. На север от нея с много голяма вероятност валежите са от сняг, на юг от нея – от дъжд.</p>
+<p><b>През топлото полугодие</b> с червена линия се изчертава изотерма плюс 20&deg;C . На юг от нея през деня става горещо с температури над 35&deg;C.</p>
+<p>Студените въздушни маси са представени с цветове от синьо към лилаво, а топлите – от жълто към червено.</p>
+<p>Бреговите линии и границите на България са представени с черен контур. </p>
+   </div>
+     </div>
+  </div>
+</div> 
+
+</div>
+
+
+<!-- -------------------  FOOTER -------------- -->  
+
+<footer>
+<div  class="vestnik">
+<h2 class="footer">Карта на сайта</h2>
+<a name="karta"></a>
+<h3><a class="footer" href="index.php?koiFail=tekushti&lng=0"> => Текущи данни и измервания </a></h3>
+  <ul>
+    <li>Температура, вятър и явления в България</li>
+    <li>Минимални и максимални температури за изминалото денонощие</li>
+    <li>Спътникови анимации - температура на горната граница на облаците и въздушни маси</li>
+    <li>Валежи за 24 часа</li>
+    <li>Снежна покривка</li>
+    <li>Гръмотевична дейност</li>
+    <li>Температура на земната повърхност&nbsp;&mdash; анализ</li>
+    <li>Условията за борба с пожари&nbsp;&mdash; анализ</li>
+    <li>Условията на комфорт&nbsp;&mdash; анализ на последните данни</li>
+    <li>Карти-анализ за текущия месец до днес</li>
+    <li>Температура на морската повърхност&nbsp;&mdash; Черно и Средиземно море</li>
+ </ul>
+ <h3><a class="footer" href="index.php?koiFail=vecherenBiuletin&lng=0"> => Вечерен метеорологичен бюлетин </a></h3>
+  <ul>
+    <li>Видео - преглед на времето през изминалото денонощие и прогноза за следващите дни</li>
+  </ul>
+ <h3><a class="footer" href="index.php?koiFail=analizi&lng=0"> => Анализи </a></h3>
+  <ul>
+    <li>Карти-анализ за текущия месец до днес</li>
+    <li>Минимални и максимални температури за изминалото денонощие</li>
+    <li>Изминалият месец</li>
+    <li>Месечен ход на температурата и валежите м 4 града</li>  
+    <li>Изминалият сезон</li>
+  </ul>
+<h3><a class="footer" href="https://storm.cfd.meteo.bg/weather/obshtini/"> => Прогнози - опасни явления </a></h3>
+  <ul>
+    <li>Прогноза за опасни метеорологични явления (в нов прозорец)</li>
+ </ul>
+<h3><a class="footer" href="index.php?koiFail=bg&lng=0"> => Прогнози за България - краткосрочни </a></h3>
+  <ul>
+    <li>Карти за 3 или 4 дена и текст</li>
+    <li>Прогноза по градове</li>
+    <li>Прогноза за планините</li>
+    <li>Прогноза за морето </li>
+    <li>Прогноза на препоръчителна готовност за борба с пожари</li>
+    <li>Прогноза на условията на комфорт</li>
+    <li>Прогноза на температурата на земната повърхност</li>
+    <li>Прогноза на вероятност за гръмотевична дейност</li>
+ </ul>
+<h3><a class="footer" href="index.php?koiFail=bg2&lng=0"> => Прогнози за България -средносрочни</a></h3>
+  <ul>
+    <li>Седмична</li>
+    <li>15-дневна</li>
+    <li>Месечна</li>
+    <li>Сезонна</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=eubp&lng=0"> => Прогнози за Балканите и Европа</a></h3>
+  <ul>
+    <li>За Балканите - карти за 3 дена и текст</li>
+    <li>За Европа - карти за 3 дена и текст</li>
+    <li>Прогноза по градове </li>
+    <li>Продукти от НИМХ на базата на модела GFS</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=tablitsi&lng=0"> => Синоптични прогнози в точки</a></h3>
+  <ul>
+    <li>Прогноза по градове в България</li>
+    <li>Прогноза за морските курорти </li>
+    <li>Прогноза за планинските курорти</li>
+    <li>Прогноза по градове - Европа</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=prognChisleni&lng=0"> => Числени прогнози за България и Европа</a></h3>
+  <ul>
+    <li>ALADIN - облачност и вятър и температура при земята за 72 часа</li>
+    <li>AROME - облачност и вятър и температура при земята за 48 часа</li>
+    <li>Морско вълнение - височина на вълната и вятър над Черно море</li>
+    <li>Прогноза на вероятността за слана</li>
+    <li>Прогноза на вероятността за гръмотевична дейност</li>
+    <li>Прогноза на условията на комфорт</li>
+    <li>Прогноза на температурата на земната повърхност</li>
+    <li>Прогноза на препоръчителна готовност за борба с пожари</li>
+    <li>Продукти от НИМХ на базата на модела GFS</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=poGradoveAJ&lng=0"> => Числени прогнози в точки</a></h3>
+  <ul>
+    <li>Метеограми за 72 часа за всички областни центрове и за всичките ни синоптични станции </li>
+    <li>Морско вълнение за 12 курорта</li>
+ </ul> 
+<h3><a class="footer" href="index.php?koiFail=zaNas&lng=0"> => За нас</a></h3>
+  <ul>
+    <li>Контакти</li>
+    <li>Предлагани продукти и услуги</li>
+    <li>Повече за прогнозите, които издаваме - краткосрочни, средносрочни, дългосрочни и числени</li>
+    <li>Повече за моделите, които пускаме и поддържаме оперативно в нашия институт</li>
+    <li>Повече за другите модели, които използваме</li>
+ </ul> 
+
+
+</div>
+<hr/>
+<b>Copyright © 2025, НИМХ. </b>   Съдържанието на сайта на Националния институт по метеорология и хидрология (НИМХ) и технологиите, използвани в него, са под закрила на Закона за авторското право и сродните му права. Всички текстови и графични изображения, публикувани в сайта, са собственост на НИМХ, освен ако изрично не е посочено друго. Ползвателите на съдържанието на сайта на НИМХ се задължават, ако го разпространяват, да не го променят, изменят, редактират или модифицират и задължително да посочват източника на информация – НИМХ. </footer>
+</div>
+
+
+</body>
+</html>
