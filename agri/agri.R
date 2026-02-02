@@ -96,14 +96,14 @@ dairy_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/dairy/prices?years=
   select(date = begin_date, state = member_state_name, product,
          price_100kg_eur = price)
 
-fruit_veg_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/fruitAndVegetable/prices?beginDate=01/01/2024&endDate=31/12/2026") %>% 
+fruit_veg_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/fruitAndVegetable/pricesSupplyChain?beginDate=01/01/2024&endDate=31/12/2026") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = parse_number(price)) %>% 
-  select(date = begin_date, state = member_state_name, product, variety, 
-         product_description = description, price_100_kg_eur = price)
+  select(date = begin_date, state = member_state_name, product = product_stage, 
+         variety, product_description = market, price_100_kg_eur = price)
 
-cereals_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/cereal/prices?beginDate=01/01/2024&endDate=31/12/2024") %>% 
+cereals_new <- fromJSON("https://www.ec.europa.eu/agrifood/api/cereal/prices?beginDate=01/01/2024&endDate=31/12/2026") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date),
          price = str_remove(price, "€"), 
@@ -140,14 +140,14 @@ beef_carc <- bind_rows(beef_carc, beef_carc_new) %>%
 beef_live <- bind_rows(beef_live, beef_live_new) %>% distinct()
 piglets <- bind_rows(piglets, piglets_new) %>% distinct()
 pigmeat_carc <- bind_rows(pigmeat_carc, pigmeat_carc_new) %>% distinct()
-pigmeat_cuts <- bind_rows(pigmeat_cuts, pigmeat_cuts_new) %>% distinct() %>% drop_na()
+pigmeat_cuts <- bind_rows(pigmeat_cuts, pigmeat_cuts_new) %>% distinct()
 eggs <- bind_rows(eggs, eggs_new) %>% distinct()
-poultry <- bind_rows(poultry, poultry_new) %>% distinct() %>% drop_na()
+poultry <- bind_rows(poultry, poultry_new) %>% distinct()
 sheep_goat <- bind_rows(sheep_goat, sheep_goat_new) %>% distinct()
 raw_milk <- bind_rows(raw_milk, raw_milk_new) %>% distinct()
 dairy <- bind_rows(dairy, dairy_new) %>% distinct()
 fruit_veg <- bind_rows(fruit_veg, fruit_veg_new) %>% distinct()
-cereals <- bind_rows(cereals, cereals_new) %>% distinct() %>% drop_na()
+cereals <- bind_rows(cereals, cereals_new) %>% distinct()
 oilseeds <- bind_rows(oilseeds, oilseeds_new) %>% distinct()
 olive_oil <- bind_rows(olive_oil, olive_oil_new) %>% distinct()
 wine <- bind_rows(wine, wine_new) %>% distinct()

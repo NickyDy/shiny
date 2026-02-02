@@ -40,7 +40,7 @@ df_markets <- bind_rows(df_markets_2025, df_markets_2026) %>%
 
 df_market <- read_parquet("df_market.parquet") %>% 
   mutate(
-  date = as.character(date),
+  #date = as.character(date),
   product = str_replace(product, "\\\n", " ")) %>% 
   mutate(product = fct_recode(product, 'Брашно тип "500" /пакет 1 кг/' = 'Брашно тип"500" /пакет 1 кг/'),
          product = fct_recode(product, "Брашно тип \"500\" /пакет 1 кг/" = "Брашно тип \"500\" /пакет 1 кг/ "),
@@ -64,7 +64,7 @@ ui <- page_fillable(
     nav_panel(title = "Инфлация (продукти)",
               layout_columns(
                 dateRangeInput("inf_date", "Дата:",
-                  start = "2026-01-01",
+                  start = "2025-12-31",
                   end = last(df_markets$date),
                   min = first(df_markets$date),
                   max = last(df_markets$date),
@@ -72,7 +72,7 @@ ui <- page_fillable(
                   weekstart = 1,
                   language = "bg"),
                 sliderInput("height", "Височина на графиката:",
-                min = 800, max = 3000, value = 800, step = 100),
+                min = 800, max = 3000, value = 2000, step = 100),
               col_widths = c(2, 2)),
               layout_columns(
                 plotOutput("inf_plot"),
@@ -80,7 +80,7 @@ ui <- page_fillable(
     nav_panel(title = "Инфлация (по ключова дума)",
               layout_columns(
                 dateRangeInput("inf_keyword_date", "Дата:",
-                               start = "2026-01-01",
+                               start = "2025-12-31",
                                end = last(df_markets$date),
                                min = first(df_markets$date),
                                max = last(df_markets$date),
@@ -93,14 +93,14 @@ ui <- page_fillable(
                           placeholder = "ключова дума"),
                 textInput("key_input_unit", "Грамаж:", value = "", 
                           placeholder = "ключова дума"),
-                col_widths = c(2, 2, 2, 2)),
+                col_widths = c(2, 2, 2)),
               layout_columns(
                 plotOutput("key_plot"),
                 col_widths = c(12))),
     nav_panel(title = "Инфлация (групи храни)",
               layout_columns(
                 dateRangeInput("inf_markets_date", "Дата:",
-                               start = "2026-01-01",
+                               start = "2025-12-31",
                                end = last(df_markets$date),
                                min = first(df_markets$date),
                                max = last(df_markets$date),
@@ -116,7 +116,7 @@ ui <- page_fillable(
     nav_panel(title = "Групи храни (време)",
               layout_columns(
                 dateRangeInput("inf_date_time", "Дата:",
-                               start = "2026-01-01",
+                               start = "2025-12-31",
                                end = last(df_markets$date),
                                min = first(df_markets$date),
                                max = last(df_markets$date),
@@ -133,14 +133,17 @@ ui <- page_fillable(
       title = "Борса (таблица)",
       DTOutput("market_foods", width = 1850)),
     nav_panel(
-      title = "Инфлация (борса)", layout_columns(
-        selectInput("market_date_first", "От дата:",
-                    choices = unique(df_market$date),
-                    selected = first(df_market$date)),
-        selectInput("market_date_last", "До дата:",
-                    choices = unique(df_market$date),
-                    selected = last(df_market$date)),
-        col_widths = c(1, 1)),
+      title = "Инфлация (борса)", 
+      layout_columns(
+        dateRangeInput("market_date", "Дата:",
+                       start = "2025-12-29",
+                       end = last(df_market$date),
+                       min = first(df_market$date),
+                       max = last(df_market$date),
+                       separator = " до ",
+                       weekstart = 1,
+                       language = "bg"),
+        col_widths = c(2)),
       plotOutput("market_inf_plot")),
     nav_panel(
       title = "Тренд (борса)", layout_columns(
@@ -189,7 +192,7 @@ server <- function(input, output, session) {
         price_change = (last(cena_na_drebno) - first(
           cena_na_drebno)) / first(cena_na_drebno) * 100,
         .by = c(market, naimenovanie_na_produkta)) %>%
-      filter(price_change != 0) %>%
+      filter(!between(price_change, -0.5, 0.5)) %>%
       mutate(naimenovanie_na_produkta = fct_reorder(
         naimenovanie_na_produkta, price_change), col = price_change > 0,
              market = fct_relevel(market, "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")) %>% 
@@ -197,7 +200,7 @@ server <- function(input, output, session) {
       geom_col(show.legend = F) +
       scale_fill_manual(values = colors_percent) +
       scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
-      geom_text(aes(label = paste0(round(price_change, 0), "%")),
+      geom_text(aes(label = paste0(round(price_change, 1), "%")),
                 position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
       labs(y = NULL, x = NULL) +
       theme(text = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
@@ -289,7 +292,7 @@ output$time_plot <- renderPlot({
     geom_line(linewidth = 0.3, linetype = 2) +
     scale_color_manual(values = c("black", "red"), 
                        labels = c("Цена на дребно", "Цена в промоция")) +
-    scale_x_date(date_breaks = "1 month", date_labels = "%b") +
+    scale_x_date(date_breaks = "15 days", date_labels = "%b-%d") +
     labs(y = "Средна цена (евро)", x = "Дата", color = "Легенда:") +
     theme(text = element_text(size = 14), legend.position = "top") +
     facet_wrap(vars(market), nrow = 1)
@@ -311,41 +314,42 @@ output$market_foods <- renderDT(
 )
 
 df_market_plot <- reactive(
+  
   df_market %>%
-    filter(date %in% c(input$market_date_first, input$market_date_last)) %>%
+    filter(date %in% c(input$market_date[1], input$market_date[2])) %>%
     summarise(
-      price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T),
-      .by = c(unit, product)
-    ) %>%
+      price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T) * 100,
+      .by = c(unit, product)) %>%
     filter(price_change != 0) %>%
     mutate(product = fct_reorder(product, price_change))
+  
 )
 
 inf_sum <- reactive(
   df_market %>%
-    filter(date %in% c(input$market_date_first, input$market_date_last)) %>%
+    filter(date %in% c(input$market_date[1], input$market_date[2])) %>%
     summarise(
-      price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T),
-      .by = c(unit, product)
-    ) %>%
+      price_change = (last(price, na_rm = T) - first(price, na_rm = T)) / first(price, na_rm = T) * 100,
+      .by = c(unit, product)) %>%
     filter(price_change != 0) %>%
-    summarise(sum_inflation = sum(price_change)) %>% pull()
+    summarise(mean_inflation = mean(price_change)) %>% pull()
 )
 
 output$market_inf_plot <- renderPlot({
+  
     df_market_plot() %>%
       ggplot(aes(price_change, product, fill = price_change > 0)) +
       geom_col(show.legend = F) +
-      geom_text(aes(label = paste0(round(price_change * 100, 2), "%")), hjust = -0.03) +
+      geom_text(aes(label = paste0(round(price_change, 2), "%")), hjust = -0.03) +
       scale_x_continuous(expand = expansion(mult = c(0.01, 0.1))) +
       theme(
         text = element_text(size = 14), axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) +
       labs(
         x = NULL, y = NULL,
-        title = paste0("Изчислена инфлация от ", input$market_date_first, " до ", input$market_date_last),
-        subtitle = paste0("Обща инфлация: ", round(inf_sum(), 2), "%")
-      )
+        title = paste0("Натрупана инфлация от ", input$market_date[1], " до ", input$market_date[2]),
+        subtitle = paste0("Средна натрупана инфлация: ", round(inf_sum(), 2), "%"))
+  
   }, height = 800, width = 1850, res = 96)
 
 market_unit_trend <- reactive({
@@ -364,6 +368,7 @@ market_product_trend <- reactive({
 })
 
 output$market_trend_plot <- renderPlot({
+  
     market_product_trend() %>%
       mutate(date = ymd(date), m = month(date)) %>%
       ggplot(aes(date, price)) +
@@ -372,7 +377,8 @@ output$market_trend_plot <- renderPlot({
       geom_point(size = 2) +
       scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
       theme(text = element_text(size = 16)) +
-      labs(x = "Дата", y = "Цена (евро)")
+      labs(x = "Дата", y = "Цена (евро)", title = paste0(input$market_product_trend, " (", input$market_unit_trend, ")"))
+  
   }, height = 800, width = 1850, res = 96)
   
 session$onSessionEnded(function() {stopApp()})

@@ -7,9 +7,9 @@ beef_carc <- read_rds("beef_carc.rds") %>% arrange(date)
 beef_live <- read_rds("beef_live.rds") %>% arrange(date)
 piglets <- read_rds("piglets.rds") %>% arrange(date)
 pigmeat_carc <- read_rds("pigmeat_carc.rds") %>% arrange(date)
-pigmeat_cuts <- read_rds("pigmeat_cuts.rds") %>% arrange(date) %>% drop_na()
+pigmeat_cuts <- read_rds("pigmeat_cuts.rds") %>% arrange(date)
 eggs <- read_rds("eggs.rds") %>% arrange(date)
-poultry <- read_rds("poultry.rds") %>% arrange(date) %>% drop_na() %>% 
+poultry <- read_rds("poultry.rds") %>% arrange(date) %>% 
   mutate(price_100kg_eur = case_when(
     state == "Poland" & price_100kg_eur == 4611.50 ~ 461.15,
     state == "Poland" & price_100kg_eur == 2147.17 ~ 214.71,
@@ -26,7 +26,7 @@ dairy <- read_rds("dairy.rds") %>% arrange(date)
 fruit_veg <- read_rds("fruit_veg.rds") %>% arrange(date)
 cereals <- read_rds("cereals.rds") %>% 
   filter(!stage_name == "Unknown") %>% 
-  arrange(date) %>% drop_na()
+  arrange(date)
 oilseeds <- read_rds("oilseeds.rds") %>% arrange(date)
 olive_oil <- read_rds("olive_oil.rds") %>%
   mutate(product = str_replace_all(product, c("°" = "%", "," = "."))) %>% 
@@ -481,7 +481,7 @@ server <- function(input, output, session) {
   
   output$fruit_veg <- renderPlot({
     
-    fruit_veg_variety() %>% 
+    fruit_veg_variety() %>%
       filter(date >= input$fruit_veg_date[1] & date <= input$fruit_veg_date[2],
              variety %in% c(input$fruit_veg_variety)) %>% 
       ggplot(aes(date, price_100_kg_eur / 100)) +

@@ -11,9 +11,9 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
   html_element("table") %>% 
   html_table() %>%
   filter(str_detect(X1, "^[:punct:]\\d{1,2}[:punct:]")) %>% 
-  select(2:17, 19:34) %>%
+  select(2:17, 19:31) %>%
   rename(station = X2) %>% 
-  rename_with(~ as.character(c(1:31)), starts_with("X")) %>%
+  rename_with(~ as.character(c(1:28)), starts_with("X")) %>%
   mutate(
     station = str_remove_all(station, "\\("), 
     station = str_remove_all(station, "\\)"),
@@ -28,7 +28,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
       str_detect(station, "Рупите") ~ "unofficial",
       str_detect(station, "Илинденци") ~ "unofficial",
       str_detect(station, "Конгур") ~ "unofficial"), .after = station,
-    year = 2026, month = 1,
+    year = 2026, month = 2,
     elev = case_when(
       station == "Видин" ~ 31, station == "Ловеч" ~ 220, str_detect(station, "Конгур") ~ 1284,
       station == "Разград" ~ 345, station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180,
@@ -44,7 +44,7 @@ rain_new <- read_html("https://www.stringmeteo.com/synop/prec_month.php") %>%
     year %in% c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019") ~ "10s",
     year %in% c("2020", "2021", "2022", "2023", "2024", "2025", "2026") ~ "20s")) %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
-  pivot_longer(7:37, names_to = "day", values_to = "rain") %>%
+  pivot_longer(7:34, names_to = "day", values_to = "rain") %>%
   mutate(rain = str_remove(rain, "---")) %>% 
   mutate(across(c(2, 4:7), as.factor)) %>%
   mutate(rain = parse_number(rain))
@@ -53,9 +53,9 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
   html_element("table") %>% 
   html_table() %>%
   filter(str_detect(X1, "^[:punct:]\\d{1,2}[:punct:]")) %>% 
-  select(2:17, 19:34) %>%
+  select(2:17, 19:31) %>%
   rename(station = X2) %>% 
-  rename_with(~ as.character(c(1:31)), starts_with("X")) %>%
+  rename_with(~ as.character(c(1:28)), starts_with("X")) %>%
   mutate(
     station = str_remove_all(station, "\\("), 
     station = str_remove_all(station, "\\)"),
@@ -68,7 +68,7 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
                      "Обзор", "Дупница", "Орландовци", "Бояна", "Княжево",
                      "Панагюрище", "Ямбол", "Петрич", "Турну Мъгуреле Р.",
                      "Кълъраш Р.", "Одрин Т.", "Рилци", "Добри дол") ~ "unofficial"), .after = station,
-    year = 2026, month = 1,
+    year = 2026, month = 2,
     elev = case_when(
       station == "Видин" ~ 31, station == "Гложене" ~ 64, station == "Ловеч" ~ 220, station == "Разград" ~ 345,
       station == "Варна" ~ 41, station == "Варна-Акчелар" ~ 180, station == "Варна-Боровец" ~ 193,
@@ -85,7 +85,7 @@ temp_new <- read_html("https://www.stringmeteo.com/synop/temp_month.php") %>%
     year %in% c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019") ~ "10s",
     year %in% c("2020", "2021", "2022", "2023", "2024", "2025", "2026") ~ "20s")) %>%
   relocate(decade, .after = status) %>% relocate(elev, .after = status) %>% 
-  pivot_longer(7:37, names_to = "day", values_to = "temp") %>% 
+  pivot_longer(7:34, names_to = "day", values_to = "temp") %>% 
   mutate(temp = str_remove(temp, "---")) %>% 
   mutate(across(c(2, 4:7), as.factor)) %>%
   mutate(temp = parse_number(temp))
@@ -212,7 +212,7 @@ server <- function(input, output, session) {
       labs(x = "Месеци", y = "Средна денонощна температура (\u00B0C)", fill = "Легенда:",
            caption = "Източник на данните: www.stringmeteo.com",
            title = paste0("Средно за периода (", first(t_year()$year), "-", last(t_year()$year), 
-                          "г.): ", t_year()$tot_mean, " (\u00B0C)")) +
+                          " г.): ", t_year()$tot_mean, " (\u00B0C)")) +
       theme(text = element_text(size = 20), legend.position = "top",
             plot.title = element_text(color = "red", face = "bold"),
             legend.justification = c(1, 0)) +
@@ -247,7 +247,7 @@ server <- function(input, output, session) {
       labs(x = "Месеци", y = "Средно месечно количество на валежите (mm)", fill = "Легенда:",
            caption = "Източник на данните: www.stringmeteo.com",
            title = paste0("Средно за периода (", first(d_year()$year), "-", last(d_year()$year), 
-                          "г.): ", d_year()$tot_mean, " (mm)")) +
+                          " г.): ", d_year()$tot_mean, " (mm)")) +
       theme(text = element_text(size = 20), legend.position = "top",
             plot.title = element_text(color = "blue", face = "bold"),
             legend.justification = c(1, 0)) +
@@ -285,8 +285,9 @@ server <- function(input, output, session) {
       scale_fill_manual(values = c("1" = "blue", "2" = "green", "3" = "orange", "4" = "red"),
                         labels = c("1" = "< 0 \u00B0C", "2" = "0-5 \u00B0C", "3" = "5-25 \u00B0C", "4" = "25-30 \u00B0C"),
                         name = "Легенда: ") +
-      labs(x = "Ден", y = "Средна денонощна температура (\u00B0C)",
-           title = paste0("Средно за месеца за целия период: ", round(month_mean_temp()$month_m, 1), " (\u00B0C)")) +
+      labs(x = "Дата", y = "Средна денонощна температура (\u00B0C)",
+           title = paste0("Средно за месеца за целия период (", first(t_year()$year), "-", 
+                          last(t_year()$year), " г.): ", round(month_mean_temp()$month_m, 1), " (\u00B0C)")) +
       facet_wrap(vars(label_year), ncol = 4)
     
   }, height = 800, width = 1850)
@@ -322,8 +323,9 @@ server <- function(input, output, session) {
     scale_fill_manual(values = c("4" = "blue", "3" = "#0096FF", "2" = "green", "1" = "orange"),
                       labels = c("1" = "< 5 (mm)", "2" = "5-15 (mm)", "3" = "15-30 (mm)", "4" = "> 30 (mm)"),
                       name = "Легенда: ") +
-    labs(x = "Ден", y = "Средно количетсво на валежите (mm)", 
-         title = paste0("Средно за месеца за целия период: ", round(month_mean_rain()$month_m, 0), " (mm)")) +
+    labs(x = "Дата", y = "Средно количетсво на валежите (mm)", 
+         title = paste0("Средно за месеца за целия период (", first(d_year()$year), "-", 
+                        last(d_year()$year), " г.): ", round(month_mean_rain()$month_m, 0), " (mm)")) +
     facet_wrap(vars(label_year), ncol = 4)
   }, height = 800, width = 1850)
 

@@ -99,7 +99,7 @@ server <- function(input, output, session) {
 	    geom_col(show.legend = F) +
 	    geom_text(aes(label = paste0(sm, "%")), size = 5, hjust = -0.05) +
 	    scale_x_continuous(expand = expansion(mult = c(0.005, 0.1))) +
-	    labs(y = NULL, x = "Натрупана инфлация", caption = "Източник на данните: Евростат",
+	    labs(y = NULL, x = "Натрупана инфлация", caption = "Източник на данните: Eurostat",
 	         title = paste0(input$item, ", от ", input$date[1], " до ", input$date[2])) +
 	    theme(text = element_text(size = 20), axis.text.x = element_blank(),
 	          axis.ticks.x = element_blank())
@@ -180,7 +180,7 @@ server <- function(input, output, session) {
 	    geom_label(data = euro_zone, aes(label = label, x = x, y = y), 
 	              size = 5, color = "blue", hjust = -0.1, fontface = "bold") +
 	    scale_color_manual(values = c("red", "black")) +
-	    labs(x = NULL, y = "Инфлация", caption = "Източник на данните: Евростат",
+	    labs(x = NULL, y = "Инфлация", caption = "Източник на данните: Eurostat",
 	         title = paste0(input$item, ", ", input$country))
 	}, height = 750, width = 1800)
 	
