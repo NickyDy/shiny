@@ -363,10 +363,10 @@ output$sec_perc <- renderPlot({
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank()) +
-			labs(x = NULL, y = NULL, title = paste0("Секция: ", input$sec),
+			labs(x = "Проценти (%)", y = NULL, title = paste0("Секция: ", input$sec),
 					 caption = "Източник на данните: ЦИК.") +
 			facet_wrap(~ vote_date, nrow = 1, drop = F)
-	}, height = 350, width = 1600, res = 96)
+	}, height = 400, width = 1600, res = 96)
 
 output$country <- renderPlot({
   if (input$votes_perc == "Брой гласове") {
@@ -407,7 +407,7 @@ output$country <- renderPlot({
       theme(text = element_text(size = 14), 
             axis.text.x = element_blank(), 
             axis.ticks.x = element_blank()) +
-      labs(x = NULL, y = NULL,
+      labs(x = "Проценти (%)", y = NULL,
            caption = "Източник на данните: ЦИК.") +
       facet_wrap(~ vote_date, nrow = 1)
   }
@@ -476,9 +476,11 @@ output$elec_act <- renderPlot({
     geom_text(aes(label = paste0(activity, "%")), position = position_dodge(width = 1),
               hjust = -0.1, size = 4) +
     scale_x_continuous(expand = expansion(mult = c(.05, .5))) +
-    labs(x = "Избирателна активност", y = NULL, fill = "Тур:",
+    labs(x = NULL, y = NULL, fill = "Тур:",
          caption = "Източник на данните: Wikipedia") +
-    theme(text = element_text(size = 16)) +
+    theme(text = element_text(size = 16), 
+          axis.text.x = element_blank(), 
+          axis.ticks.x = element_blank()) +
     guides(fill = guide_legend(reverse = TRUE)) +
     facet_wrap(vars(type_election))
 

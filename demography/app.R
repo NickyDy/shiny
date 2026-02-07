@@ -2,6 +2,7 @@ library(tidyverse)
 library(shiny)
 library(scales)
 library(bslib)
+options(scipen = 100)
 
 loc_sex <- read_rds("loc_sex.rds") %>% arrange(oblast) %>% drop_na()
 obl_age_sex <- read_rds("obl_age_sex.rds")
