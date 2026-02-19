@@ -84,9 +84,9 @@ server <- function(input, output, session) {
 	  inf %>%
 		filter(coicop == input$item, 
 		       TIME_PERIOD >= input$date[1] & TIME_PERIOD <= input$date[2]) %>% 
-		group_by(coicop, geo) %>% 
-		summarise(sm = sum(values, na.rm = T)) %>%
-		ungroup() %>% 
+		#group_by(coicop, geo) %>% 
+		summarise(sm = sum(values, na.rm = T), .by = c(coicop, geo)) %>%
+		#ungroup() %>% 
 		mutate_if(is.numeric, round, 1) %>% 
     mutate(col = if_else(geo == "Bulgaria", "0", "1"),
            geo = fct_reorder(geo, sm))

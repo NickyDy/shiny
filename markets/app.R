@@ -35,7 +35,10 @@ df_markets <- bind_rows(df_markets_2025, df_markets_2026) %>%
                                     "Паста за зъби" = "81", "Шампоани" = "82", "Сапуни" = "83", 
                                     "Мокри кърпички" = "84", "Тоалетна хартия" = "85"), .after = kategoria) %>% 
   mutate(kategoria = as.numeric(kategoria), naimenovanie_na_produkta = as.character(naimenovanie_na_produkta)) %>% 
-  filter(!cena_na_drebno == 0, !kategoria_c %in% c("0043157", "6800057")) %>% 
+  filter(!cena_na_drebno == 0, !str_detect(naimenovanie_na_produkta, "^Krina"),
+         !str_detect(naimenovanie_na_produkta, "Гръцко краве сирене"), 
+         !str_detect(naimenovanie_na_produkta, "Сал.сирене от кр.мляко с пов.вод.съ"),
+         !str_detect(naimenovanie_na_produkta, "Обикновени бисквити")) %>% 
   arrange(date, kategoria)
 
 df_market <- read_parquet("df_market.parquet") %>% 
@@ -88,9 +91,9 @@ ui <- page_fillable(
                                weekstart = 1,
                                language = "bg"),
                 textInput("key_input", "Ключова дума/думи:", value = "", 
-                          placeholder = "ключова дума"),
+                          placeholder = "например: ябълки"),
                 textInput("key_input_unit", "Грамаж:", value = "", 
-                          placeholder = "ключова дума"),
+                          placeholder = "например: кг"),
                 selectInput("key_market", "Супермаркет:",
                             choices = c("", "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")),
                 col_widths = c(2, 2, 2)),

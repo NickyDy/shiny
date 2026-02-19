@@ -301,8 +301,8 @@ output$text <- renderText({ "Панелът работи със следните
 output$obsh_perc <- renderPlot({
 		obsh() %>%
 			filter(obshtina %in% c(input$obsh)) %>%
-			group_by(vote_date, party) %>%
-			summarise(sum_votes = sum(votes)) %>%
+			summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
+      group_by(vote_date) %>%
 			mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
 			mutate(party = fct_reorder(party, sum_votes)) %>%
 			filter(prop >= input$prop_slider) %>%
@@ -324,8 +324,8 @@ output$obsh_perc <- renderPlot({
 output$sett_perc <- renderPlot({
 		sett() %>%
 			filter(section %in% c(input$sett)) %>%
-			group_by(vote_date, party) %>%
-			summarise(sum_votes = sum(votes)) %>%
+			summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
+      group_by(vote_date) %>%
 			mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
 			mutate(party = fct_reorder(party, sum_votes)) %>%
 			filter(prop >= input$prop_slider) %>%
@@ -347,8 +347,8 @@ output$sett_perc <- renderPlot({
 output$sec_perc <- renderPlot({
 		sec() %>%
 			filter(code %in% c(input$sec)) %>%
-			group_by(vote_date, party) %>%
-			summarise(sum_votes = sum(votes)) %>%
+			summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
+      group_by(vote_date) %>%
 			mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
 			mutate(party = fct_reorder(party, sum_votes)) %>%
 			filter(prop >= input$prop_slider) %>%
@@ -371,9 +371,9 @@ output$sec_perc <- renderPlot({
 output$country <- renderPlot({
   if (input$votes_perc == "Брой гласове") {
     votes %>%
-      group_by(vote_date, party) %>%
-      summarise(sum_votes = sum(votes)) %>%
+      summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
       filter(sum_votes >= input$votes_slider) %>%
+      group_by(vote_date) %>%
       mutate(party = fct_reorder(party, sum_votes)) %>% 
       ggplot(aes(sum_votes, party, fill = party)) +
       geom_col(position = "dodge", show.legend = F) +
@@ -391,8 +391,8 @@ output$country <- renderPlot({
       facet_wrap(~ vote_date, nrow = 1)
   } else {
     votes %>%
-      group_by(vote_date, party) %>%
-      summarise(sum_votes = sum(votes, na.rm = T)) %>%
+      summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
+      group_by(vote_date) %>%
       mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
       mutate(party = fct_reorder(party, sum_votes)) %>%
       filter(prop >= input$prop_slider) %>%
@@ -444,9 +444,8 @@ output$lost_gained_votes <- renderPlot({
   output$text3 <- renderText({ "Панелът не работи с филтрите от страничния бар." })
   
   votes %>%
-    group_by(vote_date, party) %>%
-    summarise(sum_votes = sum(votes)) %>%
-    pivot_wider(names_from = vote_date, values_from = sum_votes) %>% 
+    summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
+    pivot_wider(names_from = vote_date, values_from = sum_votes) %>%
     mutate(diff = .data[[input$first_date]] - .data[[input$second_date]], 
            party = fct_reorder(party, diff, .na_rm = T),
            col = diff > 0, col = as.factor(col),
