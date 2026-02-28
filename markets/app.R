@@ -206,7 +206,7 @@ server <- function(input, output, session) {
       scale_x_continuous(expand = expansion(mult = c(0.01, 0.5))) +
       geom_text(aes(label = paste0(round(price_change, 1), "%")),
                 position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
-      labs(y = NULL, x = NULL) +
+      labs(y = NULL, x = NULL, caption = 'Източник на данните: "КОЛКО СТРУВА"') +
       theme(text = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
       facet_wrap(vars(market), scales = "free_y")
     
@@ -364,7 +364,8 @@ server <- function(input, output, session) {
       labs(
         x = NULL, y = NULL,
         title = paste0("Натрупана инфлация от ", input$market_date[1], " до ", input$market_date[2]),
-        subtitle = paste0("Средна натрупана инфлация: ", round(inf_sum(), 2), "%"))
+        subtitle = paste0("Средна натрупана инфлация: ", round(inf_sum(), 2), "%"),
+        caption = "Източник на данните: ДКСБТ")
     
   }, height = 800, width = 1850, res = 96)
   

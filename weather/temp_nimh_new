@@ -37,7 +37,7 @@ else { document.getElementById(theID).style.display = "block" } }
     </div>
 
 
-    <div class="alarm" dateDnes="13.12.2025" >
+    <div class="alarm" dateDnes="26.02.2026" >
       <img class="alarm kartaOpasniM" src="images/static/opasniSS_0.png" />
       <div class="akcent2" cool-typ="за опасно време"><a class="noline" href="obshtini/" target="_blank">няма <br /> опасност  <img class="alarm icon" src="images/static/0.new.gif"/></a></div>
     </div>
@@ -50,10 +50,10 @@ else { document.getElementById(theID).style.display = "block" } }
 
   </header>
 <!---------------------- Izvanredno - moje i da go niama --------------- -->
-<izvanredno>
+<!--<izvanredno>
 <p><a href="https://storm.cfd.meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/POZICIA_NIMH_Murgash_12032025.pdf" target="_blank">Позиция на Националния институт по метеорология и хидрология относно вероломното нахлуване във високопланинската синоптична станция вр. Мургаш</a></p>
 <p><a href="https://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/files/20240805PMS273.pdf" target="_blank">Писмо от НИМХ до държавни институции и до медиите</a> във връзка с ПМС № 273 от 5 август 2024 г.</p>
-</izvanredno>
+</izvanredno>-->
 
 <!-- -------------------  MENU -------------- -->  
 
@@ -132,7 +132,7 @@ else { document.getElementById(theID).style.display = "block" } }
 
 <table border=1>
 <tr><th>Станция</th><th>Дата</th><th>&nbsp;Час&nbsp;</th><th>Температура<br/>[&deg;C]</th><th>Време</th><th>Вятър-скорост<br/>[m/s]</th><th>Вятър-посока</th><th>Налягане<br/>[hPa]</th></tr>
-<tr><td>Ново село</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1018.1</td></tr><tr><td>Видин</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>W</td><td style='text-align:center'>1021.3</td></tr><tr><td>Враца</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>4</td><td style='text-align:center'>S</td><td style='text-align:center'>987.6</td></tr><tr><td>Монтана</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>SW</td><td style='text-align:center'>1002.7</td></tr><tr><td>Лом</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>2</td><td style='text-align:center'>E</td><td style='text-align:center'>1022.6</td></tr><tr><td>Оряхово</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>3</td><td style='text-align:center'>W</td><td style='text-align:center'>1022.1</td></tr><tr><td>Кнежа</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>E</td><td style='text-align:center'>1011.2</td></tr><tr><td>Ловеч</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>2</td><td style='text-align:center'>S</td><td style='text-align:center'>998.6</td></tr><tr><td>Плевен</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>W</td><td style='text-align:center'>1006</td></tr><tr><td>Велико Търново</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1001.6</td></tr><tr><td>Свищов</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1019.9</td></tr><tr><td>Русе</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла</td><td style='text-align:center'>1</td><td style='text-align:center'>SW</td><td style='text-align:center'>1020.3</td></tr><tr><td>Шумен</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>7</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>998.2</td></tr><tr><td>Разград</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла</td><td style='text-align:center'>2</td><td style='text-align:center'>W</td><td style='text-align:center'>982.5</td></tr><tr><td>Силистра</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image04.gif'>видимост под 10km</td><td style='text-align:center'>3</td><td style='text-align:center'>W</td><td style='text-align:center'>1022.4</td></tr><tr><td>Силистра НИМХ</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image04.gif'>видимост под 10km</td><td style='text-align:center'>3</td><td style='text-align:center'>W</td><td style='text-align:center'>1022.1</td></tr><tr><td>Варна</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>3</td><td style='text-align:center'>W</td><td style='text-align:center'>1018.8</td></tr><tr><td>Шабла</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>5</td><td style='text-align:center'>W</td><td style='text-align:center'>1023.8</td></tr><tr><td>Калиакра</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>4</td><td style='text-align:center'>N</td><td style='text-align:center'>1015.7</td></tr><tr><td>Добрич</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image04.gif'>видимост под 10km</td><td style='text-align:center'>2</td><td style='text-align:center'>W</td><td style='text-align:center'>999.3</td></tr><tr><td>вр. Мургаш</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>6</td><td style='text-align:center'>N</td><td style='text-align:center'>835</td></tr><tr><td>Кюстендил</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>963.3</td></tr><tr><td>Драгоман</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>3</td><td style='text-align:center'>NW</td><td style='text-align:center'>941.5</td></tr><tr><td>Благоевград</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>1</td><td style='text-align:center'>S</td><td style='text-align:center'>975.6</td></tr><tr><td>Черни връх</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>4</td><td style='text-align:center'>N</td><td style='text-align:center'>774</td></tr><tr><td>София-ЦМС</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>2</td><td style='text-align:center'>NW</td><td style='text-align:center'>956.4</td></tr><tr><td>вр. Мусала</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>6</td><td style='text-align:center'>N</td><td style='text-align:center'>714.1</td></tr><tr><td>Пловдив - Тракия</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>7</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>4</td><td style='text-align:center'>W</td><td style='text-align:center'>1005.6</td></tr><tr><td>вр. Ботев</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>2</td><td style='text-align:center'>N</td><td style='text-align:center'>764.3</td></tr><tr><td>Пазарджик</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>6</td><td style='text-align:center'>S</td><td style='text-align:center'>999.6</td></tr><tr><td>Чирпан</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>1</td><td style='text-align:center'>NW</td><td style='text-align:center'>1003.1</td></tr><tr><td>Казанлък</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>0</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>976.5</td></tr><tr><td>Стара Загора</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1004.4</td></tr><tr><td>Сливен</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>993.2</td></tr><tr><td>Елхово</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-0</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>E</td><td style='text-align:center'>1003.2</td></tr><tr><td>Карнобат</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1001.4</td></tr><tr><td>н. Емине</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>9</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>6</td><td style='text-align:center'>NW</td><td style='text-align:center'>1016.7</td></tr><tr><td>Бургас</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>3</td><td style='text-align:center'>W</td><td style='text-align:center'>1021.6</td></tr><tr><td>Ахтопол</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>3</td><td style='text-align:center'>W</td><td style='text-align:center'>1023.5</td></tr><tr><td>Сандански</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>1</td><td style='text-align:center'>W</td><td style='text-align:center'>1001.6</td></tr><tr><td>Рожен</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>-2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image03.gif'>значителна облачност</td><td style='text-align:center'>2</td><td style='text-align:center'>NW</td><td style='text-align:center'>829</td></tr><tr><td>Кърджали</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image09.gif'>мъгла</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>984.9</td></tr><tr><td>Хасково</td><td style='text-align:center'>13.12.2025</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>2</td><td style='text-align:center'>N</td><td style='text-align:center'>997.4</td></tr></table> 
+<tr><td>Ново село</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1016.7</td></tr><tr><td>Видин</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1020.1</td></tr><tr><td>Враца</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>4</td><td style='text-align:center'>NW</td><td style='text-align:center'>986.7</td></tr><tr><td>Монтана</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>5</td><td style='text-align:center'>NW</td><td style='text-align:center'>1000.1</td></tr><tr><td>Лом</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1021.8</td></tr><tr><td>Оряхово</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1021.1</td></tr><tr><td>Кнежа</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>0</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image01.gif'>слънчево/ясно</td><td style='text-align:center'>1</td><td style='text-align:center'>N</td><td style='text-align:center'>1009.8</td></tr><tr><td>Ловеч</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>1</td><td style='text-align:center'>SW</td><td style='text-align:center'>996.4</td></tr><tr><td>Плевен</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>1</td><td style='text-align:center'>NE</td><td style='text-align:center'>1004</td></tr><tr><td>Велико Търново</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>1</td><td style='text-align:center'>NW</td><td style='text-align:center'>999.4</td></tr><tr><td>Свищов</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image20.gif'>слаб дъжд</td><td style='text-align:center'>7</td><td style='text-align:center'>NE</td><td style='text-align:center'>1021.1</td></tr><tr><td>Русе</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>5</td><td style='text-align:center'>N</td><td style='text-align:center'>1021.5</td></tr><tr><td>Шумен</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>999.2</td></tr><tr><td>Разград</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>-0</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>4</td><td style='text-align:center'>NE</td><td style='text-align:center'>981.9</td></tr><tr><td>Силистра</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>5</td><td style='text-align:center'>N</td><td style='text-align:center'>1022.8</td></tr><tr><td>Силистра НИМХ</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>3</td><td style='text-align:center'>NE</td><td style='text-align:center'>1023.9</td></tr><tr><td>Варна</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>2</td><td style='text-align:center'>N</td><td style='text-align:center'>1020</td></tr><tr><td>Шабла</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>5</td><td style='text-align:center'>N</td><td style='text-align:center'>1023.5</td></tr><tr><td>Калиакра</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>5</td><td style='text-align:center'>N</td><td style='text-align:center'>1016.6</td></tr><tr><td>Добрич</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>1</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image04.gif'>видимост под 10km</td><td style='text-align:center'>2</td><td style='text-align:center'>N</td><td style='text-align:center'>999.7</td></tr><tr><td>вр. Мургаш</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>-5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла</td><td style='text-align:center'>10</td><td style='text-align:center'>N</td><td style='text-align:center'>831.7</td></tr><tr><td>Кюстендил</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>2</td><td style='text-align:center'>NW</td><td style='text-align:center'>960.5</td></tr><tr><td>Драгоман</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>5</td><td style='text-align:center'>NW</td><td style='text-align:center'>939.2</td></tr><tr><td>Благоевград</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image03.gif'>значителна облачност</td><td style='text-align:center'>4</td><td style='text-align:center'>W</td><td style='text-align:center'>972.1</td></tr><tr><td>Черни връх</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>-8</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла</td><td style='text-align:center'>8</td><td style='text-align:center'>NW</td><td style='text-align:center'>769.2</td></tr><tr><td>София-ЦМС</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>2</td><td style='text-align:center'>W</td><td style='text-align:center'>952.6</td></tr><tr><td>вр. Мусала</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>-13</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла</td><td style='text-align:center'>10</td><td style='text-align:center'>N</td><td style='text-align:center'>708.1</td></tr><tr><td>Пловдив - Тракия</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>7</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>3</td><td style='text-align:center'>NE</td><td style='text-align:center'>1005.1</td></tr><tr><td>вр. Ботев</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>-9</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image05.gif'>мъгла</td><td style='text-align:center'>14</td><td style='text-align:center'>NW</td><td style='text-align:center'>758.4</td></tr><tr><td>Пазарджик</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>7</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>6</td><td style='text-align:center'>N</td><td style='text-align:center'>997.5</td></tr><tr><td>Чирпан</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image20.gif'>слаб дъжд</td><td style='text-align:center'>3</td><td style='text-align:center'>N</td><td style='text-align:center'>1001.2</td></tr><tr><td>Казанлък</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>974.5</td></tr><tr><td>Стара Загора</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image20.gif'>слаб дъжд</td><td style='text-align:center'>2</td><td style='text-align:center'>W</td><td style='text-align:center'>1003.3</td></tr><tr><td>Сливен</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>992.1</td></tr><tr><td>Елхово</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>1</td><td style='text-align:center'>N</td><td style='text-align:center'>1002.3</td></tr><tr><td>Карнобат</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>2</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1000.8</td></tr><tr><td>н. Емине</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>4</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>14</td><td style='text-align:center'>N</td><td style='text-align:center'>1015.8</td></tr><tr><td>Бургас</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>3</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>0</td><td style='text-align:center'>тихо</td><td style='text-align:center'>1020.8</td></tr><tr><td>Сандански</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>8</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>4</td><td style='text-align:center'>W</td><td style='text-align:center'>997.4</td></tr><tr><td>Гоце Делчев</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>-0</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image02.gif'>разкъсана облачност</td><td style='text-align:center'>2</td><td style='text-align:center'>W</td><td style='text-align:center'>952</td></tr><tr><td>Рожен</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>-5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>4</td><td style='text-align:center'>N</td><td style='text-align:center'>824.7</td></tr><tr><td>Кърджали</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>6</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>6</td><td style='text-align:center'>NE</td><td style='text-align:center'>982.8</td></tr><tr><td>Хасково</td><td style='text-align:center'>26.02.2026</td><td style='text-align:center'>05</td><td style='text-align:center'>5</td><td style='text-align:left'><img src='https://info.meteo.bg/i/meteo/naborizm/image14.gif'>облачно</td><td style='text-align:center'>2</td><td style='text-align:center'>E</td><td style='text-align:center'>995.8</td></tr></table> 
      </div>
   <div onClick="openClose('a2')"  class="linkOpenClose">Легенда - измервания</div>
         <p>&nbsp;</p>
@@ -301,7 +301,7 @@ else { document.getElementById(theID).style.display = "block" } }
      </div>
      <div id="tRain" class="texter">
        <center>
-<h2>Ежедневни данни за валежа в 166 станции от мрежата на НИМХ<br/>   12.12.2025</h2>
+<h2>Ежедневни данни за валежа в 166 станции от мрежата на НИМХ<br/>   25.02.2026</h2>
 <center>
  <table  cellpadding="1" cellspacing="1" border="0" width=70%>
  
@@ -312,7 +312,7 @@ else { document.getElementById(theID).style.display = "block" } }
     </td>
     <td><b>Валеж [mm]</b>
     </td>
-    <td><b>Средни месечни стойности на валежа [mm]<br/> за периода 1993-2008<br/> за месец 12</b>
+    <td><b>Средни месечни стойности на валежа [mm]<br/> за периода 1993-2008<br/> за месец 02</b>
     </td>
   </tr>
  
@@ -321,48 +321,48 @@ else { document.getElementById(theID).style.display = "block" } }
   <tr>
     <td>1010    </td>
     <td>Ново село    </td>
-    <td  align="right">    </td>
-    <td align="right">56    </td>
+    <td  align="right">4.    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
   <tr>
     <td>1020    </td>
     <td>Видин    </td>
-    <td  align="right">    </td>
-    <td align="right">52    </td>
+    <td  align="right">2.    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
   <tr>
     <td>1030    </td>
     <td>Грамада    </td>
-    <td  align="right">    </td>
-    <td align="right">58    </td>
+    <td  align="right">2.    </td>
+    <td align="right">25    </td>
   </tr>
 	
 	
   <tr>
     <td>1040    </td>
     <td>Белоградчик    </td>
-    <td  align="right">    </td>
-    <td align="right">54    </td>
+    <td  align="right">3.    </td>
+    <td align="right">36    </td>
   </tr>
 	
 	
   <tr>
     <td>1460    </td>
     <td>Кула    </td>
-    <td  align="right">    </td>
-    <td align="right">53    </td>
+    <td  align="right">1.    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
   <tr>
     <td>2015    </td>
     <td>Монтана    </td>
-    <td  align="right">    </td>
-    <td align="right">41    </td>
+    <td  align="right">0.    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
@@ -370,7 +370,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>2020    </td>
     <td>Д-р Йосифово    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">47    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
@@ -378,7 +378,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>2030    </td>
     <td>Вършец    </td>
     <td  align="right">    </td>
-    <td align="right">53    </td>
+    <td align="right">41    </td>
   </tr>
 	
 	
@@ -386,87 +386,87 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>2050    </td>
     <td>Бъзовец    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">42    </td>
+    <td align="right">24    </td>
   </tr>
 	
 	
   <tr>
     <td>2060    </td>
     <td>Лом    </td>
-    <td  align="right">    </td>
-    <td align="right">47    </td>
+    <td  align="right">2.    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
   <tr>
     <td>2401    </td>
     <td>Чипровци    </td>
-    <td  align="right">    </td>
-    <td align="right">55    </td>
+    <td  align="right">1.    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>2430    </td>
     <td>Берковица    </td>
-    <td  align="right">    </td>
-    <td align="right">62    </td>
+    <td  align="right">2.    </td>
+    <td align="right">50    </td>
   </tr>
 	
 	
   <tr>
     <td>3010    </td>
     <td>Враца    </td>
-    <td  align="right">    </td>
-    <td align="right">52    </td>
+    <td  align="right">4.    </td>
+    <td align="right">42    </td>
   </tr>
 	
 	
   <tr>
     <td>3040    </td>
     <td>Кнежа    </td>
-    <td  align="right">    </td>
-    <td align="right">41    </td>
+    <td  align="right">1.    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>3050    </td>
     <td>Оряхово    </td>
-    <td  align="right">    </td>
-    <td align="right">41    </td>
+    <td  align="right">1.    </td>
+    <td align="right">24    </td>
   </tr>
 	
 	
   <tr>
     <td>3401    </td>
     <td>Бяла Слатина    </td>
-    <td  align="right">    </td>
-    <td align="right">51    </td>
+    <td  align="right">2.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>3440    </td>
     <td>Борован    </td>
-    <td  align="right">    </td>
-    <td align="right">44    </td>
+    <td  align="right">1.    </td>
+    <td align="right">29    </td>
   </tr>
 	
 	
   <tr>
     <td>3530    </td>
     <td>Роман    </td>
-    <td  align="right">    </td>
-    <td align="right">46    </td>
+    <td  align="right">1.    </td>
+    <td align="right">33    </td>
   </tr>
 	
 	
   <tr>
     <td>4010    </td>
     <td>Плевен    </td>
-    <td  align="right">    </td>
-    <td align="right">42    </td>
+    <td  align="right">1.    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
@@ -474,55 +474,55 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>4020    </td>
     <td>Сомовит    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">41    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>4040    </td>
     <td>Новачене    </td>
-    <td  align="right">    </td>
-    <td align="right">40    </td>
+    <td  align="right">4.    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>4060    </td>
     <td>Николаево    </td>
-    <td  align="right">    </td>
-    <td align="right">43    </td>
+    <td  align="right">1.    </td>
+    <td align="right">25    </td>
   </tr>
 	
 	
   <tr>
     <td>4430    </td>
     <td>Пордим    </td>
-    <td  align="right">    </td>
-    <td align="right">49    </td>
+    <td  align="right">3.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>4500    </td>
     <td>Ореховица    </td>
-    <td  align="right">    </td>
-    <td align="right">42    </td>
+    <td  align="right">2.    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>4590    </td>
     <td>Левски    </td>
-    <td  align="right">    </td>
-    <td align="right">46    </td>
+    <td  align="right">1.    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>5010    </td>
     <td>Ловеч    </td>
-    <td  align="right">    </td>
-    <td align="right">50    </td>
+    <td  align="right">2.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
@@ -530,15 +530,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>5020    </td>
     <td>Борима    </td>
     <td  align="right">    </td>
-    <td align="right">53    </td>
+    <td align="right">42    </td>
   </tr>
 	
 	
   <tr>
     <td>5030    </td>
     <td>Тетевен    </td>
-    <td  align="right">    </td>
-    <td align="right">51    </td>
+    <td  align="right">3.    </td>
+    <td align="right">40    </td>
   </tr>
 	
 	
@@ -546,199 +546,199 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>5040    </td>
     <td>Троян    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">55    </td>
+    <td align="right">35    </td>
   </tr>
 	
 	
   <tr>
     <td>5080    </td>
     <td>Дерманци    </td>
-    <td  align="right">    </td>
-    <td align="right">41    </td>
+    <td  align="right">2.    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
   <tr>
     <td>5401    </td>
     <td>Луковит    </td>
-    <td  align="right">    </td>
-    <td align="right">40    </td>
+    <td  align="right">0.    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
   <tr>
     <td>5460    </td>
     <td>Рибарица    </td>
-    <td  align="right">    </td>
-    <td align="right">65    </td>
+    <td  align="right">3.    </td>
+    <td align="right">49    </td>
   </tr>
 	
 	
   <tr>
     <td>5490    </td>
     <td>Чифлик    </td>
-    <td  align="right">    </td>
-    <td align="right">70    </td>
+    <td  align="right">4.    </td>
+    <td align="right">51    </td>
   </tr>
 	
 	
   <tr>
     <td>5510    </td>
     <td>Черни Осъм    </td>
-    <td  align="right">    </td>
-    <td align="right">80    </td>
+    <td  align="right">6.    </td>
+    <td align="right">61    </td>
   </tr>
 	
 	
   <tr>
     <td>5520    </td>
     <td>Априлци    </td>
-    <td  align="right">    </td>
-    <td align="right">55    </td>
+    <td  align="right">2.    </td>
+    <td align="right">42    </td>
   </tr>
 	
 	
   <tr>
     <td>6010    </td>
     <td>Севлиево    </td>
-    <td  align="right">    </td>
-    <td align="right">43    </td>
+    <td  align="right">4.    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>6020    </td>
     <td>Габрово    </td>
-    <td  align="right">    </td>
-    <td align="right">70    </td>
+    <td  align="right">3.    </td>
+    <td align="right">48    </td>
   </tr>
 	
 	
   <tr>
     <td>6470    </td>
     <td>Трявна    </td>
-    <td  align="right">    </td>
-    <td align="right">60    </td>
+    <td  align="right">1.    </td>
+    <td align="right">40    </td>
   </tr>
 	
 	
   <tr>
     <td>7010    </td>
     <td>Велико Търново    </td>
-    <td  align="right">    </td>
-    <td align="right">56    </td>
+    <td  align="right">2.    </td>
+    <td align="right">38    </td>
   </tr>
 	
 	
   <tr>
     <td>7020    </td>
     <td>Павликени    </td>
-    <td  align="right">    </td>
-    <td align="right">37    </td>
+    <td  align="right">2.    </td>
+    <td align="right">24    </td>
   </tr>
 	
 	
   <tr>
     <td>7040    </td>
     <td>Елена    </td>
-    <td  align="right">    </td>
-    <td align="right">59    </td>
+    <td  align="right">2.    </td>
+    <td align="right">39    </td>
   </tr>
 	
 	
   <tr>
     <td>7440    </td>
     <td>Костел    </td>
-    <td  align="right">    </td>
-    <td align="right">76    </td>
+    <td  align="right">1.    </td>
+    <td align="right">55    </td>
   </tr>
 	
 	
   <tr>
     <td>7470    </td>
     <td>Кесарево    </td>
-    <td  align="right">    </td>
-    <td align="right">52    </td>
+    <td  align="right">2.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>7580    </td>
     <td>Полски Тръмбеш    </td>
-    <td  align="right">    </td>
-    <td align="right">41    </td>
+    <td  align="right">3.    </td>
+    <td align="right">25    </td>
   </tr>
 	
 	
   <tr>
     <td>21010    </td>
     <td>Русе-АППД    </td>
-    <td  align="right">0.    </td>
-    <td align="right">48    </td>
+    <td  align="right">6.    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>21020    </td>
     <td>Две могили    </td>
-    <td  align="right">    </td>
-    <td align="right">50    </td>
+    <td  align="right">5.    </td>
+    <td align="right">35    </td>
   </tr>
 	
 	
   <tr>
     <td>21030    </td>
     <td>Образцов чифлик    </td>
-    <td  align="right">    </td>
-    <td align="right">46    </td>
+    <td  align="right">8.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>22010    </td>
     <td>Търговище    </td>
-    <td  align="right">    </td>
-    <td align="right">53    </td>
+    <td  align="right">3.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>22020    </td>
     <td>Омуртаг    </td>
-    <td  align="right">    </td>
-    <td align="right">59    </td>
+    <td  align="right">5.    </td>
+    <td align="right">46    </td>
   </tr>
 	
 	
   <tr>
     <td>22030    </td>
     <td>Славяново    </td>
-    <td  align="right">    </td>
-    <td align="right">61    </td>
+    <td  align="right">4.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>22480    </td>
     <td>Врани кон    </td>
-    <td  align="right">    </td>
-    <td align="right">38    </td>
+    <td  align="right">2.    </td>
+    <td align="right">37    </td>
   </tr>
 	
 	
   <tr>
     <td>22520    </td>
     <td>Надарево    </td>
-    <td  align="right">    </td>
-    <td align="right">47    </td>
+    <td  align="right">6.    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>23010    </td>
     <td>Разград    </td>
-    <td  align="right">    </td>
-    <td align="right">45    </td>
+    <td  align="right">5.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
@@ -746,71 +746,71 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>23020    </td>
     <td>Самуил    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">46    </td>
+    <td align="right">33    </td>
   </tr>
 	
 	
   <tr>
     <td>23030    </td>
     <td>Исперих    </td>
-    <td  align="right">    </td>
-    <td align="right">50    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">38    </td>
   </tr>
 	
 	
   <tr>
     <td>23480    </td>
     <td>Цар Калоян    </td>
-    <td  align="right">    </td>
-    <td align="right">46    </td>
+    <td  align="right">6.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>23490    </td>
     <td>Кубрат    </td>
-    <td  align="right">    </td>
-    <td align="right">43    </td>
+    <td  align="right">8.    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
   <tr>
     <td>24010    </td>
     <td>Силистра - АППД    </td>
-    <td  align="right">    </td>
-    <td align="right">39    </td>
+    <td  align="right">7.    </td>
+    <td align="right">25    </td>
   </tr>
 	
 	
   <tr>
     <td>24020    </td>
     <td>Алфатар    </td>
-    <td  align="right">    </td>
-    <td align="right">40    </td>
+    <td  align="right">7.    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
   <tr>
     <td>24030    </td>
     <td>Главиница    </td>
-    <td  align="right">0.    </td>
-    <td align="right">51    </td>
+    <td  align="right">6.    </td>
+    <td align="right">38    </td>
   </tr>
 	
 	
   <tr>
     <td>24430    </td>
     <td>Тутракан    </td>
-    <td  align="right">    </td>
-    <td align="right">42    </td>
+    <td  align="right">6.    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
   <tr>
     <td>25010    </td>
     <td>Шумен    </td>
-    <td  align="right">    </td>
-    <td align="right">48    </td>
+    <td  align="right">6.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
@@ -818,15 +818,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>25040    </td>
     <td>Царев брод    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">43    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
   <tr>
     <td>25401    </td>
     <td>Преслав    </td>
-    <td  align="right">    </td>
-    <td align="right">70    </td>
+    <td  align="right">4.    </td>
+    <td align="right">50    </td>
   </tr>
 	
 	
@@ -834,55 +834,55 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>25410    </td>
     <td>Нови пазар    </td>
     <td  align="right">    </td>
-    <td align="right">45    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>25420    </td>
     <td>Върбица    </td>
-    <td  align="right">    </td>
-    <td align="right">66    </td>
+    <td  align="right">2.    </td>
+    <td align="right">47    </td>
   </tr>
 	
 	
   <tr>
     <td>25500    </td>
     <td>Риш    </td>
-    <td  align="right">    </td>
-    <td align="right">71    </td>
+    <td  align="right">9.    </td>
+    <td align="right">46    </td>
   </tr>
 	
 	
   <tr>
     <td>26010    </td>
     <td>Добрич    </td>
-    <td  align="right">    </td>
-    <td align="right">47    </td>
+    <td  align="right">6.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>26020    </td>
     <td>Шабла    </td>
-    <td  align="right">    </td>
-    <td align="right">35    </td>
+    <td  align="right">8.    </td>
+    <td align="right">23    </td>
   </tr>
 	
 	
   <tr>
     <td>26030    </td>
     <td>Калиакра    </td>
-    <td  align="right">    </td>
-    <td align="right">36    </td>
+    <td  align="right">7.    </td>
+    <td align="right">21    </td>
   </tr>
 	
 	
   <tr>
     <td>26060    </td>
     <td>Крушари    </td>
-    <td  align="right">    </td>
-    <td align="right">44    </td>
+    <td  align="right">7.    </td>
+    <td align="right">25    </td>
   </tr>
 	
 	
@@ -890,23 +890,23 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>26080    </td>
     <td>Генерал Тошево    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">42    </td>
+    <td align="right">25    </td>
   </tr>
 	
 	
   <tr>
     <td>26630    </td>
     <td>Оброчище    </td>
-    <td  align="right">    </td>
-    <td align="right">41    </td>
+    <td  align="right">4.    </td>
+    <td align="right">23    </td>
   </tr>
 	
 	
   <tr>
     <td>27010    </td>
     <td>Варна    </td>
-    <td  align="right">    </td>
-    <td align="right">45    </td>
+    <td  align="right">7.    </td>
+    <td align="right">30    </td>
   </tr>
 	
 	
@@ -914,95 +914,95 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>27020    </td>
     <td>Старо Оряхово    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">62    </td>
+    <td align="right">37    </td>
   </tr>
 	
 	
   <tr>
     <td>27030    </td>
     <td>Горен чифлик    </td>
-    <td  align="right">    </td>
-    <td align="right">61    </td>
+    <td  align="right">5.    </td>
+    <td align="right">37    </td>
   </tr>
 	
 	
   <tr>
     <td>27050    </td>
     <td>Суворово    </td>
-    <td  align="right">    </td>
-    <td align="right">42    </td>
+    <td  align="right">1.    </td>
+    <td align="right">23    </td>
   </tr>
 	
 	
   <tr>
     <td>27070    </td>
     <td>Дългопол    </td>
-    <td  align="right">    </td>
-    <td align="right">55    </td>
+    <td  align="right">5.    </td>
+    <td align="right">37    </td>
   </tr>
 	
 	
   <tr>
     <td>27460    </td>
     <td>Белослав    </td>
-    <td  align="right">    </td>
-    <td align="right">43    </td>
+    <td  align="right">5.    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
   <tr>
     <td>27490    </td>
     <td>Нова шипка    </td>
-    <td  align="right">    </td>
-    <td align="right">60    </td>
+    <td  align="right">4.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>28010    </td>
     <td>Бургас    </td>
-    <td  align="right">    </td>
-    <td align="right">49    </td>
+    <td  align="right">2.    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>28021    </td>
     <td>Ахтопол    </td>
-    <td  align="right">    </td>
-    <td align="right">84    </td>
+    <td  align="right">5.    </td>
+    <td align="right">52    </td>
   </tr>
 	
 	
   <tr>
     <td>28040    </td>
     <td>Карнобат    </td>
-    <td  align="right">    </td>
-    <td align="right">46    </td>
+    <td  align="right">1.    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>28045    </td>
     <td>Сунгурларе    </td>
-    <td  align="right">    </td>
-    <td align="right">56    </td>
+    <td  align="right">4.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>28050    </td>
     <td>Люляково    </td>
-    <td  align="right">    </td>
-    <td align="right">48    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>28060    </td>
     <td>Средец    </td>
-    <td  align="right">    </td>
-    <td align="right">71    </td>
+    <td  align="right">0.    </td>
+    <td align="right">44    </td>
   </tr>
 	
 	
@@ -1010,47 +1010,47 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>28120    </td>
     <td>Резово    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">83    </td>
+    <td align="right">56    </td>
   </tr>
 	
 	
   <tr>
     <td>28150    </td>
     <td>Малко Търново    </td>
-    <td  align="right">    </td>
-    <td align="right">93    </td>
+    <td  align="right">6.    </td>
+    <td align="right">58    </td>
   </tr>
 	
 	
   <tr>
     <td>28510    </td>
     <td>Веселие    </td>
-    <td  align="right">    </td>
-    <td align="right">80    </td>
+    <td  align="right">3.    </td>
+    <td align="right">51    </td>
   </tr>
 	
 	
   <tr>
     <td>28550    </td>
     <td>Кости    </td>
-    <td  align="right">    </td>
-    <td align="right">120    </td>
+    <td  align="right">4.    </td>
+    <td align="right">73    </td>
   </tr>
 	
 	
   <tr>
     <td>28610    </td>
     <td>Факия    </td>
-    <td  align="right">    </td>
-    <td align="right">62    </td>
+    <td  align="right">4.    </td>
+    <td align="right">45    </td>
   </tr>
 	
 	
   <tr>
     <td>28630    </td>
     <td>Зидарово    </td>
-    <td  align="right">    </td>
-    <td align="right">66    </td>
+    <td  align="right">1.    </td>
+    <td align="right">42    </td>
   </tr>
 	
 	
@@ -1058,15 +1058,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>29010    </td>
     <td>Ямбол    </td>
     <td  align="right">0.    </td>
-    <td align="right">48    </td>
+    <td align="right">30    </td>
   </tr>
 	
 	
   <tr>
     <td>29020    </td>
     <td>Елхово    </td>
-    <td  align="right">    </td>
-    <td align="right">46    </td>
+    <td  align="right">0.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
@@ -1074,39 +1074,39 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>29060    </td>
     <td>Тополовград    </td>
     <td  align="right">0.    </td>
-    <td align="right">68    </td>
+    <td align="right">50    </td>
   </tr>
 	
 	
   <tr>
     <td>29465    </td>
     <td>Странджа    </td>
-    <td  align="right">    </td>
-    <td align="right">63    </td>
+    <td  align="right">2.    </td>
+    <td align="right">43    </td>
   </tr>
 	
 	
   <tr>
     <td>41010    </td>
     <td>Сливен    </td>
-    <td  align="right">    </td>
-    <td align="right">53    </td>
+    <td  align="right">0.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>41030    </td>
     <td>Садиево    </td>
-    <td  align="right">    </td>
-    <td align="right">51    </td>
+    <td  align="right">0.    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>41040    </td>
     <td>Котел    </td>
-    <td  align="right">    </td>
-    <td align="right">95    </td>
+    <td  align="right">8.    </td>
+    <td align="right">68    </td>
   </tr>
 	
 	
@@ -1114,15 +1114,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>41430    </td>
     <td>Злати войвода    </td>
     <td  align="right">    </td>
-    <td align="right">51    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
   <tr>
     <td>41530    </td>
     <td>Градец    </td>
-    <td  align="right">    </td>
-    <td align="right">77    </td>
+    <td  align="right">2.    </td>
+    <td align="right">50    </td>
   </tr>
 	
 	
@@ -1130,15 +1130,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>42010    </td>
     <td>Стара Загора - инст    </td>
     <td  align="right">    </td>
-    <td align="right">48    </td>
+    <td align="right">29    </td>
   </tr>
 	
 	
   <tr>
     <td>42020    </td>
     <td>Чирпан    </td>
-    <td  align="right">0.    </td>
-    <td align="right">55    </td>
+    <td  align="right">    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
@@ -1146,7 +1146,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>42030    </td>
     <td>Казанлък    </td>
     <td  align="right">    </td>
-    <td align="right">49    </td>
+    <td align="right">29    </td>
   </tr>
 	
 	
@@ -1154,7 +1154,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>42042    </td>
     <td>Раднево    </td>
     <td  align="right">    </td>
-    <td align="right">43    </td>
+    <td align="right">38    </td>
   </tr>
 	
 	
@@ -1162,7 +1162,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>42420    </td>
     <td>Дълбоки    </td>
     <td  align="right">    </td>
-    <td align="right">63    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
@@ -1170,15 +1170,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>42450    </td>
     <td>Пчелиново    </td>
     <td  align="right">    </td>
-    <td align="right">84    </td>
+    <td align="right">38    </td>
   </tr>
 	
 	
   <tr>
     <td>42470    </td>
     <td>Шипка    </td>
-    <td  align="right">    </td>
-    <td align="right">64    </td>
+    <td  align="right">1.    </td>
+    <td align="right">44    </td>
   </tr>
 	
 	
@@ -1186,23 +1186,23 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>43010    </td>
     <td>Хасково    </td>
     <td  align="right">0.    </td>
-    <td align="right">77    </td>
+    <td align="right">48    </td>
   </tr>
 	
 	
   <tr>
     <td>43040    </td>
     <td>Любимец    </td>
-    <td  align="right">0.    </td>
-    <td align="right">50    </td>
+    <td  align="right">    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>43420    </td>
     <td>Симеоновград    </td>
-    <td  align="right">    </td>
-    <td align="right">54    </td>
+    <td  align="right">1.    </td>
+    <td align="right">35    </td>
   </tr>
 	
 	
@@ -1210,15 +1210,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>43520    </td>
     <td>Царева поляна    </td>
     <td  align="right">    </td>
-    <td align="right">90    </td>
+    <td align="right">58    </td>
   </tr>
 	
 	
   <tr>
     <td>44010    </td>
     <td>Кърджали    </td>
-    <td  align="right">0.    </td>
-    <td align="right">90    </td>
+    <td  align="right">    </td>
+    <td align="right">48    </td>
   </tr>
 	
 	
@@ -1226,15 +1226,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>44020    </td>
     <td>Джебел    </td>
     <td  align="right">    </td>
-    <td align="right">108    </td>
+    <td align="right">68    </td>
   </tr>
 	
 	
   <tr>
     <td>44030    </td>
     <td>Крумовград    </td>
-    <td  align="right">    </td>
-    <td align="right">103    </td>
+    <td  align="right">0.    </td>
+    <td align="right">63    </td>
   </tr>
 	
 	
@@ -1242,39 +1242,39 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>44040    </td>
     <td>Ивайловград    </td>
     <td  align="right">1.    </td>
-    <td align="right">80    </td>
+    <td align="right">56    </td>
   </tr>
 	
 	
   <tr>
     <td>44540    </td>
     <td>Ардино    </td>
-    <td  align="right">0.    </td>
-    <td align="right">110    </td>
+    <td  align="right">    </td>
+    <td align="right">68    </td>
   </tr>
 	
 	
   <tr>
     <td>44470    </td>
     <td>Момчилград    </td>
-    <td  align="right">0.    </td>
-    <td align="right">114    </td>
+    <td  align="right">    </td>
+    <td align="right">65    </td>
   </tr>
 	
 	
   <tr>
     <td>44510    </td>
     <td>Кирково    </td>
-    <td  align="right">    </td>
-    <td align="right">194    </td>
+    <td  align="right">1.    </td>
+    <td align="right">104    </td>
   </tr>
 	
 	
   <tr>
     <td>45030    </td>
     <td>Чепеларе    </td>
-    <td  align="right">    </td>
-    <td align="right">65    </td>
+    <td  align="right">1.    </td>
+    <td align="right">58    </td>
   </tr>
 	
 	
@@ -1282,7 +1282,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>45040    </td>
     <td>Райково    </td>
     <td  align="right">    </td>
-    <td align="right">123    </td>
+    <td align="right">58    </td>
   </tr>
 	
 	
@@ -1290,15 +1290,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>45070    </td>
     <td>Златоград    </td>
     <td  align="right">    </td>
-    <td align="right">136    </td>
+    <td align="right">70    </td>
   </tr>
 	
 	
   <tr>
     <td>45120    </td>
     <td>Рожен    </td>
-    <td  align="right">    </td>
-    <td align="right">118    </td>
+    <td  align="right">2.    </td>
+    <td align="right">65    </td>
   </tr>
 	
 	
@@ -1306,7 +1306,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>45130    </td>
     <td>Девин    </td>
     <td  align="right">    </td>
-    <td align="right">74    </td>
+    <td align="right">40    </td>
   </tr>
 	
 	
@@ -1314,7 +1314,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>45450    </td>
     <td>Мугла    </td>
     <td  align="right">    </td>
-    <td align="right">101    </td>
+    <td align="right">55    </td>
   </tr>
 	
 	
@@ -1322,71 +1322,71 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>45480    </td>
     <td>Барутин    </td>
     <td  align="right">    </td>
-    <td align="right">82    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>45530    </td>
     <td>Манастир    </td>
-    <td  align="right">0.    </td>
-    <td align="right">112    </td>
+    <td  align="right">2.    </td>
+    <td align="right">88    </td>
   </tr>
 	
 	
   <tr>
     <td>45541    </td>
     <td>Михалково    </td>
-    <td  align="right">    </td>
-    <td align="right">70    </td>
+    <td  align="right">0.    </td>
+    <td align="right">39    </td>
   </tr>
 	
 	
   <tr>
     <td>46011    </td>
     <td>Пловдив    </td>
-    <td  align="right">0.    </td>
-    <td align="right">54    </td>
+    <td  align="right">    </td>
+    <td align="right">30    </td>
   </tr>
 	
 	
   <tr>
     <td>46020    </td>
     <td>Садово    </td>
-    <td  align="right">0.    </td>
-    <td align="right">57    </td>
+    <td  align="right">    </td>
+    <td align="right">33    </td>
   </tr>
 	
 	
   <tr>
     <td>46030    </td>
     <td>Асеновград    </td>
-    <td  align="right">    </td>
-    <td align="right">59    </td>
+    <td  align="right">0.    </td>
+    <td align="right">37    </td>
   </tr>
 	
 	
   <tr>
     <td>46060    </td>
     <td>Карлово    </td>
-    <td  align="right">n.a.    </td>
-    <td align="right">55    </td>
+    <td  align="right">    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>46090    </td>
     <td>Вр. Ботев    </td>
-    <td  align="right">    </td>
-    <td align="right">64    </td>
+    <td  align="right">1.    </td>
+    <td align="right">52    </td>
   </tr>
 	
 	
   <tr>
     <td>46440    </td>
     <td>Първомай    </td>
-    <td  align="right">0.    </td>
-    <td align="right">65    </td>
+    <td  align="right">    </td>
+    <td align="right">40    </td>
   </tr>
 	
 	
@@ -1394,7 +1394,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>46680    </td>
     <td>Свежен    </td>
     <td  align="right">    </td>
-    <td align="right">64    </td>
+    <td align="right">38    </td>
   </tr>
 	
 	
@@ -1402,7 +1402,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>46760    </td>
     <td>Клисура    </td>
     <td  align="right">    </td>
-    <td align="right">68    </td>
+    <td align="right">38    </td>
   </tr>
 	
 	
@@ -1410,7 +1410,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>47010    </td>
     <td>Пазарджик    </td>
     <td  align="right">    </td>
-    <td align="right">51    </td>
+    <td align="right">26    </td>
   </tr>
 	
 	
@@ -1418,7 +1418,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>47040    </td>
     <td>Велинград    </td>
     <td  align="right">    </td>
-    <td align="right">54    </td>
+    <td align="right">29    </td>
   </tr>
 	
 	
@@ -1426,15 +1426,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>47050    </td>
     <td>Панагюрище    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">53    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
   <tr>
     <td>47070    </td>
     <td>Пещера    </td>
-    <td  align="right">    </td>
-    <td align="right">52    </td>
+    <td  align="right">0.    </td>
+    <td align="right">29    </td>
   </tr>
 	
 	
@@ -1442,31 +1442,31 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>47570    </td>
     <td>Батак    </td>
     <td  align="right">    </td>
-    <td align="right">81    </td>
+    <td align="right">51    </td>
   </tr>
 	
 	
   <tr>
     <td>47590    </td>
     <td>Фотиново    </td>
-    <td  align="right">    </td>
-    <td align="right">91    </td>
+    <td  align="right">4.    </td>
+    <td align="right">61    </td>
   </tr>
 	
 	
   <tr>
     <td>47640    </td>
     <td>Сърница    </td>
-    <td  align="right">    </td>
-    <td align="right">114    </td>
+    <td  align="right">1.    </td>
+    <td align="right">67    </td>
   </tr>
 	
 	
   <tr>
     <td>61010    </td>
     <td>Благоевград    </td>
-    <td  align="right">    </td>
-    <td align="right">60    </td>
+    <td  align="right">0.    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
@@ -1474,7 +1474,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>61040    </td>
     <td>Банско    </td>
     <td  align="right">    </td>
-    <td align="right">79    </td>
+    <td align="right">40    </td>
   </tr>
 	
 	
@@ -1482,15 +1482,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>61100    </td>
     <td>Сандански    </td>
     <td  align="right">    </td>
-    <td align="right">64    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
   <tr>
     <td>61111    </td>
     <td>Първомай    </td>
-    <td  align="right">    </td>
-    <td align="right">67    </td>
+    <td  align="right">n.a.    </td>
+    <td align="right">29    </td>
   </tr>
 	
 	
@@ -1498,7 +1498,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>61420    </td>
     <td>Якоруда    </td>
     <td  align="right">    </td>
-    <td align="right">67    </td>
+    <td align="right">39    </td>
   </tr>
 	
 	
@@ -1506,7 +1506,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>61570    </td>
     <td>Сатовча    </td>
     <td  align="right">    </td>
-    <td align="right">90    </td>
+    <td align="right">43    </td>
   </tr>
 	
 	
@@ -1514,7 +1514,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>61600    </td>
     <td>Гайтаниново    </td>
     <td  align="right">    </td>
-    <td align="right">64    </td>
+    <td align="right">24    </td>
   </tr>
 	
 	
@@ -1522,7 +1522,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>61631    </td>
     <td>Полена    </td>
     <td  align="right">    </td>
-    <td align="right">80    </td>
+    <td align="right">49    </td>
   </tr>
 	
 	
@@ -1530,7 +1530,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>61695    </td>
     <td>С. Пирин    </td>
     <td  align="right">    </td>
-    <td align="right">96    </td>
+    <td align="right">44    </td>
   </tr>
 	
 	
@@ -1538,39 +1538,39 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>62010    </td>
     <td>Кюстендил    </td>
     <td  align="right">    </td>
-    <td align="right">55    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>62050    </td>
     <td>Дупница    </td>
-    <td  align="right">    </td>
-    <td align="right">48    </td>
+    <td  align="right">0.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>63010    </td>
     <td>Перник    </td>
-    <td  align="right">    </td>
-    <td align="right">44    </td>
+    <td  align="right">0.    </td>
+    <td align="right">34    </td>
   </tr>
 	
 	
   <tr>
     <td>63406    </td>
     <td>Чуйпетлово    </td>
-    <td  align="right">    </td>
-    <td align="right">69    </td>
+    <td  align="right">1.    </td>
+    <td align="right">53    </td>
   </tr>
 	
 	
   <tr>
     <td>64132    </td>
     <td>Златица    </td>
-    <td  align="right">    </td>
-    <td align="right">41    </td>
+    <td  align="right">0.    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
@@ -1578,31 +1578,31 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>64201    </td>
     <td>София    </td>
     <td  align="right">    </td>
-    <td align="right">42    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>64205    </td>
     <td>Черни връх    </td>
-    <td  align="right">    </td>
-    <td align="right">54    </td>
+    <td  align="right">3.    </td>
+    <td align="right">55    </td>
   </tr>
 	
 	
   <tr>
     <td>64210    </td>
     <td>Вр. Мургаш    </td>
-    <td  align="right">    </td>
-    <td align="right">37    </td>
+    <td  align="right">1.    </td>
+    <td align="right">32    </td>
   </tr>
 	
 	
   <tr>
     <td>64215    </td>
     <td>Вр. Мусала    </td>
-    <td  align="right">    </td>
-    <td align="right">69    </td>
+    <td  align="right">21.    </td>
+    <td align="right">64    </td>
   </tr>
 	
 	
@@ -1610,7 +1610,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>64235    </td>
     <td>Самоков    </td>
     <td  align="right">    </td>
-    <td align="right">52    </td>
+    <td align="right">36    </td>
   </tr>
 	
 	
@@ -1618,15 +1618,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>64305    </td>
     <td>Божурище    </td>
     <td  align="right">    </td>
-    <td align="right">36    </td>
+    <td align="right">31    </td>
   </tr>
 	
 	
   <tr>
     <td>64310    </td>
     <td>Драгоман    </td>
-    <td  align="right">    </td>
-    <td align="right">38    </td>
+    <td  align="right">4.    </td>
+    <td align="right">27    </td>
   </tr>
 	
 	
@@ -1634,15 +1634,15 @@ else { document.getElementById(theID).style.display = "block" } }
     <td>64315    </td>
     <td>Банкя    </td>
     <td  align="right">n.a.    </td>
-    <td align="right">48    </td>
+    <td align="right">36    </td>
   </tr>
 	
 	
   <tr>
     <td>64420    </td>
     <td>Етрополе    </td>
-    <td  align="right">    </td>
-    <td align="right">63    </td>
+    <td  align="right">1.    </td>
+    <td align="right">48    </td>
   </tr>
 	
 	
@@ -1675,7 +1675,7 @@ else { document.getElementById(theID).style.display = "block" } }
 </head>
 
 <body bgcolor="#FFFFFF" text="#000000"><center>
-<h2>Ежедневни данни за снежната покривка в 166 станции от мрежата на НИМХ<br/> за  12.12.2025</h2>
+<h2>Ежедневни данни за снежната покривка в 166 станции от мрежата на НИМХ<br/> за  25.02.2026</h2>
 <center>
  <table cellpadding="1" cellspacing="1" border="0" width=100%>
  <tr><td>
@@ -1702,7 +1702,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">1010    </td>
     <td  align="center">Ново село    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">39    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1710,7 +1710,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">1020    </td>
     <td  align="center">Видин    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">19    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1718,7 +1718,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">1030    </td>
     <td  align="center">Грамада    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">22    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1726,7 +1726,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">1040    </td>
     <td  align="center">Белоградчик    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">25    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1734,7 +1734,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">1460    </td>
     <td  align="center">Кула    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">14    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1742,7 +1742,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">2015    </td>
     <td  align="center">Монтана    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1774,7 +1774,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">2060    </td>
     <td  align="center">Лом    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">16    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1782,7 +1782,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">2401    </td>
     <td  align="center">Чипровци    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">5    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1790,7 +1790,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">2430    </td>
     <td  align="center">Берковица    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">22    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1798,7 +1798,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">3010    </td>
     <td  align="center">Враца    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">35    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1806,7 +1806,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">3040    </td>
     <td  align="center">Кнежа    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">10    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1814,7 +1814,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">3050    </td>
     <td  align="center">Оряхово    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">14    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1822,7 +1822,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">3401    </td>
     <td  align="center">Бяла Слатина    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">15    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1830,7 +1830,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">3440    </td>
     <td  align="center">Борован    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">10    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1838,7 +1838,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">3530    </td>
     <td  align="center">Роман    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">8    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1846,7 +1846,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">4010    </td>
     <td  align="center">Плевен    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">11    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1862,7 +1862,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">4040    </td>
     <td  align="center">Новачене    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">37    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1870,7 +1870,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">4060    </td>
     <td  align="center">Николаево    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">14    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1878,7 +1878,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">4430    </td>
     <td  align="center">Пордим    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">32    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1886,7 +1886,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">4500    </td>
     <td  align="center">Ореховица    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">18    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1894,7 +1894,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">4590    </td>
     <td  align="center">Левски    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">8    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1902,7 +1902,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5010    </td>
     <td  align="center">Ловеч    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">23    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1918,7 +1918,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5030    </td>
     <td  align="center">Тетевен    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">33    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1934,7 +1934,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5080    </td>
     <td  align="center">Дерманци    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">22    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1942,7 +1942,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5401    </td>
     <td  align="center">Луковит    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1950,7 +1950,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5460    </td>
     <td  align="center">Рибарица    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">31    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1958,7 +1958,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5490    </td>
     <td  align="center">Чифлик    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">35    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1966,7 +1966,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5510    </td>
     <td  align="center">Черни Осъм    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">55    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1974,7 +1974,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">5520    </td>
     <td  align="center">Априлци    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">17    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1982,7 +1982,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">6010    </td>
     <td  align="center">Севлиево    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">37    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1990,7 +1990,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">6020    </td>
     <td  align="center">Габрово    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">32    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -1998,7 +1998,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">6470    </td>
     <td  align="center">Трявна    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">14    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2006,7 +2006,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">7010    </td>
     <td  align="center">Велико Търново    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">16    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2014,7 +2014,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">7020    </td>
     <td  align="center">Павликени    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">15    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2022,7 +2022,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">7040    </td>
     <td  align="center">Елена    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">16    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2030,7 +2030,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">7440    </td>
     <td  align="center">Костел    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">7    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2038,7 +2038,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">7470    </td>
     <td  align="center">Кесарево    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">22    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2046,7 +2046,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">7580    </td>
     <td  align="center">Полски Тръмбеш    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">28    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2054,7 +2054,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">21010    </td>
     <td  align="center">Русе-АППД    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">1    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">55    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2062,7 +2062,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">21020    </td>
     <td  align="center">Две могили    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">50    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2070,7 +2070,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">21030    </td>
     <td  align="center">Образцов чифлик    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">80    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2078,7 +2078,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">22010    </td>
     <td  align="center">Търговище    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">34    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2086,7 +2086,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">22020    </td>
     <td  align="center">Омуртаг    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">45    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2094,7 +2094,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">22030    </td>
     <td  align="center">Славяново    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">37    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2102,7 +2102,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">22480    </td>
     <td  align="center">Врани кон    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">23    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2110,7 +2110,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">22520    </td>
     <td  align="center">Надарево    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">62    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2118,7 +2118,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">23010    </td>
     <td  align="center">Разград    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">48    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2134,7 +2134,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">23030    </td>
     <td  align="center">Исперих    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2142,7 +2142,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">23480    </td>
     <td  align="center">Цар Калоян    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">60    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2150,7 +2150,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">23490    </td>
     <td  align="center">Кубрат    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">80    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2158,7 +2158,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">24010    </td>
     <td  align="center">Силистра - АППД    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">66    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2166,7 +2166,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">24020    </td>
     <td  align="center">Алфатар    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">66    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2174,7 +2174,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">24030    </td>
     <td  align="center">Главиница    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">1    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">64    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2182,7 +2182,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">24430    </td>
     <td  align="center">Тутракан    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">55    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2190,7 +2190,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">25010    </td>
     <td  align="center">Шумен    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">58    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2206,7 +2206,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">25401    </td>
     <td  align="center">Преслав    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">41    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2222,7 +2222,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">25420    </td>
     <td  align="center">Върбица    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">16    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2230,7 +2230,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">25500    </td>
     <td  align="center">Риш    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">88    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2238,7 +2238,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">26010    </td>
     <td  align="center">Добрич    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">58    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2246,7 +2246,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">26020    </td>
     <td  align="center">Шабла    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">77    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2254,7 +2254,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">26030    </td>
     <td  align="center">Калиакра    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">73    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2262,7 +2262,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">26060    </td>
     <td  align="center">Крушари    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">74    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2278,7 +2278,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">26630    </td>
     <td  align="center">Оброчище    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">43    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2286,7 +2286,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">27010    </td>
     <td  align="center">Варна    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">69    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2302,7 +2302,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">27030    </td>
     <td  align="center">Горен чифлик    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">46    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2310,7 +2310,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">27050    </td>
     <td  align="center">Суворово    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">14    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2318,7 +2318,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">27070    </td>
     <td  align="center">Дългопол    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">50    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2326,7 +2326,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">27460    </td>
     <td  align="center">Белослав    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">53    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2334,7 +2334,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">27490    </td>
     <td  align="center">Нова шипка    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">40    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2342,7 +2342,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28010    </td>
     <td  align="center">Бургас    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">23    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2350,7 +2350,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28021    </td>
     <td  align="center">Ахтопол    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">45    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2358,7 +2358,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28040    </td>
     <td  align="center">Карнобат    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">11    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2366,7 +2366,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28045    </td>
     <td  align="center">Сунгурларе    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">42    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2374,7 +2374,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28050    </td>
     <td  align="center">Люляково    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">n.a.    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2382,7 +2382,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28060    </td>
     <td  align="center">Средец    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2398,7 +2398,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28150    </td>
     <td  align="center">Малко Търново    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">62    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2406,7 +2406,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28510    </td>
     <td  align="center">Веселие    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">30    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2414,7 +2414,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28550    </td>
     <td  align="center">Кости    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">38    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2422,7 +2422,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28610    </td>
     <td  align="center">Факия    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">39    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2430,7 +2430,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">28630    </td>
     <td  align="center">Зидарово    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">14    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2438,7 +2438,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">29010    </td>
     <td  align="center">Ямбол    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">1    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2446,7 +2446,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">29020    </td>
     <td  align="center">Елхово    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2454,7 +2454,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">29060    </td>
     <td  align="center">Тополовград    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">1    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2462,7 +2462,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">29465    </td>
     <td  align="center">Странджа    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">18    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2470,7 +2470,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">41010    </td>
     <td  align="center">Сливен    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2478,7 +2478,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">41030    </td>
     <td  align="center">Садиево    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2486,7 +2486,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">41040    </td>
     <td  align="center">Котел    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">80    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2502,7 +2502,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">41530    </td>
     <td  align="center">Градец    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">15    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2518,7 +2518,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">42020    </td>
     <td  align="center">Чирпан    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2526,7 +2526,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">42030    </td>
     <td  align="center">Казанлък    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2558,7 +2558,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">42470    </td>
     <td  align="center">Шипка    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">5    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2566,7 +2566,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">43010    </td>
     <td  align="center">Хасково    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">3    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2574,7 +2574,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">43040    </td>
     <td  align="center">Любимец    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">0    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2582,7 +2582,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">43420    </td>
     <td  align="center">Симеоновград    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">5    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2598,7 +2598,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">44010    </td>
     <td  align="center">Кърджали    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">3    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">0    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2606,7 +2606,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">44020    </td>
     <td  align="center">Джебел    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2614,7 +2614,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">44030    </td>
     <td  align="center">Крумовград    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2630,7 +2630,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">44540    </td>
     <td  align="center">Ардино    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2638,7 +2638,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">44470    </td>
     <td  align="center">Момчилград    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2646,7 +2646,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">44510    </td>
     <td  align="center">Кирково    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">10    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2654,7 +2654,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">45030    </td>
     <td  align="center">Чепеларе    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">6    </td>    <td  align="center">ръмеж    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2670,7 +2670,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">45070    </td>
     <td  align="center">Златоград    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2678,7 +2678,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">45120    </td>
     <td  align="center">Рожен    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">16    </td>    <td  align="center">сняг    </td>    <td  align="center">56    </td>
   </tr>
 	
 	
@@ -2710,7 +2710,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">45530    </td>
     <td  align="center">Манастир    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">20    </td>    <td  align="center">    </td>    <td  align="center">5    </td>
   </tr>
 	
 	
@@ -2718,7 +2718,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">45541    </td>
     <td  align="center">Михалково    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2726,7 +2726,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">46011    </td>
     <td  align="center">Пловдив    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2734,7 +2734,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">46020    </td>
     <td  align="center">Садово    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">4    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2742,7 +2742,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">46030    </td>
     <td  align="center">Асеновград    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2750,7 +2750,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">46060    </td>
     <td  align="center">Карлово    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2758,7 +2758,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">46090    </td>
     <td  align="center">Вр. Ботев    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">27    </td>
+    <td  align="center">12    </td>    <td  align="center">    </td>    <td  align="center">269    </td>
   </tr>
 	
 	
@@ -2766,7 +2766,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">46440    </td>
     <td  align="center">Първомай    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2790,7 +2790,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">47010    </td>
     <td  align="center">Пазарджик    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2798,7 +2798,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">47040    </td>
     <td  align="center">Велинград    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2814,7 +2814,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">47070    </td>
     <td  align="center">Пещера    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2830,7 +2830,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">47590    </td>
     <td  align="center">Фотиново    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">37    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2838,7 +2838,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">47640    </td>
     <td  align="center">Сърница    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">6    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2846,7 +2846,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">61010    </td>
     <td  align="center">Благоевград    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">1    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2854,7 +2854,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">61040    </td>
     <td  align="center">Банско    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">0    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2862,7 +2862,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">61100    </td>
     <td  align="center">Сандански    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">роса    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2870,7 +2870,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">61111    </td>
     <td  align="center">Първомай    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2918,7 +2918,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">62010    </td>
     <td  align="center">Кюстендил    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2926,7 +2926,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">62050    </td>
     <td  align="center">Дупница    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">слана    </td>    <td  align="center">    </td>
+    <td  align="center">2    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2934,7 +2934,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">63010    </td>
     <td  align="center">Перник    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">1    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2942,7 +2942,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">63406    </td>
     <td  align="center">Чуйпетлово    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">6    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2950,7 +2950,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">64132    </td>
     <td  align="center">Златица    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">мокреща мъгла    </td>    <td  align="center">    </td>
+    <td  align="center">3    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2966,7 +2966,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">64205    </td>
     <td  align="center">Черни връх    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">25    </td>
+    <td  align="center">27    </td>    <td  align="center">    </td>    <td  align="center">123    </td>
   </tr>
 	
 	
@@ -2974,7 +2974,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">64210    </td>
     <td  align="center">Вр. Мургаш    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">7    </td>    <td  align="center">сняг    </td>    <td  align="center">16    </td>
   </tr>
 	
 	
@@ -2982,7 +2982,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">64215    </td>
     <td  align="center">Вр. Мусала    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">208    </td>    <td  align="center">    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -2990,7 +2990,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">64235    </td>
     <td  align="center">Самоков    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">0    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -3006,7 +3006,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">64310    </td>
     <td  align="center">Драгоман    </td>
     <td  align="center">климатична    </td>
-    <td  align="center">    </td>    <td  align="center">няма явление    </td>    <td  align="center">    </td>
+    <td  align="center">37    </td>    <td  align="center">краткотраен дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -3022,7 +3022,7 @@ else { document.getElementById(theID).style.display = "block" } }
     <td align="center">64420    </td>
     <td  align="center">Етрополе    </td>
     <td  align="center">валежомерна    </td>
-    <td  align="center">    </td>    <td  align="center">    </td>    <td  align="center">    </td>
+    <td  align="center">9    </td>    <td  align="center">дъжд    </td>    <td  align="center">    </td>
   </tr>
 	
 	
@@ -3076,7 +3076,7 @@ else { document.getElementById(theID).style.display = "block" } }
      </div>
      <div id="tS" class="texter">
        
-<h2>Температура на земната повърхност в синоптичните ни станции на 13.12.2025 в 03 ч.(UTC)</h2>
+<h2>Температура на земната повърхност в синоптичните ни станции на 26.02.2026 в 03 ч.(UTC)</h2>
 <p>Данните са от последното наблюдение в българските синоптични станции.</p>
 <p>Часът в България е UTC+2 ч. през зимата и UTC+3 ч. през лятото.</p>
 <center><table border=1>
@@ -3084,305 +3084,305 @@ else { document.getElementById(theID).style.display = "block" } }
 </tr>
 <tr>
         <td>Ново село</td>
-        <td style='text-align:center'>1.4</td>
-        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>3.1</td>
+        <td style='text-align:center'>88</td>
         <td style='text-align:center'>0.</td>
         <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-2.3</td>
+        <td style='text-align:center;'>-1.1</td>
       </tr><tr>
         <td>Видин</td>
-        <td style='text-align:center'>1.3</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.9</td>
+        <td style='text-align:center'>94</td>
         <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-1.4</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-3.1</td>
       </tr><tr>
         <td>Враца</td>
-        <td style='text-align:center'>4.8</td>
-        <td style='text-align:center'>84</td>
-        <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>3.1</td>
-      </tr><tr>
-        <td>Монтана</td>
-        <td style='text-align:center'>2.5</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-0.2</td>
-      </tr><tr>
-        <td>Лом</td>
-        <td style='text-align:center'>1.9</td>
-        <td style='text-align:center'>91</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-0.3</td>
-      </tr><tr>
-        <td>Оряхово</td>
-        <td style='text-align:center'>4.2</td>
-        <td style='text-align:center'>93</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>2.4</td>
-      </tr><tr>
-        <td>Кнежа</td>
-        <td style='text-align:center'>-1.7</td>
-        <td style='text-align:center'>100</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-4.3</td>
-      </tr><tr>
-        <td>Ловеч</td>
-        <td style='text-align:center'>2.0</td>
-        <td style='text-align:center'>95</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-0.2</td>
-      </tr><tr>
-        <td>Плевен</td>
-        <td style='text-align:center'>2.6</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-0.2</td>
-      </tr><tr>
-        <td>Велико Търново</td>
-        <td style='text-align:center'>1.5</td>
-        <td style='text-align:center'>94</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center;'>-1.5</td>
-      </tr><tr>
-        <td>Свищов</td>
-        <td style='text-align:center'>3.4</td>
-        <td style='text-align:center'>93</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-0.4</td>
-      </tr><tr>
-        <td>Русе</td>
-        <td style='text-align:center'>4.4</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>9.</td>
-        <td style='text-align:center;'>3.2</td>
-      </tr><tr>
-        <td>Шумен</td>
-        <td style='text-align:center'>6.5</td>
-        <td style='text-align:center'>76</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>1.8</td>
-      </tr><tr>
-        <td>Разград</td>
-        <td style='text-align:center'>4.1</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>8.</td>
-        <td style='text-align:center;'>2.7</td>
-      </tr><tr>
-        <td>Силистра</td>
-        <td style='text-align:center'>4.0</td>
-        <td style='text-align:center'>97</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>10.</td>
-        <td style='text-align:center;'>3.5</td>
-      </tr><tr>
-        <td>Силистра НИМХ</td>
-        <td style='text-align:center'>3.7</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>10.</td>
-        <td style='text-align:center;'>3.2</td>
-      </tr><tr>
-        <td>Варна</td>
-        <td style='text-align:center'>5.7</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center;'>3.9</td>
-      </tr><tr>
-        <td>Шабла</td>
-        <td style='text-align:center'>4.0</td>
-        <td style='text-align:center'>95</td>
-        <td style='text-align:center'>5.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>2.7</td>
-      </tr><tr>
-        <td>Калиакра</td>
-        <td style='text-align:center'>4.8</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>3.2</td>
-      </tr><tr>
-        <td>Добрич</td>
-        <td style='text-align:center'>3.9</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>10.</td>
-        <td style='text-align:center;'>3.3</td>
-      </tr><tr>
-        <td>вр. Мургаш</td>
-        <td style='text-align:center'>-1.5</td>
-        <td style='text-align:center'>97</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-2.8</td>
-      </tr><tr>
-        <td>Кюстендил</td>
-        <td style='text-align:center'>-1.1</td>
-        <td style='text-align:center'>94</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center;'>-4.9</td>
-      </tr><tr>
-        <td>Драгоман</td>
-        <td style='text-align:center'>3.5</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>9.</td>
-        <td style='text-align:center;'>2.5</td>
-      </tr><tr>
-        <td>Благоевград</td>
-        <td style='text-align:center'>5.0</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>8.</td>
-        <td style='text-align:center;'>3.1</td>
-      </tr><tr>
-        <td>Черни връх</td>
-        <td style='text-align:center'>-2.7</td>
+        <td style='text-align:center'>5.2</td>
         <td style='text-align:center'>66</td>
         <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-5.0</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center;'>3.2</td>
       </tr><tr>
-        <td>София-ЦМС</td>
-        <td style='text-align:center'>3.8</td>
-        <td style='text-align:center'>89</td>
-        <td style='text-align:center'>2.</td>
+        <td>Монтана</td>
+        <td style='text-align:center'>6.3</td>
+        <td style='text-align:center'>66</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>4.5</td>
+      </tr><tr>
+        <td>Лом</td>
+        <td style='text-align:center'>4.7</td>
+        <td style='text-align:center'>73</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-0.1</td>
+      </tr><tr>
+        <td>Оряхово</td>
+        <td style='text-align:center'>3.1</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-1.0</td>
+      </tr><tr>
+        <td>Кнежа</td>
+        <td style='text-align:center'>0.3</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center;'>-2.6</td>
+      </tr><tr>
+        <td>Ловеч</td>
+        <td style='text-align:center'>4.5</td>
+        <td style='text-align:center'>81</td>
+        <td style='text-align:center'>1.</td>
         <td style='text-align:center'>8.</td>
         <td style='text-align:center;'>2.3</td>
       </tr><tr>
-        <td>вр. Мусала</td>
-        <td style='text-align:center'>-6.0</td>
-        <td style='text-align:center'>78</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-7.7</td>
-      </tr><tr>
-        <td>Пловдив - Тракия</td>
-        <td style='text-align:center'>7.1</td>
-        <td style='text-align:center'>81</td>
-        <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>5.4</td>
-      </tr><tr>
-        <td>вр. Ботев</td>
-        <td style='text-align:center'>-5.2</td>
-        <td style='text-align:center'>88</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-8.0</td>
-      </tr><tr>
-        <td>Пазарджик</td>
-        <td style='text-align:center'>5.3</td>
-        <td style='text-align:center'>81</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>3.9</td>
-      </tr><tr>
-        <td>Чирпан</td>
-        <td style='text-align:center'>1.4</td>
-        <td style='text-align:center'>96</td>
+        <td>Плевен</td>
+        <td style='text-align:center'>2.5</td>
+        <td style='text-align:center'>100</td>
         <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center;'>-1.2</td>
-      </tr><tr>
-        <td>Стара Загора</td>
-        <td style='text-align:center'>1.2</td>
-        <td style='text-align:center'>91</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-2.7</td>
-      </tr><tr>
-        <td>Сливен</td>
-        <td style='text-align:center'>3.8</td>
-        <td style='text-align:center'>93</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>3.</td>
         <td style='text-align:center;'>-0.2</td>
       </tr><tr>
-        <td>Елхово</td>
+        <td>Велико Търново</td>
+        <td style='text-align:center'>4.5</td>
+        <td style='text-align:center'>79</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>3.2</td>
+      </tr><tr>
+        <td>Свищов</td>
+        <td style='text-align:center'>2.8</td>
+        <td style='text-align:center'>86</td>
+        <td style='text-align:center'>7.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>2.3</td>
+      </tr><tr>
+        <td>Русе</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>1.7</td>
+      </tr><tr>
+        <td>Шумен</td>
+        <td style='text-align:center'>1.0</td>
+        <td style='text-align:center'>94</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>-0.3</td>
+      </tr><tr>
+        <td>Разград</td>
         <td style='text-align:center'>-0.1</td>
         <td style='text-align:center'>98</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-2.7</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center;'>-0.8</td>
       </tr><tr>
-        <td>Карнобат</td>
-        <td style='text-align:center'>2.4</td>
-        <td style='text-align:center'>95</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-1.4</td>
-      </tr><tr>
-        <td>н. Емине</td>
-        <td style='text-align:center'>8.6</td>
-        <td style='text-align:center'>75</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>7.2</td>
-      </tr><tr>
-        <td>Бургас</td>
-        <td style='text-align:center'>5.8</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center;'>4.0</td>
-      </tr><tr>
-        <td>Ахтопол</td>
-        <td style='text-align:center'>6.1</td>
-        <td style='text-align:center'>88</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>4.2</td>
-      </tr><tr>
-        <td>Сандански</td>
-        <td style='text-align:center'>4.3</td>
-        <td style='text-align:center'>89</td>
-        <td style='text-align:center'>1.</td>
+        <td>Силистра</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>85</td>
+        <td style='text-align:center'>5.</td>
         <td style='text-align:center'>7.</td>
-        <td style='text-align:center;'>2.1</td>
+        <td style='text-align:center;'>1.1</td>
       </tr><tr>
-        <td></td>
-        <td style='text-align:center'>3.6</td>
-        <td style='text-align:center'>89</td>
-        <td style='text-align:center'>0.</td>
+        <td>Силистра НИМХ</td>
+        <td style='text-align:center'>2.0</td>
+        <td style='text-align:center'>87</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>1.3</td>
+      </tr><tr>
+        <td>Варна</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>93</td>
         <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center;'>0.8</td>
+      </tr><tr>
+        <td>Шабла</td>
+        <td style='text-align:center'>3.1</td>
+        <td style='text-align:center'>76</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>1.5</td>
+      </tr><tr>
+        <td>Калиакра</td>
+        <td style='text-align:center'>2.5</td>
+        <td style='text-align:center'>80</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>1.9</td>
+      </tr><tr>
+        <td>Добрич</td>
+        <td style='text-align:center'>0.7</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>10.</td>
         <td style='text-align:center;'>-0.1</td>
       </tr><tr>
-        <td>Рожен</td>
-        <td style='text-align:center'>-1.5</td>
-        <td style='text-align:center'>97</td>
+        <td>вр. Мургаш</td>
+        <td style='text-align:center'>-5.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center;'>-5.8</td>
+      </tr><tr>
+        <td>Кюстендил</td>
+        <td style='text-align:center'>3.6</td>
+        <td style='text-align:center'>75</td>
         <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>0.8</td>
+      </tr><tr>
+        <td>Драгоман</td>
+        <td style='text-align:center'>2.9</td>
+        <td style='text-align:center'>90</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>1.4</td>
+      </tr><tr>
+        <td>Благоевград</td>
+        <td style='text-align:center'>6.4</td>
+        <td style='text-align:center'>64</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center;'>4.3</td>
+      </tr><tr>
+        <td>Черни връх</td>
+        <td style='text-align:center'>-8.2</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center;'>-9.0</td>
+      </tr><tr>
+        <td>София-ЦМС</td>
+        <td style='text-align:center'>4.4</td>
+        <td style='text-align:center'>73</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center;'>1.7</td>
+      </tr><tr>
+        <td>вр. Мусала</td>
+        <td style='text-align:center'>-12.6</td>
+        <td style='text-align:center'>88</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>-13.3</td>
+      </tr><tr>
+        <td>Пловдив - Тракия</td>
+        <td style='text-align:center'>7.0</td>
+        <td style='text-align:center'>74</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>7.</td>
+        <td style='text-align:center;'>5.3</td>
+      </tr><tr>
+        <td>вр. Ботев</td>
+        <td style='text-align:center'>-9.3</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>14.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>-9.8</td>
+      </tr><tr>
+        <td>Пазарджик</td>
+        <td style='text-align:center'>7.0</td>
+        <td style='text-align:center'>64</td>
         <td style='text-align:center'>6.</td>
-        <td style='text-align:center;'>-3.5</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center;'>5.5</td>
+      </tr><tr>
+        <td>Чирпан</td>
+        <td style='text-align:center'>5.8</td>
+        <td style='text-align:center'>74</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>4.9</td>
+      </tr><tr>
+        <td>Стара Загора</td>
+        <td style='text-align:center'>5.5</td>
+        <td style='text-align:center'>74</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>4.3</td>
+      </tr><tr>
+        <td>Сливен</td>
+        <td style='text-align:center'>4.7</td>
+        <td style='text-align:center'>84</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>3.1</td>
+      </tr><tr>
+        <td>Елхово</td>
+        <td style='text-align:center'>1.6</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center;'>-0.1</td>
+      </tr><tr>
+        <td>Карнобат</td>
+        <td style='text-align:center'>1.5</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center;'>-0.9</td>
+      </tr><tr>
+        <td>н. Емине</td>
+        <td style='text-align:center'>3.9</td>
+        <td style='text-align:center'>77</td>
+        <td style='text-align:center'>14.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center;'>3.2</td>
+      </tr><tr>
+        <td>Бургас</td>
+        <td style='text-align:center'>3.0</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center;'>0.5</td>
+      </tr><tr>
+        <td></td>
+        <td style='text-align:center'>4.1</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>3.0</td>
+      </tr><tr>
+        <td>Сандански</td>
+        <td style='text-align:center'>7.8</td>
+        <td style='text-align:center'>55</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center;'>5.5</td>
+      </tr><tr>
+        <td>Гоце Делчев</td>
+        <td style='text-align:center'>-0.4</td>
+        <td style='text-align:center'>76</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center;'>-2.9</td>
+      </tr><tr>
+        <td>Рожен</td>
+        <td style='text-align:center'>-4.6</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>-5.5</td>
       </tr><tr>
         <td>Кърджали</td>
-        <td style='text-align:center'>1.5</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>-2.2</td>
+        <td style='text-align:center'>5.7</td>
+        <td style='text-align:center'>63</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center;'>4.5</td>
       </tr><tr>
         <td>Хасково</td>
-        <td style='text-align:center'>5.5</td>
+        <td style='text-align:center'>5.1</td>
         <td style='text-align:center'>86</td>
         <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center;'>3.1</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center;'>4.2</td>
       </tr></table></center>     </div>
      <div onClick="openClose('atS')"  class="linkOpenClose">Температура на земната повърхност
      </div>
@@ -3431,7 +3431,7 @@ else { document.getElementById(theID).style.display = "block" } }
      </div>
      <div id="tWCI" class="texter">
        
-<h2>Индекс на комфорт в синоптичните ни станции на 13.12.2025 в 03 ч.(UTC)</h2>
+<h2>Индекс на комфорт в синоптичните ни станции на 26.02.2026 в 03 ч.(UTC)</h2>
 <p>Данните са от последното наблюдение в българските синоптични станции.</p>
 <p>Часът в България е UTC+2 ч. през зимата и UTC+3 ч. през лятото.</p>
 <table border=1>
@@ -3442,391 +3442,391 @@ else { document.getElementById(theID).style.display = "block" } }
 </tr>
 <tr>
         <td>Ново село</td>
-        <td style='text-align:center'>1.4</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.8</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.66</td>
-      </tr><tr>
-        <td>Видин</td>
-        <td style='text-align:center'>1.3</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.8</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.82</td>
-      </tr><tr>
-        <td>Враца</td>
-        <td style='text-align:center'>4.8</td>
-        <td style='text-align:center'>84</td>
-        <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.9</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.66</td>
-      </tr><tr>
-        <td>Монтана</td>
-        <td style='text-align:center'>2.5</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.3</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.74</td>
-      </tr><tr>
-        <td>Лом</td>
-        <td style='text-align:center'>1.9</td>
-        <td style='text-align:center'>91</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-6.1</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.84</td>
-      </tr><tr>
-        <td>Оряхово</td>
-        <td style='text-align:center'>4.2</td>
-        <td style='text-align:center'>93</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.2</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.68</td>
-      </tr><tr>
-        <td>Кнежа</td>
-        <td style='text-align:center'>-1.7</td>
-        <td style='text-align:center'>100</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-9.7</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>2.02</td>
-      </tr><tr>
-        <td>Ловеч</td>
-        <td style='text-align:center'>2.0</td>
-        <td style='text-align:center'>95</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.9</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.82</td>
-      </tr><tr>
-        <td>Плевен</td>
-        <td style='text-align:center'>2.6</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.1</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.73</td>
-      </tr><tr>
-        <td>Велико Търново</td>
-        <td style='text-align:center'>1.5</td>
-        <td style='text-align:center'>94</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.8</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.61</td>
-      </tr><tr>
-        <td>Свищов</td>
-        <td style='text-align:center'>3.4</td>
-        <td style='text-align:center'>93</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.5</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.54</td>
-      </tr><tr>
-        <td>Русе</td>
-        <td style='text-align:center'>4.4</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>9.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.1</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.52</td>
-      </tr><tr>
-        <td>Шумен</td>
-        <td style='text-align:center'>6.5</td>
-        <td style='text-align:center'>76</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>2.4</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.39</td>
-      </tr><tr>
-        <td>Разград</td>
-        <td style='text-align:center'>4.1</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>8.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.0</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.62</td>
-      </tr><tr>
-        <td>Силистра</td>
-        <td style='text-align:center'>4.0</td>
-        <td style='text-align:center'>97</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>10.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.7</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.60</td>
-      </tr><tr>
-        <td>Силистра НИМХ</td>
-        <td style='text-align:center'>3.7</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>10.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.1</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.62</td>
-      </tr><tr>
-        <td>Варна</td>
-        <td style='text-align:center'>5.7</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.0</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.57</td>
-      </tr><tr>
-        <td>Шабла</td>
-        <td style='text-align:center'>4.0</td>
-        <td style='text-align:center'>95</td>
-        <td style='text-align:center'>5.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.9</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.72</td>
-      </tr><tr>
-        <td>Калиакра</td>
-        <td style='text-align:center'>4.8</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.7</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.65</td>
-      </tr><tr>
-        <td>Добрич</td>
-        <td style='text-align:center'>3.9</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>10.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.2</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.58</td>
-      </tr><tr>
-        <td>вр. Мургаш</td>
-        <td style='text-align:center'>-1.5</td>
-        <td style='text-align:center'>97</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-12.0</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.14</td>
-      </tr><tr>
-        <td>Кюстендил</td>
-        <td style='text-align:center'>-1.1</td>
-        <td style='text-align:center'>94</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.8</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.82</td>
-      </tr><tr>
-        <td>Драгоман</td>
-        <td style='text-align:center'>3.5</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>9.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.1</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.68</td>
-      </tr><tr>
-        <td>Благоевград</td>
-        <td style='text-align:center'>5.0</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>8.</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.3</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.50</td>
-      </tr><tr>
-        <td>Черни връх</td>
-        <td style='text-align:center'>-2.7</td>
-        <td style='text-align:center'>66</td>
-        <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-14.0</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.25</td>
-      </tr><tr>
-        <td>София-ЦМС</td>
-        <td style='text-align:center'>3.8</td>
-        <td style='text-align:center'>89</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>8.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.65</td>
-      </tr><tr>
-        <td>вр. Мусала</td>
-        <td style='text-align:center'>-6.0</td>
-        <td style='text-align:center'>78</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#003399;color:#ffffff;'>-18.8</td>
-        <td style='text-align:center; background-color:#003399;color:#ffffff;'>4</td>
-        <td style='text-align:center; background-color:#003399;color:#ffffff;'>2.50</td>
-      </tr><tr>
-        <td>Пловдив - Тракия</td>
-        <td style='text-align:center'>7.1</td>
-        <td style='text-align:center'>81</td>
-        <td style='text-align:center'>4.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.4</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.49</td>
-      </tr><tr>
-        <td>вр. Ботев</td>
-        <td style='text-align:center'>-5.2</td>
+        <td style='text-align:center'>3.1</td>
         <td style='text-align:center'>88</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-16.1</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.36</td>
-      </tr><tr>
-        <td>Пазарджик</td>
-        <td style='text-align:center'>5.3</td>
-        <td style='text-align:center'>81</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.5</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.64</td>
-      </tr><tr>
-        <td>Чирпан</td>
-        <td style='text-align:center'>1.4</td>
-        <td style='text-align:center'>96</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.8</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.82</td>
-      </tr><tr>
-        <td>Стара Загора</td>
-        <td style='text-align:center'>1.2</td>
-        <td style='text-align:center'>91</td>
         <td style='text-align:center'>0.</td>
         <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.2</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.68</td>
-      </tr><tr>
-        <td>Сливен</td>
-        <td style='text-align:center'>3.8</td>
-        <td style='text-align:center'>93</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.1</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.52</td>
-      </tr><tr>
-        <td>Елхово</td>
-        <td style='text-align:center'>-0.1</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-7.6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.91</td>
-      </tr><tr>
-        <td>Карнобат</td>
-        <td style='text-align:center'>2.4</td>
-        <td style='text-align:center'>95</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.60</td>
-      </tr><tr>
-        <td>н. Емине</td>
-        <td style='text-align:center'>8.6</td>
-        <td style='text-align:center'>75</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>2.2</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
-        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.40</td>
-      </tr><tr>
-        <td>Бургас</td>
-        <td style='text-align:center'>5.8</td>
-        <td style='text-align:center'>92</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.9</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.56</td>
-      </tr><tr>
-        <td>Ахтопол</td>
-        <td style='text-align:center'>6.1</td>
-        <td style='text-align:center'>88</td>
-        <td style='text-align:center'>3.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.55</td>
-      </tr><tr>
-        <td>Сандански</td>
-        <td style='text-align:center'>4.3</td>
-        <td style='text-align:center'>89</td>
-        <td style='text-align:center'>1.</td>
-        <td style='text-align:center'>7.</td>
         <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.1</td>
         <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
         <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.57</td>
       </tr><tr>
-        <td></td>
-        <td style='text-align:center'>3.6</td>
-        <td style='text-align:center'>89</td>
+        <td>Видин</td>
+        <td style='text-align:center'>0.9</td>
+        <td style='text-align:center'>94</td>
         <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.6</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-3.5</td>
         <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.60</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.70</td>
       </tr><tr>
-        <td>Рожен</td>
-        <td style='text-align:center'>-1.5</td>
-        <td style='text-align:center'>97</td>
-        <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>6.</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-10.4</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
-        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.06</td>
-      </tr><tr>
-        <td>Кърджали</td>
-        <td style='text-align:center'>1.5</td>
-        <td style='text-align:center'>98</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.6</td>
+        <td>Враца</td>
+        <td style='text-align:center'>5.2</td>
+        <td style='text-align:center'>66</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.7</td>
         <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
         <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.65</td>
       </tr><tr>
-        <td>Хасково</td>
+        <td>Монтана</td>
+        <td style='text-align:center'>6.3</td>
+        <td style='text-align:center'>66</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.4</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.59</td>
+      </tr><tr>
+        <td>Лом</td>
+        <td style='text-align:center'>4.7</td>
+        <td style='text-align:center'>73</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.1</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.51</td>
+      </tr><tr>
+        <td>Оряхово</td>
+        <td style='text-align:center'>3.1</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.0</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.57</td>
+      </tr><tr>
+        <td>Кнежа</td>
+        <td style='text-align:center'>0.3</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-7.2</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.89</td>
+      </tr><tr>
+        <td>Ловеч</td>
+        <td style='text-align:center'>4.5</td>
+        <td style='text-align:center'>81</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.56</td>
+      </tr><tr>
+        <td>Плевен</td>
+        <td style='text-align:center'>2.5</td>
+        <td style='text-align:center'>100</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.2</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.73</td>
+      </tr><tr>
+        <td>Велико Търново</td>
+        <td style='text-align:center'>4.5</td>
+        <td style='text-align:center'>79</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.2</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.50</td>
+      </tr><tr>
+        <td>Свищов</td>
+        <td style='text-align:center'>2.8</td>
+        <td style='text-align:center'>86</td>
+        <td style='text-align:center'>7.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.77</td>
+      </tr><tr>
+        <td>Русе</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>91</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.2</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.79</td>
+      </tr><tr>
+        <td>Шумен</td>
+        <td style='text-align:center'>1.0</td>
+        <td style='text-align:center'>94</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.52</td>
+      </tr><tr>
+        <td>Разград</td>
+        <td style='text-align:center'>-0.1</td>
+        <td style='text-align:center'>98</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-8.6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.96</td>
+      </tr><tr>
+        <td>Силистра</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>85</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>7.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-6.3</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.84</td>
+      </tr><tr>
+        <td>Силистра НИМХ</td>
+        <td style='text-align:center'>2.0</td>
+        <td style='text-align:center'>87</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.77</td>
+      </tr><tr>
+        <td>Варна</td>
+        <td style='text-align:center'>2.2</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.8</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.76</td>
+      </tr><tr>
+        <td>Шабла</td>
+        <td style='text-align:center'>3.1</td>
+        <td style='text-align:center'>76</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.81</td>
+      </tr><tr>
+        <td>Калиакра</td>
+        <td style='text-align:center'>2.5</td>
+        <td style='text-align:center'>80</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.78</td>
+      </tr><tr>
+        <td>Добрич</td>
+        <td style='text-align:center'>0.7</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.8</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.82</td>
+      </tr><tr>
+        <td>вр. Мургаш</td>
+        <td style='text-align:center'>-5.2</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-17.2</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.42</td>
+      </tr><tr>
+        <td>Кюстендил</td>
+        <td style='text-align:center'>3.6</td>
+        <td style='text-align:center'>75</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.2</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.73</td>
+      </tr><tr>
+        <td>Драгоман</td>
+        <td style='text-align:center'>2.9</td>
+        <td style='text-align:center'>90</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.81</td>
+      </tr><tr>
+        <td>Благоевград</td>
+        <td style='text-align:center'>6.4</td>
+        <td style='text-align:center'>64</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.0</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.57</td>
+      </tr><tr>
+        <td>Черни връх</td>
+        <td style='text-align:center'>-8.2</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center'>9.</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>-21.2</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>4</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>2.63</td>
+      </tr><tr>
+        <td>София-ЦМС</td>
+        <td style='text-align:center'>4.4</td>
+        <td style='text-align:center'>73</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>5.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-2.9</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.67</td>
+      </tr><tr>
+        <td>вр. Мусала</td>
+        <td style='text-align:center'>-12.6</td>
+        <td style='text-align:center'>88</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#660066;color:#ffffff;'>-27.7</td>
+        <td style='text-align:center; background-color:#660066;color:#ffffff;'>3</td>
+        <td style='text-align:center; background-color:#660066;color:#ffffff;'>2.97</td>
+      </tr><tr>
+        <td>Пловдив - Тракия</td>
+        <td style='text-align:center'>7.0</td>
+        <td style='text-align:center'>74</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>7.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.8</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.47</td>
+      </tr><tr>
+        <td>вр. Ботев</td>
+        <td style='text-align:center'>-9.3</td>
+        <td style='text-align:center'>95</td>
+        <td style='text-align:center'>14.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>-23.4</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>4</td>
+        <td style='text-align:center; background-color:#003399;color:#ffffff;'>2.74</td>
+      </tr><tr>
+        <td>Пазарджик</td>
+        <td style='text-align:center'>7.0</td>
+        <td style='text-align:center'>64</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.52</td>
+      </tr><tr>
+        <td>Чирпан</td>
+        <td style='text-align:center'>5.8</td>
+        <td style='text-align:center'>74</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.2</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.50</td>
+      </tr><tr>
+        <td>Стара Загора</td>
         <td style='text-align:center'>5.5</td>
+        <td style='text-align:center'>74</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.3</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.50</td>
+      </tr><tr>
+        <td>Сливен</td>
+        <td style='text-align:center'>4.7</td>
+        <td style='text-align:center'>84</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>4.1</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.30</td>
+      </tr><tr>
+        <td>Елхово</td>
+        <td style='text-align:center'>1.6</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-4.4</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.75</td>
+      </tr><tr>
+        <td>Карнобат</td>
+        <td style='text-align:center'>1.5</td>
+        <td style='text-align:center'>96</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.8</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.56</td>
+      </tr><tr>
+        <td>н. Емине</td>
+        <td style='text-align:center'>3.9</td>
+        <td style='text-align:center'>77</td>
+        <td style='text-align:center'>14.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-5.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.78</td>
+      </tr><tr>
+        <td>Бургас</td>
+        <td style='text-align:center'>3.0</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>0.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.9</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.47</td>
+      </tr><tr>
+        <td></td>
+        <td style='text-align:center'>4.1</td>
+        <td style='text-align:center'>92</td>
+        <td style='text-align:center'>1.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-0.1</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.52</td>
+      </tr><tr>
+        <td>Сандански</td>
+        <td style='text-align:center'>7.8</td>
+        <td style='text-align:center'>55</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>3.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.6</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.48</td>
+      </tr><tr>
+        <td>Гоце Делчев</td>
+        <td style='text-align:center'>-0.4</td>
+        <td style='text-align:center'>76</td>
+        <td style='text-align:center'>2.</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-9.6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>2.01</td>
+      </tr><tr>
+        <td>Рожен</td>
+        <td style='text-align:center'>-4.6</td>
+        <td style='text-align:center'>93</td>
+        <td style='text-align:center'>4.</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>-14.7</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>5</td>
+        <td style='text-align:center; background-color:#0000FF;color:#ffffff;'>2.29</td>
+      </tr><tr>
+        <td>Кърджали</td>
+        <td style='text-align:center'>5.7</td>
+        <td style='text-align:center'>63</td>
+        <td style='text-align:center'>6.</td>
+        <td style='text-align:center'>8.</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.7</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
+        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.60</td>
+      </tr><tr>
+        <td>Хасково</td>
+        <td style='text-align:center'>5.1</td>
         <td style='text-align:center'>86</td>
         <td style='text-align:center'>2.</td>
-        <td style='text-align:center'>0.</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>-1.2</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>6</td>
-        <td style='text-align:center; background-color:#00FFff;color:#000000;'>1.58</td>
+        <td style='text-align:center'>10.</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>0.2</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>7</td>
+        <td style='text-align:center; background-color:#ccFFcc;color:#000000;'>1.51</td>
       </tr></table>     </div>
      <div onClick="openClose('aWCI')"  class="linkOpenClose">Индекс на топлинен комфорт на базата на температура на усещане
           </div>
@@ -4007,22 +4007,22 @@ else { document.getElementById(theID).style.display = "block" } }
 
  <div class="images analyses">
    <div class="card"> 
-     <h2>Средна месечна температура (градуси С), декември до днес</h2>
-     <p><img src="https://info.meteo.bg/obstanovki/month/temp/T_total_202512.png"  style="border:groove;margin-top: 5px;"></p>
+     <h2>Средна месечна температура (градуси С), февруари до днес</h2>
+     <p><img src="https://info.meteo.bg/obstanovki/month/temp/T_total_202602.png"  style="border:groove;margin-top: 5px;"></p>
    </div>
    <div class="card"> 
-        	  <h2>Отклонение на средната месечна температура от климатичната норма (градуси&nbsp;С), декември до днес</h2> 
-        	  <p><img src="https://info.meteo.bg/obstanovki/month/temp/T_anomaly_202512.png" style="border:groove;margin-top: 5px;"></p>
+        	  <h2>Отклонение на средната месечна температура от климатичната норма (градуси&nbsp;С), февруари до днес</h2> 
+        	  <p><img src="https://info.meteo.bg/obstanovki/month/temp/T_anomaly_202602.png" style="border:groove;margin-top: 5px;"></p>
    </div>
  </div>
  <div class="images analyses">
    <div class="card"> 
-        	  <h2>Месечна сума на валежа в mm (l/m<sup>2</sup>), декември до днес</h2>
-        	  <p><img src="https://info.meteo.bg/obstanovki/month/prec/R_total_202512.png" style="border:groove;margin-top: 5px;"></p>
+        	  <h2>Месечна сума на валежа в mm (l/m<sup>2</sup>), февруари до днес</h2>
+        	  <p><img src="https://info.meteo.bg/obstanovki/month/prec/R_total_202602.png" style="border:groove;margin-top: 5px;"></p>
    </div>
    <div class="card"> 
-        	  <h2>Месечна сума на валежа в % от климатичната норма,декември до днес</h2> 
-        	  <p><img src="https://info.meteo.bg/obstanovki/month/prec/R_percent_202512.png" style="border:groove;margin-top: 5px;"></p>
+        	  <h2>Месечна сума на валежа в % от климатичната норма,февруари до днес</h2> 
+        	  <p><img src="https://info.meteo.bg/obstanovki/month/prec/R_percent_202602.png" style="border:groove;margin-top: 5px;"></p>
    </div>
  </div>
   
@@ -4133,7 +4133,7 @@ else { document.getElementById(theID).style.display = "block" } }
 
 </div>
 <hr/>
-<b>Copyright © 2025, НИМХ. </b>   Съдържанието на сайта на Националния институт по метеорология и хидрология (НИМХ) и технологиите, използвани в него, са под закрила на Закона за авторското право и сродните му права. Всички текстови и графични изображения, публикувани в сайта, са собственост на НИМХ, освен ако изрично не е посочено друго. Ползвателите на съдържанието на сайта на НИМХ се задължават, ако го разпространяват, да не го променят, изменят, редактират или модифицират и задължително да посочват източника на информация – НИМХ. </footer>
+<b>Copyright © 2026, НИМХ. </b>   Съдържанието на сайта на Националния институт по метеорология и хидрология (НИМХ) и технологиите, използвани в него, са под закрила на Закона за авторското право и сродните му права. Всички текстови и графични изображения, публикувани в сайта, са собственост на НИМХ, освен ако изрично не е посочено друго. Ползвателите на съдържанието на сайта на НИМХ се задължават, ако го разпространяват, да не го променят, изменят, редактират или модифицират и задължително да посочват източника на информация – НИМХ. </footer>
 </div>
 
 

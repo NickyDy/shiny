@@ -5,7 +5,7 @@ library(bslib)
 library(scales)
 library(tidytext)
 
-votes <- read_rds("votes_new.rds") %>% 
+votes <- read_rds("votes.rds") %>% 
   mutate(vote_date = fct_relevel(vote_date,
                                  "Октомври_2024",
                                  "Юни_2024",
@@ -20,15 +20,18 @@ act <- read_rds("activity.rds")
 #address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
 
 risk_sec <- votes %>% 
-  filter(!oblast == "Извън страната") %>%
-  summarise(v = var(votes, na.rm = T), .by = c(oblast, obshtina, section, code)) %>%
-  mutate(v = round(v, 1), 
-         var = case_when(
-    v <= 500 ~ "Нисък",
-    v > 500 & v <= 1500 ~ "Среден",
-    v > 1500 ~ "Висок"), .after = v,
-    var = factor(var, levels = c("Висок", "Среден", "Нисък"))) %>% 
-  drop_na(var)
+  mutate(party = fct_recode(party, "БСП" = "БСП-ОЛ", "ДПС" = "АПС"))
+
+# risk_sec <- votes %>% 
+#   filter_out(oblast == "Извън страната") %>%
+#   summarise(v = var(votes, na.rm = T), .by = c(oblast, obshtina, section, code)) %>%
+#   mutate(v = round(v, 1), 
+#          risk = case_when(
+#     v <= 500 ~ "Нисък",
+#     v > 500 & v <= 1500 ~ "Среден",
+#     v > 1500 ~ "Висок"), .after = v,
+#     risk = factor(risk, levels = c("Висок", "Среден", "Нисък"))) %>% 
+#   drop_na(risk)
 
 colors <- c(
   "ПП" = "yellow",
@@ -126,12 +129,10 @@ ui <- page_sidebar(
     selectInput("obsh", "Община:", choices = NULL),
     selectInput("sett", "Населено място:", choices = NULL),
     selectInput("sec", "Секция:", choices = NULL),
-    sliderInput("prop_slider", "Филтър (проценти):", 
+    sliderInput("prop_slider", "Филтър проценти:", 
                 min = 0, max = 50, value = 4, step = 1),
-    sliderInput("votes_slider", "Филтър (брой гласове):", 
-                min = 0, max = 1000000, value = 50000, step = 1000),
-    sliderInput("height_slider", "Височина на графиката:", 
-                min = 800, max = 4000, value = 800, step = 100))),
+    sliderInput("votes_slider", "Филтър брой гласове:", 
+                min = 0, max = 1000000, value = 50000, step = 1000))),
   navset_pill(
     nav_panel(title = "Изборни резултати",
               textOutput("text"),
@@ -143,12 +144,16 @@ ui <- page_sidebar(
               plotOutput("sett_perc", height = 350),
               plotOutput("sec_perc", height = 350)),
     nav_panel(title = "Общо за страната",
+              textOutput("text1"),
+              tags$head(tags$style("#text1{color: red;
+                                 font-size: 20px;
+                                 font-style: bold;
+                                 }")), br(),
+              layout_columns(
               selectInput("votes_perc", "Показател:", c("Брой гласове", "Проценти")),
-              # textOutput("text1"),
-              # tags$head(tags$style("#text1{color: red;
-              #                    font-size: 20px;
-              #                    font-style: bold;
-              #                    }")), br(),
+              sliderInput("height_slider", "Височина на графиката:", 
+                          min = 700, max = 4000, value = 700, step = 100),
+              col_widths = c(2, 2)),
               plotOutput("country")),
     # nav_panel(title = "Общо за страната (брой гласове)",
     #           textOutput("text2"),
@@ -192,6 +197,28 @@ ui <- page_sidebar(
                                  font-size: 20px;
                                  font-style: bold;
                                  }")), br(),
+              layout_columns(
+                selectInput("second_risk", "Последващи избори:",
+                            choices = c("Октомври_2024",
+                                        "Юни_2024",
+                                        "Април_2023", 
+                                        "Октомври_2022", 
+                                        "Ноември_2021", 
+                                        "Юли_2021", 
+                                        "Април_2021",
+                                        "Март_2017"), 
+                            selected = "Октомври_2024"),
+                selectInput("first_risk", "Предходни избори:",
+                            choices = c("Октомври_2024",
+                                        "Юни_2024",
+                                        "Април_2023", 
+                                        "Октомври_2022", 
+                                        "Ноември_2021", 
+                                        "Юли_2021", 
+                                        "Април_2021", 
+                                        "Март_2017"),
+                            selected = "Юни_2024"),
+                col_widths = c(2, 2)),
               DTOutput("dt_table", width = 1600)),
     # nav_panel(title = "Адресна регистрация", layout_columns(
     #           selectInput("oblast_add", "Област:",
@@ -369,6 +396,8 @@ output$sec_perc <- renderPlot({
 	}, height = 400, width = 1600, res = 96)
 
 output$country <- renderPlot({
+  output$text1 <- renderText({ "Панелът работи със следните филтри: Филтър проценти, Филтър брой гласове." })
+  
   if (input$votes_perc == "Брой гласове") {
     votes %>%
       summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
@@ -411,8 +440,6 @@ output$country <- renderPlot({
            caption = "Източник на данните: ЦИК.") +
       facet_wrap(~ vote_date, nrow = 1)
   }
-  
-  #output$text1 <- renderText({ "Панелът работи със следните филтри: Филтър проценти, Височина на графиката." })
   
 }, height = function() input$height_slider, width = 1600, res = 96)
 #---------------------------------------
@@ -546,11 +573,54 @@ output$mand_plot <- renderPlot({
 # }, height = function() input$height_slider, width = 1600, res = 96)
 
 dt_rend <- reactive({
-  risk_sec %>%
-    filter(oblast %in% c(input$obl), 
-           obshtina %in% c(input$obsh)) %>%
-    arrange(-v) %>%
-    select(-v)
+  # risk_sec %>%
+  #   filter(oblast %in% c(input$obl), 
+  #          obshtina %in% c(input$obsh)) %>%
+  #   arrange(-v) %>%
+  #   select(-v)
+  
+  risk_sec %>% 
+    filter(
+      oblast %in% c(input$obl), 
+      obshtina %in% c(input$obsh),
+      vote_date %in% c(input$second_risk, input$first_risk)
+    ) %>%
+    summarise(votes = sum(votes), 
+              .by = c(vote_date, oblast, obshtina, section, code, party)) %>%
+    pivot_wider(names_from = vote_date, values_from = votes) %>%
+    mutate(
+      !!input$first_risk := replace_na(.data[[input$first_risk]], 0),
+      !!input$second_risk := replace_na(.data[[input$second_risk]], 0)
+    ) %>% 
+    group_by(oblast, obshtina, section, code) %>% 
+    mutate(
+      !!paste0(input$first_risk, "_perc") := 
+        .data[[input$first_risk]] / sum(.data[[input$first_risk]]),
+      !!paste0(input$second_risk, "_perc") := 
+        .data[[input$second_risk]] / sum(.data[[input$second_risk]])
+    ) %>%
+    ungroup() %>% 
+    summarise(
+      pedersen = 0.5 * sum(
+        abs(
+          .data[[paste0(input$first_risk, "_perc")]] - 
+            .data[[paste0(input$second_risk, "_perc")]]
+        ) * 100
+      ),
+      .by = c(oblast, obshtina, section, code)
+    ) %>%
+    mutate(
+      risk = case_when(
+        pedersen <= 30 ~ "Нисък",
+        pedersen > 30 & pedersen <= 50 ~ "Среден",
+        pedersen > 50 ~ "Висок"
+      ),
+      .after = pedersen,
+      risk = factor(risk, levels = c("Висок", "Среден", "Нисък"))
+    ) %>% 
+    arrange(-pedersen) %>%
+    select(-pedersen) %>% 
+    drop_na(risk)
 })
 
 output$text4 <- renderText({ "Панелът работи със следните филтри: Избирателен район, Община." })
@@ -562,8 +632,8 @@ output$dt_table <- renderDT(
                    "Община" = "obshtina",
                    "Населено място" = "section",
                    "Секция" = "code",
-                   "Риск" = "var"), 
-      options = list(dom = 'Brtip', pageLength = 100)) %>% 
+                   "Риск" = "risk"), 
+      options = list(dom = 'frtip', pageLength = 100)) %>% 
       formatStyle("Риск", backgroundColor = styleEqual(
         c("Висок", "Среден", "Нисък"), 
         c("red", "orange", "darkgreen"))))
