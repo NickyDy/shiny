@@ -53,7 +53,7 @@ github <- tags$a(icon("github"), "Github",
 #------------------------------------------------
 ui <- page_fillable(
   theme = bslib::bs_theme(bootswatch = "darkly"),
-  navset_pill(
+  navset_pill(selected = "Инфлация (групи храни)",
     nav_panel(
       title = "Супермаркети (таблица)",
       DTOutput("markets_table", width = 1850)),
@@ -267,7 +267,9 @@ server <- function(input, output, session) {
       filter(!group_change == 0) %>%
       mutate(kategoria_c = fct_rev(kategoria_c), col = group_change > 0,
         market = fct_relevel(market, "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")) %>% 
-      drop_na() %>% 
+      group_by(market) %>% 
+      mutate(total_markets = sum(group_change, na.rm = T)) %>% 
+      ungroup() %>% drop_na() %>% 
       ggplot(aes(group_change, kategoria_c, fill = col)) +
       geom_col(show.legend = F) +
       scale_fill_manual(values = colors_percent) +
@@ -276,8 +278,9 @@ server <- function(input, output, session) {
                 position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
       labs(y = NULL, x = NULL, caption = 'Източник на данните: "КОЛКО СТРУВА"',
            title = "Средна инфлация по групи продукти") +
-      theme(text = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
-      facet_wrap(vars(market), nrow = 1)
+      theme(text = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+            strip.text = element_text(face = "bold")) +
+      facet_wrap(market ~ paste0("Обща инфлация: ", round(total_markets, 1), " %"), nrow = 1)
 
     # df_markets %>%
     #   filter(date %in% c(input$inf_markets_date[1], input$inf_markets_date[2]), !cena_na_drebno == 0) %>%

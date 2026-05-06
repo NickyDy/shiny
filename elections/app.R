@@ -64,8 +64,7 @@ colors <- c(
   "АПС" = "purple",
   "МЕЧ" = "maroon",
   "БСП-ОЛ" = "red",
-  "ПБ" = "darkgreen",
-  "СИЯНИЕ" = "pink")
+  "ПБ" = "darkgreen")
 
 colors_mand <- c(
   "ПП" = "yellow",
@@ -360,8 +359,7 @@ output$obsh_perc <- renderPlot({
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank(),
-						strip.background = element_rect(fill = "black", color = "white"),
-						strip.text = element_text(color = "white", face = "bold")) +
+						strip.text = element_text(face = "bold")) +
 			labs(x = NULL, y = NULL, title = paste0("Община: ", input$obsh)) +
 			facet_wrap(~ vote_date, nrow = 1, drop = F)
 	}, height = 350, width = 1600, res = 96)
@@ -385,8 +383,7 @@ output$sett_perc <- renderPlot({
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank(),
-						strip.background = element_rect(fill = "black", color = "white"),
-						strip.text = element_text(color = "white", face = "bold")) +
+						strip.text = element_text(face = "bold")) +
 			labs(x = NULL, y = NULL, title = paste0("Населено място: ", input$sett)) +
 			facet_wrap(~ vote_date, nrow = 1, drop = F)
 	}, height = 350, width = 1600, res = 96)
@@ -395,9 +392,6 @@ output$sec_perc <- renderPlot({
 		sec() %>%
 			filter(code %in% c(input$sec)) %>%
 			summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
-      # group_by(vote_date) %>% 
-      # mutate(total = sum(sum_votes, na.rm = T)) %>% 
-      # ungroup() %>% 
       group_by(vote_date) %>%
 			mutate(prop = sum_votes / sum(sum_votes) * 100) %>%
 			mutate(party = fct_reorder(party, sum_votes)) %>%
@@ -413,8 +407,7 @@ output$sec_perc <- renderPlot({
 			theme(text = element_text(size = 12),
 						axis.text.x = element_blank(),
 						axis.ticks.x = element_blank(),
-						strip.background = element_rect(fill = "black", color = "white"),
-						strip.text = element_text(color = "white", face = "bold")) +
+						strip.text = element_text(face = "bold")) +
 			labs(x = "Проценти (%)", y = NULL, title = paste0("Секция: ", input$sec),
 					 caption = "Източник на данните: ЦИК.") +
 			facet_wrap(~ vote_date, nrow = 1, drop = F)
@@ -453,11 +446,10 @@ output$country <- renderPlot({
       theme(text = element_text(size = 14), 
             axis.text.x = element_blank(), 
             axis.ticks.x = element_blank(),
-            strip.background = element_rect(fill = "black", color = "white"),
-            strip.text = element_text(color = "white", face = "bold")) +
+            strip.text = element_text(face = "bold")) +
       labs(y = NULL, x = "Брой гласове", title = NULL,
            caption = "Източник на данните: ЦИК.") +
-      facet_wrap(vote_date ~ paste0("Общо: ", total), nrow = 1)
+      facet_wrap(vote_date ~ paste0("Общо: ", space_s(total)), nrow = 1)
   } else {
     votes %>%
       summarise(sum_votes = sum(votes), .by = c(vote_date, party)) %>%
@@ -476,8 +468,7 @@ output$country <- renderPlot({
       theme(text = element_text(size = 14), 
             axis.text.x = element_blank(), 
             axis.ticks.x = element_blank(),
-            strip.background = element_rect(fill = "black", color = "white"),
-            strip.text = element_text(color = "white", face = "bold")) +
+            strip.text = element_text(face = "bold")) +
       labs(x = "Проценти (%)", y = NULL,
            caption = "Източник на данните: ЦИК.") +
       facet_wrap(~ vote_date, nrow = 1)
@@ -550,8 +541,7 @@ output$elec_act <- renderPlot({
     theme(text = element_text(size = 16), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank(),
-          strip.background = element_rect(fill = "black", color = "white"),
-          strip.text = element_text(color = "white", face = "bold")) +
+          strip.text = element_text(face = "bold")) +
     guides(fill = guide_legend(reverse = TRUE)) +
     facet_wrap(vars(type_election))
 
@@ -575,8 +565,7 @@ output$mand_plot <- renderPlot({
     theme(text = element_text(size = 14), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank(),
-          strip.background = element_rect(fill = "black", color = "white"),
-          strip.text = element_text(color = "white", face = "bold")) +
+          strip.text = element_text(face = "bold")) +
     facet_wrap(vars(ns_year), scales = "free_y")
   
 }, height = 800, width = 1600, res = 96)

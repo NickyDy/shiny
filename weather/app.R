@@ -12,22 +12,18 @@ wf <- request("https://api.open-meteo.com/v1/forecast") %>%
     latitude = coord$lat,
     longitude = coord$long,
     daily = paste(
-      c(
-        "temperature_2m_mean",
+      c("temperature_2m_mean",
         "temperature_2m_max",
         "temperature_2m_min",
         "rain_sum",
         "snowfall_sum",
         "wind_speed_10m_max",
         "wind_direction_10m_dominant",
-        "cloud_cover_mean"
-      ),
-      collapse = ","
-    ),
+        "cloud_cover_mean"),
+      collapse = ","),
     timezone = "auto",
     wind_speed_unit = "ms",
-    forecast_days = "10"
-  ) %>% 
+    forecast_days = "14") %>% 
   req_perform() %>% 
   resp_body_json(., simplifyVector = T) %>% 
   pluck("daily") %>% as_tibble() %>% 
@@ -142,7 +138,7 @@ ui <- page_fillable(#h3("Времето в България!"),
                                 selectInput("river_depth", "Река:",
                                             choices = unique(rivers$river)),
                                 plotOutput("depths")),
-                      nav_panel(title = "10-дневна прогноза",
+                      nav_panel(title = "14-дневна прогноза",
                                 plotOutput("forcast_10_days")),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
@@ -385,7 +381,7 @@ output$forcast_10_days <- renderPlot({
     geom_text(aes(label = paste0(value, " ", unit, wind_dir)), size = 5, vjust = -0.3) +
     scale_fill_manual(values = c("#0096FF", "blue", "#00FFFF", "red", "orange", "yellow", "darkgreen", "green")) +
     scale_y_continuous(expand = expansion(mult = c(0, 0.4))) +
-    scale_x_date(date_breaks = "1 day", date_labels = "%b-%d-%a") +
+    scale_x_date(date_breaks = "3 days", date_labels = "%b-%d-%a") +
     theme(text = element_text(size = 16)) +
     labs(x = "Дата", y = "Стойност") +
     facet_wrap(vars(name), ncol = 1, scale = "free_y")
