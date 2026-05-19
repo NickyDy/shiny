@@ -1,15 +1,16 @@
 library(tidyverse)
+library(nanoparquet)
 library(shiny)
 library(bslib)
 
-user_base <- read_rds("user_base.rds")
-beef_carc <- read_rds("beef_carc.rds") %>% arrange(date)
-beef_live <- read_rds("beef_live.rds") %>% arrange(date)
-piglets <- read_rds("piglets.rds") %>% arrange(date)
-pigmeat_carc <- read_rds("pigmeat_carc.rds") %>% arrange(date)
-pigmeat_cuts <- read_rds("pigmeat_cuts.rds") %>% arrange(date)
-eggs <- read_rds("eggs.rds") %>% arrange(date)
-poultry <- read_rds("poultry.rds") %>% arrange(date) %>% 
+#user_base <- read_parquet("user_base.parquet")
+beef_carc <- read_parquet("beef_carc.parquet") %>% arrange(date)
+beef_live <- read_parquet("beef_live.parquet") %>% arrange(date)
+piglets <- read_parquet("piglets.parquet") %>% arrange(date)
+pigmeat_carc <- read_parquet("pigmeat_carc.parquet") %>% arrange(date)
+pigmeat_cuts <- read_parquet("pigmeat_cuts.parquet") %>% arrange(date)
+eggs <- read_parquet("eggs.parquet") %>% arrange(date)
+poultry <- read_parquet("poultry.parquet") %>% arrange(date) %>% 
   mutate(price_100kg_eur = case_when(
     state == "Poland" & price_100kg_eur == 4611.50 ~ 461.15,
     state == "Poland" & price_100kg_eur == 2147.17 ~ 214.71,
@@ -20,18 +21,18 @@ poultry <- read_rds("poultry.rds") %>% arrange(date) %>%
     state == "European Union (27 countries excluding UK)" & price_100kg_eur == 332.06 ~ 232.06,
     state == "European Union (27 countries excluding UK)" & price_100kg_eur == 638.86 ~ 238.86,
     .default = price_100kg_eur))
-sheep_goat <- read_rds("sheep_goat.rds") %>% arrange(date)
-raw_milk <- read_rds("raw_milk.rds") %>% arrange(date)
-dairy <- read_rds("dairy.rds") %>% arrange(date)
-fruit_veg <- read_rds("fruit_veg.rds") %>% arrange(date)
-cereals <- read_rds("cereals.rds") %>% 
+sheep_goat <- read_parquet("sheep_goat.parquet") %>% arrange(date)
+raw_milk <- read_parquet("raw_milk.parquet") %>% arrange(date)
+dairy <- read_parquet("dairy.parquet") %>% arrange(date)
+fruit_veg <- read_parquet("fruit_veg.parquet") %>% arrange(date)
+cereals <- read_parquet("cereals.parquet") %>% 
   filter(!stage_name == "Unknown") %>% 
   arrange(date)
-oilseeds <- read_rds("oilseeds.rds") %>% arrange(date)
-olive_oil <- read_rds("olive_oil.rds") %>%
+oilseeds <- read_parquet("oilseeds.parquet") %>% arrange(date)
+olive_oil <- read_parquet("olive_oil.parquet") %>%
   mutate(product = str_replace_all(product, c("°" = "%", "," = "."))) %>% 
   arrange(date)
-wine <- read_rds("wine.rds") %>% arrange(date)
+wine <- read_parquet("wine.parquet") %>% arrange(date)
 #-----------------------------------------------------
 mail <- tags$a(icon("envelope"), "Email", 
                href = "mailto:nickydyakov@gmail.com", 

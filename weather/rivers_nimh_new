@@ -10,45 +10,49 @@
 <link rel="shortlink" href="http://meteo.bg/meteo7/bg/node/111" />
 <title>Оперативна информация за речния отток - таблица | meteo.bg</title>
 <style type="text/css" media="all">
-@import url("http://meteo.bg/meteo7/modules/system/system.base.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/system/system.menus.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/system/system.messages.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/system/system.theme.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/system/system.base.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/system/system.menus.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/system/system.messages.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/system/system.theme.css?tf0vor");
 </style>
 <style type="text/css" media="all">
-@import url("http://meteo.bg/meteo7/modules/aggregator/aggregator.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/calendar/css/calendar_multiday.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/date/date_api/date.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/date/date_popup/themes/datepicker.1.7.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/date/date_repeat_field/date_repeat_field.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/field/theme/field.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/node/node.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/user/user.css?t3scra");
-@import url("http://meteo.bg/meteo7/sites/all/modules/extlink/extlink.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/views/css/views.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/aggregator/aggregator.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/calendar/css/calendar_multiday.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/date/date_api/date.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/date/date_popup/themes/datepicker.1.7.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/date/date_repeat_field/date_repeat_field.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/field/theme/field.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/node/node.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/user/user.css?tf0vor");
+@import url("http://meteo.bg/meteo7/sites/all/modules/extlink/extlink.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/views/css/views.css?tf0vor");
 </style>
 <style type="text/css" media="all">
-@import url("http://meteo.bg/meteo7/modules/ctools/css/ctools.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/panels/css/panels.css?t3scra");
-@import url("http://meteo.bg/meteo7/modules/locale/locale.css?t3scra");
+@import url("http://meteo.bg/meteo7/modules/ctools/css/ctools.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/panels/css/panels.css?tf0vor");
+@import url("http://meteo.bg/meteo7/modules/locale/locale.css?tf0vor");
 </style>
 <style type="text/css" media="all">
-@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/font-awesome.css?t3scra");
-@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/style.css?t3scra");
-@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/media.css?t3scra");
+@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/font-awesome.css?tf0vor");
+@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/style.css?tf0vor");
+@import url("http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/css/media.css?tf0vor");
 </style>
-<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/jquery_update/replace/jquery/1.10/jquery.min.js?v=1.10.2"></script>
-<script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery-extend-3.4.0.js?v=1.10.2"></script>
-<script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery-html-prefilter-3.5.0-backport.js?v=1.10.2"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/jquery_update/js/jquery_migrate.js?v=3.5.2"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.5.2/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery-extend-3.4.0.js?v=3.7.1"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery-html-prefilter-3.5.0-backport.js?v=3.7.1"></script>
 <script type="text/javascript" src="http://meteo.bg/meteo7/misc/jquery.once.js?v=1.2"></script>
-<script type="text/javascript" src="http://meteo.bg/meteo7/misc/drupal.js?t3scra"></script>
-<script type="text/javascript" src="http://meteo.bg/meteo7/modules/admin_menu/admin_devel/admin_devel.js?t3scra"></script>
-<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/extlink/extlink.js?t3scra"></script>
-<script type="text/javascript" src="http://meteo.bg/meteo7/sites/meteo.bg/files/languages/bg_zm-s9E0dbosLYSFvnk34t8II4bdn-3QHJddeOFzzrkk.js?t3scra"></script>
-<script type="text/javascript" src="http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/js/custom.js?t3scra"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/misc/drupal.js?tf0vor"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/jquery_update/js/jquery_browser.js?v=0.0.1"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/modules/admin_menu/admin_devel/admin_devel.js?tf0vor"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/extlink/extlink.js?tf0vor"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/meteo.bg/files/languages/bg_zm-s9E0dbosLYSFvnk34t8II4bdn-3QHJddeOFzzrkk.js?tf0vor"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/storm.cfd.meteo.bg.meteo7/themes/software_responsive_theme/js/custom.js?tf0vor"></script>
+<script type="text/javascript" src="http://meteo.bg/meteo7/sites/all/modules/jquery_update/js/jquery_position.js?v=0.0.1"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","setHasJsCookie":0,"ajaxPageState":{"theme":"software","theme_token":"Jaiee-tRpM0R25cwyz3iezlmbsVR6ewhdGZqG8h9O4s","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"public:\/\/languages\/bg_zm-s9E0dbosLYSFvnk34t8II4bdn-3QHJddeOFzzrkk.js":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/js\/custom.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/aggregator\/aggregator.css":1,"modules\/calendar\/css\/calendar_multiday.css":1,"modules\/date\/date_api\/date.css":1,"modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"modules\/views\/css\/views.css":1,"modules\/ctools\/css\/ctools.css":1,"modules\/panels\/css\/panels.css":1,"modules\/locale\/locale.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/font-awesome.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/style.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/media.css":1}},"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":0,"extExclude":"","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"}});
+jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","setHasJsCookie":0,"jqueryUpdate":{"migrateMute":true,"migrateTrace":false},"ajaxPageState":{"theme":"software","theme_token":"dUgitXczHAl0ENZ7sfWetVu9GDDhwWUuegZsEcreLdA","js":{"https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/jquery\/3.7.1\/jquery.min.js":1,"sites\/all\/modules\/jquery_update\/js\/jquery_migrate.js":1,"https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/jquery-migrate\/3.5.2\/jquery-migrate.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/jquery_update\/js\/jquery_browser.js":1,"modules\/admin_menu\/admin_devel\/admin_devel.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"public:\/\/languages\/bg_zm-s9E0dbosLYSFvnk34t8II4bdn-3QHJddeOFzzrkk.js":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/js\/custom.js":1,"sites\/all\/modules\/jquery_update\/js\/jquery_position.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/aggregator\/aggregator.css":1,"modules\/calendar\/css\/calendar_multiday.css":1,"modules\/date\/date_api\/date.css":1,"modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/extlink\/extlink.css":1,"modules\/views\/css\/views.css":1,"modules\/ctools\/css\/ctools.css":1,"modules\/panels\/css\/panels.css":1,"modules\/locale\/locale.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/font-awesome.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/style.css":1,"sites\/storm.cfd.meteo.bg.meteo7\/themes\/software_responsive_theme\/css\/media.css":1}},"extlink":{"extTarget":"_blank","extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":0,"extExclude":"","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -213,7 +217,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     
   <div class="content node-izmervania">
     <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded">
-<h2> <br/> 05.05.2026 08:00&nbsp;ч. местно време</h2>
+<h2> <br/> 18.05.2026 08:00&nbsp;ч. местно време</h2>
  <center>
  
 <h3>Дунавски басейн </h3>
@@ -238,9 +242,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,079    </td>
     <td align="right">5,534    </td>
     <td align="right">255,000    </td>
-    <td align="right">38    </td>
-    <td align="right">4,785    </td>
-    <td align="right">1    </td>
+    <td align="right">45    </td>
+    <td align="right">7,375    </td>
+    <td align="right">5    </td>
   </tr>
 	
 	
@@ -251,9 +255,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,500    </td>
     <td align="right">16,252    </td>
     <td align="right">560,000    </td>
-    <td align="right">73    </td>
-    <td align="right">11,432    </td>
-    <td align="right">-20    </td>
+    <td align="right">91    </td>
+    <td align="right">24,306    </td>
+    <td align="right">11    </td>
   </tr>
 	
 	
@@ -264,9 +268,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">2,000    </td>
     <td align="right">19,459    </td>
     <td align="right">735,000    </td>
-    <td align="right">71    </td>
-    <td align="right">16,335    </td>
-    <td align="right">5    </td>
+    <td align="right">75    </td>
+    <td align="right">18,880    </td>
+    <td align="right">6    </td>
   </tr>
 	
 	
@@ -277,9 +281,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,082    </td>
     <td align="right">6,616    </td>
     <td align="right">97,000    </td>
-    <td align="right">46    </td>
-    <td align="right">10,412    </td>
-    <td align="right">-5    </td>
+    <td align="right">70    </td>
+    <td align="right">24,100    </td>
+    <td align="right">-9    </td>
   </tr>
 	
 	
@@ -290,8 +294,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0    </td>
     <td align="right">0,440    </td>
     <td align="right">9,400    </td>
-    <td align="right">54    </td>
-    <td align="right">1,262    </td>
+    <td align="right">74    </td>
+    <td align="right">2,780    </td>
     <td align="right">0    </td>
   </tr>
 	
@@ -303,9 +307,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,017    </td>
     <td align="right">1,434    </td>
     <td align="right">60,835    </td>
-    <td align="right">54    </td>
-    <td align="right">1,246    </td>
-    <td align="right">-2    </td>
+    <td align="right">46    </td>
+    <td align="right">1,373    </td>
+    <td align="right">0    </td>
   </tr>
 	
 	
@@ -316,9 +320,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">4,400    </td>
     <td align="right">21,082    </td>
     <td align="right">1 330,000    </td>
-    <td align="right">76    </td>
-    <td align="right">27,657    </td>
-    <td align="right">1    </td>
+    <td align="right">88    </td>
+    <td align="right">32,646    </td>
+    <td align="right">28    </td>
   </tr>
 	
 	
@@ -331,7 +335,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">650,000    </td>
     <td align="right">51    </td>
     <td align="right">7,247    </td>
-    <td align="right">-1    </td>
+    <td align="right">-3    </td>
   </tr>
 	
 	
@@ -342,9 +346,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">6,500    </td>
     <td align="right">49,672    </td>
     <td align="right">1 102,000    </td>
-    <td align="right">71    </td>
-    <td align="right">43,617    </td>
-    <td align="right">3    </td>
+    <td align="right">50    </td>
+    <td align="right">27,500    </td>
+    <td align="right">-2    </td>
   </tr>
 	
 	
@@ -355,8 +359,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">6,890    </td>
     <td align="right">45,656    </td>
     <td align="right">1 117,000    </td>
-    <td align="right">108    </td>
-    <td align="right">54,120    </td>
+    <td align="right">88    </td>
+    <td align="right">40,619    </td>
     <td align="right">4    </td>
   </tr>
 	
@@ -368,9 +372,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,100    </td>
     <td align="right">2,717    </td>
     <td align="right">195,000    </td>
-    <td align="right">48    </td>
-    <td align="right">3,009    </td>
-    <td align="right">-2    </td>
+    <td align="right">54    </td>
+    <td align="right">4,178    </td>
+    <td align="right">6    </td>
   </tr>
 	
 	
@@ -383,7 +387,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">322,000    </td>
     <td align="right">94    </td>
     <td align="right">4,665    </td>
-    <td align="right">-2    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -394,9 +398,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,190    </td>
     <td align="right">9,542    </td>
     <td align="right">520,000    </td>
-    <td align="right">61    </td>
-    <td align="right">6,438    </td>
-    <td align="right">-4    </td>
+    <td align="right">72    </td>
+    <td align="right">10,453    </td>
+    <td align="right">-6    </td>
   </tr>
 	
 	
@@ -407,9 +411,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,150    </td>
     <td align="right">12,370    </td>
     <td align="right">572,000    </td>
-    <td align="right">86    </td>
-    <td align="right">12,474    </td>
-    <td align="right">-2    </td>
+    <td align="right">92    </td>
+    <td align="right">18,029    </td>
+    <td align="right">6    </td>
   </tr>
 	
 	
@@ -420,9 +424,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,150    </td>
     <td align="right">6,130    </td>
     <td align="right">290,000    </td>
-    <td align="right">37    </td>
-    <td align="right">9,286    </td>
-    <td align="right">0    </td>
+    <td align="right">28    </td>
+    <td align="right">6,399    </td>
+    <td align="right">-2    </td>
   </tr>
 	
 	
@@ -433,9 +437,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,200    </td>
     <td align="right">9,379    </td>
     <td align="right">562,000    </td>
-    <td align="right">50    </td>
-    <td align="right">10,100    </td>
-    <td align="right">0    </td>
+    <td align="right">46    </td>
+    <td align="right">8,493    </td>
+    <td align="right">-6    </td>
   </tr>
 	
 	
@@ -446,9 +450,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,200    </td>
     <td align="right">11,260    </td>
     <td align="right">285,000    </td>
-    <td align="right">168    </td>
-    <td align="right">15,069    </td>
-    <td align="right">-6    </td>
+    <td align="right">162    </td>
+    <td align="right">13,677    </td>
+    <td align="right">12    </td>
   </tr>
 	
 	
@@ -459,9 +463,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,300    </td>
     <td align="right">4,704    </td>
     <td align="right">686,000    </td>
-    <td align="right">118    </td>
-    <td align="right">5,734    </td>
-    <td align="right">-4    </td>
+    <td align="right">111    </td>
+    <td align="right">4,923    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -472,9 +476,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,260    </td>
     <td align="right">13,202    </td>
     <td align="right">1 306,000    </td>
-    <td align="right">135    </td>
-    <td align="right">14,606    </td>
-    <td align="right">-2    </td>
+    <td align="right">131    </td>
+    <td align="right">12,280    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -485,9 +489,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,070    </td>
     <td align="right">8,593    </td>
     <td align="right">575,000    </td>
-    <td align="right">113    </td>
-    <td align="right">6,959    </td>
-    <td align="right">-4    </td>
+    <td align="right">96    </td>
+    <td align="right">4,113    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -498,9 +502,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,004    </td>
     <td align="right">1,739    </td>
     <td align="right">213,000    </td>
-    <td align="right">104    </td>
-    <td align="right">3,175    </td>
-    <td align="right">3    </td>
+    <td align="right">89    </td>
+    <td align="right">1,179    </td>
+    <td align="right">-3    </td>
   </tr>
 	
 	
@@ -511,8 +515,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,120    </td>
     <td align="right">9,957    </td>
     <td align="right">558,000    </td>
-    <td align="right">102    </td>
-    <td align="right">19,029    </td>
+    <td align="right">98    </td>
+    <td align="right">15,433    </td>
     <td align="right">-2    </td>
   </tr>
 	
@@ -524,9 +528,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">3,400    </td>
     <td align="right">49,275    </td>
     <td align="right">1 925,000    </td>
-    <td align="right">150    </td>
-    <td align="right">57,541    </td>
-    <td align="right">-1    </td>
+    <td align="right">138    </td>
+    <td align="right">47,355    </td>
+    <td align="right">2    </td>
   </tr>
 	
 	
@@ -537,9 +541,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,500    </td>
     <td align="right">3,462    </td>
     <td align="right">161,000    </td>
-    <td align="right">70    </td>
-    <td align="right">5,572    </td>
-    <td align="right">-4    </td>
+    <td align="right">52    </td>
+    <td align="right">3,576    </td>
+    <td align="right">-2    </td>
   </tr>
 	
 	
@@ -550,9 +554,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">1,100    </td>
     <td align="right">6,091    </td>
     <td align="right">127,000    </td>
-    <td align="right">258    </td>
-    <td align="right">8,558    </td>
-    <td align="right">-2    </td>
+    <td align="right">220    </td>
+    <td align="right">6,300    </td>
+    <td align="right">2    </td>
   </tr>
 	
 	
@@ -579,9 +583,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,025    </td>
     <td align="right">0,641    </td>
     <td align="right">35,750    </td>
-    <td align="right">44    </td>
-    <td align="right">0,731    </td>
-    <td align="right">0    </td>
+    <td align="right">40    </td>
+    <td align="right">0,613    </td>
+    <td align="right">2    </td>
   </tr>
 	
 	
@@ -592,9 +596,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,095    </td>
     <td align="right">1,573    </td>
     <td align="right">49,000    </td>
-    <td align="right">228    </td>
-    <td align="right">2,097    </td>
-    <td align="right">22    </td>
+    <td align="right">206    </td>
+    <td align="right">1,291    </td>
+    <td align="right">6    </td>
   </tr>
 	
 	
@@ -605,9 +609,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,280    </td>
     <td align="right">2,795    </td>
     <td align="right">110,000    </td>
-    <td align="right">53    </td>
-    <td align="right">3,292    </td>
-    <td align="right">0    </td>
+    <td align="right">33    </td>
+    <td align="right">2,033    </td>
+    <td align="right">-2    </td>
   </tr>
 	
 	
@@ -631,9 +635,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0    </td>
     <td align="right">4,883    </td>
     <td align="right">688,000    </td>
-    <td align="right">130    </td>
-    <td align="right">6,380    </td>
-    <td align="right">-4    </td>
+    <td align="right">124    </td>
+    <td align="right">4,631    </td>
+    <td align="right">-16    </td>
   </tr>
 	
 	
@@ -644,9 +648,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,300    </td>
     <td align="right">15,783    </td>
     <td align="right">418,000    </td>
-    <td align="right">138    </td>
-    <td align="right">18,912    </td>
-    <td align="right">-1    </td>
+    <td align="right">134    </td>
+    <td align="right">17,973    </td>
+    <td align="right">1    </td>
   </tr>
 	
 	
@@ -659,7 +663,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">58,200    </td>
     <td align="right">41    </td>
     <td align="right">0,566    </td>
-    <td align="right">0    </td>
+    <td align="right">1    </td>
   </tr>
 	
 	
@@ -670,9 +674,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0    </td>
     <td align="right">3,723    </td>
     <td align="right">288,000    </td>
-    <td align="right">97    </td>
-    <td align="right">1,952    </td>
-    <td align="right">-1    </td>
+    <td align="right">100    </td>
+    <td align="right">2,206    </td>
+    <td align="right">-3    </td>
   </tr>
 	
 	
@@ -683,9 +687,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0    </td>
     <td align="right">1,218    </td>
     <td align="right">279,000    </td>
-    <td align="right">92    </td>
-    <td align="right">0,427    </td>
-    <td align="right">-1    </td>
+    <td align="right">96    </td>
+    <td align="right">0,631    </td>
+    <td align="right">4    </td>
   </tr>
 	
 	
@@ -712,9 +716,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,020    </td>
     <td align="right">2,868    </td>
     <td align="right">110,000    </td>
-    <td align="right">34    </td>
-    <td align="right">2,716    </td>
-    <td align="right">-1    </td>
+    <td align="right">37    </td>
+    <td align="right">3,250    </td>
+    <td align="right">-2    </td>
   </tr>
 	
 	
@@ -725,9 +729,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,800    </td>
     <td align="right">16,775    </td>
     <td align="right">211,000    </td>
-    <td align="right">153    </td>
-    <td align="right">17,162    </td>
-    <td align="right">-7    </td>
+    <td align="right">135    </td>
+    <td align="right">13,709    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -738,9 +742,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,012    </td>
     <td align="right">0,317    </td>
     <td align="right">32,349    </td>
-    <td align="right">8    </td>
-    <td align="right">0,145    </td>
-    <td align="right">0    </td>
+    <td align="right">6    </td>
+    <td align="right">0,085    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -753,7 +757,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">702,229    </td>
     <td align="right">40    </td>
     <td align="right">4,450    </td>
-    <td align="right">1    </td>
+    <td align="right">-5    </td>
   </tr>
 	
 	
@@ -764,8 +768,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,123    </td>
     <td align="right">1,366    </td>
     <td align="right">154,492    </td>
-    <td align="right">30    </td>
-    <td align="right">1,000    </td>
+    <td align="right">27    </td>
+    <td align="right">0,750    </td>
     <td align="right">-2    </td>
   </tr>
 	
@@ -777,9 +781,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,100    </td>
     <td align="right">6,252    </td>
     <td align="right">399,897    </td>
-    <td align="right">57    </td>
-    <td align="right">6,647    </td>
-    <td align="right">1    </td>
+    <td align="right">59    </td>
+    <td align="right">7,350    </td>
+    <td align="right">7    </td>
   </tr>
 	
 	
@@ -790,9 +794,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,300    </td>
     <td align="right">15,332    </td>
     <td align="right">1 136,000    </td>
-    <td align="right">-58    </td>
-    <td align="right">8,594    </td>
-    <td align="right">-24    </td>
+    <td align="right">-56    </td>
+    <td align="right">9,197    </td>
+    <td align="right">6    </td>
   </tr>
 	
 	
@@ -803,9 +807,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0    </td>
     <td align="right">0,987    </td>
     <td align="right">7,030    </td>
-    <td align="right">40    </td>
-    <td align="right">0,981    </td>
-    <td align="right">-4    </td>
+    <td align="right">42    </td>
+    <td align="right">1,144    </td>
+    <td align="right">0    </td>
   </tr>
 	
 	
@@ -816,9 +820,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">1,250    </td>
     <td align="right">11,575    </td>
     <td align="right">435,500    </td>
-    <td align="right">146    </td>
-    <td align="right">25,484    </td>
-    <td align="right">-2    </td>
+    <td align="right">145    </td>
+    <td align="right">24,690    </td>
+    <td align="right">-3    </td>
   </tr>
 	
 	
@@ -829,9 +833,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">4,000    </td>
     <td align="right">45,318    </td>
     <td align="right">1 204,284    </td>
-    <td align="right">3    </td>
-    <td align="right">56,913    </td>
-    <td align="right">-21    </td>
+    <td align="right">-9    </td>
+    <td align="right">41,190    </td>
+    <td align="right">2    </td>
   </tr>
 	
 	
@@ -842,9 +846,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,780    </td>
     <td align="right">8,808    </td>
     <td align="right">361,500    </td>
-    <td align="right">79    </td>
-    <td align="right">17,562    </td>
-    <td align="right">0    </td>
+    <td align="right">59    </td>
+    <td align="right">9,952    </td>
+    <td align="right">-4    </td>
   </tr>
 	
 	
@@ -855,9 +859,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">5,890    </td>
     <td align="right">62,530    </td>
     <td align="right">864,000    </td>
-    <td align="right">214    </td>
-    <td align="right">86,528    </td>
-    <td align="right">8    </td>
+    <td align="right">176    </td>
+    <td align="right">49,893    </td>
+    <td align="right">1    </td>
   </tr>
 	
 	
@@ -868,9 +872,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">1,570    </td>
     <td align="right">13,584    </td>
     <td align="right">211,970    </td>
-    <td align="right">183    </td>
-    <td align="right">14,213    </td>
-    <td align="right">-1    </td>
+    <td align="right">171    </td>
+    <td align="right">12,451    </td>
+    <td align="right">-5    </td>
   </tr>
 	
 	
@@ -881,9 +885,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,159    </td>
     <td align="right">4,341    </td>
     <td align="right">464,000    </td>
-    <td align="right">128    </td>
-    <td align="right">9,314    </td>
-    <td align="right">-1    </td>
+    <td align="right">80    </td>
+    <td align="right">2,752    </td>
+    <td align="right">1    </td>
   </tr>
 	
 	
@@ -894,9 +898,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">5,000    </td>
     <td align="right">97,022    </td>
     <td align="right">1 335,000    </td>
-    <td align="right">178    </td>
-    <td align="right">102,895    </td>
-    <td align="right">2    </td>
+    <td align="right">148    </td>
+    <td align="right">61,855    </td>
+    <td align="right">-2    </td>
   </tr>
 	
 	
@@ -907,9 +911,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">2,000    </td>
     <td align="right">110,230    </td>
     <td align="right">1 465,000    </td>
-    <td align="right">128    </td>
-    <td align="right">129,195    </td>
-    <td align="right">0    </td>
+    <td align="right">113    </td>
+    <td align="right">89,016    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -920,9 +924,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,230    </td>
     <td align="right">3,964    </td>
     <td align="right">220,500    </td>
-    <td align="right">84    </td>
-    <td align="right">6,926    </td>
-    <td align="right">-1    </td>
+    <td align="right">70    </td>
+    <td align="right">4,300    </td>
+    <td align="right">-5    </td>
   </tr>
 	
 	
@@ -946,9 +950,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,003    </td>
     <td align="right">15,982    </td>
     <td align="right">1 865,000    </td>
-    <td align="right">-60    </td>
-    <td align="right">8,655    </td>
-    <td align="right">-3    </td>
+    <td align="right">-67    </td>
+    <td align="right">6,499    </td>
+    <td align="right">0    </td>
   </tr>
 	
 	
@@ -975,9 +979,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">1,280    </td>
     <td align="right">16,366    </td>
     <td align="right">334,000    </td>
-    <td align="right">118    </td>
-    <td align="right">24,967    </td>
-    <td align="right">-2    </td>
+    <td align="right">135    </td>
+    <td align="right">37,269    </td>
+    <td align="right">-21    </td>
   </tr>
 	
 	
@@ -988,9 +992,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,800    </td>
     <td align="right">21,506    </td>
     <td align="right">397,900    </td>
-    <td align="right">105    </td>
-    <td align="right">35,264    </td>
-    <td align="right">-4    </td>
+    <td align="right">130    </td>
+    <td align="right">52,400    </td>
+    <td align="right">-26    </td>
   </tr>
 	
 	
@@ -1001,9 +1005,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,200    </td>
     <td align="right">1,680    </td>
     <td align="right">71,500    </td>
-    <td align="right">61    </td>
-    <td align="right">2,223    </td>
-    <td align="right">1    </td>
+    <td align="right">60    </td>
+    <td align="right">2,171    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -1014,8 +1018,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,001    </td>
     <td align="right">0,517    </td>
     <td align="right">78,500    </td>
-    <td align="right">30    </td>
-    <td align="right">0,529    </td>
+    <td align="right">28    </td>
+    <td align="right">0,635    </td>
     <td align="right">0    </td>
   </tr>
 	
@@ -1040,9 +1044,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0    </td>
     <td align="right">0,356    </td>
     <td align="right">61,000    </td>
-    <td align="right">46    </td>
-    <td align="right">0,514    </td>
-    <td align="right">0    </td>
+    <td align="right">43    </td>
+    <td align="right">0,104    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -1053,9 +1057,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,075    </td>
     <td align="right">2,700    </td>
     <td align="right">96,000    </td>
-    <td align="right">64    </td>
-    <td align="right">3,120    </td>
-    <td align="right">0    </td>
+    <td align="right">60    </td>
+    <td align="right">3,090    </td>
+    <td align="right">-5    </td>
   </tr>
 	
 	
@@ -1066,9 +1070,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">1,450    </td>
     <td align="right">21,556    </td>
     <td align="right">387,000    </td>
-    <td align="right">102    </td>
-    <td align="right">18,344    </td>
-    <td align="right">-2    </td>
+    <td align="right">98    </td>
+    <td align="right">15,840    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -1079,9 +1083,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,286    </td>
     <td align="right">2,827    </td>
     <td align="right">169,000    </td>
-    <td align="right">49    </td>
-    <td align="right">6,614    </td>
-    <td align="right">11    </td>
+    <td align="right">58    </td>
+    <td align="right">8,450    </td>
+    <td align="right">8    </td>
   </tr>
 	
 	
@@ -1093,8 +1097,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,647    </td>
     <td align="right">18,750    </td>
     <td align="right">68    </td>
-    <td align="right">1,001    </td>
-    <td align="right">0    </td>
+    <td align="right">0,800    </td>
+    <td align="right">-1    </td>
   </tr>
 	
 	
@@ -1105,9 +1109,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">2,000    </td>
     <td align="right">38,799    </td>
     <td align="right">592,000    </td>
-    <td align="right">87    </td>
-    <td align="right">39,355    </td>
-    <td align="right">-2    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
+    <td align="right">n.a.    </td>
   </tr>
 	
 	
@@ -1118,9 +1122,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">n.a.    </td>
     <td align="right">n.a.    </td>
     <td align="right">n.a.    </td>
-    <td align="right">22    </td>
-    <td align="right">1,150    </td>
-    <td align="right">-1    </td>
+    <td align="right">23    </td>
+    <td align="right">1,323    </td>
+    <td align="right">-8    </td>
   </tr>
 	
 	
@@ -1144,9 +1148,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">5,000    </td>
     <td align="right">63,641    </td>
     <td align="right">658,850    </td>
-    <td align="right">-52    </td>
-    <td align="right">72,170    </td>
-    <td align="right">-4    </td>
+    <td align="right">-28    </td>
+    <td align="right">102,480    </td>
+    <td align="right">-2    </td>
   </tr>
 	
 	
@@ -1157,9 +1161,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/meteo7\/","pathPrefix":"bg\/","set
     <td align="right">0,002    </td>
     <td align="right">0,476    </td>
     <td align="right">21,700    </td>
-    <td align="right">32    </td>
-    <td align="right">0,760    </td>
-    <td align="right">-1    </td>
+    <td align="right">31    </td>
+    <td align="right">0,524    </td>
+    <td align="right">-3    </td>
   </tr>
 	
 	
