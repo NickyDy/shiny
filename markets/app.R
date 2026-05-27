@@ -313,7 +313,11 @@ server <- function(input, output, session) {
     df_markets %>%
       mutate(naimenovanie_na_produkta = str_remove(naimenovanie_na_produkta, "___.+$")) %>%
       filter(date %in% c(input$inf_markets_date[1], input$inf_markets_date[2]), !cena_na_drebno == 0,
-             !naimenovanie_na_produkta %in% c("ДЕЛИКАТЕС С ПУЕШКО ФИЛЕ МАЙСТОР ЦВЕТКО")) %>%
+             !naimenovanie_na_produkta %in% c("ДЕЛИКАТЕС С ПУЕШКО ФИЛЕ МАЙСТОР ЦВЕТКО"),
+             # !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
+             #                     "Домати", "Кромид лук", "Моркови", "Зеле",
+             #                     "Краставици", "Чесън")
+             ) %>%
       group_by(market, naimenovanie_na_produkta) %>% 
       mutate(
         price_change = (last(cena_na_drebno) - first(

@@ -33,7 +33,7 @@ ui <- page_fillable(
               selectInput("country", "Държава:", 
                           choices = unique(inf$geo), 
                           selected = "Bulgaria"),
-              col_widths = c(2, 2)),
+              col_widths = c(4, 2)),
               plotOutput("accum")),
     nav_panel(tags$img(src = "shiny.png", width = 40),
               "Other useful apps:",
