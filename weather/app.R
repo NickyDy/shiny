@@ -9,6 +9,7 @@ coord <- tibble(city = "yambol", lat = 42.31189, long = 26.56369)
 
 wf <- request("https://api.open-meteo.com/v1/forecast") %>% 
   req_url_query(
+    models = "ecmwf_ifs",
     latitude = coord$lat,
     longitude = coord$long,
     daily = paste(

@@ -316,7 +316,7 @@ server <- function(input, output, session) {
              !naimenovanie_na_produkta %in% c("ДЕЛИКАТЕС С ПУЕШКО ФИЛЕ МАЙСТОР ЦВЕТКО"),
              # !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
              #                     "Домати", "Кромид лук", "Моркови", "Зеле",
-             #                     "Краставици", "Чесън")
+             #                     "Краставици", "Чесън", "Картофи")
              ) %>%
       group_by(market, naimenovanie_na_produkta) %>% 
       mutate(
@@ -337,7 +337,8 @@ server <- function(input, output, session) {
       geom_text(aes(label = paste0(round(group_change, 1), "%")),
                 position = position_dodge(width = 1), hjust = -0.1, size = 3.5) +
       labs(y = NULL, x = NULL, caption = 'Източник на данните: "КОЛКО СТРУВА"',
-           title = "Средна инфлация по групи продукти") +
+           title = paste0("Средна инфлация по групи продукти от ", input$inf_markets_date[1], " до ",
+                          input$inf_markets_date[2])) +
       theme(text = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
             strip.text = element_text(face = "bold")) +
       facet_wrap(market ~ paste0("Сумарна инфлация: ", round(total_markets, 1), " %"), nrow = 1)

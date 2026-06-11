@@ -40,9 +40,10 @@ labor <- read_rds("nama_10_lp_ulc.rds") %>%
 debt <- read_rds("gov_10dd_edpt1.rds") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-ppp <- read_rds("prc_ppp_ind.rds") %>% 
+ppp <- read_parquet("prc_ppp_ind_1.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
-  filter(!str_detect(geo, "^Cand")) %>% 
+  filter(!str_detect(geo, "^Cand")) %>%
+  rename(na_item = indic_ppp, ppp_cat = ppp_cat18) %>% 
   arrange(TIME_PERIOD)
 gva <- read_rds("nama_10_a10.rds") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
