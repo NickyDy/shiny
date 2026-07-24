@@ -119,8 +119,8 @@ ui <- page_fillable(
                                separator = " до ",
                                weekstart = 1,
                                language = "bg"),
-                sliderInput("height_markets", "Височина на графиката:",
-                            min = 800, max = 3000, value = 1700, step = 100),
+                # sliderInput("height_markets", "Височина на графиката:",
+                #             min = 800, max = 3000, value = 1700, step = 100),
                 col_widths = c(2, 2)),
               layout_columns(
                 plotOutput("inf_markets_plot"),
@@ -148,7 +148,7 @@ ui <- page_fillable(
       title = "Инфлация (борса)", 
       layout_columns(
         dateRangeInput("market_date", "Дата:",
-                       start = "2025-12-29",
+                       start = last(df_market$date) - 7,
                        end = last(df_market$date),
                        min = first(df_market$date),
                        max = last(df_market$date),
@@ -314,9 +314,9 @@ server <- function(input, output, session) {
       mutate(naimenovanie_na_produkta = str_remove(naimenovanie_na_produkta, "___.+$")) %>%
       filter(date %in% c(input$inf_markets_date[1], input$inf_markets_date[2]), !cena_na_drebno == 0,
              !naimenovanie_na_produkta %in% c("ДЕЛИКАТЕС С ПУЕШКО ФИЛЕ МАЙСТОР ЦВЕТКО"),
-             # !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
-             #                     "Домати", "Кромид лук", "Моркови", "Зеле",
-             #                     "Краставици", "Чесън", "Картофи")
+             !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
+                                 "Домати", "Кромид лук", "Моркови", "Зеле",
+                                 "Краставици", "Чесън", "Картофи")
              ) %>%
       group_by(market, naimenovanie_na_produkta) %>% 
       mutate(
@@ -368,7 +368,7 @@ server <- function(input, output, session) {
     #         axis.ticks.x = element_blank()) +
     #   facet_wrap(vars(market), nrow = 1)
 
-  }, height = function() input$height_markets, width = 1800, res = 96)
+  }, height = 1500, width = 1800, res = 96)
   # 
   # output$time_plot <- renderPlot({
   #   

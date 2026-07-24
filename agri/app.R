@@ -10,24 +10,12 @@ piglets <- read_parquet("piglets.parquet") %>% arrange(date)
 pigmeat_carc <- read_parquet("pigmeat_carc.parquet") %>% arrange(date)
 pigmeat_cuts <- read_parquet("pigmeat_cuts.parquet") %>% arrange(date)
 eggs <- read_parquet("eggs.parquet") %>% arrange(date)
-poultry <- read_parquet("poultry.parquet") %>% arrange(date) %>% 
-  mutate(price_100kg_eur = case_when(
-    state == "Poland" & price_100kg_eur == 4611.50 ~ 461.15,
-    state == "Poland" & price_100kg_eur == 2147.17 ~ 214.71,
-    state == "Poland" & price_100kg_eur == 1965.85 ~ 196.59,
-    state == "European Union" & price_100kg_eur == 1427.67 ~ 142.77,
-    state == "European Union" & price_100kg_eur == 707.65 ~ 277.65,
-    state == "European Union" & price_100kg_eur == 610.48 ~ 243.48,
-    state == "European Union (27 countries excluding UK)" & price_100kg_eur == 332.06 ~ 232.06,
-    state == "European Union (27 countries excluding UK)" & price_100kg_eur == 638.86 ~ 238.86,
-    .default = price_100kg_eur))
+poultry <- read_parquet("poultry.parquet") %>% arrange(date)
 sheep_goat <- read_parquet("sheep_goat.parquet") %>% arrange(date)
 raw_milk <- read_parquet("raw_milk.parquet") %>% arrange(date)
 dairy <- read_parquet("dairy.parquet") %>% arrange(date)
 fruit_veg <- read_parquet("fruit_veg.parquet") %>% arrange(date)
-cereals <- read_parquet("cereals.parquet") %>% 
-  filter(!stage_name == "Unknown") %>% 
-  arrange(date)
+cereals <- read_parquet("cereals.parquet") %>% arrange(date)
 oilseeds <- read_parquet("oilseeds.parquet") %>% arrange(date)
 olive_oil <- read_parquet("olive_oil.parquet") %>%
   mutate(product = str_replace_all(product, c("°" = "%", "," = "."))) %>% 
@@ -173,10 +161,10 @@ ui <- page_fillable(#h3("Цени на селскостопанска проду
                                        max = last(cereals$date)),
                         selectInput("cereals_state", "Държава:",
                                     choices = unique(cereals$state)),
-                        selectInput("cereals_stage_name", "Порт:",
-                                    choices = NULL),
+                        # selectInput("cereals_stage_name", "Порт:",
+                        #             choices = NULL),
                         selectInput("cereals_product", "Продукт:",
-                                    choices = NULL), col_widths = c(2, 2, 5, 2)),
+                                    choices = NULL), col_widths = c(2, 2, 2)),
                         plotOutput("cereals")),
                       nav_panel("Маслодайни", layout_columns(
                         dateRangeInput("oilseeds_date", "Дата (от/до):", 
@@ -299,12 +287,12 @@ server <- function(input, output, session) {
   output$beef_carc_plot <- renderPlot({
     beef_carc_product() %>% 
       filter(date >= input$beef_carc_date[1] & date <= input$beef_carc_date[2],
-             product %in% c(input$beef_carc_product)) %>% 
-      ggplot(aes(date, price / 100)) +
-      geom_line() +
+             product %in% c(input$beef_carc_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14), 
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
   }, height = 800, width = 1800, res = 96)
   #-----------------------------------------
@@ -328,12 +316,12 @@ server <- function(input, output, session) {
     beef_live_unit() %>% 
       filter(date >= input$beef_live_date[1] & date <= input$beef_live_date[2],
              category %in% c(input$beef_live_category),
-             unit %in% c(input$beef_live_unit)) %>% 
-      ggplot(aes(date, price_eur)) +
-      geom_line() +
+             unit %in% c(input$beef_live_unit)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_eur, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€)/глава") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -341,12 +329,12 @@ server <- function(input, output, session) {
   output$piglets <- renderPlot({
     
     piglets %>% 
-      filter(date >= input$piglets_date[1] & date <= input$piglets_date[2]) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+      filter(date >= input$piglets_date[1] & date <= input$piglets_date[2]) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -355,12 +343,12 @@ server <- function(input, output, session) {
     
     pigmeat_carc %>% 
       filter(date >= input$pigmeat_carc_date[1] & date <= input$pigmeat_carc_date[2],
-             product %in% c(input$pigmeat_carc_product)) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+             product %in% c(input$pigmeat_carc_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -384,12 +372,13 @@ server <- function(input, output, session) {
     
     pigmeat_cuts_price_type() %>% 
       filter(date >= input$pigmeat_cuts_date[1] & date <= input$pigmeat_cuts_date[2],
-             price_type %in% c(input$pigmeat_cuts_price_type)) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+             price_type %in% c(input$pigmeat_cuts_price_type)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
+      scale_color_manual(values = c("1" = "#00BFC4", "0" = "#F8766D")) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -398,12 +387,12 @@ server <- function(input, output, session) {
     
     eggs %>% 
       filter(date >= input$eggs_date[1] & date <= input$eggs_date[2],
-             farming_method %in% c(input$farming_method)) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+             farming_method %in% c(input$farming_method)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -412,12 +401,12 @@ server <- function(input, output, session) {
     
     poultry %>% 
       filter(date >= input$poultry_date[1] & date <= input$poultry_date[2],
-             product %in% c(input$poultry_product)) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+             product %in% c(input$poultry_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -427,12 +416,12 @@ server <- function(input, output, session) {
     sheep_goat %>% 
       filter(date >= input$sheep_goat_date[1] & date <= input$sheep_goat_date[2],
              category %in% c(input$sheep_goat_category)) %>%
-      group_by(state) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      # group_by(state) %>% 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -441,12 +430,12 @@ server <- function(input, output, session) {
     
     raw_milk %>% 
       filter(date >= input$raw_milk_date[1] & date <= input$raw_milk_date[2],
-             product %in% c(input$raw_milk_product)) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+             product %in% c(input$raw_milk_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -455,12 +444,12 @@ server <- function(input, output, session) {
     
     dairy %>% 
       filter(date >= input$dairy_date[1] & date <= input$dairy_date[2],
-             product %in% c(input$dairy_product)) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+             product %in% c(input$dairy_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -484,12 +473,13 @@ server <- function(input, output, session) {
     
     fruit_veg_variety() %>%
       filter(date >= input$fruit_veg_date[1] & date <= input$fruit_veg_date[2],
-             variety %in% c(input$fruit_veg_variety)) %>% 
-      ggplot(aes(date, price_100_kg_eur / 100)) +
-      geom_line() +
+             variety %in% c(input$fruit_veg_variety)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100_kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
+      scale_color_manual(values = c("1" = "#00BFC4", "0" = "#F8766D")) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(state))
     
   }, height = 800, width = 1800, res = 96)
@@ -498,39 +488,40 @@ server <- function(input, output, session) {
     filter(cereals, state %in% c(input$cereals_state))
   })
   
+  # observeEvent(cereals_state(), {
+  #   freezeReactiveValue(input, "cereals_stage_name")
+  #   choices <- unique(cereals_state()$stage_name)
+  #   updateSelectInput(inputId = "cereals_stage_name", choices = choices)
+  # })
+  # 
+  # cereals_stage_name <- reactive({
+  #   req(input$cereals_state)
+  #   filter(cereals_state(), stage_name == input$cereals_stage_name)
+  # })
+  
   observeEvent(cereals_state(), {
-    freezeReactiveValue(input, "cereals_stage_name")
-    choices <- unique(cereals_state()$stage_name)
-    updateSelectInput(inputId = "cereals_stage_name", choices = choices)
-  })
-  
-  cereals_stage_name <- reactive({
-    req(input$cereals_state)
-    filter(cereals_state(), stage_name == input$cereals_stage_name)
-  })
-  
-  observeEvent(cereals_stage_name(), {
     freezeReactiveValue(input, "cereals_product")
-    choices <- unique(cereals_stage_name()$product)
+    choices <- unique(cereals_state()$product)
     updateSelectInput(inputId = "cereals_product", choices = choices)
   })
   
   cereals_product <- reactive({
-    req(input$cereals_stage_name)
-    filter(cereals_stage_name(), product == input$cereals_product)
+    req(input$cereals_state)
+    filter(cereals_state(), product == input$cereals_product)
   })
   
   output$cereals <- renderPlot({
     
     cereals_product() %>% 
       filter(date >= input$cereals_date[1] & date <= input$cereals_date[2],
-             stage_name %in% c(input$cereals_stage_name),
-             product %in% c(input$cereals_product)) %>% 
-      ggplot(aes(date, price_tonne_eur)) +
-      geom_line() +
+             # stage_name %in% c(input$cereals_stage_name),
+             product %in% c(input$cereals_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_tonne_eur, color = col)) +
+      geom_line(show.legend = F) +
+      scale_color_manual(values = c("1" = "#00BFC4", "0" = "#F8766D")) +
       labs(x = NULL, y = "Цена (€/тон)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(market_name))
     
   }, height = 800, width = 1800, res = 96)
@@ -591,12 +582,13 @@ server <- function(input, output, session) {
              market_stage %in% c(input$oilseeds_market_stage),
              market %in% c(input$oilseeds_market),
              product_type %in% c(input$oilseeds_product_type),
-             product %in% c(input$oilseeds_product)) %>% 
-      ggplot(aes(date, price_eur)) +
-      geom_line() +
+             product %in% c(input$oilseeds_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_eur, color = col)) +
+      geom_line(show.legend = F) +
+      scale_color_manual(values = c("1" = "#00BFC4", "0" = "#F8766D")) +
       labs(x = NULL, y = "Цена (€)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(market))
     
   }, height = 800, width = 1800, res = 96)
@@ -620,12 +612,13 @@ server <- function(input, output, session) {
     
     olive_oil_product() %>% 
       filter(date >= input$olive_oil_date[1] & date <= input$olive_oil_date[2],
-             product %in% c(input$olive_oil_product)) %>% 
-      ggplot(aes(date, price_100kg_eur / 100)) +
-      geom_line() +
+             product %in% c(input$olive_oil_product)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, price_100kg_eur / 100, color = col)) +
+      geom_line(show.legend = F) +
+      scale_color_manual(values = c("1" = "#00BFC4", "0" = "#F8766D")) +
       labs(x = NULL, y = "Цена (€/кг)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(market))
     
   }, height = 800, width = 1800, res = 96)
@@ -634,12 +627,13 @@ server <- function(input, output, session) {
     
     wine %>% 
       filter(date >= input$wine_date[1] & date <= input$wine_date[2],
-             state %in% c(input$wine_state)) %>% 
-      ggplot(aes(date, eur_price_per_hl)) +
-      geom_line() +
+             state %in% c(input$wine_state)) %>%
+      mutate(col = if_else(state == "European Union", "0", "1")) |> 
+      ggplot(aes(date, eur_price_per_hl, color = col)) +
+      geom_line(show.legend = F) +
+      scale_color_manual(values = c("1" = "#00BFC4", "0" = "#F8766D")) +
       labs(x = NULL, y = "Цена (€/hl)") +
-      theme(text = element_text(size = 14),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(text = element_text(size = 14)) +
       facet_wrap(vars(wine_description))
     
   }, height = 800, width = 1800, res = 96)

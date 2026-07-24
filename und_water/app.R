@@ -1,19 +1,20 @@
 library(tidyverse)
+library(nanoparquet)
 library(leaflet)
 library(shiny)
 library(bslib)
 library(sf)
 
-und_water <- read_rds("under_df.rds")
-surf_water <- read_rds("surf_df.rds") %>% 
+und_water <- read_parquet("und_water.parquet")
+surf_water <- read_parquet("surf_water.parquet") %>% 
   mutate(year = year(date))
 
-und_water <- und_water %>%
+und_water <- und_water %>% 
   mutate(lat_new = case_when(
-    year == 2025 ~ long,
+    year == 2025 & sett != "Коньовец" ~ long,
     .default = lat),
     long_new = case_when(
-      year == 2025 ~ lat,
+      year == 2025 & sett != "Коньовец" ~ lat,
       .default = long)) %>%
   select(-lat, -long) %>%
   rename(lat = lat_new, long = long_new)

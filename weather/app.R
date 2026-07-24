@@ -381,7 +381,7 @@ output$forcast_10_days <- renderPlot({
     geom_col(show.legend = F) +
     geom_text(aes(label = paste0(value, " ", unit, wind_dir)), size = 5, vjust = -0.3) +
     scale_fill_manual(values = c("#0096FF", "blue", "#00FFFF", "red", "orange", "yellow", "darkgreen", "green")) +
-    scale_y_continuous(expand = expansion(mult = c(0, 0.4))) +
+    scale_y_continuous(n.breaks = 3, expand = expansion(mult = c(0, 0.4))) +
     scale_x_date(date_breaks = "3 days", date_labels = "%b-%d-%a") +
     theme(text = element_text(size = 16)) +
     labs(x = "Дата", y = "Стойност") +

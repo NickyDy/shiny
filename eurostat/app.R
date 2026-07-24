@@ -40,6 +40,9 @@ labor <- read_rds("nama_10_lp_ulc.rds") %>%
 debt <- read_rds("gov_10dd_edpt1.rds") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
+def <- read_parquet("gov_10q_ggnfa.parquet") |> 
+  filter(!str_detect(geo, "^Euro")) %>% 
+  arrange(TIME_PERIOD)
 ppp <- read_parquet("prc_ppp_ind_1.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   filter(!str_detect(geo, "^Cand")) %>%
@@ -269,6 +272,23 @@ ui <- page_fillable(#h3("Евростат за България!"),
                                     choices = NULL),
                         col_widths = c(2, 2, 5, 3)),
                         plotOutput("debt_plot")),
+                      nav_panel("Бюджетен дефицит", layout_columns(
+                        selectInput("date_deficit", "Дата:",
+                                    choices = unique(def$TIME_PERIOD),
+                                    selected = last(def$TIME_PERIOD)),
+                        selectInput("sector_deficit", "Сектор:",
+                                    choices = NULL),
+                        selectInput("na_item_deficit", "Показател:",
+                                    choices = NULL),
+                        selectInput("s_adj_deficit", "Корекция:",
+                                    choices = NULL),
+                        selectInput("unit_deficit", "Индекс, мерна единица:",
+                                    choices = NULL),
+                        col_widths = c(2, 2, 8, 5, 3)),
+                        layout_columns(
+                          plotOutput("deficit_plot"),
+                          plotOutput("deficit_line"),
+                        col_widths = c(6, 6))),
                       nav_panel("Покупателна способност", layout_columns(
                         selectInput("date_ppp", "Дата:",
                                     choices = unique(ppp$TIME_PERIOD),
@@ -990,7 +1010,102 @@ output$debt_plot <- renderPlot({
            caption = "Източник на данните: Eurostat")
     
   }, height = 800, width = 1550, res = 96)
-#---------------------------------------
+#----------------------------------------
+date_deficit <- reactive({
+  filter(def, TIME_PERIOD == input$date_deficit)
+})
+
+observeEvent(date_deficit(), {
+  freezeReactiveValue(input, "sector_deficit")
+  choices <- unique(date_deficit()$sector)
+  updateSelectInput(inputId = "sector_deficit", choices = choices)
+})
+
+sector_deficit <- reactive({
+  req(input$date_deficit)
+  filter(date_deficit(), sector == input$sector_deficit)
+})
+
+observeEvent(sector_deficit(), {
+  freezeReactiveValue(input, "na_item_deficit")
+  choices <- unique(sector_deficit()$na_item)
+  updateSelectInput(inputId = "na_item_deficit", choices = choices)
+})
+
+na_item_deficit <- reactive({
+  req(input$sector_deficit)
+  filter(sector_deficit(), na_item == input$na_item_deficit)
+})
+
+observeEvent(na_item_deficit(), {
+  freezeReactiveValue(input, "s_adj_deficit")
+  choices <- unique(na_item_deficit()$s_adj)
+  updateSelectInput(inputId = "s_adj_deficit", choices = choices)
+})
+
+s_adj_deficit <- reactive({
+  req(input$na_item_deficit)
+  filter(na_item_deficit(), s_adj == input$s_adj_deficit)
+})
+
+observeEvent(s_adj_deficit(), {
+  freezeReactiveValue(input, "unit_deficit")
+  choices <- unique(s_adj_deficit()$unit)
+  updateSelectInput(inputId = "unit_deficit", choices = choices)
+})
+
+unit_deficit <- reactive({
+  req(input$s_adj_deficit)
+  filter(s_adj_deficit(), unit == input$unit_deficit)
+})
+
+output$deficit_plot <- renderPlot({
+  
+  unit_deficit() %>% 
+    filter(sector %in% c(input$sector_deficit),
+           na_item %in% c(input$na_item_deficit),
+           s_adj %in% c(input$s_adj_deficit),
+           unit %in% c(input$unit_deficit)) %>% 
+    mutate(geo = fct_reorder(geo, values),
+           col = if_else(geo == "Bulgaria", "1", "0")) %>% 
+    ggplot(aes(values, geo, fill = col)) +
+    geom_col(position = position_dodge2(preserve = "single")) +
+    scale_x_continuous(expand = expansion(mult = c(0.01, 0.3))) +
+    geom_text(aes(label = space_s(values)),
+              position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
+    scale_fill_manual(values = c("gray50", "red")) +
+    theme(text = element_text(size = 14), legend.position = "none") +
+    labs(x = paste0(input$na_item_deficit, " [", input$unit_deficit, "]"), y = NULL, 
+         caption = "Източник на данните: Eurostat")
+  
+}, height = 700, width = 750, res = 96)
+
+output$deficit_line <- renderPlot({
+  
+  def %>% 
+    filter(
+      #str_detect(TIME_PERIOD, "^\\d{4}-01-01"),
+           TIME_PERIOD >= "2000-01-01",
+           sector == "General government",
+           na_item == "Net lending (+)/net borrowing (-)",
+           s_adj == "Seasonally and calendar adjusted data",
+           unit == "Percentage of gross domestic product (GDP)",
+           geo == "Bulgaria") %>%
+    ggplot(aes(TIME_PERIOD, values)) +
+    geom_line(linetype = 2, linewidth = 0.3) +
+    geom_point(size = 1.5) +
+    geom_smooth(se = F, method = "loess") +
+    #scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
+    scale_x_date(date_breaks = "3 years", date_labels = "%Y") +
+    geom_text(aes(label = round(values, 1)), check_overlap = T,
+              position = position_dodge(width = 1), vjust = -0.5, size = 3.5) +
+    theme(text = element_text(size = 14), legend.position = "none") +
+    labs(y = "% от БВП", x = NULL,
+         title = "Бюджетен дефицит/излишък на България във времето",
+         caption = "Източник на данните: Eurostat")
+  
+}, height = 700, width = 750, res = 96)
+#----------------------------------------
 date_ppp <- reactive({
   filter(ppp, TIME_PERIOD == input$date_ppp)
 })
