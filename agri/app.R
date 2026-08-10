@@ -175,14 +175,15 @@ ui <- page_fillable(#h3("Цени на селскостопанска проду
                                        max = last(oilseeds$date)),
                         selectInput("oilseeds_state", "Страна:",
                                     choices = unique(oilseeds$state)),
+                        selectInput("oilseeds_product", "Продукт:",
+                                    choices = NULL),
+                        selectInput("oilseeds_product_type", "Разновидност:",
+                                    choices = NULL),
                         selectInput("oilseeds_market_stage", "Порт:",
                                     choices = NULL),
-                        selectInput("oilseeds_market", "Пазар:",
-                                    choices = NULL),
-                        selectInput("oilseeds_product_type", "Тип продукт:",
-                                    choices = NULL),
-                        selectInput("oilseeds_product", "Продукт:",
-                                    choices = NULL), col_widths = c(2, 2, 2, 2, 2)),
+                        # selectInput("oilseeds_market", "Пазар:",
+                        #             choices = NULL),
+                        col_widths = c(2, 2, 2, 2)),
                         plotOutput("oilseeds")),
                       nav_panel("Зехтин", layout_columns(
                         dateRangeInput("olive_oil_date", "Дата (от/до):", 
@@ -531,58 +532,59 @@ server <- function(input, output, session) {
   })
   
   observeEvent(oilseeds_state(), {
-    freezeReactiveValue(input, "oilseeds_market_stage")
-    choices <- unique(oilseeds_state()$market_stage)
-    updateSelectInput(inputId = "oilseeds_market_stage", choices = choices)
-  })
-  
-  oilseeds_market_stage <- reactive({
-    req(input$oilseeds_state)
-    filter(oilseeds_state(), market_stage == input$oilseeds_market_stage)
-  })
-  
-  observeEvent(oilseeds_market_stage(), {
-    freezeReactiveValue(input, "oilseeds_market")
-    choices <- unique(oilseeds_market_stage()$market)
-    updateSelectInput(inputId = "oilseeds_market", choices = choices)
-  })
-  
-  oilseeds_market <- reactive({
-    req(input$oilseeds_market_stage)
-    filter(oilseeds_market_stage(), market == input$oilseeds_market)
-  })
-  
-  observeEvent(oilseeds_market(), {
-    freezeReactiveValue(input, "oilseeds_product_type")
-    choices <- unique(oilseeds_market()$product_type)
-    updateSelectInput(inputId = "oilseeds_product_type", choices = choices)
-  })
-  
-  oilseeds_product_type <- reactive({
-    req(input$oilseeds_market)
-    filter(oilseeds_market(), product_type == input$oilseeds_product_type)
-  })
-  
-  observeEvent(oilseeds_product_type(), {
     freezeReactiveValue(input, "oilseeds_product")
-    choices <- unique(oilseeds_product_type()$product)
+    choices <- unique(oilseeds_state()$product)
     updateSelectInput(inputId = "oilseeds_product", choices = choices)
   })
   
   oilseeds_product <- reactive({
-    req(input$oilseeds_product_type)
-    filter(oilseeds_product_type(), product == input$oilseeds_product)
+    req(input$oilseeds_state)
+    filter(oilseeds_state(), product == input$oilseeds_product)
   })
+  
+  observeEvent(oilseeds_product(), {
+    freezeReactiveValue(input, "oilseeds_product_type")
+    choices <- unique(oilseeds_product()$product_type)
+    updateSelectInput(inputId = "oilseeds_product_type", choices = choices)
+  })
+  
+  oilseeds_product_type <- reactive({
+    req(input$oilseeds_product)
+    filter(oilseeds_product(), product_type == input$oilseeds_product_type)
+  })
+  
+  observeEvent(oilseeds_product_type(), {
+    freezeReactiveValue(input, "oilseeds_market_stage")
+    choices <- unique(oilseeds_product_type()$market_stage)
+    updateSelectInput(inputId = "oilseeds_market_stage", choices = choices)
+  })
+  
+  oilseeds_market_stage <- reactive({
+    req(input$oilseeds_product_type)
+    filter(oilseeds_product_type(), market_stage == input$oilseeds_market_stage)
+  })
+  
+  # observeEvent(oilseeds_market_stage(), {
+  #   freezeReactiveValue(input, "oilseeds_market")
+  #   choices <- unique(oilseeds_market_stage()$market)
+  #   updateSelectInput(inputId = "oilseeds_market", choices = choices)
+  # })
+  # 
+  # oilseeds_market <- reactive({
+  #   req(input$oilseeds_market_stage)
+  #   filter(oilseeds_market_stage(), market == input$oilseeds_market)
+  # })
   
   output$oilseeds <- renderPlot({
     
-    oilseeds_product() %>% 
+    oilseeds_market_stage() %>% 
       filter(date >= input$oilseeds_date[1] & date <= input$oilseeds_date[2],
              state %in% c(input$oilseeds_state),
-             market_stage %in% c(input$oilseeds_market_stage),
-             market %in% c(input$oilseeds_market),
+             product %in% c(input$oilseeds_product),
              product_type %in% c(input$oilseeds_product_type),
-             product %in% c(input$oilseeds_product)) %>%
+             market_stage %in% c(input$oilseeds_market_stage),
+             #market %in% c(input$oilseeds_market)
+             ) %>%
       mutate(col = if_else(state == "European Union", "0", "1")) |> 
       ggplot(aes(date, price_eur, color = col)) +
       geom_line(show.legend = F) +

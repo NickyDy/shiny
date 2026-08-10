@@ -159,11 +159,19 @@ ui <- page_fillable(
       plotOutput("market_inf_plot")),
     nav_panel(
       title = "Тренд (борса)", layout_columns(
+        dateRangeInput("trend_date", "Дата:",
+                       start = first(df_market$date),
+                       end = last(df_market$date),
+                       min = first(df_market$date),
+                       max = last(df_market$date),
+                       separator = " до ",
+                       weekstart = 1,
+                       language = "bg"),
         selectInput("market_unit_trend", "Грамаж:",
                     choices = unique(df_market$unit)),
         selectInput("market_product_trend", "Продукт:",
                     choices = NULL),
-        col_widths = c(1, 3)),
+        col_widths = c(2, 1, 3)),
       plotOutput("market_trend_plot")),
     nav_spacer(),
     nav_menu(
@@ -297,14 +305,16 @@ server <- function(input, output, session) {
       mutate(cena_v_promocia = if_else(is.na(cena_v_promocia), "", as.character(cena_v_promocia)),
              market = fct_relevel(market, "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")) %>% 
       ggplot(aes(cena_na_drebno, reorder_within(naimenovanie_na_produkta, cena_na_drebno, market), fill = market)) +
-      geom_col(show.legend = F) +
+      geom_col(show.legend = T) +
       geom_richtext(aes(label = glue::glue("{cena_na_drebno};  <span style='color:red'>{cena_v_promocia}</span>")), 
                     position = position_dodge(width = 1), hjust = -0.01, size = 4.5, fill = NA, label.colour = NA) +
       scale_y_reordered() +
       scale_x_continuous(expand = expansion(mult = c(.05, .7))) +
-      labs(x = "Цена (евро); <span style='color:red'>Промоция (евро)</span>", y = NULL) +
-      theme(text = element_text(size = 14), axis.title.x = element_markdown()) +
-      facet_wrap(vars(market), scales = "free_y")
+      scale_fill_manual(values = c("Кауфланд" = "red", "Лидл" = "yellow", "T Market" = "green",
+                                   "Билла" = "lightblue", "Вилтон" = "blue", "Славекс" = "purple")) +
+      labs(x = "Цена (евро); <span style='color:red'>Промоция (евро)</span>", y = NULL,
+           fill = "Супермаркет: ") +
+      theme(text = element_text(size = 14), axis.title.x = element_markdown())
     
   }, height = function() input$height_products, width = 1800, res = 96)
   
@@ -314,9 +324,9 @@ server <- function(input, output, session) {
       mutate(naimenovanie_na_produkta = str_remove(naimenovanie_na_produkta, "___.+$")) %>%
       filter(date %in% c(input$inf_markets_date[1], input$inf_markets_date[2]), !cena_na_drebno == 0,
              !naimenovanie_na_produkta %in% c("ДЕЛИКАТЕС С ПУЕШКО ФИЛЕ МАЙСТОР ЦВЕТКО"),
-             !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
-                                 "Домати", "Кромид лук", "Моркови", "Зеле",
-                                 "Краставици", "Чесън", "Картофи")
+             # !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
+             #                     "Домати", "Кромид лук", "Моркови", "Зеле",
+             #                     "Краставици", "Чесън", "Картофи")
              ) %>%
       group_by(market, naimenovanie_na_produkta) %>% 
       mutate(
@@ -466,14 +476,31 @@ server <- function(input, output, session) {
     filter(market_unit_trend(), product == input$market_product_trend)
   })
   
+  df_final <- reactive({
+    market_product_trend() %>%
+    filter(date >= input$trend_date[1] & date <= input$trend_date[2]) %>%
+    mutate(date = ymd(date), m = month(date)) %>% 
+    arrange(date)
+  })
+  
+  df_label <- reactive({
+    df_final() %>%
+      filter(date == min(date) | date == max(date)) %>%
+      arrange(date)
+  })
+    
   output$market_trend_plot <- renderPlot({
     
-    market_product_trend() %>%
-      mutate(date = ymd(date), m = month(date)) %>%
+    df_final() %>% 
       ggplot(aes(date, price)) +
       geom_vline(xintercept = as.Date("2026-01-01"), linetype = 2, linewidth = 0.3) +
-      geom_line(linetype = 2) +
-      geom_point(size = 2) +
+      geom_line(linetype = 2, linewidth = 0.3) +
+      geom_point(size = 1) +
+      geom_text(
+        data = df_label(),
+        aes(label = paste0(round(price, 2), " €")),
+        hjust = -0.2, size = 5,
+        fontface = "bold", color = "red", check_overlap = T) +
       scale_x_date(breaks = "1 month", date_labels = "%b-%Y") +
       theme(text = element_text(size = 16)) +
       labs(x = "Дата", y = "Цена (евро)", title = paste0(input$market_product_trend, " (", input$market_unit_trend, ")"))

@@ -5,10 +5,10 @@ library(bslib)
 library(scales)
 options(scipen = 100)
 
-gdp <- read_rds("nama_10_gdp.rds") %>% 
+gdp <- read_parquet("nama_10_gdp.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-gdp_pc <- read_rds("nama_10_pc.rds") %>% 
+gdp_pc <- read_parquet("nama_10_pc.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
 gini <- read_rds("ilc_di12.rds") %>% 
@@ -93,44 +93,44 @@ ui <- page_fillable(#h3("Евростат за България!"),
                                   selectInput("date_gdp", "Дата:",
                                               choices = unique(gdp$TIME_PERIOD),
                                               selected = last(gdp$TIME_PERIOD)),
-                                  selectInput("na_item_gdp", "Показател:",
-                                              choices = NULL),
-                                  selectInput("unit_gdp", "Индекс, мерна единица:",
-                                              choices = NULL),
-                                  col_widths = c(2, 4, 6)),
+                                  # selectInput("na_item_gdp", "Показател:",
+                                  #             choices = NULL),
+                                  # selectInput("unit_gdp", "Индекс, мерна единица:",
+                                  #             choices = NULL),
+                                  col_widths = c(2)),
                                 plotOutput("gdp_plot")),
                       nav_panel(title = "БВП (in time)",
                                 layout_columns(
                                   selectInput("country_gdp", "Държава:",
                                               choices = unique(gdp$geo),
                                               selected = "Bulgaria"),
-                                  selectInput("na_item_gdp_time", "Показател:",
-                                              choices = NULL),
-                                  selectInput("unit_gdp_time", "Индекс, мерна единица:",
-                                              choices = NULL),
-                                  col_widths = c(2, 4, 6)),
+                                  # selectInput("na_item_gdp_time", "Показател:",
+                                  #             choices = NULL),
+                                  # selectInput("unit_gdp_time", "Индекс, мерна единица:",
+                                  #             choices = NULL),
+                                  col_widths = c(2)),
                                 plotOutput("gdp_plot_time")),
                       nav_panel(title = "БВП на глава",
                                 layout_columns(
                                   selectInput("date_gdp_pc", "Дата:",
                                               choices = unique(gdp_pc$TIME_PERIOD),
                                               selected = last(gdp_pc$TIME_PERIOD)),
-                                  selectInput("na_item_gdp_pc", "Показател:",
-                                              choices = NULL),
-                                  selectInput("unit_gdp_pc", "Индекс, мерна единица:",
-                                              choices = NULL),
-                                  col_widths = c(2, 4, 6)),
+                                  # selectInput("na_item_gdp_pc", "Показател:",
+                                  #             choices = NULL),
+                                  # selectInput("unit_gdp_pc", "Индекс, мерна единица:",
+                                  #             choices = NULL),
+                                  col_widths = c(2)),
                                 plotOutput("plot_gdp_pc")),
                       nav_panel(title = "БВП на глава (in time)",
                                 layout_columns(
                                   selectInput("country_gdp_pc", "Държава:",
                                               choices = unique(gdp_pc$geo),
                                               selected = "Bulgaria"),
-                                  selectInput("na_item_gdp_time_pc", "Показател:",
-                                              choices = NULL),
-                                  selectInput("unit_gdp_time_pc", "Индекс, мерна единица:",
-                                              choices = NULL),
-                                  col_widths = c(2, 4, 6)),
+                                  # selectInput("na_item_gdp_time_pc", "Показател:",
+                                  #             choices = NULL),
+                                  # selectInput("unit_gdp_time_pc", "Индекс, мерна единица:",
+                                  #             choices = NULL),
+                                  col_widths = c(2)),
                                 plotOutput("gdp_plot_time_pc")),
                       nav_panel(title = "Инфлация",
                                 layout_columns(
@@ -276,15 +276,15 @@ ui <- page_fillable(#h3("Евростат за България!"),
                         selectInput("date_deficit", "Дата:",
                                     choices = unique(def$TIME_PERIOD),
                                     selected = last(def$TIME_PERIOD)),
-                        selectInput("sector_deficit", "Сектор:",
-                                    choices = NULL),
-                        selectInput("na_item_deficit", "Показател:",
-                                    choices = NULL),
-                        selectInput("s_adj_deficit", "Корекция:",
-                                    choices = NULL),
+                        # selectInput("sector_deficit", "Сектор:",
+                        #             choices = NULL),
+                        # selectInput("na_item_deficit", "Показател:",
+                        #             choices = NULL),
+                        # selectInput("s_adj_deficit", "Корекция:",
+                        #             choices = NULL),
                         selectInput("unit_deficit", "Индекс, мерна единица:",
                                     choices = NULL),
-                        col_widths = c(2, 2, 8, 5, 3)),
+                        col_widths = c(2, 4)),
                         layout_columns(
                           plotOutput("deficit_plot"),
                           plotOutput("deficit_line"),
@@ -424,32 +424,32 @@ server <- function(input, output, session) {
     filter(gdp, TIME_PERIOD == input$date_gdp)
   })
   
-  observeEvent(date_gdp(), {
-    freezeReactiveValue(input, "na_item_gdp")
-    choices <- unique(date_gdp()$na_item)
-    updateSelectInput(inputId = "na_item_gdp", choices = choices)
-  })
-  
-  na_item_gdp <- reactive({
-    req(input$date_gdp)
-    filter(date_gdp(), na_item == input$na_item_gdp)
-  })
-  
-  observeEvent(na_item_gdp(), {
-    freezeReactiveValue(input, "unit_gdp")
-    choices <- unique(na_item_gdp()$unit)
-    updateSelectInput(inputId = "unit_gdp", choices = choices)
-  })
-  
-  unit_gdp <- reactive({
-    req(input$na_item_gdp)
-    filter(na_item_gdp(), unit == input$unit_gdp)
-  })
+  # observeEvent(date_gdp(), {
+  #   freezeReactiveValue(input, "na_item_gdp")
+  #   choices <- unique(date_gdp()$na_item)
+  #   updateSelectInput(inputId = "na_item_gdp", choices = choices)
+  # })
+  # 
+  # na_item_gdp <- reactive({
+  #   req(input$date_gdp)
+  #   filter(date_gdp(), na_item == input$na_item_gdp)
+  # })
+  # 
+  # observeEvent(na_item_gdp(), {
+  #   freezeReactiveValue(input, "unit_gdp")
+  #   choices <- unique(na_item_gdp()$unit)
+  #   updateSelectInput(inputId = "unit_gdp", choices = choices)
+  # })
+  # 
+  # unit_gdp <- reactive({
+  #   req(input$na_item_gdp)
+  #   filter(na_item_gdp(), unit == input$unit_gdp)
+  # })
   
 output$gdp_plot <- renderPlot({
-  unit_gdp() %>% 
-      filter(na_item %in% c(input$na_item_gdp),
-             unit %in% c(input$unit_gdp)) %>% 
+  date_gdp() %>% 
+      # filter(na_item %in% c(input$na_item_gdp),
+      #        unit %in% c(input$unit_gdp)) %>% 
       mutate(geo = fct_reorder(geo, values),
              col = if_else(geo == "Bulgaria", "1", "0")) %>% 
       ggplot(aes(values, geo, fill = col)) +
@@ -459,7 +459,7 @@ output$gdp_plot <- renderPlot({
                 position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
       scale_fill_manual(values = c("gray50", "red")) +
       theme(text = element_text(size = 14), legend.position = "none") +
-      labs(x = input$unit_gdp, y = NULL, 
+      labs(x = "Current prices, million euro", y = NULL,
            caption = "Източник на данните: Eurostat")
   }, height = 800, width = 1550, res = 96)
 
@@ -468,38 +468,39 @@ country_gdp <- reactive({
   filter(gdp, geo == input$country_gdp)
 })
 
-observeEvent(country_gdp(), {
-  freezeReactiveValue(input, "na_item_gdp_time")
-  choices <- unique(country_gdp()$na_item)
-  updateSelectInput(inputId = "na_item_gdp_time", choices = choices)
-})
-
-na_item_gdp_time <- reactive({
-  req(input$country_gdp)
-  filter(country_gdp(), na_item == input$na_item_gdp_time)
-})
-
-observeEvent(na_item_gdp_time(), {
-  freezeReactiveValue(input, "unit_gdp_time")
-  choices <- unique(na_item_gdp_time()$unit)
-  updateSelectInput(inputId = "unit_gdp_time", choices = choices)
-})
-
-unit_gdp_time <- reactive({
-  req(input$na_item_gdp_time)
-  filter(na_item_gdp_time(), unit == input$unit_gdp_time)
-})
+# observeEvent(country_gdp(), {
+#   freezeReactiveValue(input, "na_item_gdp_time")
+#   choices <- unique(country_gdp()$na_item)
+#   updateSelectInput(inputId = "na_item_gdp_time", choices = choices)
+# })
+# 
+# na_item_gdp_time <- reactive({
+#   req(input$country_gdp)
+#   filter(country_gdp(), na_item == input$na_item_gdp_time)
+# })
+# 
+# observeEvent(na_item_gdp_time(), {
+#   freezeReactiveValue(input, "unit_gdp_time")
+#   choices <- unique(na_item_gdp_time()$unit)
+#   updateSelectInput(inputId = "unit_gdp_time", choices = choices)
+# })
+# 
+# unit_gdp_time <- reactive({
+#   req(input$na_item_gdp_time)
+#   filter(na_item_gdp_time(), unit == input$unit_gdp_time)
+# })
 
 output$gdp_plot_time <- renderPlot({
   
-  unit_gdp_time() %>% 
-    filter(na_item %in% c(input$na_item_gdp_time),
-           unit %in% c(input$unit_gdp_time)) %>%
+  country_gdp() %>% 
+    # filter(na_item %in% c(input$na_item_gdp_time),
+    #        unit %in% c(input$unit_gdp_time)) %>%
     ggplot(aes(TIME_PERIOD, values)) +
-    geom_line() +
-    geom_point() +
+    geom_line(linetype = 2, linewidth = 0.3) +
+    geom_point(size = 2) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
     theme(text = element_text(size = 12), plot.title.position = "plot") +
-    labs(y = paste0(input$unit_gdp_time), x = NULL,
+    labs(y = "Current prices, million euro", x = NULL,
          caption = "Източник на данните: Eurostat")
   
 }, height = 800, width = 1550, res = 96)
@@ -508,32 +509,32 @@ date_gdp_pc <- reactive({
   filter(gdp_pc, TIME_PERIOD == input$date_gdp_pc)
 })
 
-observeEvent(date_gdp_pc(), {
-  freezeReactiveValue(input, "na_item_gdp_pc")
-  choices <- unique(date_gdp_pc()$na_item)
-  updateSelectInput(inputId = "na_item_gdp_pc", choices = choices)
-})
-
-na_item_gdp_pc <- reactive({
-  req(input$date_gdp_pc)
-  filter(date_gdp_pc(), na_item == input$na_item_gdp_pc)
-})
-
-observeEvent(na_item_gdp_pc(), {
-  freezeReactiveValue(input, "unit_gdp_pc")
-  choices <- unique(na_item_gdp_pc()$unit)
-  updateSelectInput(inputId = "unit_gdp_pc", choices = choices)
-})
-
-unit_gdp_pc <- reactive({
-  req(input$na_item_gdp_pc)
-  filter(na_item_gdp_pc(), unit == input$unit_gdp_pc)
-})
+# observeEvent(date_gdp_pc(), {
+#   freezeReactiveValue(input, "na_item_gdp_pc")
+#   choices <- unique(date_gdp_pc()$na_item)
+#   updateSelectInput(inputId = "na_item_gdp_pc", choices = choices)
+# })
+# 
+# na_item_gdp_pc <- reactive({
+#   req(input$date_gdp_pc)
+#   filter(date_gdp_pc(), na_item == input$na_item_gdp_pc)
+# })
+# 
+# observeEvent(na_item_gdp_pc(), {
+#   freezeReactiveValue(input, "unit_gdp_pc")
+#   choices <- unique(na_item_gdp_pc()$unit)
+#   updateSelectInput(inputId = "unit_gdp_pc", choices = choices)
+# })
+# 
+# unit_gdp_pc <- reactive({
+#   req(input$na_item_gdp_pc)
+#   filter(na_item_gdp_pc(), unit == input$unit_gdp_pc)
+# })
 
 output$plot_gdp_pc <- renderPlot({
-  unit_gdp_pc() %>% 
-    filter(na_item %in% c(input$na_item_gdp_pc),
-           unit %in% c(input$unit_gdp_pc)) %>% 
+  date_gdp_pc() %>% 
+    # filter(na_item %in% c(input$na_item_gdp_pc),
+    #        unit %in% c(input$unit_gdp_pc)) %>% 
     mutate(geo = fct_reorder(geo, values),
            col = if_else(geo == "Bulgaria", "1", "0")) %>% 
     ggplot(aes(values, geo, fill = col)) +
@@ -543,7 +544,7 @@ output$plot_gdp_pc <- renderPlot({
               position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
     scale_fill_manual(values = c("gray50", "red")) +
     theme(text = element_text(size = 14), legend.position = "none") +
-    labs(x = input$unit_gdp_pc, y = NULL, 
+    labs(x = "Current prices, euro per capita", y = NULL, 
          caption = "Източник на данните: Eurostat")
 }, height = 800, width = 1550, res = 96)
 
@@ -552,38 +553,39 @@ country_gdp_pc <- reactive({
   filter(gdp_pc, geo == input$country_gdp_pc)
 })
 
-observeEvent(country_gdp_pc(), {
-  freezeReactiveValue(input, "na_item_gdp_time_pc")
-  choices <- unique(country_gdp_pc()$na_item)
-  updateSelectInput(inputId = "na_item_gdp_time_pc", choices = choices)
-})
-
-na_item_gdp_time_pc <- reactive({
-  req(input$country_gdp_pc)
-  filter(country_gdp_pc(), na_item == input$na_item_gdp_time_pc)
-})
-
-observeEvent(na_item_gdp_time_pc(), {
-  freezeReactiveValue(input, "unit_gdp_time_pc")
-  choices <- unique(na_item_gdp_time_pc()$unit)
-  updateSelectInput(inputId = "unit_gdp_time_pc", choices = choices)
-})
-
-unit_gdp_time_pc <- reactive({
-  req(input$na_item_gdp_time_pc)
-  filter(na_item_gdp_time_pc(), unit == input$unit_gdp_time_pc)
-})
+# observeEvent(country_gdp_pc(), {
+#   freezeReactiveValue(input, "na_item_gdp_time_pc")
+#   choices <- unique(country_gdp_pc()$na_item)
+#   updateSelectInput(inputId = "na_item_gdp_time_pc", choices = choices)
+# })
+# 
+# na_item_gdp_time_pc <- reactive({
+#   req(input$country_gdp_pc)
+#   filter(country_gdp_pc(), na_item == input$na_item_gdp_time_pc)
+# })
+# 
+# observeEvent(na_item_gdp_time_pc(), {
+#   freezeReactiveValue(input, "unit_gdp_time_pc")
+#   choices <- unique(na_item_gdp_time_pc()$unit)
+#   updateSelectInput(inputId = "unit_gdp_time_pc", choices = choices)
+# })
+# 
+# unit_gdp_time_pc <- reactive({
+#   req(input$na_item_gdp_time_pc)
+#   filter(na_item_gdp_time_pc(), unit == input$unit_gdp_time_pc)
+# })
 
 output$gdp_plot_time_pc <- renderPlot({
   
-  unit_gdp_time_pc() %>% 
-    filter(na_item %in% c(input$na_item_gdp_time_pc),
-           unit %in% c(input$unit_gdp_time_pc)) %>%
+  country_gdp_pc() %>% 
+    # filter(na_item %in% c(input$na_item_gdp_time_pc),
+    #        unit %in% c(input$unit_gdp_time_pc)) %>%
     ggplot(aes(TIME_PERIOD, values)) +
-    geom_line() +
-    geom_point() +
+    geom_line(linetype = 2, linewidth = 0.3) +
+    geom_point(size = 2) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
     theme(text = element_text(size = 12), plot.title.position = "plot") +
-    labs(y = paste0(input$unit_gdp_time_pc), x = NULL,
+    labs(y = "Current prices, euro per capita", x = NULL,
          caption = "Източник на данните: Eurostat")
   
 }, height = 800, width = 1550, res = 96)
@@ -1015,57 +1017,59 @@ date_deficit <- reactive({
   filter(def, TIME_PERIOD == input$date_deficit)
 })
 
+# observeEvent(date_deficit(), {
+#   freezeReactiveValue(input, "sector_deficit")
+#   choices <- unique(date_deficit()$sector)
+#   updateSelectInput(inputId = "sector_deficit", choices = choices)
+# })
+# 
+# sector_deficit <- reactive({
+#   req(input$date_deficit)
+#   filter(date_deficit(), sector == input$sector_deficit)
+# })
+# 
+# observeEvent(sector_deficit(), {
+#   freezeReactiveValue(input, "na_item_deficit")
+#   choices <- unique(sector_deficit()$na_item)
+#   updateSelectInput(inputId = "na_item_deficit", choices = choices)
+# })
+# 
+# na_item_deficit <- reactive({
+#   req(input$sector_deficit)
+#   filter(sector_deficit(), na_item == input$na_item_deficit)
+# })
+# 
+# observeEvent(na_item_deficit(), {
+#   freezeReactiveValue(input, "s_adj_deficit")
+#   choices <- unique(na_item_deficit()$s_adj)
+#   updateSelectInput(inputId = "s_adj_deficit", choices = choices)
+# })
+# 
+# s_adj_deficit <- reactive({
+#   req(input$na_item_deficit)
+#   filter(na_item_deficit(), s_adj == input$s_adj_deficit)
+# })
+
 observeEvent(date_deficit(), {
-  freezeReactiveValue(input, "sector_deficit")
-  choices <- unique(date_deficit()$sector)
-  updateSelectInput(inputId = "sector_deficit", choices = choices)
-})
-
-sector_deficit <- reactive({
-  req(input$date_deficit)
-  filter(date_deficit(), sector == input$sector_deficit)
-})
-
-observeEvent(sector_deficit(), {
-  freezeReactiveValue(input, "na_item_deficit")
-  choices <- unique(sector_deficit()$na_item)
-  updateSelectInput(inputId = "na_item_deficit", choices = choices)
-})
-
-na_item_deficit <- reactive({
-  req(input$sector_deficit)
-  filter(sector_deficit(), na_item == input$na_item_deficit)
-})
-
-observeEvent(na_item_deficit(), {
-  freezeReactiveValue(input, "s_adj_deficit")
-  choices <- unique(na_item_deficit()$s_adj)
-  updateSelectInput(inputId = "s_adj_deficit", choices = choices)
-})
-
-s_adj_deficit <- reactive({
-  req(input$na_item_deficit)
-  filter(na_item_deficit(), s_adj == input$s_adj_deficit)
-})
-
-observeEvent(s_adj_deficit(), {
   freezeReactiveValue(input, "unit_deficit")
-  choices <- unique(s_adj_deficit()$unit)
-  updateSelectInput(inputId = "unit_deficit", choices = choices)
+  choices <- unique(date_deficit()$unit)
+  updateSelectInput(inputId = "unit_deficit", choices = choices, 
+                    selected = "Percentage of gross domestic product (GDP)")
 })
 
 unit_deficit <- reactive({
-  req(input$s_adj_deficit)
-  filter(s_adj_deficit(), unit == input$unit_deficit)
+  req(input$date_deficit)
+  filter(date_deficit(), unit == input$unit_deficit)
 })
 
 output$deficit_plot <- renderPlot({
   
   unit_deficit() %>% 
-    filter(sector %in% c(input$sector_deficit),
-           na_item %in% c(input$na_item_deficit),
-           s_adj %in% c(input$s_adj_deficit),
-           unit %in% c(input$unit_deficit)) %>% 
+    filter(
+      # sector %in% c(input$sector_deficit),
+      # na_item %in% c(input$na_item_deficit),
+      # s_adj %in% c(input$s_adj_deficit),
+      unit %in% c(input$unit_deficit)) %>% 
     mutate(geo = fct_reorder(geo, values),
            col = if_else(geo == "Bulgaria", "1", "0")) %>% 
     ggplot(aes(values, geo, fill = col)) +
@@ -1075,7 +1079,7 @@ output$deficit_plot <- renderPlot({
               position = position_dodge(width = 1), hjust = -0.1, size = 4.5) +
     scale_fill_manual(values = c("gray50", "red")) +
     theme(text = element_text(size = 14), legend.position = "none") +
-    labs(x = paste0(input$na_item_deficit, " [", input$unit_deficit, "]"), y = NULL, 
+    labs(x = paste0(input$unit_deficit), y = NULL, 
          caption = "Източник на данните: Eurostat")
   
 }, height = 700, width = 750, res = 96)
@@ -1091,10 +1095,12 @@ output$deficit_line <- renderPlot({
            s_adj == "Seasonally and calendar adjusted data",
            unit == "Percentage of gross domestic product (GDP)",
            geo == "Bulgaria") %>%
+    mutate(col = values > 0) %>% 
     ggplot(aes(TIME_PERIOD, values)) +
     geom_line(linetype = 2, linewidth = 0.3) +
-    geom_point(size = 1.5) +
+    geom_point(size = 1.5, aes(color = col)) +
     geom_smooth(se = F, method = "loess") +
+    scale_color_manual(values = c("TRUE" = "blue", "FALSE" = "red")) +
     #scale_y_continuous(expand = expansion(mult = c(0.01, 0.1))) +
     scale_x_date(date_breaks = "3 years", date_labels = "%Y") +
     geom_text(aes(label = round(values, 1)), check_overlap = T,
