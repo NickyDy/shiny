@@ -40,6 +40,7 @@ wf_h <- request("https://api.open-meteo.com/v1/forecast") %>%
         "precipitation",
         "precipitation_probability",
         "wind_speed_10m",
+        "wind_gusts_10m",
         "wind_direction_10m",
         "cloud_cover"),
       collapse = ","),
@@ -136,7 +137,7 @@ github <- tags$a(icon("github"), "Github",
 #--------------------------------------------
 ui <- page_fillable(#h3("Времето в България!"),
                     theme = bslib::bs_theme(bootswatch = "darkly"),
-                    navset_pill(
+                    navset_pill(selected = "10-дневна прогноза (по часове)",
                       nav_panel(title = "Температура",
                                 selectInput("rows", "Брой колонки:",
                                             choices = c(1, 2)),
@@ -437,15 +438,17 @@ wf_h %>%
                              "Валеж (mm)" = "precipitation",
                              "Посока на вятъра" = "wind_direction_10m",
                              "Скорост на вятъра (m/s)" = "wind_speed_10m",
+                             "Пориви на вятъра (m/s)" = "wind_gusts_10m",
                              "Облачност (%)" = "cloud_cover"),
            name = fct_relevel(name, "Облачност (%)", "Вероятност за валеж (%)", "Валеж (mm)",
-                              "Температура (\u00B0C)", "Посока на вятъра", "Скорост на вятъра (m/s)")) %>%
+                              "Температура (\u00B0C)", "Посока на вятъра", "Скорост на вятъра (m/s)",
+                              "Пориви на вятъра (m/s)")) %>%
     ggplot(aes(date, value, fill = name)) +
     geom_vline(data = midnights, aes(xintercept = as.numeric(date)),
                linetype = "dashed", color = "gray40", linewidth = 0.4) +
     geom_col(show.legend = F) +
     geom_text(aes(label = paste0( unit)), size = 3.5, vjust = -0.1) +
-    scale_fill_manual(values = c("#0096FF", "#0096FF", "blue", "red", "darkgreen", "green")) +
+    scale_fill_manual(values = c("#0096FF", "#0096FF", "blue", "red", "darkgreen", "green", "yellow")) +
     scale_y_continuous(expand = expansion(mult = c(0, 0.3))) +
     scale_x_datetime(date_breaks = "1 day", date_labels = "%b-%d-%a") +
     theme(text = element_text(size = 16), axis.text.y = element_blank(), 

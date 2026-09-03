@@ -36,7 +36,8 @@ df_markets <- bind_rows(df_markets_2025, df_markets_2026) %>%
                                     "Паста за зъби" = "81", "Шампоани" = "82", "Сапуни" = "83",
                                     "Мокри кърпички" = "84", "Тоалетна хартия" = "85"), .after = kategoria) %>%
   mutate(kategoria = as.numeric(kategoria), naimenovanie_na_produkta = as.character(naimenovanie_na_produkta)) %>% 
-  filter(!cena_na_drebno == 0, !str_detect(naimenovanie_na_produkta, "^Krina"),
+  filter(!cena_na_drebno == 0, 
+         !str_detect(naimenovanie_na_produkta, "^Krina"),
          !str_detect(naimenovanie_na_produkta, "Гръцко краве сирене"), 
          !str_detect(naimenovanie_na_produkta, "Сал.сирене от кр.мляко с пов.вод.съ"),
          !str_detect(naimenovanie_na_produkta, "Обикновени бисквити"),
@@ -324,9 +325,9 @@ server <- function(input, output, session) {
       mutate(naimenovanie_na_produkta = str_remove(naimenovanie_na_produkta, "___.+$")) %>%
       filter(date %in% c(input$inf_markets_date[1], input$inf_markets_date[2]), !cena_na_drebno == 0,
              !naimenovanie_na_produkta %in% c("ДЕЛИКАТЕС С ПУЕШКО ФИЛЕ МАЙСТОР ЦВЕТКО"),
-             # !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
-             #                     "Домати", "Кромид лук", "Моркови", "Зеле",
-             #                     "Краставици", "Чесън", "Картофи")
+             !kategoria_c %in% c("Лимони", "Портокали", "Банани", "Ябълки",
+                                 "Домати", "Кромид лук", "Моркови", "Зеле",
+                                 "Краставици", "Чесън", "Картофи")
              ) %>%
       group_by(market, naimenovanie_na_produkta) %>% 
       mutate(

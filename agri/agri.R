@@ -2,8 +2,6 @@ library(tidyverse)
 library(jsonlite)
 library(nanoparquet)
 
-glimpse(cereals)
-
 beef_carc <- fromJSON("https://www.ec.europa.eu/agrifood/api/beef/prices?&beginDate=01/01/2020&endDate=31/12/2026") %>% 
   janitor::clean_names() %>% 
   mutate(begin_date = dmy(begin_date), 
