@@ -5,6 +5,9 @@ library(shiny)
 library(bslib)
 library(httr2)
 
+# library(robotstxt)
+# paths_allowed(paths = "https://www.meteo.bg/bg/rekiTablitsa")
+
 coord <- tibble(city = "yambol", lat = 42.31189, long = 26.56369)
 
 wf <- request("https://api.open-meteo.com/v1/forecast") %>% 
@@ -19,6 +22,7 @@ wf <- request("https://api.open-meteo.com/v1/forecast") %>%
         "rain_sum",
         "snowfall_sum",
         "wind_speed_10m_max",
+        "wind_gusts_10m_mean",
         "wind_direction_10m_dominant",
         "cloud_cover_mean"),
       collapse = ","),
@@ -54,10 +58,10 @@ wf_h <- request("https://api.open-meteo.com/v1/forecast") %>%
   mutate(date = ymd_hm(time)) %>% 
   select(-time)
 
-download.file("http://www.weather.bg/index.php?koiFail=tekushti&lng=0", destfile = "temp_nimh_new")
+download.file("https://weather.bg/index.php?koiFail=tekushti&lng=0", destfile = "temp_nimh_new")
 # download.file("http://weather.bg/index.php?koiFail=bg&lng=0", destfile = "forcast_nimh_new")
 # download.file("http://weather.bg/index.php?koiFail=eubp&lng=0", destfile = "forcast_eu_new")
-download.file("http://meteo.bg/meteo7/bg/rekiTablitsa", destfile = "rivers_nimh_new")
+download.file("https://www.meteo.bg/meteo7/bg/rekiTablitsa", destfile = "rivers_nimh_new")
 
 temp_nimh_new <- read_html("temp_nimh_new") %>%
   html_element("table") %>% html_table() %>%
@@ -390,6 +394,7 @@ output$forcast_10_days <- renderPlot({
       name == "rain_sum" ~ "mm",
       name == "snowfall_sum" ~ "cm",
       name == "wind_speed_10m_max" ~ "m/s",
+      name == "wind_gusts_10m_mean" ~ "m/s",
       name == "cloud_cover_mean" ~ "%",
       name == "wind_direction_10m_dominant" ~ "",
       .default = "\u00B0C")) %>%
@@ -399,14 +404,15 @@ output$forcast_10_days <- renderPlot({
                              "Сума на валежите" = "rain_sum",
                              "Височина на снежната покривка" = "snowfall_sum",
                              "Посока на вятъра" = "wind_direction_10m_dominant",
+                             "Пориви на вятъра" = "wind_gusts_10m_mean",
                              "Скорост на вятъра" = "wind_speed_10m_max",
                              "Средна облачност" = "cloud_cover_mean"),
            value = round(value, 0)) %>% 
     ggplot(aes(date, value, fill = name)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = paste0(value, " ", unit, wind_dir)), size = 5, vjust = -0.3) +
-    scale_fill_manual(values = c("#0096FF", "blue", "#00FFFF", "red", "orange", "yellow", "darkgreen", "green")) +
-    scale_y_continuous(n.breaks = 3, expand = expansion(mult = c(0, 0.4))) +
+    scale_fill_manual(values = c("#0096FF", "blue", "#00FFFF", "red", "orange", "yellow", "darkgreen", "purple", "green")) +
+    scale_y_continuous(n.breaks = 3, expand = expansion(mult = c(0, 0.5))) +
     scale_x_date(date_breaks = "3 days", date_labels = "%b-%d-%a") +
     theme(text = element_text(size = 16)) +
     labs(x = "Дата", y = "Стойност") +

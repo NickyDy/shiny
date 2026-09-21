@@ -41,7 +41,8 @@ df_markets <- bind_rows(df_markets_2025, df_markets_2026) %>%
          !str_detect(naimenovanie_na_produkta, "Гръцко краве сирене"), 
          !str_detect(naimenovanie_na_produkta, "Сал.сирене от кр.мляко с пов.вод.съ"),
          !str_detect(naimenovanie_na_produkta, "Обикновени бисквити"),
-         !str_detect(naimenovanie_na_produkta, "КРАВЕ МАСЛО D.MARKENBUTTER")) %>% 
+         !str_detect(naimenovanie_na_produkta, "КРАВЕ МАСЛО D.MARKENBUTTER"),
+         !str_detect(naimenovanie_na_produkta, "NN DeutscheMarkenbutter Кр масло 82%250г")) %>% 
   arrange(date, kategoria)
 
 df_market <- read_parquet("df_market.parquet")
@@ -302,20 +303,23 @@ server <- function(input, output, session) {
   
   output$key_plot_products <- renderPlot({
     
-    online_products() %>% 
+    online_products() %>%
       mutate(cena_v_promocia = if_else(is.na(cena_v_promocia), "", as.character(cena_v_promocia)),
-             market = fct_relevel(market, "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")) %>% 
-      ggplot(aes(cena_na_drebno, reorder_within(naimenovanie_na_produkta, cena_na_drebno, market), fill = market)) +
+             market = fct_relevel(market, "Кауфланд", "Лидл", "Билла", "T Market", "Славекс", "Вилтон")) %>%
+      mutate(cena_v_promocia = as.numeric(cena_v_promocia)) %>% 
+      pivot_longer(cena_na_drebno:cena_v_promocia) %>% 
+      ggplot(aes(value, reorder_within(naimenovanie_na_produkta, value, name), fill = market)) +
       geom_col(show.legend = T) +
-      geom_richtext(aes(label = glue::glue("{cena_na_drebno};  <span style='color:red'>{cena_v_promocia}</span>")), 
+      geom_richtext(aes(label = glue::glue("{value}")),
                     position = position_dodge(width = 1), hjust = -0.01, size = 4.5, fill = NA, label.colour = NA) +
       scale_y_reordered() +
       scale_x_continuous(expand = expansion(mult = c(.05, .7))) +
       scale_fill_manual(values = c("Кауфланд" = "red", "Лидл" = "yellow", "T Market" = "green",
                                    "Билла" = "lightblue", "Вилтон" = "blue", "Славекс" = "purple")) +
-      labs(x = "Цена (евро); <span style='color:red'>Промоция (евро)</span>", y = NULL,
-           fill = "Супермаркет: ") +
-      theme(text = element_text(size = 14), axis.title.x = element_markdown())
+      labs(x = "Цена (евро)", y = NULL, fill = "Супермаркет: ") +
+      theme(text = element_text(size = 16), axis.title.x = element_markdown()) +
+      facet_wrap(vars(name), labeller = labeller(name = c("cena_na_drebno" = "Цена на дребно",
+                                                         "cena_v_promocia" = "Цена в промоция")))
     
   }, height = function() input$height_products, width = 1800, res = 96)
   
