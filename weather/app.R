@@ -24,7 +24,8 @@ wf <- request("https://api.open-meteo.com/v1/forecast") %>%
         "wind_speed_10m_max",
         "wind_gusts_10m_mean",
         "wind_direction_10m_dominant",
-        "cloud_cover_mean"),
+        "cloud_cover_mean",
+        "visibility_min"),
       collapse = ","),
     timezone = "auto",
     wind_speed_unit = "ms",
@@ -37,25 +38,28 @@ wf <- request("https://api.open-meteo.com/v1/forecast") %>%
 
 wf_h <- request("https://api.open-meteo.com/v1/forecast") %>% 
   req_url_query(
+    models = "ncep_gfs_seamless",
     latitude = coord$lat,
     longitude = coord$long,
-    hourly = paste(
-      c("temperature_2m",
-        "precipitation",
-        "precipitation_probability",
-        "wind_speed_10m",
-        "wind_gusts_10m",
-        "wind_direction_10m",
-        "cloud_cover"),
+    daily = paste(
+      c("temperature_2m_mean",
+        "temperature_2m_max",
+        "temperature_2m_min",
+        "rain_sum",
+        "snowfall_sum",
+        "wind_speed_10m_max",
+        "wind_gusts_10m_mean",
+        "wind_direction_10m_dominant",
+        "cloud_cover_mean",
+        "visibility_min"),
       collapse = ","),
     timezone = "auto",
     wind_speed_unit = "ms",
-    forecast_days = "10",
-    models = "ecmwf_ifs") %>% 
+    forecast_days = "14") %>% 
   req_perform() %>% 
   resp_body_json(., simplifyVector = T) %>% 
-  pluck("hourly") %>% as_tibble() %>% 
-  mutate(date = ymd_hm(time)) %>% 
+  pluck("daily") %>% as_tibble() %>% 
+  mutate(date = ymd(time)) %>% 
   select(-time)
 
 download.file("https://weather.bg/index.php?koiFail=tekushti&lng=0", destfile = "temp_nimh_new")
@@ -141,7 +145,7 @@ github <- tags$a(icon("github"), "Github",
 #--------------------------------------------
 ui <- page_fillable(#h3("Времето в България!"),
                     theme = bslib::bs_theme(bootswatch = "darkly"),
-                    navset_pill(selected = "10-дневна прогноза (по часове)",
+                    navset_pill(selected = "Температура",
                       nav_panel(title = "Температура",
                                 selectInput("rows", "Брой колонки:",
                                             choices = c(1, 2)),
@@ -166,10 +170,10 @@ ui <- page_fillable(#h3("Времето в България!"),
                                 selectInput("river_depth", "Река:",
                                             choices = unique(rivers$river)),
                                 plotOutput("depths")),
-                      nav_panel(title = "14-дневна прогноза",
-                                plotOutput("forcast_10_days")),
-                      nav_panel(title = "10-дневна прогноза (по часове)",
-                                plotOutput("forcast_14_days")),
+                      nav_panel(title = "14-дневна прогноза (ecmwf)",
+                                plotOutput("forcast_ecmwf")),
+                      nav_panel(title = "14-дневна прогноза (ncep)",
+                                plotOutput("forcast_ncep")),
                       nav_panel(tags$img(src = "shiny.png", width = 40),
                                 "Други полезни приложения:",
                                 tags$a(href = "https://nickydy.shinyapps.io/elections/", br(),
@@ -379,7 +383,7 @@ output$depths <- renderPlot({
     facet_wrap(vars(station), scales = "free_x")
 }, height = 800, width = 1800, res = 96)
 
-output$forcast_10_days <- renderPlot({
+output$forcast_ecmwf <- renderPlot({
   
   wf %>% 
     pivot_longer(c(-date)) %>%
@@ -397,12 +401,14 @@ output$forcast_10_days <- renderPlot({
       name == "wind_gusts_10m_mean" ~ "m/s",
       name == "cloud_cover_mean" ~ "%",
       name == "wind_direction_10m_dominant" ~ "",
+      name == "visibility_min" ~ "m",
       .default = "\u00B0C")) %>%
     mutate(name = fct_recode(name, "Минимална температура" = "temperature_2m_min",
                              "Средна температура" = "temperature_2m_mean",
                              "Максимална температура" = "temperature_2m_max",
                              "Сума на валежите" = "rain_sum",
                              "Височина на снежната покривка" = "snowfall_sum",
+                             "Минимална видимост" = "visibility_min",
                              "Посока на вятъра" = "wind_direction_10m_dominant",
                              "Пориви на вятъра" = "wind_gusts_10m_mean",
                              "Скорост на вятъра" = "wind_speed_10m_max",
@@ -411,8 +417,9 @@ output$forcast_10_days <- renderPlot({
     ggplot(aes(date, value, fill = name)) +
     geom_col(show.legend = F) +
     geom_text(aes(label = paste0(value, " ", unit, wind_dir)), size = 5, vjust = -0.3) +
-    scale_fill_manual(values = c("#0096FF", "blue", "#00FFFF", "red", "orange", "yellow", "darkgreen", "purple", "green")) +
-    scale_y_continuous(n.breaks = 3, expand = expansion(mult = c(0, 0.5))) +
+    scale_fill_manual(values = c("#0096FF", "blue", "#00FFFF", "red", "orange", "yellow", 
+                                 "pink", "darkgreen", "purple", "green")) +
+    scale_y_continuous(n.breaks = 3, expand = expansion(mult = c(0, 0.6))) +
     scale_x_date(date_breaks = "3 days", date_labels = "%b-%d-%a") +
     theme(text = element_text(size = 16)) +
     labs(x = "Дата", y = "Стойност") +
@@ -420,47 +427,86 @@ output$forcast_10_days <- renderPlot({
   
 }, height = 900, width = 1800, res = 96)
 
-midnights <- data.frame(
-  date = as.POSIXct(unique(as.Date(wf_h$date))))
+# midnights <- data.frame(
+#   date = as.POSIXct(unique(as.Date(wf_h$date))))
 
-output$forcast_14_days <- renderPlot({
+output$forcast_ncep <- renderPlot({
   
 wf_h %>%
-    slice(seq(1, 240, by = 3)) %>%
     pivot_longer(c(-date)) %>%
-    mutate(wind_dir = value, hour = hour(date)) %>%
+    mutate(wind_dir = value) %>% 
     mutate(wind_dir = case_when(
-      name %in% c("wind_direction_10m") & between(wind_dir, 45, 135) ~ "E",
-      name %in% c("wind_direction_10m") & between(wind_dir, 135, 225) ~ "S",
-      name %in% c("wind_direction_10m") & between(wind_dir, 225, 315) ~ "W",
-      name %in% c("wind_direction_10m") & between(wind_dir, 315, 360) ~ "N",
-      name %in% c("wind_direction_10m") & between(wind_dir, 0, 45) ~ "N", .default = "")) %>%
-    mutate(value = round(value, 0), value = as.character(value), unit = case_when(
-      name != "wind_direction_10m" ~ value,
-      .default = wind_dir),
-      value = as.numeric(value)) %>%
-    mutate(name = fct_recode(name, "Температура (\u00B0C)" = "temperature_2m",
-                             "Вероятност за валеж (%)" = "precipitation_probability",
-                             "Валеж (mm)" = "precipitation",
-                             "Посока на вятъра" = "wind_direction_10m",
-                             "Скорост на вятъра (m/s)" = "wind_speed_10m",
-                             "Пориви на вятъра (m/s)" = "wind_gusts_10m",
-                             "Облачност (%)" = "cloud_cover"),
-           name = fct_relevel(name, "Облачност (%)", "Вероятност за валеж (%)", "Валеж (mm)",
-                              "Температура (\u00B0C)", "Посока на вятъра", "Скорост на вятъра (m/s)",
-                              "Пориви на вятъра (m/s)")) %>%
+      name %in% c("wind_direction_10m_dominant") & between(wind_dir, 45, 135) ~ "E",
+      name %in% c("wind_direction_10m_dominant") & between(wind_dir, 135, 225) ~ "S",
+      name %in% c("wind_direction_10m_dominant") & between(wind_dir, 225, 315) ~ "W",
+      name %in% c("wind_direction_10m_dominant") & between(wind_dir, 315, 360) ~ "N",
+      name %in% c("wind_direction_10m_dominant") & between(wind_dir, 0, 45) ~ "N", .default = "")) %>% 
+    mutate(unit = case_when(
+      name == "rain_sum" ~ "mm",
+      name == "snowfall_sum" ~ "cm",
+      name == "wind_speed_10m_max" ~ "m/s",
+      name == "wind_gusts_10m_mean" ~ "m/s",
+      name == "cloud_cover_mean" ~ "%",
+      name == "wind_direction_10m_dominant" ~ "",
+      name == "visibility_min" ~ "m",
+      .default = "\u00B0C")) %>%
+    mutate(name = fct_recode(name, "Минимална температура" = "temperature_2m_min",
+                             "Средна температура" = "temperature_2m_mean",
+                             "Максимална температура" = "temperature_2m_max",
+                             "Сума на валежите" = "rain_sum",
+                             "Височина на снежната покривка" = "snowfall_sum",
+                             "Минимална видимост" = "visibility_min",
+                             "Посока на вятъра" = "wind_direction_10m_dominant",
+                             "Пориви на вятъра" = "wind_gusts_10m_mean",
+                             "Скорост на вятъра" = "wind_speed_10m_max",
+                             "Средна облачност" = "cloud_cover_mean"),
+           value = round(value, 0)) %>% 
     ggplot(aes(date, value, fill = name)) +
-    geom_vline(data = midnights, aes(xintercept = as.numeric(date)),
-               linetype = "dashed", color = "gray40", linewidth = 0.4) +
     geom_col(show.legend = F) +
-    geom_text(aes(label = paste0( unit)), size = 3.5, vjust = -0.1) +
-    scale_fill_manual(values = c("#0096FF", "#0096FF", "blue", "red", "darkgreen", "green", "yellow")) +
-    scale_y_continuous(expand = expansion(mult = c(0, 0.3))) +
-    scale_x_datetime(date_breaks = "1 day", date_labels = "%b-%d-%a") +
-    theme(text = element_text(size = 16), axis.text.y = element_blank(), 
-          axis.ticks.y = element_blank()) +
-    labs(x = "Дата", y = NULL) +
+    geom_text(aes(label = paste0(value, " ", unit, wind_dir)), size = 5, vjust = -0.3) +
+    scale_fill_manual(values = c("#0096FF", "blue", "#00FFFF", "red", "orange", "yellow", 
+                                 "pink", "darkgreen", "purple", "green")) +
+    scale_y_continuous(n.breaks = 3, expand = expansion(mult = c(0, 0.6))) +
+    scale_x_date(date_breaks = "3 days", date_labels = "%b-%d-%a") +
+    theme(text = element_text(size = 16)) +
+    labs(x = "Дата", y = "Стойност") +
     facet_wrap(vars(name), ncol = 1, scale = "free_y")
+  
+    # slice(seq(1, 240, by = 3)) %>%
+    # pivot_longer(c(-date)) %>%
+    # mutate(wind_dir = value, hour = hour(date)) %>%
+    # mutate(wind_dir = case_when(
+    #   name %in% c("wind_direction_10m") & between(wind_dir, 45, 135) ~ "E",
+    #   name %in% c("wind_direction_10m") & between(wind_dir, 135, 225) ~ "S",
+    #   name %in% c("wind_direction_10m") & between(wind_dir, 225, 315) ~ "W",
+    #   name %in% c("wind_direction_10m") & between(wind_dir, 315, 360) ~ "N",
+    #   name %in% c("wind_direction_10m") & between(wind_dir, 0, 45) ~ "N", .default = "")) %>%
+    # mutate(value = round(value, 0), value = as.character(value), unit = case_when(
+    #   name != "wind_direction_10m" ~ value,
+    #   .default = wind_dir),
+    #   value = as.numeric(value)) %>%
+    # mutate(name = fct_recode(name, "Температура (\u00B0C)" = "temperature_2m",
+    #                          "Вероятност за валеж (%)" = "precipitation_probability",
+    #                          "Валеж (mm)" = "precipitation",
+    #                          "Посока на вятъра" = "wind_direction_10m",
+    #                          "Скорост на вятъра (m/s)" = "wind_speed_10m",
+    #                          "Пориви на вятъра (m/s)" = "wind_gusts_10m",
+    #                          "Облачност (%)" = "cloud_cover"),
+    #        name = fct_relevel(name, "Облачност (%)", "Вероятност за валеж (%)", "Валеж (mm)",
+    #                           "Температура (\u00B0C)", "Посока на вятъра", "Скорост на вятъра (m/s)",
+    #                           "Пориви на вятъра (m/s)")) %>%
+    # ggplot(aes(date, value, fill = name)) +
+    # geom_vline(data = midnights, aes(xintercept = as.numeric(date)),
+    #            linetype = "dashed", color = "gray40", linewidth = 0.4) +
+    # geom_col(show.legend = F) +
+    # geom_text(aes(label = paste0( unit)), size = 3.5, vjust = -0.1) +
+    # scale_fill_manual(values = c("#0096FF", "#0096FF", "blue", "red", "darkgreen", "green", "yellow")) +
+    # scale_y_continuous(expand = expansion(mult = c(0, 0.3))) +
+    # scale_x_datetime(date_breaks = "1 day", date_labels = "%b-%d-%a") +
+    # theme(text = element_text(size = 16), axis.text.y = element_blank(), 
+    #       axis.ticks.y = element_blank()) +
+    # labs(x = "Дата", y = NULL) +
+    # facet_wrap(vars(name), ncol = 1, scale = "free_y")
   
 }, height = 900, width = 1800, res = 96)
  

@@ -19,16 +19,16 @@ inf <- read_parquet("prc_hicp_minr.parquet") %>%
   rename(coicop = coicop18, TIME_PERIOD = time) %>% 
   arrange(TIME_PERIOD) %>% drop_na(values)
 ind <- read_parquet("sts_inpr_m.parquet") %>% 
-  arrange(TIME_PERIOD)
+  arrange(time)
 sal <- read_rds("nama_10_fte.rds") %>% 
   filter(!str_detect(geo, "^Euro"), unit == "Euro") %>% 
   arrange(TIME_PERIOD)
-wage <- read_rds("earn_mw_cur.rds") %>% 
+wage <- read_parquet("earn_mw_cur.parquet") %>% 
   arrange(TIME_PERIOD) %>% drop_na(values)
 house <- read_rds("prc_hpi_a.rds") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
-unemp <- read_rds("tps00203.rds") %>% 
+unemp <- read_parquet("tipsun30.parquet") %>% 
   filter(!str_detect(geo, "^Euro")) %>% 
   arrange(TIME_PERIOD)
 imp_exp <- read_rds("nama_10_exi.rds") %>% 
@@ -157,10 +157,10 @@ ui <- page_fillable(#h3("Евростат за България!"),
                       nav_panel(title = "Индустриално производство",
                                 layout_columns(gap = "400px",
                                   dateRangeInput("date_ind", "Дата:",
-                                                 start = first(ind$TIME_PERIOD),
-                                                 end = last(ind$TIME_PERIOD),
-                                                 min = first(ind$TIME_PERIOD),
-                                                 max = last(ind$TIME_PERIOD),
+                                                 start = first(ind$time),
+                                                 end = last(ind$time),
+                                                 min = first(ind$time),
+                                                 max = last(ind$time),
                                                  language = "bg"),
                                   selectInput("country_ind", "Държава:",
                                               choices = unique(ind$geo),
@@ -642,8 +642,7 @@ inf_last() %>%
   #---------------------------------------
   ind_last <- reactive({
     ind %>%
-      filter(TIME_PERIOD >= input$date_ind[1] & TIME_PERIOD <= input$date_ind[2],
-             nace_r2 == "C", s_adj == "SCA", unit == "PCH_PRE") %>% 
+      filter(time >= input$date_ind[1] & time <= input$date_ind[2]) %>% 
       summarise(sm = sum(values, na.rm = T), .by = c(geo)) %>%
       mutate_if(is.numeric, round, 1) %>% 
       mutate(geo = fct_reorder(geo, sm),
@@ -668,9 +667,8 @@ inf_last() %>%
   
   ind_line_r <- reactive({
     ind %>% 
-      filter(TIME_PERIOD >= input$date_ind[1] & TIME_PERIOD <= input$date_ind[2],
-             nace_r2 == "C", s_adj == "SCA", unit == "PCH_PRE",
-             geo %in% c(input$country_ind)) %>% 
+      filter(time >= input$date_ind[1] & time <= input$date_ind[2],
+             geo %in% c(input$country_ind)) %>% drop_na(values) %>% 
       group_by(geo) %>%
       mutate(cs = cumsum(values)) %>%
       ungroup()
@@ -679,7 +677,7 @@ inf_last() %>%
   output$ind_line <- renderPlot({
     
     ind_line_r() %>% 
-      ggplot(aes(TIME_PERIOD, cs)) +
+      ggplot(aes(time, cs)) +
       geom_line() +
       geom_point() +
       theme(text = element_text(size = 12), plot.title.position = "plot") +
