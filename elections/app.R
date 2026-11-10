@@ -8,7 +8,7 @@ library(nanoparquet)
 library(sf)
 library(leaflet)
 
-votes <- read_parquet("votes_new.parquet") %>%
+votes <- read_parquet("votes.parquet") %>%
   filter(!vote_date == "Март_2017", !party == "ИК Тодор Тодоров Батков") %>%
   mutate(party = fct_recode(party, "ИСМВ" = "ИЗПРАВИ СЕ! МУТРИ ВЪН!",
                             "ИБГНИ" = "ИЗПРАВИ СЕ БГ! НИЕ ИДВАМЕ!",
@@ -26,7 +26,7 @@ votes <- read_parquet("votes_new.parquet") %>%
 
 sec_coord <- read_parquet("sec_coord.parquet")
 mand <- read_rds("mand.rds")
-act <- read_rds("activity.rds")
+act <- read_parquet("activity.parquet")
 #address <- read_parquet("df_2024.parquet") %>% arrange(oblast, obshtina)
 
 risk_sec <- votes %>% 
@@ -541,7 +541,8 @@ output$elec_act <- renderPlot({
     theme(text = element_text(size = 16), 
           axis.text.x = element_blank(), 
           axis.ticks.x = element_blank(),
-          strip.text = element_text(face = "bold")) +
+          strip.text = element_text(face = "bold"),
+          legend.position = "bottom") +
     guides(fill = guide_legend(reverse = TRUE)) +
     facet_wrap(vars(type_election))
 
